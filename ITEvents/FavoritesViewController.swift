@@ -4,7 +4,7 @@ import DisplaySwitcher
 class FavoritesViewController: UIViewController {
     let list = ["First", "Second", "Third", "Fourth", "Fiveth"]
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var rotationButton: UIBarButtonItem!
+    @IBOutlet weak var rotationButton: SwitchLayoutButton!
     
     private let animationDuration: TimeInterval = 0.3
     private let listLayoutCellStaticHeihgt: CGFloat = 80
@@ -27,7 +27,9 @@ class FavoritesViewController: UIViewController {
     }
     
     fileprivate func setupCollectionView() {
-        collectionView.collectionViewLayout = getCurrentLayout()
+        let layout = getCurrentLayout()
+        collectionView.collectionViewLayout = layout
+        setRotationButtonSelection(layout: layout)
     }
     
     @IBAction func changeLayout(_ sender: Any) {
@@ -36,11 +38,14 @@ class FavoritesViewController: UIViewController {
         } else {
             layoutState = .list
         }
+        let layout = getCurrentLayout()
         let transitionManager = TransitionManager(duration: animationDuration,
                                                   collectionView: collectionView,
-                                                  destinationLayout: getCurrentLayout(),
+                                                  destinationLayout: layout,
                                                   layoutState: layoutState)
         transitionManager.startInteractiveTransition()
+        setRotationButtonSelection(layout: layout)
+        rotationButton.animationDuration = animationDuration
     }
     
     private func getCurrentLayout() -> DisplaySwitchLayout {
@@ -48,6 +53,10 @@ class FavoritesViewController: UIViewController {
             return listLayout
         }
         return gridLayout
+    }
+    
+    private func setRotationButtonSelection(layout: DisplaySwitchLayout) {
+        rotationButton.isSelected = layout == listLayout
     }
 }
 
@@ -60,6 +69,7 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EventCell", for: indexPath) as! EventCollectionViewCell
         cell.eventTitleLabel.text = list[indexPath.row]
+        cell.backgroundColor = .green
         return cell
     }
     
