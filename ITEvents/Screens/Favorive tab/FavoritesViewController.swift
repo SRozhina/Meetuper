@@ -2,34 +2,51 @@ import UIKit
 import DisplaySwitcher
 
 class FavoritesViewController: UIViewController {
-    let list = ["First", "Second", "Third", "Fourth", "Fiveth"]
+    let events = ["First", "Second", "Third", "Fourth", "Fiveth"]
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var rotationButton: SwitchLayoutButton!
     
-    private let animationDuration: TimeInterval = 0.3
-    private let listLayoutCellStaticHeihgt: CGFloat = 80
-    private let gridLayoutCellStaticHeight: CGFloat = 165
-    
-    private lazy var listLayout = DisplaySwitchLayout(staticCellHeight: listLayoutCellStaticHeihgt,
-                                                      nextLayoutStaticCellHeight: gridLayoutCellStaticHeight,
-                                                      layoutState: .list)
-    private lazy var gridLayout = DisplaySwitchLayout(staticCellHeight: gridLayoutCellStaticHeight,
-                                                      nextLayoutStaticCellHeight: listLayoutCellStaticHeihgt,
-                                                      layoutState: .grid)
+    private var animationDuration: TimeInterval!
+    private var listLayoutCellStaticHeihgt: CGFloat!
+    private var gridLayoutCellStaticHeight: CGFloat!
+    private var listLayout: DisplaySwitchLayout!
+    private var gridLayout: DisplaySwitchLayout!
     
     private var layoutState: LayoutState = .list
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setProperties()
+        registerNibs()
         collectionView.dataSource = self
         collectionView.delegate = self
         setupCollectionView()
+        
+    }
+    
+    private func setProperties() {
+        animationDuration = 0.3
+        listLayoutCellStaticHeihgt = 105
+        gridLayoutCellStaticHeight = (view.frame.width / 2 - 20) / 0.8
+        listLayout = DisplaySwitchLayout(staticCellHeight: listLayoutCellStaticHeihgt,
+                                        nextLayoutStaticCellHeight: gridLayoutCellStaticHeight,
+                                        layoutState: .list)
+        gridLayout = DisplaySwitchLayout(staticCellHeight: gridLayoutCellStaticHeight,
+                                         nextLayoutStaticCellHeight: listLayoutCellStaticHeihgt,
+                                         layoutState: .grid)
     }
     
     fileprivate func setupCollectionView() {
         let layout = getCurrentLayout()
         collectionView.collectionViewLayout = layout
         setRotationButtonSelection(layout: layout)
+    }
+    
+    private func registerNibs() {
+        let listCellNib = UINib(nibName: "ListCollectionViewCell", bundle: nil)
+        collectionView.register(listCellNib, forCellWithReuseIdentifier: "ListCell")
+        let gridCellNib = UINib(nibName: "GridCollectionViewCell", bundle: nil)
+        collectionView.register(gridCellNib, forCellWithReuseIdentifier: "GridCell")
     }
     
     @IBAction func changeLayout(_ sender: Any) {
@@ -63,13 +80,19 @@ class FavoritesViewController: UIViewController {
 extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return list.count
+        return events.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EventCell", for: indexPath) as! EventCollectionViewCell
-        cell.eventTitleLabel.text = list[indexPath.row]
-        cell.backgroundColor = .green
+        let event = events[indexPath.row]
+        let cell: IEventCollectionViewCell & UICollectionViewCell
+        switch layoutState {
+        case .list:
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ListCell", for: indexPath) as! ListCollectionViewCell
+        case .grid:
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GridCell", for: indexPath) as! GridCollectionViewCell
+        }
+        cell.setTitle(event)
         return cell
     }
     

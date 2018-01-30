@@ -73,23 +73,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="e9t-ED-VKi">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Tv0-jF-bof">
+                                <rect key="frame" x="0.0" y="74" width="375" height="544"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Tv0-jF-bof">
                                     <size key="itemSize" width="140" height="96"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="20"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EventCell" id="qLl-4a-8Je" customClass="EventCollectionViewCell" customModule="ITEvents" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ListCell" id="qLl-4a-8Je" customClass="ListCollectionViewCell" customModule="ITEvents" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="140" height="96"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="140" height="96"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GridCell" id="4nr-oH-Kbs" customClass="GridCollectionViewCell" customModule="ITEvents" customModuleProvider="target">
+                                        <rect key="frame" x="235" y="0.0" width="140" height="96"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="140" height="96"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y0X-FS-nQK">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tly-LX-R1x">
                                                     <rect key="frame" x="49" y="38" width="42" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -99,27 +107,22 @@
                                             </subviews>
                                         </view>
                                         <connections>
-                                            <outlet property="eventTitleLabel" destination="y0X-FS-nQK" id="XIA-Nc-6Hi"/>
+                                            <outlet property="eventTitleLabel" destination="tly-LX-R1x" id="B49-4F-EjD"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="e9t-ED-VKi" firstAttribute="leading" secondItem="mlJ-uE-zFF" secondAttribute="leading" id="8BH-lO-750"/>
-                            <constraint firstItem="e9t-ED-VKi" firstAttribute="top" secondItem="mlJ-uE-zFF" secondAttribute="top" id="Cbq-a9-Ztc"/>
+                            <constraint firstItem="e9t-ED-VKi" firstAttribute="top" secondItem="mlJ-uE-zFF" secondAttribute="top" constant="10" id="Cbq-a9-Ztc"/>
                             <constraint firstItem="e9t-ED-VKi" firstAttribute="bottom" secondItem="mlJ-uE-zFF" secondAttribute="bottom" id="GJU-cH-GNW"/>
                             <constraint firstItem="mlJ-uE-zFF" firstAttribute="trailing" secondItem="e9t-ED-VKi" secondAttribute="trailing" id="kTz-8n-TgM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mlJ-uE-zFF"/>
                     </view>
                     <navigationItem key="navigationItem" title="Favorites" id="qL7-rN-98E">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="WtP-cO-CgF">
-                            <connections>
-                                <action selector="changeLayout:" destination="l4M-Ct-4fJ" id="Nul-pp-wT7"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" width="60" id="1Zf-Xi-xkh">
                             <view key="customView" contentMode="scaleToFill" id="e4u-oV-WFv" userLabel="Container View">
                                 <rect key="frame" x="288" y="5.5" width="71" height="33"/>
