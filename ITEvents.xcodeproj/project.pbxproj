@@ -10,6 +10,7 @@
 		9901D92B4C3F91783D96F1E6 /* Pods_ITEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01648EDF16EDD9EC7EB9596E /* Pods_ITEvents.framework */; };
 		C329BDFE201BC90F00F32829 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329BDFD201BC90F00F32829 /* ListCollectionViewCell.swift */; };
 		C3764B712020A94B0024CFA7 /* GridCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3CEBDC3201FCA38003CE306 /* GridCollectionViewCell.xib */; };
+		C3764B73202100AA0024CFA7 /* UIGradientImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3764B72202100AA0024CFA7 /* UIGradientImageView.swift */; };
 		C391908C201E59D100CD7151 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391908B201E59D100CD7151 /* Event.swift */; };
 		C3919090201E604600CD7151 /* FavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391908F201E604600CD7151 /* FavoritePresenter.swift */; };
 		C3919093201E608A00CD7151 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3919092201E608A00CD7151 /* SearchViewController.swift */; };
@@ -61,6 +62,7 @@
 		09058408E21C7D56F3F1A534 /* Pods-ITEvents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ITEvents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ITEvents/Pods-ITEvents.debug.xcconfig"; sourceTree = "<group>"; };
 		0CBFD89C81FCC879B485DC5E /* Pods-ITEvents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ITEvents.release.xcconfig"; path = "Pods/Target Support Files/Pods-ITEvents/Pods-ITEvents.release.xcconfig"; sourceTree = "<group>"; };
 		C329BDFD201BC90F00F32829 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
+		C3764B72202100AA0024CFA7 /* UIGradientImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGradientImageView.swift; sourceTree = "<group>"; };
 		C391908B201E59D100CD7151 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		C391908F201E604600CD7151 /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePresenter.swift; sourceTree = "<group>"; };
 		C3919092201E608A00CD7151 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				C3CEBDBD201FADA9003CE306 /* ListCollectionViewCell.xib */,
 				C39190B2201E64D700CD7151 /* GridCollectionViewCell.swift */,
 				C3CEBDC3201FCA38003CE306 /* GridCollectionViewCell.xib */,
+				C3764B72202100AA0024CFA7 /* UIGradientImageView.swift */,
 				C39190B4201E6B2C00CD7151 /* IEventCollectionViewCell.swift */,
 			);
 			path = "Shared view cells";
@@ -503,6 +506,7 @@
 				C39190B1201E63C500CD7151 /* IFullEventPresenter.swift in Sources */,
 				C329BDFE201BC90F00F32829 /* ListCollectionViewCell.swift in Sources */,
 				C39190AF201E639500CD7151 /* IFullEventViewController.swift in Sources */,
+				C3764B73202100AA0024CFA7 /* UIGradientImageView.swift in Sources */,
 				C391909D201E62E300CD7151 /* ISearchPresenter.swift in Sources */,
 				C39190AB201E637600CD7151 /* FullEventViewController.swift in Sources */,
 				C3B88298201A22520031F261 /* AppDelegate.swift in Sources */,

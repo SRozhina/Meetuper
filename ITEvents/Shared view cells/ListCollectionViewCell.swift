@@ -18,12 +18,14 @@ class ListCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
 
     func commonInit() {
         eventBackgroundView.layer.cornerRadius = 14
+        eventBackgroundView.clipsToBounds = true
         eventBackgroundView.layer.shadowColor = UIColor.black.cgColor
         eventBackgroundView.layer.shadowOpacity = 0.15
         eventBackgroundView.layer.shadowOffset = CGSize(width: 0.5, height: 10)
         eventBackgroundView.layer.shadowRadius = 8
         
-        eventImage.backgroundColor = .green
         eventImage.layer.cornerRadius = 14
+        eventImage.clipsToBounds = true
+
     }
 }

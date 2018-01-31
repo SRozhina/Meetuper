@@ -1,55 +1,28 @@
 import UIKit
 
-//extension UIImageView {
-//    func addGradient() {
-//        let gradient = CAGradientLayer()
-//        gradient.frame = self.frame
-//        let whiteColor = UIColor.green
-//        gradient.colors = [whiteColor.withAlphaComponent(0).cgColor, whiteColor.withAlphaComponent(1).cgColor]
-//        gradient.locations = [0, 1]
-//        self.layer.addSublayer(gradient)
-//    }
-//}
-
 class GridCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
+    @IBOutlet private weak var eventTitleLabel: UILabel!
+    @IBOutlet private weak var eventImage: UIGradientImageView!
+    @IBOutlet private weak var eventDateLabel: UILabel!
+    @IBOutlet private weak var eventBackgroundView: UIView!
+    @IBOutlet weak var shadowView: UIView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        commonInit()
+    }
+    
     func setTitle(_ title: String) {
         eventTitleLabel.text = title
     }
     
-    @IBOutlet private weak var eventTitleLabel: UILabel!
-    @IBOutlet private weak var eventImage: UIImageView!
-    @IBOutlet private weak var eventDateLabel: UILabel!
-    @IBOutlet private weak var eventBackgroundView: UIView!
-    //var gradient = CAGradientLayer()
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        //commonInit()
+    func commonInit() {
+        eventBackgroundView.layer.cornerRadius = 14
+        eventBackgroundView.clipsToBounds = true
+        shadowView.layer.cornerRadius = 14
+        shadowView.layer.shadowColor = UIColor.black.cgColor
+        shadowView.layer.shadowOpacity = 0.10
+        shadowView.layer.shadowOffset = CGSize(width: 0.5, height: 10)
+        shadowView.layer.shadowRadius = 8
     }
-//
-//    func commonInit() {
-//        //var view = UIView(frame: eventBackgroundView.frame)
-//
-//
-//        gradient.startPoint = CGPoint(x: 0, y: 0)
-//        gradient.endPoint = CGPoint(x: 0, y: 1)
-//        let whiteColor = UIColor.green
-//        gradient.colors = [whiteColor.withAlphaComponent(0).cgColor, whiteColor.withAlphaComponent(1).cgColor]
-//        gradient.locations = [0, 1]
-//        //gradient.frame = view.frame
-//        //view.layer.insertSublayer(gradient, at: 0)
-//        //eventImage.layer.insertSublayer(gradient, at: 0)
-//
-//        eventImage.layer.addSublayer(gradient)
-//        //eventImage.bringSubview(toFront: view)
-//
-//        //eventImage.layer.mask = mask
-//        //setNeedsLayout()
-//
-//    }
-//
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//        self.gradient.frame = self.frame
-//    }
 }

@@ -34,7 +34,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Profile" translatesAutoresizingMaskIntoConstraints="NO" id="QJA-2s-7vh">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="download" translatesAutoresizingMaskIntoConstraints="NO" id="QJA-2s-7vh">
                                 <rect key="frame" x="10" y="10" width="65" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="QJA-2s-7vh" secondAttribute="height" multiplier="1:1" id="iSk-qJ-Oef"/>
@@ -72,6 +72,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="Profile" width="25" height="25"/>
+        <image name="download" width="100" height="100"/>
     </resources>
 </document>
