@@ -2,7 +2,35 @@ import UIKit
 import DisplaySwitcher
 
 class FavoritesViewController: UIViewController {
-    let events = ["First", "Second", "Third", "Fourth", "Fiveth"]
+    
+    static func createEvent(title: String, date: String, image: UIImage) -> Event {
+        return Event(title: title,
+                     date: date,
+                     place: "",
+                     city: "",
+                     description: "",
+                     tags: [],
+                     image: image)
+    }
+    
+    let events = [
+        createEvent(title: "PiterJS #21",
+                    date: "18 January 19:00-22:00",
+                    image: UIImage(named: "js")!),
+        createEvent(title: "PiterCSS #25",
+                    date: "31 March 19:00-22:00",
+                    image: UIImage(named: "pitercss")!),
+        createEvent(title: "DartUp",
+                    date: "6 May 19:00-22:00",
+                    image: UIImage(named: "wrike")!),
+        createEvent(title: "EmberJS",
+                    date: "9 September 19:00-22:00",
+                    image: UIImage(named: "ember")!),
+        createEvent(title: "Yandex Frontend Meetup for Middle developers and higher",
+                    date: "23 December 19:00-22:00",
+                    image: UIImage(named: "yandex")!)
+    ]
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var rotationButton: SwitchLayoutButton!
     
@@ -18,8 +46,6 @@ class FavoritesViewController: UIViewController {
         super.viewDidLoad()
         setProperties()
         registerNibs()
-        collectionView.dataSource = self
-        collectionView.delegate = self
         setupCollectionView()
         
     }
@@ -43,10 +69,8 @@ class FavoritesViewController: UIViewController {
     }
     
     private func registerNibs() {
-        let listCellNib = UINib(nibName: "ListCollectionViewCell", bundle: nil)
-        collectionView.register(listCellNib, forCellWithReuseIdentifier: "ListCell")
-        let gridCellNib = UINib(nibName: "GridCollectionViewCell", bundle: nil)
-        collectionView.register(gridCellNib, forCellWithReuseIdentifier: "GridCell")
+        let eventCellNib = UINib(nibName: "EventCollectionViewCell", bundle: nil)
+        collectionView.register(eventCellNib, forCellWithReuseIdentifier: "EventCell")
     }
     
     @IBAction func changeLayout(_ sender: Any) {
@@ -85,14 +109,18 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let event = events[indexPath.row]
-        let cell: IEventCollectionViewCell & UICollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EventCell", for: indexPath)
+            as! IEventCollectionViewCell & UICollectionViewCell
         switch layoutState {
         case .list:
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ListCell", for: indexPath) as! ListCollectionViewCell
+            cell.setupListLayout()
         case .grid:
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GridCell", for: indexPath) as! GridCollectionViewCell
+            cell.setupGridLayout()
         }
-        cell.setTitle(event)
+        cell.setTitle(event.title)
+        cell.setDate(event.date)
+        cell.setImage(event.image)
+
         return cell
     }
     

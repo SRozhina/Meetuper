@@ -3,7 +3,7 @@ import UIKit
 
 struct Event {
     let title: String
-    let date: Date
+    let date: String  //TODO: Replace String -> Date
     let place: String
     let city: String
     let description: String
