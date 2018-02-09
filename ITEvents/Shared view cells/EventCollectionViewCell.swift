@@ -7,7 +7,6 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
     @IBOutlet private weak var eventImage: UIGradientImageView!
     @IBOutlet private weak var eventDateListLabel: UILabel!
     @IBOutlet private weak var eventBackgroundView: UIView!
-    @IBOutlet private weak var shadowView: UIView!
     
     @IBOutlet weak var eventImageBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var eventImageLeadingConstraint: NSLayoutConstraint!
@@ -26,12 +25,13 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
 
     func commonInit() {
         eventBackgroundView.layer.cornerRadius = 14
-
-        shadowView.layer.cornerRadius = 14
-        shadowView.layer.shadowColor = UIColor.black.cgColor
-        shadowView.layer.shadowOpacity = 0.10
-        shadowView.layer.shadowOffset = CGSize(width: 0.5, height: 10)
-        shadowView.layer.shadowRadius = 8
+        
+        layer.cornerRadius = 14
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.10
+        layer.shadowOffset = CGSize(width: 0.5, height: 10)
+        layer.shadowRadius = 8
+        layer.masksToBounds = false
         
         eventImage.clipsToBounds = true
     }
