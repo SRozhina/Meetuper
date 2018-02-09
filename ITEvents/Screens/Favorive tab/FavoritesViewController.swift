@@ -2,34 +2,8 @@ import UIKit
 import DisplaySwitcher
 
 class FavoritesViewController: UIViewController {
-    
-    static func createEvent(title: String, date: String, image: UIImage) -> Event {
-        return Event(title: title,
-                     date: date,
-                     place: "",
-                     city: "",
-                     description: "",
-                     tags: [],
-                     image: image)
-    }
-    
-    let events = [
-        createEvent(title: "PiterJS #21",
-                    date: "18 January 19:00-22:00",
-                    image: UIImage(named: "js")!),
-        createEvent(title: "PiterCSS #25",
-                    date: "31 March 19:00-22:00",
-                    image: UIImage(named: "pitercss")!),
-        createEvent(title: "DartUp",
-                    date: "6 May 19:00-22:00",
-                    image: UIImage(named: "wrike")!),
-        createEvent(title: "EmberJS",
-                    date: "9 September 19:00-22:00",
-                    image: UIImage(named: "ember")!),
-        createEvent(title: "Yandex Frontend Meetup for Middle developers and higher",
-                    date: "23 December 19:00-22:00",
-                    image: UIImage(named: "yandex")!)
-    ]
+    var eventDataService: IEventDataService!
+    var events = [Event]()
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var rotationButton: SwitchLayoutButton!
@@ -44,6 +18,8 @@ class FavoritesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        eventDataService = EventDataServiceMockImpl()
+        events = eventDataService.fetchEvents()
         setProperties()
         registerNibs()
         setupCollectionView()
@@ -56,10 +32,10 @@ class FavoritesViewController: UIViewController {
         gridLayoutCellStaticHeight = (view.frame.width / 2 - 20) / 0.8
         listLayout = DisplaySwitchLayout(staticCellHeight: listLayoutCellStaticHeihgt,
                                         nextLayoutStaticCellHeight: gridLayoutCellStaticHeight,
-                                        layoutState: .list)
+                                        layoutState: .list, cellHeightPadding: 8, cellWidthPadding: 10)
         gridLayout = DisplaySwitchLayout(staticCellHeight: gridLayoutCellStaticHeight,
                                          nextLayoutStaticCellHeight: listLayoutCellStaticHeihgt,
-                                         layoutState: .grid)
+                                         layoutState: .grid, cellHeightPadding: 8, cellWidthPadding: 10)
     }
     
     fileprivate func setupCollectionView() {
@@ -118,7 +94,7 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
             cell.setupGridLayout()
         }
         cell.setTitle(event.title)
-        cell.setDate(event.date)
+        cell.setDate(from: event.startDate, to: event.endDate)
         cell.setImage(event.image)
 
         return cell
