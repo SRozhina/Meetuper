@@ -28,8 +28,8 @@ class FavoritesViewController: UIViewController {
     
     private func setProperties() {
         animationDuration = 0.3
-        listLayoutCellStaticHeihgt = 105
-        gridLayoutCellStaticHeight = (view.frame.width / 2 - 20) / 0.8
+        listLayoutCellStaticHeihgt = 85
+        gridLayoutCellStaticHeight = view.frame.width / 2
         listLayout = DisplaySwitchLayout(staticCellHeight: listLayoutCellStaticHeihgt,
                                         nextLayoutStaticCellHeight: gridLayoutCellStaticHeight,
                                         layoutState: .list, cellHeightPadding: 8, cellWidthPadding: 10)

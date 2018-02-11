@@ -6,7 +6,6 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
     @IBOutlet private weak var eventTitleListLabel: UILabel!
     @IBOutlet private weak var eventImage: UIGradientImageView!
     @IBOutlet private weak var eventDateListLabel: UILabel!
-    @IBOutlet private weak var eventBackgroundView: UIView!
     
     @IBOutlet weak var eventImageBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var eventImageLeadingConstraint: NSLayoutConstraint!
@@ -28,9 +27,7 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         commonInit()
     }
     
-    func commonInit() {
-        eventBackgroundView.layer.cornerRadius = 14
-        
+    func commonInit() {        
         layer.cornerRadius = 14
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.10
@@ -53,12 +50,11 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
     }
     
     func setupGridLayout() {
-        eventImage.layer.cornerRadius = 0
+        eventImage.layer.cornerRadius = 14
         eventImageTopConstraint.constant = 0
         eventImageBottomConstraint.constant = 15
         eventImageLeadingConstraint.constant = 0
-        eventBackgroundView.clipsToBounds = true
-        
+
         eventImage.showGradient()
         eventDateListLabel.alpha = 0
         eventTitleListLabel.alpha = 0
