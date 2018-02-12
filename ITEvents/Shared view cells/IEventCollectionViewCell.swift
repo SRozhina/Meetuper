@@ -1,9 +1,7 @@
 import UIKit
 
 protocol IEventCollectionViewCell {
-    func setTitle(_ title: String)
-    func setDate(from start: Date, to end: Date)
-    func setImage(_ image: UIImage)
+    func setupCellWith(_ event: Event)
     func setupGridLayout()
     func setupListLayout()
 }

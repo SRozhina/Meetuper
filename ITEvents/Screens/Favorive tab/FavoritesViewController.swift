@@ -27,7 +27,7 @@ class FavoritesViewController: UIViewController {
     }
     
     private func setProperties() {
-        animationDuration = 0.3
+        animationDuration = 0.5
         listLayoutCellStaticHeihgt = 85
         gridLayoutCellStaticHeight = view.frame.width / 2
         listLayout = DisplaySwitchLayout(staticCellHeight: listLayoutCellStaticHeihgt,
@@ -93,9 +93,7 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
         case .grid:
             cell.setupGridLayout()
         }
-        cell.setTitle(event.title)
-        cell.setDate(from: event.startDate, to: event.endDate)
-        cell.setImage(event.image)
+        cell.setupCellWith(event)
 
         return cell
     }

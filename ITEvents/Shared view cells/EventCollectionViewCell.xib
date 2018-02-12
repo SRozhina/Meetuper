@@ -31,13 +31,13 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="clip" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="ZqH-Hs-oXP">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="ZqH-Hs-oXP">
                         <rect key="frame" x="105" y="49" width="257" height="24"/>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="reZ-aN-uE3">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="reZ-aN-uE3">
                         <rect key="frame" x="10" y="46" width="352" height="24"/>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <nil key="textColor"/>
@@ -74,6 +74,7 @@
                 <outlet property="eventDateGridLabel" destination="sLq-o0-d1J" id="Fto-mK-FJu"/>
                 <outlet property="eventDateListLabel" destination="58A-Bw-L2K" id="GCv-2T-8it"/>
                 <outlet property="eventImage" destination="QJA-2s-7vh" id="73h-kS-Ugz"/>
+                <outlet property="eventImageAspectRatioConstraint" destination="XlW-RW-AAw" id="7mS-hF-W1e"/>
                 <outlet property="eventImageBottomConstraint" destination="g2Y-PB-L0g" id="cgn-A4-1y2"/>
                 <outlet property="eventImageLeadingConstraint" destination="aaV-7Q-diZ" id="Odq-mM-Uzf"/>
                 <outlet property="eventImageTopConstraint" destination="l40-29-jOz" id="njN-yt-Vj4"/>

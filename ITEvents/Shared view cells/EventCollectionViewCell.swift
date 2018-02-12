@@ -10,12 +10,16 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
     @IBOutlet weak var eventImageBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var eventImageLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var eventImageTopConstraint: NSLayoutConstraint!
+    var eventImageTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet var eventImageAspectRatioConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var eventTitleGridLabel: UILabel!
     @IBOutlet weak var eventDateGridLabel: UILabel!
     
-    let titleFontSize: CGFloat = 20
-    let dateFontSize: CGFloat = 14
+    private let titleFontSize: CGFloat = 20
+    private let dateFontSize: CGFloat = 14
+    private let imageMargin: CGFloat = 10
+    private let cornerRadius: CGFloat = 14
     
     private static let locale = Locale(identifier: "en_GB")
     private var listFormat = DateFormatter.dateFormat(fromTemplate: "dMMMM HH:mm", options: 0, locale: locale)
@@ -27,22 +31,32 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         commonInit()
     }
     
-    func commonInit() {        
-        layer.cornerRadius = 14
+    private func commonInit() {
+        layer.cornerRadius = cornerRadius
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.10
         layer.shadowOffset = CGSize(width: 0.5, height: 10)
         layer.shadowRadius = 8
         layer.masksToBounds = false
+        eventImageTrailingConstraint = NSLayoutConstraint(item: eventImage,
+                                                          attribute: .trailing,
+                                                          relatedBy: .equal,
+                                                          toItem: self,
+                                                          attribute: .trailing,
+                                                          multiplier: 1,
+                                                          constant: 0)
         
         eventImage.clipsToBounds = true
     }
     
     func setupListLayout() {
-        eventImageTopConstraint.constant = 10
-        eventImageBottomConstraint.constant = 10
-        eventImageLeadingConstraint.constant = 10
-        eventImage.layer.cornerRadius = 14
+        eventImageTopConstraint.constant = imageMargin
+        eventImageBottomConstraint.constant = imageMargin
+        eventImageLeadingConstraint.constant = imageMargin
+        eventImage.layer.cornerRadius = cornerRadius
+        
+        eventImageTrailingConstraint.isActive = false
+        eventImageAspectRatioConstraint.isActive = true
         
         eventImage.hideGradient()
         eventDateGridLabel.alpha = 0
@@ -50,38 +64,38 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
     }
     
     func setupGridLayout() {
-        eventImage.layer.cornerRadius = 14
-        eventImageTopConstraint.constant = 0
-        eventImageBottomConstraint.constant = 15
-        eventImageLeadingConstraint.constant = 0
-
-        eventImage.showGradient()
-        eventDateListLabel.alpha = 0
-        eventTitleListLabel.alpha = 0
+        eventImageTrailingConstraint.isActive = true
+        eventImageAspectRatioConstraint.isActive = false
     }
     
     private func transitGridLayout(_ progress: CGFloat) {
-        let alpha = 1 - progress * 1.5
-        
-        eventDateListLabel.alpha = alpha
-        eventTitleListLabel.alpha = alpha
-        eventDateGridLabel.alpha = progress
-        eventTitleGridLabel.alpha = progress
+        setLabelsOpacity(to: 1 - progress)
+        let reverseProgress = 1 - progress
         
         eventTitleGridLabel.font = eventTitleGridLabel.font.withSize(titleFontSize * progress)
         eventDateGridLabel.font = eventDateGridLabel.font.withSize(dateFontSize * progress)
+        
+        eventImageTopConstraint.constant *= reverseProgress
+        eventImageBottomConstraint.constant *= reverseProgress
+        eventImageLeadingConstraint.constant *= reverseProgress
+        eventImageTrailingConstraint.constant *= reverseProgress
     }
     
     private func transitListLayout(_ progress: CGFloat) {
-        let alpha = 1 - progress * 1.5
-        
-        eventDateListLabel.alpha = progress
-        eventTitleListLabel.alpha = progress
-        eventTitleGridLabel.alpha = alpha
-        eventDateGridLabel.alpha = alpha
+        setLabelsOpacity(to: progress)
         
         eventTitleGridLabel.font = eventTitleGridLabel.font.withSize(titleFontSize * alpha)
         eventDateGridLabel.font = eventDateGridLabel.font.withSize(dateFontSize * alpha)
+    }
+    
+    private func setLabelsOpacity(to alpha: CGFloat) {
+        let reverceAlpha = 1 - alpha
+        
+        eventDateListLabel.alpha = alpha
+        eventTitleListLabel.alpha = alpha
+        
+        eventTitleGridLabel.alpha = reverceAlpha
+        eventDateGridLabel.alpha = reverceAlpha
     }
     
     override func willTransition(from oldLayout: UICollectionViewLayout, to newLayout: UICollectionViewLayout) {
@@ -98,7 +112,7 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         }
     }
     
-    func getLatoutState(_ layout: DisplaySwitchLayout) -> LayoutState {
+    private func getLatoutState(_ layout: DisplaySwitchLayout) -> LayoutState {
         let mirror = Mirror(reflecting: layout)
         let layoutStatePair = mirror.children.first { $0.label == "layoutState" }!
         return layoutStatePair.value as! LayoutState
@@ -108,7 +122,6 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         super.apply(layoutAttributes)
         if let attributes = layoutAttributes as? DisplaySwitchLayoutAttributes,
             attributes.transitionProgress > 0 {
-            print(attributes.transitionProgress)
             if attributes.layoutState == .grid {
                 transitGridLayout(attributes.transitionProgress)
             } else {
@@ -117,8 +130,10 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         }
     }
     
-    func setImageAlpha(_ alpha: CGFloat) {
-        eventImage.alpha = alpha
+    func setupCellWith(_ event: Event) {
+        setTitle(event.title)
+        setDate(from: event.startDate, to: event.endDate)
+        setImage(event.image)
     }
     
     func setTitle(_ title: String) {
