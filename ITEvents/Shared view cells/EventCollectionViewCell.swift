@@ -38,6 +38,8 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         layer.shadowOffset = CGSize(width: 0.5, height: 10)
         layer.shadowRadius = 8
         layer.masksToBounds = false
+        eventImage.clipsToBounds = true
+        eventImage.layer.cornerRadius = cornerRadius
         eventImageTrailingConstraint = NSLayoutConstraint(item: eventImage,
                                                           attribute: .trailing,
                                                           relatedBy: .equal,
@@ -45,15 +47,12 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
                                                           attribute: .trailing,
                                                           multiplier: 1,
                                                           constant: 0)
-        
-        eventImage.clipsToBounds = true
     }
     
     func setupListLayout() {
         eventImageTopConstraint.constant = imageMargin
         eventImageBottomConstraint.constant = imageMargin
         eventImageLeadingConstraint.constant = imageMargin
-        eventImage.layer.cornerRadius = cornerRadius
         
         eventImageTrailingConstraint.isActive = false
         eventImageAspectRatioConstraint.isActive = true
@@ -66,6 +65,11 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
     func setupGridLayout() {
         eventImageTrailingConstraint.isActive = true
         eventImageAspectRatioConstraint.isActive = false
+        
+        eventImageTopConstraint.constant = 0
+        eventImageBottomConstraint.constant = 0
+        eventImageLeadingConstraint.constant = 0
+        eventImageTrailingConstraint.constant = 0
     }
     
     private func transitGridLayout(_ progress: CGFloat) {
@@ -81,13 +85,6 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         eventImageTrailingConstraint.constant *= reverseProgress
     }
     
-    private func transitListLayout(_ progress: CGFloat) {
-        setLabelsOpacity(to: progress)
-        
-        eventTitleGridLabel.font = eventTitleGridLabel.font.withSize(titleFontSize * alpha)
-        eventDateGridLabel.font = eventDateGridLabel.font.withSize(dateFontSize * alpha)
-    }
-    
     private func setLabelsOpacity(to alpha: CGFloat) {
         let reverceAlpha = 1 - alpha
         
@@ -96,6 +93,13 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         
         eventTitleGridLabel.alpha = reverceAlpha
         eventDateGridLabel.alpha = reverceAlpha
+    }
+    
+    private func transitListLayout(_ progress: CGFloat) {
+        setLabelsOpacity(to: progress)
+        
+        eventTitleGridLabel.font = eventTitleGridLabel.font.withSize(titleFontSize * alpha)
+        eventDateGridLabel.font = eventDateGridLabel.font.withSize(dateFontSize * alpha)
     }
     
     override func willTransition(from oldLayout: UICollectionViewLayout, to newLayout: UICollectionViewLayout) {
@@ -136,12 +140,12 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         setImage(event.image)
     }
     
-    func setTitle(_ title: String) {
+    private func setTitle(_ title: String) {
         eventTitleListLabel.text = title
         eventTitleGridLabel.text = title
     }
     
-    func setDate(from start: Date, to end: Date) {
+    private func setDate(from start: Date, to end: Date) {
         eventDateListLabel.text = getListLabelDate(start: start, end: end)
         eventDateGridLabel.text = getGridLabelDate(start: start, end: end)
     }
@@ -172,7 +176,7 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         return "\(beginDate)\(separator)\(endDate)"
     }
     
-    func setImage(_ image: UIImage) {
+    private func setImage(_ image: UIImage) {
         eventImage.image = image
     }
 }
