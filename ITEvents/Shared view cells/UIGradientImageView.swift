@@ -26,12 +26,10 @@ class UIGradientImageView: UIImageView {
         self.layer.addSublayer(gradientLayer)
     }
     
-    func showGradient() {
-        gradientLayer.opacity = 1
-    }
-    
-    func hideGradient() {
-        gradientLayer.opacity = 0
+    func setGradientOpacity(to opacity: CGFloat) {
+        CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
+        gradientLayer.opacity = Float(opacity)
+        CATransaction.commit()
     }
     
     override func layoutSubviews() {

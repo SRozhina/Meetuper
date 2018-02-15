@@ -57,14 +57,14 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         eventImageTrailingConstraint.isActive = false
         eventImageAspectRatioConstraint.isActive = true
         
-        eventImage.hideGradient()
+        eventImage.setGradientOpacity(to: 0)
         eventDateGridLabel.alpha = 0
         eventTitleGridLabel.alpha = 0
     }
     
     func setupGridLayout() {
-        eventImageTrailingConstraint.isActive = true
         eventImageAspectRatioConstraint.isActive = false
+        eventImageTrailingConstraint.isActive = true
         
         eventImageTopConstraint.constant = 0
         eventImageBottomConstraint.constant = 0
@@ -73,8 +73,9 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
     }
     
     private func transitGridLayout(_ progress: CGFloat) {
-        setLabelsOpacity(to: 1 - progress)
         let reverseProgress = 1 - progress
+        
+        setLabelsOpacity(to: reverseProgress)
         
         eventTitleGridLabel.font = eventTitleGridLabel.font.withSize(titleFontSize * progress)
         eventDateGridLabel.font = eventDateGridLabel.font.withSize(dateFontSize * progress)
@@ -83,6 +84,8 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         eventImageBottomConstraint.constant *= reverseProgress
         eventImageLeadingConstraint.constant *= reverseProgress
         eventImageTrailingConstraint.constant *= reverseProgress
+        
+        eventImage.setGradientOpacity(to: progress)
     }
     
     private func setLabelsOpacity(to alpha: CGFloat) {
@@ -100,6 +103,8 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         
         eventTitleGridLabel.font = eventTitleGridLabel.font.withSize(titleFontSize * alpha)
         eventDateGridLabel.font = eventDateGridLabel.font.withSize(dateFontSize * alpha)
+        
+        eventImage.setGradientOpacity(to: 1 - progress)
     }
     
     override func willTransition(from oldLayout: UICollectionViewLayout, to newLayout: UICollectionViewLayout) {
@@ -109,7 +114,6 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         let oldLatoutState = getLatoutState(oldDisplaySwitchLayout)
         if oldLatoutState == .list {
             // list -> grid
-            eventImage.showGradient()
         } else {
             // grid -> list
             setupListLayout()
