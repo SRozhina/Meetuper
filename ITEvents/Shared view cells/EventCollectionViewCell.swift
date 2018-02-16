@@ -16,6 +16,9 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
     @IBOutlet weak var eventTitleGridLabel: UILabel!
     @IBOutlet weak var eventDateGridLabel: UILabel!
     
+    @IBOutlet var eventTitleListTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet var eventDateListTrailingConstraint: NSLayoutConstraint!
+    
     private let titleFontSize: CGFloat = 20
     private let dateFontSize: CGFloat = 14
     private let imageMargin: CGFloat = 10
@@ -57,7 +60,6 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         eventImageTrailingConstraint.isActive = false
         eventImageAspectRatioConstraint.isActive = true
         
-        eventImage.setGradientOpacity(to: 0)
         eventDateGridLabel.alpha = 0
         eventTitleGridLabel.alpha = 0
     }
@@ -69,7 +71,12 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         eventImageTopConstraint.constant = 0
         eventImageBottomConstraint.constant = 0
         eventImageLeadingConstraint.constant = 0
-        eventImageTrailingConstraint.constant = 0
+        
+        eventTitleListTrailingConstraint.isActive = false
+        eventDateListTrailingConstraint.isActive = false
+        eventTitleListLabel.isHidden = true
+        eventDateListLabel.isHidden = true
+        eventImage.setGradientOpacity(to: 1)
     }
     
     private func transitGridLayout(_ progress: CGFloat) {
@@ -83,17 +90,17 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         eventImageTopConstraint.constant *= reverseProgress
         eventImageBottomConstraint.constant *= reverseProgress
         eventImageLeadingConstraint.constant *= reverseProgress
-        eventImageTrailingConstraint.constant *= reverseProgress
         
         eventImage.setGradientOpacity(to: progress)
+        print(eventImage.gradientLayer.opacity)
     }
     
     private func setLabelsOpacity(to alpha: CGFloat) {
         let reverceAlpha = 1 - alpha
-        
+
         eventDateListLabel.alpha = alpha
         eventTitleListLabel.alpha = alpha
-        
+
         eventTitleGridLabel.alpha = reverceAlpha
         eventDateGridLabel.alpha = reverceAlpha
     }
@@ -113,6 +120,7 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         guard let oldDisplaySwitchLayout = oldLayout as? DisplaySwitchLayout else { return }
         let oldLatoutState = getLatoutState(oldDisplaySwitchLayout)
         if oldLatoutState == .list {
+            
             // list -> grid
         } else {
             // grid -> list
@@ -131,8 +139,21 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         if let attributes = layoutAttributes as? DisplaySwitchLayoutAttributes,
             attributes.transitionProgress > 0 {
             if attributes.layoutState == .grid {
+                if attributes.transitionProgress > 0.9 {
+                    eventTitleListTrailingConstraint.isActive = false
+                    eventDateListTrailingConstraint.isActive = false
+                    eventTitleListLabel.isHidden = true
+                    eventDateListLabel.isHidden = true
+                }
                 transitGridLayout(attributes.transitionProgress)
+                
             } else {
+                if attributes.transitionProgress > 0.1 {
+                    eventTitleListTrailingConstraint.isActive = true
+                    eventDateListTrailingConstraint.isActive = true
+                    eventTitleListLabel.isHidden = false
+                    eventDateListLabel.isHidden = false
+                }
                 transitListLayout(attributes.transitionProgress)
             }
         }

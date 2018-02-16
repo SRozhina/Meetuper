@@ -9,6 +9,7 @@ class UIGradientImageView: UIImageView {
         layer.colors = [color.withAlphaComponent(0).cgColor,
                         color.withAlphaComponent(1).cgColor]
         layer.locations = [0, 0.9]
+        layer.opacity = 0
         return layer
     }()
     

@@ -25,26 +25,26 @@
                             <constraint firstAttribute="width" secondItem="QJA-2s-7vh" secondAttribute="height" multiplier="1:1" id="XlW-RW-AAw"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="58A-Bw-L2K">
-                        <rect key="frame" x="105" y="78" width="257" height="17"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="58A-Bw-L2K">
+                        <rect key="frame" x="105" y="78" width="262" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="ZqH-Hs-oXP">
-                        <rect key="frame" x="105" y="49" width="257" height="24"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="ZqH-Hs-oXP">
+                        <rect key="frame" x="105" y="49" width="262" height="24"/>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="reZ-aN-uE3">
-                        <rect key="frame" x="10" y="46" width="352" height="24"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="reZ-aN-uE3">
+                        <rect key="frame" x="10" y="46" width="357" height="24"/>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="sLq-o0-d1J">
-                        <rect key="frame" x="10" y="78" width="352" height="17"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="sLq-o0-d1J">
+                        <rect key="frame" x="10" y="78" width="357" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -54,18 +54,18 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="sLq-o0-d1J" firstAttribute="top" secondItem="reZ-aN-uE3" secondAttribute="bottom" constant="8" id="2eG-SH-sBU"/>
-                <constraint firstAttribute="trailing" secondItem="58A-Bw-L2K" secondAttribute="trailing" constant="10" id="4c7-BO-BTE"/>
+                <constraint firstAttribute="trailing" secondItem="58A-Bw-L2K" secondAttribute="trailing" constant="5" id="4c7-BO-BTE"/>
                 <constraint firstItem="58A-Bw-L2K" firstAttribute="top" secondItem="ZqH-Hs-oXP" secondAttribute="bottom" constant="5" id="Gsp-gJ-xZ9"/>
                 <constraint firstItem="ZqH-Hs-oXP" firstAttribute="leading" secondItem="QJA-2s-7vh" secondAttribute="trailing" constant="10" id="Kxg-d2-UJY"/>
                 <constraint firstAttribute="bottom" secondItem="58A-Bw-L2K" secondAttribute="bottom" constant="10" id="N9f-mb-FSD"/>
                 <constraint firstItem="QJA-2s-7vh" firstAttribute="leading" secondItem="c2X-Pq-KXc" secondAttribute="leading" constant="10" id="aaV-7Q-diZ"/>
                 <constraint firstItem="sLq-o0-d1J" firstAttribute="leading" secondItem="c2X-Pq-KXc" secondAttribute="leading" constant="10" id="cgk-33-q8C"/>
                 <constraint firstAttribute="bottom" secondItem="QJA-2s-7vh" secondAttribute="bottom" constant="10" id="g2Y-PB-L0g"/>
-                <constraint firstAttribute="trailing" secondItem="sLq-o0-d1J" secondAttribute="trailing" constant="10" id="gzS-kU-0Z9"/>
+                <constraint firstAttribute="trailing" secondItem="sLq-o0-d1J" secondAttribute="trailing" constant="5" id="gzS-kU-0Z9"/>
                 <constraint firstItem="QJA-2s-7vh" firstAttribute="top" secondItem="c2X-Pq-KXc" secondAttribute="top" constant="10" id="l40-29-jOz"/>
                 <constraint firstItem="58A-Bw-L2K" firstAttribute="leading" secondItem="QJA-2s-7vh" secondAttribute="trailing" constant="10" id="oCN-OD-aw8"/>
-                <constraint firstAttribute="trailing" secondItem="reZ-aN-uE3" secondAttribute="trailing" constant="10" id="opI-oY-abh"/>
-                <constraint firstAttribute="trailing" secondItem="ZqH-Hs-oXP" secondAttribute="trailing" constant="10" id="pHj-3R-1K1"/>
+                <constraint firstAttribute="trailing" secondItem="reZ-aN-uE3" secondAttribute="trailing" constant="5" id="opI-oY-abh"/>
+                <constraint firstAttribute="trailing" secondItem="ZqH-Hs-oXP" secondAttribute="trailing" constant="5" id="pHj-3R-1K1"/>
                 <constraint firstItem="reZ-aN-uE3" firstAttribute="leading" secondItem="c2X-Pq-KXc" secondAttribute="leading" constant="10" id="v1k-El-T0e"/>
                 <constraint firstAttribute="bottom" secondItem="sLq-o0-d1J" secondAttribute="bottom" constant="10" id="z5O-Q6-dJR"/>
             </constraints>
@@ -73,6 +73,7 @@
             <connections>
                 <outlet property="eventDateGridLabel" destination="sLq-o0-d1J" id="Fto-mK-FJu"/>
                 <outlet property="eventDateListLabel" destination="58A-Bw-L2K" id="GCv-2T-8it"/>
+                <outlet property="eventDateListTrailingConstraint" destination="4c7-BO-BTE" id="ski-UK-JZW"/>
                 <outlet property="eventImage" destination="QJA-2s-7vh" id="73h-kS-Ugz"/>
                 <outlet property="eventImageAspectRatioConstraint" destination="XlW-RW-AAw" id="7mS-hF-W1e"/>
                 <outlet property="eventImageBottomConstraint" destination="g2Y-PB-L0g" id="cgn-A4-1y2"/>
@@ -80,6 +81,7 @@
                 <outlet property="eventImageTopConstraint" destination="l40-29-jOz" id="njN-yt-Vj4"/>
                 <outlet property="eventTitleGridLabel" destination="reZ-aN-uE3" id="Yj8-ZL-uK8"/>
                 <outlet property="eventTitleListLabel" destination="ZqH-Hs-oXP" id="1Oh-n3-aGR"/>
+                <outlet property="eventTitleListTrailingConstraint" destination="pHj-3R-1K1" id="7HY-GK-UqW"/>
             </connections>
             <point key="canvasLocation" x="-152" y="-1856.5"/>
         </collectionViewCell>
