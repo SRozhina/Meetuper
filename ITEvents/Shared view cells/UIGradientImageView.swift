@@ -1,13 +1,10 @@
 import UIKit
 
 class UIGradientImageView: UIImageView {
-    let gradientLayer: CAGradientLayer = { 
+    private let gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
         layer.startPoint = CGPoint(x: 0, y: 0.3)
         layer.endPoint = CGPoint(x: 0, y: 1)
-        let color = UIColor.white
-        layer.colors = [color.withAlphaComponent(0).cgColor,
-                        color.withAlphaComponent(1).cgColor]
         layer.locations = [0, 0.9]
         layer.opacity = 0
         return layer
@@ -15,16 +12,22 @@ class UIGradientImageView: UIImageView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setup()
+        setGragientLayer()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setup()
+        setGragientLayer()
     }
     
-    func setup() {
+    func setGragientLayer(color: UIColor) {
+        gradientLayer.colors = [color.withAlphaComponent(0).cgColor,
+                                color.withAlphaComponent(1).cgColor]
         self.layer.addSublayer(gradientLayer)
+    }
+    
+    private func setGragientLayer() {
+        setGragientLayer(color: UIColor.white)
     }
     
     func setGradientOpacity(to opacity: CGFloat) {

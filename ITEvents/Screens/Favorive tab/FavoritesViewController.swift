@@ -2,15 +2,13 @@ import UIKit
 import DisplaySwitcher
 
 class FavoritesViewController: UIViewController {
-    var eventDataService: IEventDataService!
-    var events = [Event]()
+    private let eventDataService: IEventDataService = EventDataServiceMockImpl()
+    private var events = [Event]()
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var rotationButton: SwitchLayoutButton!
     
     private var animationDuration: TimeInterval!
-    private var listLayoutCellStaticHeihgt: CGFloat!
-    private var gridLayoutCellStaticHeight: CGFloat!
     private var listLayout: DisplaySwitchLayout!
     private var gridLayout: DisplaySwitchLayout!
     
@@ -18,30 +16,30 @@ class FavoritesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        eventDataService = EventDataServiceMockImpl()
         events = eventDataService.fetchEvents()
         setProperties()
         registerNibs()
         setupCollectionView()
-        
+        rotationButton.animationDuration = animationDuration
     }
     
     private func setProperties() {
         animationDuration = 0.5
-        listLayoutCellStaticHeihgt = 85
-        gridLayoutCellStaticHeight = view.frame.width / 2
+        let listLayoutCellStaticHeihgt: CGFloat = 85
+        let gridLayoutCellStaticHeight: CGFloat = view.frame.width / 2
         listLayout = DisplaySwitchLayout(staticCellHeight: listLayoutCellStaticHeihgt,
                                         nextLayoutStaticCellHeight: gridLayoutCellStaticHeight,
                                         layoutState: .list, cellHeightPadding: 8, cellWidthPadding: 10)
         gridLayout = DisplaySwitchLayout(staticCellHeight: gridLayoutCellStaticHeight,
                                          nextLayoutStaticCellHeight: listLayoutCellStaticHeihgt,
                                          layoutState: .grid, cellHeightPadding: 8, cellWidthPadding: 10)
+        
     }
     
-    fileprivate func setupCollectionView() {
+    private func setupCollectionView() {
         let layout = getCurrentLayout()
         collectionView.collectionViewLayout = layout
-        setRotationButtonSelection(layout: layout)
+        setButtonRotation(for: layout)
     }
     
     private func registerNibs() {
@@ -61,18 +59,14 @@ class FavoritesViewController: UIViewController {
                                                   destinationLayout: layout,
                                                   layoutState: layoutState)
         transitionManager.startInteractiveTransition()
-        setRotationButtonSelection(layout: layout)
-        rotationButton.animationDuration = animationDuration
+        setButtonRotation(for: layout)
     }
     
     private func getCurrentLayout() -> DisplaySwitchLayout {
-        if layoutState == .list {
-            return listLayout
-        }
-        return gridLayout
+        return layoutState == .list ? listLayout : gridLayout
     }
     
-    private func setRotationButtonSelection(layout: DisplaySwitchLayout) {
+    private func setButtonRotation(for layout: DisplaySwitchLayout) {
         rotationButton.isSelected = layout == listLayout
     }
 }
@@ -101,7 +95,6 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView,
                         transitionLayoutForOldLayout fromLayout: UICollectionViewLayout,
                         newLayout toLayout: UICollectionViewLayout) -> UICollectionViewTransitionLayout {
-        let customTransitionLayout = TransitionLayout(currentLayout: fromLayout, nextLayout: toLayout)
-        return customTransitionLayout
+        return TransitionLayout(currentLayout: fromLayout, nextLayout: toLayout)
     }
 }

@@ -3,31 +3,43 @@ import  Foundation
 import DisplaySwitcher
 
 class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
-    @IBOutlet private weak var eventTitleListLabel: UILabel!
-    @IBOutlet private weak var eventImage: UIGradientImageView!
-    @IBOutlet private weak var eventDateListLabel: UILabel!
+    @IBOutlet private weak var titleListLabel: UILabel!
+    @IBOutlet private weak var dateListLabel: UILabel!
+    @IBOutlet private weak var titleGridLabel: UILabel!
+    @IBOutlet private weak var dateGridLabel: UILabel!
+    @IBOutlet private weak var image: UIGradientImageView!
+
+    @IBOutlet private weak var imageBottomConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var imageLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var imageTopConstraint: NSLayoutConstraint!
+    @IBOutlet private var imageTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet private var imageAspectRatioConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var eventImageBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var eventImageLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var eventImageTopConstraint: NSLayoutConstraint!
-    var eventImageTrailingConstraint: NSLayoutConstraint!
-    @IBOutlet var eventImageAspectRatioConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var eventTitleGridLabel: UILabel!
-    @IBOutlet weak var eventDateGridLabel: UILabel!
-    
-    @IBOutlet var eventTitleListTrailingConstraint: NSLayoutConstraint!
-    @IBOutlet var eventDateListTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet private var titleListTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet private var dateListTrailingConstraint: NSLayoutConstraint!
     
     private let titleFontSize: CGFloat = 20
     private let dateFontSize: CGFloat = 14
     private let imageMargin: CGFloat = 10
     private let cornerRadius: CGFloat = 14
     
-    private static let locale = Locale(identifier: "en_GB")
-    private var listFormat = DateFormatter.dateFormat(fromTemplate: "dMMMM HH:mm", options: 0, locale: locale)
-    private var gridFormat = DateFormatter.dateFormat(fromTemplate: "dMMM HH:mm", options: 0, locale: locale)
-    private var timeFormat = DateFormatter.dateFormat(fromTemplate: "HH:mm", options: 0, locale: locale)
+    private let listDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d MMMM HH:mm"
+        return formatter
+    }()
+    
+    private let gridDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d MMM HH:mm"
+        return formatter
+    }()
+    
+    private let timeDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter
+    }()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,42 +53,40 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         layer.shadowOffset = CGSize(width: 0.5, height: 10)
         layer.shadowRadius = 8
         layer.masksToBounds = false
-        eventImage.clipsToBounds = true
-        eventImage.layer.cornerRadius = cornerRadius
-        eventImageTrailingConstraint = NSLayoutConstraint(item: eventImage,
-                                                          attribute: .trailing,
-                                                          relatedBy: .equal,
-                                                          toItem: self,
-                                                          attribute: .trailing,
-                                                          multiplier: 1,
-                                                          constant: 0)
+        image.clipsToBounds = true
+        image.layer.cornerRadius = cornerRadius
     }
     
     func setupListLayout() {
-        eventImageTopConstraint.constant = imageMargin
-        eventImageBottomConstraint.constant = imageMargin
-        eventImageLeadingConstraint.constant = imageMargin
+        imageTopConstraint.constant = imageMargin
+        imageBottomConstraint.constant = imageMargin
+        imageLeadingConstraint.constant = imageMargin
         
-        eventImageTrailingConstraint.isActive = false
-        eventImageAspectRatioConstraint.isActive = true
+        imageTrailingConstraint.isActive = false
+        imageAspectRatioConstraint.isActive = true
         
-        eventDateGridLabel.alpha = 0
-        eventTitleGridLabel.alpha = 0
+        dateGridLabel.alpha = 0
+        titleGridLabel.alpha = 0
+    }
+    
+    private func startListLayoutTransition() {
+        setupListLayout()
     }
     
     func setupGridLayout() {
-        eventImageAspectRatioConstraint.isActive = false
-        eventImageTrailingConstraint.isActive = true
+        imageAspectRatioConstraint.isActive = false
+        imageTrailingConstraint.isActive = true
         
-        eventImageTopConstraint.constant = 0
-        eventImageBottomConstraint.constant = 0
-        eventImageLeadingConstraint.constant = 0
+        imageTopConstraint.constant = 0
+        imageBottomConstraint.constant = 0
+        imageLeadingConstraint.constant = 0
         
-        eventTitleListTrailingConstraint.isActive = false
-        eventDateListTrailingConstraint.isActive = false
-        eventTitleListLabel.isHidden = true
-        eventDateListLabel.isHidden = true
-        eventImage.setGradientOpacity(to: 1)
+        titleListTrailingConstraint.isActive = false
+        dateListTrailingConstraint.isActive = false
+        
+        titleListLabel.isHidden = true
+        dateListLabel.isHidden = true
+        image.setGradientOpacity(to: 1)
     }
     
     private func transitGridLayout(_ progress: CGFloat) {
@@ -84,34 +94,33 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         
         setLabelsOpacity(to: reverseProgress)
         
-        eventTitleGridLabel.font = eventTitleGridLabel.font.withSize(titleFontSize * progress)
-        eventDateGridLabel.font = eventDateGridLabel.font.withSize(dateFontSize * progress)
+        titleGridLabel.font = titleGridLabel.font.withSize(titleFontSize * progress)
+        dateGridLabel.font = dateGridLabel.font.withSize(dateFontSize * progress)
         
-        eventImageTopConstraint.constant *= reverseProgress
-        eventImageBottomConstraint.constant *= reverseProgress
-        eventImageLeadingConstraint.constant *= reverseProgress
+        imageTopConstraint.constant *= reverseProgress
+        imageBottomConstraint.constant *= reverseProgress
+        imageLeadingConstraint.constant *= reverseProgress
         
-        eventImage.setGradientOpacity(to: progress)
-        print(eventImage.gradientLayer.opacity)
+        image.setGradientOpacity(to: progress)
     }
     
     private func setLabelsOpacity(to alpha: CGFloat) {
         let reverceAlpha = 1 - alpha
-
-        eventDateListLabel.alpha = alpha
-        eventTitleListLabel.alpha = alpha
-
-        eventTitleGridLabel.alpha = reverceAlpha
-        eventDateGridLabel.alpha = reverceAlpha
+        
+        dateListLabel.alpha = alpha
+        titleListLabel.alpha = alpha
+        
+        titleGridLabel.alpha = reverceAlpha
+        dateGridLabel.alpha = reverceAlpha
     }
     
     private func transitListLayout(_ progress: CGFloat) {
         setLabelsOpacity(to: progress)
         
-        eventTitleGridLabel.font = eventTitleGridLabel.font.withSize(titleFontSize * alpha)
-        eventDateGridLabel.font = eventDateGridLabel.font.withSize(dateFontSize * alpha)
+        titleGridLabel.font = titleGridLabel.font.withSize(titleFontSize * alpha)
+        dateGridLabel.font = dateGridLabel.font.withSize(dateFontSize * alpha)
         
-        eventImage.setGradientOpacity(to: 1 - progress)
+        image.setGradientOpacity(to: 1 - progress)
     }
     
     override func willTransition(from oldLayout: UICollectionViewLayout, to newLayout: UICollectionViewLayout) {
@@ -120,11 +129,10 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         guard let oldDisplaySwitchLayout = oldLayout as? DisplaySwitchLayout else { return }
         let oldLatoutState = getLatoutState(oldDisplaySwitchLayout)
         if oldLatoutState == .list {
-            
             // list -> grid
         } else {
             // grid -> list
-            setupListLayout()
+            startListLayoutTransition()
         }
     }
     
@@ -136,27 +144,25 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
-        if let attributes = layoutAttributes as? DisplaySwitchLayoutAttributes,
-            attributes.transitionProgress > 0 {
-            if attributes.layoutState == .grid {
-                if attributes.transitionProgress > 0.9 {
-                    eventTitleListTrailingConstraint.isActive = false
-                    eventDateListTrailingConstraint.isActive = false
-                    eventTitleListLabel.isHidden = true
-                    eventDateListLabel.isHidden = true
-                }
-                transitGridLayout(attributes.transitionProgress)
-                
-            } else {
-                if attributes.transitionProgress > 0.1 {
-                    eventTitleListTrailingConstraint.isActive = true
-                    eventDateListTrailingConstraint.isActive = true
-                    eventTitleListLabel.isHidden = false
-                    eventDateListLabel.isHidden = false
-                }
-                transitListLayout(attributes.transitionProgress)
+        guard let attributes = layoutAttributes as? DisplaySwitchLayoutAttributes, attributes.transitionProgress > 0 else { return }
+        if attributes.layoutState == .grid {
+            if attributes.transitionProgress > 0.9 {
+                toggleListConstraintActive(value: false)
             }
+            transitGridLayout(attributes.transitionProgress)
+        } else {
+            if attributes.transitionProgress > 0.1 {
+                toggleListConstraintActive(value: true)
+            }
+            transitListLayout(attributes.transitionProgress)
         }
+    }
+    
+    private func toggleListConstraintActive(value: Bool) {
+        titleListTrailingConstraint.isActive = value
+        dateListTrailingConstraint.isActive = value
+        titleListLabel.isHidden = !value
+        dateListLabel.isHidden = !value
     }
     
     func setupCellWith(_ event: Event) {
@@ -166,42 +172,38 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
     }
     
     private func setTitle(_ title: String) {
-        eventTitleListLabel.text = title
-        eventTitleGridLabel.text = title
+        titleListLabel.text = title
+        titleGridLabel.text = title
     }
     
     private func setDate(from start: Date, to end: Date) {
-        eventDateListLabel.text = getListLabelDate(start: start, end: end)
-        eventDateGridLabel.text = getGridLabelDate(start: start, end: end)
+        dateListLabel.text = getListLabelDate(start: start, end: end)
+        dateGridLabel.text = getGridLabelDate(start: start, end: end)
     }
-
+    
     private func hasSameDay(start: Date, end: Date) -> Bool {
         return Calendar.current.isDate(start, equalTo: end, toGranularity: .day)
     }
     
     private func getListLabelDate(start: Date, end: Date) -> String {
-        let dateFormatter = DateFormatter()
         let sameDay = hasSameDay(start: start, end: end)
         let separator = sameDay ? "-" : " - "
-        dateFormatter.dateFormat = listFormat
-        let beginDate = dateFormatter.string(from: start)
-        dateFormatter.dateFormat = sameDay ? timeFormat : listFormat
-        let endDate = dateFormatter.string(from: end)
+        let beginDate = listDateFormatter.string(from: start)
+        let formatter = sameDay ? timeDateFormatter : listDateFormatter
+        let endDate = formatter.string(from: end)
         return "\(beginDate)\(separator)\(endDate)"
     }
     
     private func getGridLabelDate(start: Date, end: Date) -> String {
-        let dateFormatter = DateFormatter()
         let sameDay = hasSameDay(start: start, end: end)
         let separator = sameDay ? "-" : " - "
-        dateFormatter.dateFormat = gridFormat
-        let beginDate = dateFormatter.string(from: start)
-        dateFormatter.dateFormat = sameDay ? timeFormat : gridFormat
-        let endDate = dateFormatter.string(from: end)
+        let beginDate = gridDateFormatter.string(from: start)
+        let formatter = sameDay ? timeDateFormatter : gridDateFormatter
+        let endDate = formatter.string(from: end)
         return "\(beginDate)\(separator)\(endDate)"
     }
     
     private func setImage(_ image: UIImage) {
-        eventImage.image = image
+        self.image.image = image
     }
 }

@@ -20,19 +20,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="js" translatesAutoresizingMaskIntoConstraints="NO" id="QJA-2s-7vh" customClass="UIGradientImageView" customModule="ITEvents" customModuleProvider="target">
-                        <rect key="frame" x="10" y="10" width="85" height="85"/>
+                        <rect key="frame" x="287" y="10" width="85" height="85"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="QJA-2s-7vh" secondAttribute="height" multiplier="1:1" id="XlW-RW-AAw"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="58A-Bw-L2K">
-                        <rect key="frame" x="105" y="78" width="262" height="17"/>
+                        <rect key="frame" x="382" y="78" width="35.5" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="ZqH-Hs-oXP">
-                        <rect key="frame" x="105" y="49" width="262" height="24"/>
+                        <rect key="frame" x="382" y="49" width="48" height="24"/>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -55,6 +55,7 @@
             <constraints>
                 <constraint firstItem="sLq-o0-d1J" firstAttribute="top" secondItem="reZ-aN-uE3" secondAttribute="bottom" constant="8" id="2eG-SH-sBU"/>
                 <constraint firstAttribute="trailing" secondItem="58A-Bw-L2K" secondAttribute="trailing" constant="5" id="4c7-BO-BTE"/>
+                <constraint firstItem="QJA-2s-7vh" firstAttribute="trailing" secondItem="c2X-Pq-KXc" secondAttribute="trailing" id="9EW-Qo-nD3"/>
                 <constraint firstItem="58A-Bw-L2K" firstAttribute="top" secondItem="ZqH-Hs-oXP" secondAttribute="bottom" constant="5" id="Gsp-gJ-xZ9"/>
                 <constraint firstItem="ZqH-Hs-oXP" firstAttribute="leading" secondItem="QJA-2s-7vh" secondAttribute="trailing" constant="10" id="Kxg-d2-UJY"/>
                 <constraint firstAttribute="bottom" secondItem="58A-Bw-L2K" secondAttribute="bottom" constant="10" id="N9f-mb-FSD"/>
@@ -71,17 +72,18 @@
             </constraints>
             <size key="customSize" width="200" height="50"/>
             <connections>
-                <outlet property="eventDateGridLabel" destination="sLq-o0-d1J" id="Fto-mK-FJu"/>
-                <outlet property="eventDateListLabel" destination="58A-Bw-L2K" id="GCv-2T-8it"/>
-                <outlet property="eventDateListTrailingConstraint" destination="4c7-BO-BTE" id="ski-UK-JZW"/>
-                <outlet property="eventImage" destination="QJA-2s-7vh" id="73h-kS-Ugz"/>
-                <outlet property="eventImageAspectRatioConstraint" destination="XlW-RW-AAw" id="7mS-hF-W1e"/>
-                <outlet property="eventImageBottomConstraint" destination="g2Y-PB-L0g" id="cgn-A4-1y2"/>
-                <outlet property="eventImageLeadingConstraint" destination="aaV-7Q-diZ" id="Odq-mM-Uzf"/>
-                <outlet property="eventImageTopConstraint" destination="l40-29-jOz" id="njN-yt-Vj4"/>
-                <outlet property="eventTitleGridLabel" destination="reZ-aN-uE3" id="Yj8-ZL-uK8"/>
-                <outlet property="eventTitleListLabel" destination="ZqH-Hs-oXP" id="1Oh-n3-aGR"/>
-                <outlet property="eventTitleListTrailingConstraint" destination="pHj-3R-1K1" id="7HY-GK-UqW"/>
+                <outlet property="dateGridLabel" destination="sLq-o0-d1J" id="Fto-mK-FJu"/>
+                <outlet property="dateListLabel" destination="58A-Bw-L2K" id="GCv-2T-8it"/>
+                <outlet property="dateListTrailingConstraint" destination="4c7-BO-BTE" id="ski-UK-JZW"/>
+                <outlet property="image" destination="QJA-2s-7vh" id="73h-kS-Ugz"/>
+                <outlet property="imageAspectRatioConstraint" destination="XlW-RW-AAw" id="7mS-hF-W1e"/>
+                <outlet property="imageBottomConstraint" destination="g2Y-PB-L0g" id="cgn-A4-1y2"/>
+                <outlet property="imageLeadingConstraint" destination="aaV-7Q-diZ" id="Odq-mM-Uzf"/>
+                <outlet property="imageTopConstraint" destination="l40-29-jOz" id="njN-yt-Vj4"/>
+                <outlet property="imageTrailingConstraint" destination="9EW-Qo-nD3" id="Kxk-l0-kJS"/>
+                <outlet property="titleGridLabel" destination="reZ-aN-uE3" id="Yj8-ZL-uK8"/>
+                <outlet property="titleListLabel" destination="ZqH-Hs-oXP" id="1Oh-n3-aGR"/>
+                <outlet property="titleListTrailingConstraint" destination="pHj-3R-1K1" id="7HY-GK-UqW"/>
             </connections>
             <point key="canvasLocation" x="-152" y="-1856.5"/>
         </collectionViewCell>

@@ -2,6 +2,12 @@ import Foundation
 import UIKit
 
 class EventDataServiceMockImpl: IEventDataService {
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return formatter
+    }()
+    
     private func createEvent(title: String, startDate: Date, endDate: Date, image: UIImage) -> Event {
         return Event(title: title,
                      startDate: startDate,
@@ -14,13 +20,11 @@ class EventDataServiceMockImpl: IEventDataService {
     }
     
     private func getDateFromString(stringDate: String) -> Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return dateFormatter.date(from: stringDate)!
     }
     
     func fetchEvents() -> [Event] {
-        let events = [
+        return [
             createEvent(title: "PiterJS #21",
                         startDate: getDateFromString(stringDate: "2018-01-18 19:00:00"),
                         endDate: getDateFromString(stringDate: "2018-01-18 22:00:00"),
@@ -42,6 +46,5 @@ class EventDataServiceMockImpl: IEventDataService {
                         endDate: getDateFromString(stringDate: "2018-12-24 22:00:00"),
                         image: UIImage(named: "yandex")!)
         ]
-        return events
     }
 }
