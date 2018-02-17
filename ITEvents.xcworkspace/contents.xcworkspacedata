@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/sofia/Documents/Projects/Meetuper/ITEvents/Shared view cells/GridCollectionViewCell.xib">
-   </FileRef>
-   <FileRef
       location = "group:ITEvents.xcodeproj">
    </FileRef>
    <FileRef
