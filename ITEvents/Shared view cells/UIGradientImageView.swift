@@ -1,37 +1,39 @@
 import UIKit
 
 class UIGradientImageView: UIImageView {
-    let gradientLayer: CAGradientLayer = { 
+    private let gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
         layer.startPoint = CGPoint(x: 0, y: 0.3)
         layer.endPoint = CGPoint(x: 0, y: 1)
-        let color = UIColor.white
-        layer.colors = [color.withAlphaComponent(0).cgColor,
-                        color.withAlphaComponent(1).cgColor]
         layer.locations = [0, 0.9]
+        layer.opacity = 0
         return layer
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setup()
+        setGragientLayer()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setup()
+        setGragientLayer()
     }
     
-    func setup() {
+    func setGragientLayer(color: UIColor) {
+        gradientLayer.colors = [color.withAlphaComponent(0).cgColor,
+                                color.withAlphaComponent(1).cgColor]
         self.layer.addSublayer(gradientLayer)
     }
     
-    func showGradient() {
-        gradientLayer.opacity = 1
+    private func setGragientLayer() {
+        setGragientLayer(color: UIColor.white)
     }
     
-    func hideGradient() {
-        gradientLayer.opacity = 0
+    func setGradientOpacity(to opacity: CGFloat) {
+        CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
+        gradientLayer.opacity = Float(opacity)
+        CATransaction.commit()
     }
     
     override func layoutSubviews() {
