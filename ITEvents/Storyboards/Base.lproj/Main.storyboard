@@ -30,20 +30,74 @@
             </objects>
             <point key="canvasLocation" x="-1018" y="179"/>
         </scene>
-        <!--View Controller-->
+        <!--Full Event View Controller-->
         <scene sceneID="w6Y-gd-5N7">
             <objects>
-                <viewController id="Xbi-tk-Qub" sceneMemberID="viewController">
+                <viewController id="Xbi-tk-Qub" customClass="FullEventViewController" customModule="ITEvents" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0oy-xw-a4C">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tqc-J7-xiR">
+                                <rect key="frame" x="0.0" y="64" width="375" height="887"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fn5-mg-LOx" userLabel="ContentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="887"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1rU-Sg-bl0" customClass="EventView" customModule="ITEvents" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="817"/>
+                                                <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IbG-r5-dys">
+                                                <rect key="frame" x="10" y="827" width="355" height="50"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="5cs-fE-2LW"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="IbG-r5-dys" firstAttribute="top" secondItem="1rU-Sg-bl0" secondAttribute="bottom" constant="10" id="13D-IC-eHC"/>
+                                            <constraint firstAttribute="trailing" secondItem="IbG-r5-dys" secondAttribute="trailing" constant="10" id="KFy-ck-lNQ"/>
+                                            <constraint firstItem="IbG-r5-dys" firstAttribute="leading" secondItem="fn5-mg-LOx" secondAttribute="leading" constant="10" id="Nno-s3-fZO"/>
+                                            <constraint firstAttribute="bottom" secondItem="IbG-r5-dys" secondAttribute="bottom" constant="10" id="hC7-Zf-C3M"/>
+                                            <constraint firstItem="1rU-Sg-bl0" firstAttribute="leading" secondItem="fn5-mg-LOx" secondAttribute="leading" id="xij-YZ-Vzj"/>
+                                            <constraint firstItem="1rU-Sg-bl0" firstAttribute="top" secondItem="fn5-mg-LOx" secondAttribute="top" id="yZC-P2-eAs"/>
+                                            <constraint firstAttribute="trailing" secondItem="1rU-Sg-bl0" secondAttribute="trailing" id="zbN-gQ-YGg"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="fn5-mg-LOx" firstAttribute="top" secondItem="tqc-J7-xiR" secondAttribute="top" id="3ae-El-Hoq"/>
+                                    <constraint firstItem="fn5-mg-LOx" firstAttribute="leading" secondItem="tqc-J7-xiR" secondAttribute="leading" id="3gO-kc-YNg"/>
+                                    <constraint firstAttribute="trailing" secondItem="fn5-mg-LOx" secondAttribute="trailing" id="NsT-9n-XlD"/>
+                                    <constraint firstItem="fn5-mg-LOx" firstAttribute="width" secondItem="tqc-J7-xiR" secondAttribute="width" id="Vhz-SA-P7N"/>
+                                    <constraint firstItem="fn5-mg-LOx" firstAttribute="height" secondItem="tqc-J7-xiR" secondAttribute="height" priority="250" id="YLQ-nQ-HgT"/>
+                                    <constraint firstAttribute="bottom" secondItem="fn5-mg-LOx" secondAttribute="bottom" id="hI1-ab-OVQ"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="tqc-J7-xiR" firstAttribute="top" secondItem="0cY-tl-W2u" secondAttribute="top" id="Xil-79-ecS"/>
+                            <constraint firstAttribute="trailing" secondItem="tqc-J7-xiR" secondAttribute="trailing" id="bJq-3E-0pv"/>
+                            <constraint firstItem="tqc-J7-xiR" firstAttribute="leading" secondItem="0oy-xw-a4C" secondAttribute="leading" id="eCB-O1-r5w"/>
+                            <constraint firstItem="0cY-tl-W2u" firstAttribute="bottom" secondItem="tqc-J7-xiR" secondAttribute="bottom" id="r5s-fM-ik6"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="0cY-tl-W2u"/>
                     </view>
+                    <size key="freeformSize" width="375" height="1000"/>
+                    <connections>
+                        <outlet property="contentView" destination="fn5-mg-LOx" id="4Ae-Vb-0g4"/>
+                        <outlet property="eventView" destination="1rU-Sg-bl0" id="u69-X9-pS3"/>
+                        <outlet property="showAllDescriptions" destination="IbG-r5-dys" id="qT5-rW-rrn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ART-Rd-PwL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="134" y="179"/>
+            <point key="canvasLocation" x="133.59999999999999" y="178.56071964017991"/>
         </scene>
         <!--Profile-->
         <scene sceneID="3Iu-iu-zRb">
@@ -89,6 +143,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="140" height="96"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </view>
+                                        <connections>
+                                            <segue destination="Xbi-tk-Qub" kind="show" identifier="Favorite_OpenEvent" id="dEb-y7-KcZ"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -148,7 +205,6 @@
                     <connections>
                         <outlet property="collectionView" destination="e9t-ED-VKi" id="H7t-4a-8vk"/>
                         <outlet property="rotationButton" destination="kaH-5x-ntj" id="vxl-Cd-pcZ"/>
-                        <segue destination="Xbi-tk-Qub" kind="show" identifier="Favorites_OpenEvent" id="CXJ-MR-dqL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7UJ-3O-fP6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -237,6 +293,6 @@
         <image name="Profile Inactive" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CXJ-MR-dqL"/>
+        <segue reference="dEb-y7-KcZ"/>
     </inferredMetricsTieBreakers>
 </document>

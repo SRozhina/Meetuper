@@ -24,7 +24,7 @@ class FavoritesViewController: UIViewController {
     }
     
     private func setProperties() {
-        animationDuration = 0.5
+        animationDuration = 0.3
         let listLayoutCellStaticHeihgt: CGFloat = 85
         let gridLayoutCellStaticHeight: CGFloat = view.frame.width / 2
         listLayout = DisplaySwitchLayout(staticCellHeight: listLayoutCellStaticHeihgt,
@@ -96,5 +96,9 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
                         transitionLayoutForOldLayout fromLayout: UICollectionViewLayout,
                         newLayout toLayout: UICollectionViewLayout) -> UICollectionViewTransitionLayout {
         return TransitionLayout(currentLayout: fromLayout, nextLayout: toLayout)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "Favorite_OpenEvent", sender: nil)
     }
 }
