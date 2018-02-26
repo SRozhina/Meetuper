@@ -41,58 +41,34 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tqc-J7-xiR">
                                 <rect key="frame" x="0.0" y="64" width="375" height="887"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fn5-mg-LOx" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="887"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1rU-Sg-bl0" customClass="EventView" customModule="ITEvents" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="817"/>
-                                                <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IbG-r5-dys">
-                                                <rect key="frame" x="10" y="827" width="355" height="50"/>
-                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="5cs-fE-2LW"/>
-                                                </constraints>
-                                                <state key="normal" title="Button"/>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstItem="IbG-r5-dys" firstAttribute="top" secondItem="1rU-Sg-bl0" secondAttribute="bottom" constant="10" id="13D-IC-eHC"/>
-                                            <constraint firstAttribute="trailing" secondItem="IbG-r5-dys" secondAttribute="trailing" constant="10" id="KFy-ck-lNQ"/>
-                                            <constraint firstItem="IbG-r5-dys" firstAttribute="leading" secondItem="fn5-mg-LOx" secondAttribute="leading" constant="10" id="Nno-s3-fZO"/>
-                                            <constraint firstAttribute="bottom" secondItem="IbG-r5-dys" secondAttribute="bottom" constant="10" id="hC7-Zf-C3M"/>
-                                            <constraint firstItem="1rU-Sg-bl0" firstAttribute="leading" secondItem="fn5-mg-LOx" secondAttribute="leading" id="xij-YZ-Vzj"/>
-                                            <constraint firstItem="1rU-Sg-bl0" firstAttribute="top" secondItem="fn5-mg-LOx" secondAttribute="top" id="yZC-P2-eAs"/>
-                                            <constraint firstAttribute="trailing" secondItem="1rU-Sg-bl0" secondAttribute="trailing" id="zbN-gQ-YGg"/>
-                                        </constraints>
-                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="748" verticalCompressionResistancePriority="748" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="evT-lg-y4W">
+                                        <rect key="frame" x="10" y="10" width="355" height="867"/>
+                                        <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+                                    </stackView>
                                 </subviews>
+                                <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="fn5-mg-LOx" firstAttribute="top" secondItem="tqc-J7-xiR" secondAttribute="top" id="3ae-El-Hoq"/>
-                                    <constraint firstItem="fn5-mg-LOx" firstAttribute="leading" secondItem="tqc-J7-xiR" secondAttribute="leading" id="3gO-kc-YNg"/>
-                                    <constraint firstAttribute="trailing" secondItem="fn5-mg-LOx" secondAttribute="trailing" id="NsT-9n-XlD"/>
-                                    <constraint firstItem="fn5-mg-LOx" firstAttribute="width" secondItem="tqc-J7-xiR" secondAttribute="width" id="Vhz-SA-P7N"/>
-                                    <constraint firstItem="fn5-mg-LOx" firstAttribute="height" secondItem="tqc-J7-xiR" secondAttribute="height" priority="250" id="YLQ-nQ-HgT"/>
-                                    <constraint firstAttribute="bottom" secondItem="fn5-mg-LOx" secondAttribute="bottom" id="hI1-ab-OVQ"/>
+                                    <constraint firstItem="evT-lg-y4W" firstAttribute="top" secondItem="tqc-J7-xiR" secondAttribute="top" constant="10" id="9ez-uq-Qhv"/>
+                                    <constraint firstItem="evT-lg-y4W" firstAttribute="height" secondItem="tqc-J7-xiR" secondAttribute="height" priority="250" constant="-20" id="Aue-ct-Sq5"/>
+                                    <constraint firstItem="evT-lg-y4W" firstAttribute="leading" secondItem="tqc-J7-xiR" secondAttribute="leading" constant="10" id="R07-7c-W4W"/>
+                                    <constraint firstAttribute="trailing" secondItem="evT-lg-y4W" secondAttribute="trailing" constant="10" id="VjF-5q-rxI"/>
+                                    <constraint firstItem="evT-lg-y4W" firstAttribute="width" secondItem="tqc-J7-xiR" secondAttribute="width" constant="-20" id="fad-21-fW4"/>
+                                    <constraint firstAttribute="bottom" secondItem="evT-lg-y4W" secondAttribute="bottom" constant="10" id="pMa-NZ-2mT"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="tqc-J7-xiR" firstAttribute="top" secondItem="0cY-tl-W2u" secondAttribute="top" id="Xil-79-ecS"/>
-                            <constraint firstAttribute="trailing" secondItem="tqc-J7-xiR" secondAttribute="trailing" id="bJq-3E-0pv"/>
-                            <constraint firstItem="tqc-J7-xiR" firstAttribute="leading" secondItem="0oy-xw-a4C" secondAttribute="leading" id="eCB-O1-r5w"/>
+                            <constraint firstItem="0cY-tl-W2u" firstAttribute="trailing" secondItem="tqc-J7-xiR" secondAttribute="trailing" id="bJq-3E-0pv"/>
+                            <constraint firstItem="tqc-J7-xiR" firstAttribute="leading" secondItem="0cY-tl-W2u" secondAttribute="leading" id="eCB-O1-r5w"/>
                             <constraint firstItem="0cY-tl-W2u" firstAttribute="bottom" secondItem="tqc-J7-xiR" secondAttribute="bottom" id="r5s-fM-ik6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0cY-tl-W2u"/>
                     </view>
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
-                        <outlet property="contentView" destination="fn5-mg-LOx" id="4Ae-Vb-0g4"/>
-                        <outlet property="eventView" destination="1rU-Sg-bl0" id="u69-X9-pS3"/>
-                        <outlet property="showAllDescriptions" destination="IbG-r5-dys" id="qT5-rW-rrn"/>
+                        <outlet property="stackView" destination="evT-lg-y4W" id="sNC-kU-u1S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ART-Rd-PwL" userLabel="First Responder" sceneMemberID="firstResponder"/>
