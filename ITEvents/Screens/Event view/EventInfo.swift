@@ -5,6 +5,9 @@ class EventInfo: DecorationView {
     @IBOutlet weak var imageView: RoundedImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    //TODO make private
+    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var labelsStackView: UIStackView!
     
     class func initiateFromNib() -> EventInfo {
         let eventInfoView = UINib(nibName: "EventInfo", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! EventInfo

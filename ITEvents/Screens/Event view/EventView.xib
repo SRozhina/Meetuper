@@ -12,27 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="jQj-3l-RIT" customClass="EventView" customModule="ITEvents" customModuleProvider="target">
+        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" id="hyT-P1-asO" customClass="EventView" customModule="ITEvents" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hyT-P1-asO">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                </stackView>
-            </subviews>
-            <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
-            <constraints>
-                <constraint firstAttribute="bottom" secondItem="hyT-P1-asO" secondAttribute="bottom" id="1na-WX-Xyu"/>
-                <constraint firstAttribute="trailing" secondItem="hyT-P1-asO" secondAttribute="trailing" id="cdq-Ij-eMJ"/>
-                <constraint firstItem="hyT-P1-asO" firstAttribute="top" secondItem="jQj-3l-RIT" secondAttribute="top" id="lVl-eM-Qtl"/>
-                <constraint firstItem="hyT-P1-asO" firstAttribute="leading" secondItem="jQj-3l-RIT" secondAttribute="leading" id="lhL-2O-11r"/>
-            </constraints>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="cHk-K7-R5I"/>
-            <connections>
-                <outlet property="stackView" destination="hyT-P1-asO" id="i8B-Ae-9F2"/>
-            </connections>
-            <point key="canvasLocation" x="-37" y="-20"/>
-        </view>
+            <viewLayoutGuide key="safeArea" id="OsF-c8-wIC"/>
+        </stackView>
     </objects>
 </document>
