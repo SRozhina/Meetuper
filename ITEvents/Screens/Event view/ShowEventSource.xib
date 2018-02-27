@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Ysc-xr-Ruu" customClass="ShowEventSource" customModule="ITEvents" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i76-Kq-j8h">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="98H-eS-ywf"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <state key="normal" title="Show on Timepad"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="i76-Kq-j8h" firstAttribute="bottom" secondItem="SMR-zF-zQn" secondAttribute="bottom" id="GbU-QL-Cek"/>
+                <constraint firstItem="i76-Kq-j8h" firstAttribute="leading" secondItem="SMR-zF-zQn" secondAttribute="leading" id="Riq-oe-gJQ"/>
+                <constraint firstItem="SMR-zF-zQn" firstAttribute="trailing" secondItem="i76-Kq-j8h" secondAttribute="trailing" id="UBW-hU-Ysa"/>
+                <constraint firstItem="i76-Kq-j8h" firstAttribute="top" secondItem="SMR-zF-zQn" secondAttribute="top" id="g6i-mZ-1N8"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="SMR-zF-zQn"/>
+            <connections>
+                <outlet property="showSourceButton" destination="i76-Kq-j8h" id="5bO-ck-pWe"/>
+            </connections>
+            <point key="canvasLocation" x="15.5" y="-230"/>
+        </view>
+    </objects>
+</document>

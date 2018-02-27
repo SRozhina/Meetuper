@@ -64,8 +64,6 @@
             <connections>
                 <outlet property="dateLabel" destination="rYg-B2-hLN" id="hnI-yS-oAt"/>
                 <outlet property="imageView" destination="0FC-3F-Gkz" id="ai2-mR-tMq"/>
-                <outlet property="labelsStackView" destination="hvt-Bg-uFf" id="cg1-sN-bnt"/>
-                <outlet property="stackView" destination="pSv-Ne-fvu" id="B23-Zz-PR8"/>
                 <outlet property="titleLabel" destination="hvb-CH-Ihb" id="ExK-FN-mTn"/>
             </connections>
             <point key="canvasLocation" x="97.5" y="-67.5"/>

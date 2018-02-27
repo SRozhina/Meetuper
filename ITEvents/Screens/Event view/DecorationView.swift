@@ -5,6 +5,7 @@ class DecorationView: UIView {
     
     init() {
         super.init(frame: CGRect.zero)
+        //TODO cornerradius to DI container
         layer.cornerRadius = 14
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.10
