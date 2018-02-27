@@ -14,18 +14,20 @@ class FullEventViewController: UIViewController {
         let descriptionsCount = 2
         let showMoreDescriptions = ShowMoreDescriptions.initiateAndSetup(with: descriptionsCount)
         showMoreDescriptions.showMoreDescriptionsButton.addTarget(self, action: #selector(expandOrCollapseDescriptions), for: .touchUpInside)
-        eventView.addArrangedSubview(showMoreDescriptions)
+        stackView.addArrangedSubview(showMoreDescriptions)
         
         let descriptionsStackView = UIStackView()
         descriptionsStackView.axis = .vertical
-        descriptionsStackView.spacing = 10
+        descriptionsStackView.spacing = 15
         descriptionsStackView.tag = 123
         for _ in 0..<descriptionsCount {
             let eventView = EventView.initiateAndSetup(with: event)
+            let sourceLabel = createLabelFor(source: "Event from Meetabit.com")
+            eventView.insertArrangedSubview(sourceLabel, at: 0)
             descriptionsStackView.addArrangedSubview(eventView)
         }
         descriptionsStackView.isHidden = true
-        eventView.addArrangedSubview(descriptionsStackView)
+        stackView.addArrangedSubview(descriptionsStackView)
     }
     
     @objc func expandOrCollapseDescriptions(_ sender: UIButton) {
@@ -36,5 +38,14 @@ class FullEventViewController: UIViewController {
             let title = ShowMoreDescriptions.getDescriptionFor(hidden: descriptionsStack.isHidden, count: 2) //TODO get count from event
             sender.setTitle(title, for: .normal)
         }
+    }
+    
+    func createLabelFor(source: String) -> UILabel {
+        let sourceLabel = UILabel()
+        sourceLabel.text = source
+        sourceLabel.font = UIFont.systemFont(ofSize: 12)
+        sourceLabel.textAlignment = .center
+        sourceLabel.textColor = UIColor(red: 0.63, green: 0.63, blue: 0.63, alpha: 1)
+        return sourceLabel
     }
 }

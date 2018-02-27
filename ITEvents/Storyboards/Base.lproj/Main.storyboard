@@ -41,7 +41,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tqc-J7-xiR">
                                 <rect key="frame" x="0.0" y="64" width="375" height="887"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="748" verticalCompressionResistancePriority="748" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="evT-lg-y4W">
+                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="748" verticalCompressionResistancePriority="748" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="evT-lg-y4W">
                                         <rect key="frame" x="10" y="10" width="355" height="867"/>
                                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                     </stackView>

@@ -21,7 +21,7 @@
                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="pSv-Ne-fvu">
                     <rect key="frame" x="10" y="10" width="503" height="309"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="js" translatesAutoresizingMaskIntoConstraints="NO" id="0FC-3F-Gkz" customClass="RoundedImageView" customModule="ITEvents" customModuleProvider="target">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" image="js" translatesAutoresizingMaskIntoConstraints="NO" id="0FC-3F-Gkz" customClass="RoundedImageView" customModule="ITEvents" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="176" height="176"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="0FC-3F-Gkz" secondAttribute="height" multiplier="1:1" id="6kW-iB-3sL"/>
