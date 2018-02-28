@@ -18,28 +18,12 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
     @IBOutlet private var titleListTrailingConstraint: NSLayoutConstraint!
     @IBOutlet private var dateListTrailingConstraint: NSLayoutConstraint!
     
+    private let dateFormatterService: IDateFormatterService = DateFormatterService()
+    
     private let titleFontSize: CGFloat = 20
     private let dateFontSize: CGFloat = 14
     private let imageMargin: CGFloat = 10
     private let cornerRadius: CGFloat = 14
-    
-    private let listDateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "d MMMM HH:mm"
-        return formatter
-    }()
-    
-    private let gridDateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "d MMM HH:mm"
-        return formatter
-    }()
-    
-    private let timeDateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        return formatter
-    }()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -177,30 +161,8 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
     }
     
     private func setDate(from start: Date, to end: Date) {
-        dateListLabel.text = getListLabelDate(start: start, end: end)
-        dateGridLabel.text = getGridLabelDate(start: start, end: end)
-    }
-    
-    private func hasSameDay(start: Date, end: Date) -> Bool {
-        return Calendar.current.isDate(start, equalTo: end, toGranularity: .day)
-    }
-    
-    private func getListLabelDate(start: Date, end: Date) -> String {
-        let sameDay = hasSameDay(start: start, end: end)
-        let separator = sameDay ? "-" : " - "
-        let beginDate = listDateFormatter.string(from: start)
-        let formatter = sameDay ? timeDateFormatter : listDateFormatter
-        let endDate = formatter.string(from: end)
-        return "\(beginDate)\(separator)\(endDate)"
-    }
-    
-    private func getGridLabelDate(start: Date, end: Date) -> String {
-        let sameDay = hasSameDay(start: start, end: end)
-        let separator = sameDay ? "-" : " - "
-        let beginDate = gridDateFormatter.string(from: start)
-        let formatter = sameDay ? timeDateFormatter : gridDateFormatter
-        let endDate = formatter.string(from: end)
-        return "\(beginDate)\(separator)\(endDate)"
+        dateListLabel.text = dateFormatterService.getFormattedDateStringFrom(start: start, end: end, short: false)
+        dateGridLabel.text = dateFormatterService.getFormattedDateStringFrom(start: start, end: end, short: true)
     }
     
     private func setImage(_ image: UIImage) {

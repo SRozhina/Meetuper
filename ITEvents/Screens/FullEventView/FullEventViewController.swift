@@ -5,13 +5,14 @@ class FullEventViewController: UIViewController {
     @IBOutlet weak private var stackView: UIStackView!
     
     private let similarEventsService: ISimilarEventsDataService = SimilarEventsDataServiceMockImpl()
+    private let dateFormatterService: IDateFormatterService = DateFormatterService()
     var event: Event!
     private var similarEvents: [Event]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let eventView = EventView.initiateAndSetup(with: event)
+        let eventView = EventView.initiateAndSetup(with: event, using: dateFormatterService)
         
         if let source = event.source, let url = event.url {
             let showEventSource = ShowEventSource.initiateAndSetup(with: source, and: url)
@@ -50,7 +51,7 @@ class FullEventViewController: UIViewController {
         descriptionsStackView.spacing = 15
         descriptionsStackView.tag = 123
         for similarEvent in similarEvents! {
-            let eventView = EventView.initiateAndSetup(with: similarEvent)
+            let eventView = EventView.initiateAndSetup(with: similarEvent, using: dateFormatterService)
             let sourceLabel = createLabelFor(source: similarEvent.source!)
             eventView.insertArrangedSubview(sourceLabel, at: 0)
             descriptionsStackView.addArrangedSubview(eventView)

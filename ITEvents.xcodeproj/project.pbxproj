@@ -19,6 +19,8 @@
 		C362DD8D2046022700D301A6 /* EventTagsDataServiceMockImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C362DD8C2046022700D301A6 /* EventTagsDataServiceMockImpl.swift */; };
 		C362DD8F2046E4F600D301A6 /* ISimilarEventsDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C362DD8E2046E4F600D301A6 /* ISimilarEventsDataService.swift */; };
 		C362DD952046FF4A00D301A6 /* SimilarEventsDataServiceMockImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C362DD942046FF4A00D301A6 /* SimilarEventsDataServiceMockImpl.swift */; };
+		C362DD9920472D7B00D301A6 /* IDateFormatterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C362DD9820472D7B00D301A6 /* IDateFormatterService.swift */; };
+		C362DD9B20472D9A00D301A6 /* DateFormatterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C362DD9A20472D9A00D301A6 /* DateFormatterService.swift */; };
 		C3764B73202100AA0024CFA7 /* UIGradientImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3764B72202100AA0024CFA7 /* UIGradientImageView.swift */; };
 		C391908C201E59D100CD7151 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391908B201E59D100CD7151 /* Event.swift */; };
 		C3919090201E604600CD7151 /* FavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391908F201E604600CD7151 /* FavoritePresenter.swift */; };
@@ -92,6 +94,8 @@
 		C362DD8C2046022700D301A6 /* EventTagsDataServiceMockImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTagsDataServiceMockImpl.swift; sourceTree = "<group>"; };
 		C362DD8E2046E4F600D301A6 /* ISimilarEventsDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISimilarEventsDataService.swift; sourceTree = "<group>"; };
 		C362DD942046FF4A00D301A6 /* SimilarEventsDataServiceMockImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarEventsDataServiceMockImpl.swift; sourceTree = "<group>"; };
+		C362DD9820472D7B00D301A6 /* IDateFormatterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDateFormatterService.swift; sourceTree = "<group>"; };
+		C362DD9A20472D9A00D301A6 /* DateFormatterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterService.swift; sourceTree = "<group>"; };
 		C3764B72202100AA0024CFA7 /* UIGradientImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGradientImageView.swift; sourceTree = "<group>"; };
 		C391908B201E59D100CD7151 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		C391908F201E604600CD7151 /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePresenter.swift; sourceTree = "<group>"; };
@@ -335,6 +339,8 @@
 				C362DD8C2046022700D301A6 /* EventTagsDataServiceMockImpl.swift */,
 				C362DD8E2046E4F600D301A6 /* ISimilarEventsDataService.swift */,
 				C362DD942046FF4A00D301A6 /* SimilarEventsDataServiceMockImpl.swift */,
+				C362DD9820472D7B00D301A6 /* IDateFormatterService.swift */,
+				C362DD9A20472D9A00D301A6 /* DateFormatterService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -590,6 +596,7 @@
 				C362DD8D2046022700D301A6 /* EventTagsDataServiceMockImpl.swift in Sources */,
 				C3919097201E62B900CD7151 /* IFavoritePresenter.swift in Sources */,
 				C362DD8F2046E4F600D301A6 /* ISimilarEventsDataService.swift in Sources */,
+				C362DD9920472D7B00D301A6 /* IDateFormatterService.swift in Sources */,
 				C3FFADF2204209D60021D167 /* DecorationView.swift in Sources */,
 				C3919090201E604600CD7151 /* FavoritePresenter.swift in Sources */,
 				C3FF3D0620445CB000C65137 /* EventDescription.swift in Sources */,
@@ -599,6 +606,7 @@
 				C317682F203ADFB500B21A6B /* EventView.swift in Sources */,
 				C3E792E8202E416700876D6B /* EventsDataServiceMockImpl.swift in Sources */,
 				C3FF3D0E2044AE4500C65137 /* EventTags.swift in Sources */,
+				C362DD9B20472D9A00D301A6 /* DateFormatterService.swift in Sources */,
 				C39190AF201E639500CD7151 /* IFullEventViewController.swift in Sources */,
 				C362DD952046FF4A00D301A6 /* SimilarEventsDataServiceMockImpl.swift in Sources */,
 				C3764B73202100AA0024CFA7 /* UIGradientImageView.swift in Sources */,
