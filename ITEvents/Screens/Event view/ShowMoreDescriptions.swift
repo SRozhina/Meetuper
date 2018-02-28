@@ -6,7 +6,8 @@ class ShowMoreDescriptions: DecorationView {
     
     //TODO create protocol for subviews??
     class func initiateAndSetup(with descriptionsCount: Int) -> ShowMoreDescriptions {
-        let showMoreDescriptionsView = UINib(nibName: "ShowMoreDescriptions",bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! ShowMoreDescriptions
+        let showMoreDescriptionsView = UINib(nibName: "ShowMoreDescriptions", bundle: nil)
+            .instantiate(withOwner: nil, options: nil)[0] as! ShowMoreDescriptions
         let buttonTitle = ShowMoreDescriptions.getDescriptionFor(hidden: true, count: descriptionsCount)
         showMoreDescriptionsView.showMoreDescriptionsButton.setTitle(buttonTitle, for: .normal)
         return showMoreDescriptionsView

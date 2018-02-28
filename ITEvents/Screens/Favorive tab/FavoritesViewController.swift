@@ -2,7 +2,7 @@ import UIKit
 import DisplaySwitcher
 
 class FavoritesViewController: UIViewController {
-    private let eventDataService: IEventDataService = EventDataServiceMockImpl()
+    private let eventDataService: IEventsDataService = EventsDataServiceMockImpl()
     private var events = [Event]()
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -18,7 +18,11 @@ class FavoritesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        events = eventDataService.fetchEvents()
+        eventDataService.fetchEvents { fetchedEvents in
+            self.events = fetchedEvents
+            self.collectionView.reloadData()
+        }
+        
         setProperties()
         registerNibs()
         setupCollectionView()

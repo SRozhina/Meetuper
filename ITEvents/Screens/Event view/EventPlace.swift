@@ -7,8 +7,8 @@ class EventPlace: DecorationView {
     
     class func initiateAndSetup(withCity city: String, country: String, address: String) -> EventPlace {
         let eventPlaceView = UINib(nibName: "EventPlace", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! EventPlace
-        //eventPlaceView.cityLabel.text = "\(city), \(country)"
-        //eventPlaceView.addressLabel.text = address
+        eventPlaceView.cityLabel.text = "\(city), \(country)"
+        eventPlaceView.addressLabel.text = address
         return eventPlaceView
     }
 }
