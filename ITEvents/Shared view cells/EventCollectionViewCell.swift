@@ -111,21 +111,12 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         super.willTransition(from: oldLayout, to: newLayout)
         
         guard let oldDisplaySwitchLayout = oldLayout as? DisplaySwitchLayout else { return }
-        //TODO oldDisplaySwitchLayout.layoutState ??? layoutState in class should be public
-        //maybe create shared struct with user settings and save layout there
-        let oldLatoutState = getLatoutState(oldDisplaySwitchLayout)
-        if oldLatoutState == .list {
+        if oldDisplaySwitchLayout.layoutState == .list {
             // list -> grid
         } else {
             // grid -> list
             startListLayoutTransition()
         }
-    }
-    
-    private func getLatoutState(_ layout: DisplaySwitchLayout) -> LayoutState {
-        let mirror = Mirror(reflecting: layout)
-        let layoutStatePair = mirror.children.first { $0.label == "layoutState" }!
-        return layoutStatePair.value as! LayoutState
     }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {

@@ -4,7 +4,6 @@ import UIKit
 class ShowMoreDescriptions: DecorationView {
     @IBOutlet weak var showMoreDescriptionsButton: UIButton!
     
-    //TODO create protocol for subviews??
     class func initiateAndSetup(with descriptionsCount: Int) -> ShowMoreDescriptions {
         let showMoreDescriptionsView = UINib(nibName: "ShowMoreDescriptions", bundle: nil)
             .instantiate(withOwner: nil, options: nil)[0] as! ShowMoreDescriptions

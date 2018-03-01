@@ -10,10 +10,19 @@ class FullEventViewController: UIViewController {
     
     var event: Event!
     private var similarEvents: [Event]?
+    private var collapsed: Bool = true
+    
+    //TODO service for user settings
+    
+    private lazy var descriptionsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 15
+        return stackView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let eventView = EventView.initiateAndSetup(with: event, using: dateFormatterService)
         
         if let source = event.source, let url = event.url {
@@ -30,7 +39,6 @@ class FullEventViewController: UIViewController {
     }
     
     @objc private func showMoreButtonTapped(_ sender: UIButton) {
-        let scrollYOffset = scrollView.contentOffset.y + 100
         if similarEvents == nil {
             sender.isEnabled = false
             similarEventsService.fetchSimilarEvents(for: event.id) { events in
@@ -39,7 +47,6 @@ class FullEventViewController: UIViewController {
                 self.changeTitle(for: sender)
                 self.expandOrCollapseDescriptions()
                 sender.isEnabled = true
-                self.scrollView.setContentOffset(CGPoint(x: 0, y: scrollYOffset), animated: true)
             }
         } else {
             changeTitle(for: sender)
@@ -54,10 +61,6 @@ class FullEventViewController: UIViewController {
     }
     
     private func createSimilarEventsViews() {
-        let descriptionsStackView = UIStackView()
-        descriptionsStackView.axis = .vertical
-        descriptionsStackView.spacing = 15
-        descriptionsStackView.tag = 123
         for similarEvent in similarEvents! {
             let eventView = EventView.initiateAndSetup(with: similarEvent, using: dateFormatterService)
             addEventSourceButton(in: eventView, for: similarEvent.source!, url: similarEvent.url!)
@@ -70,18 +73,20 @@ class FullEventViewController: UIViewController {
     }
     
     private func expandOrCollapseDescriptions() {
-        if let descriptionsStack = self.view.viewWithTag(123) as? UIStackView {
-            UIView.animate(withDuration: 0.3) {
-                descriptionsStack.isHidden = !descriptionsStack.isHidden
+        let scrollYOffset = stackView.frame.height
+        UIView.animate(withDuration: 0.3, animations: {
+            self.descriptionsStackView.isHidden = !self.descriptionsStackView.isHidden
+            if self.scrollView.contentOffset.y < scrollYOffset, self.collapsed {
+                self.scrollView.setContentOffset(CGPoint(x: 0, y: self.stackView.frame.height), animated: true)
             }
-        }
+        }, completion: { _ in
+            self.collapsed = !self.collapsed
+        })
     }
     
     private func changeTitle(for button: UIButton) {
-        if let descriptionsStack = self.view.viewWithTag(123) as? UIStackView {
-            let title = ShowMoreDescriptions.getDescriptionFor(hidden: !descriptionsStack.isHidden, count: event.similarEventsCount)
-            button.setTitle(title, for: .normal)
-        }
+        let title = ShowMoreDescriptions.getDescriptionFor(hidden: !descriptionsStackView.isHidden, count: event.similarEventsCount)
+        button.setTitle(title, for: .normal)
     }
     
     @objc private func openEventSource() {

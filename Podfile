@@ -4,7 +4,7 @@
 target 'ITEvents' do
 
   use_frameworks!
-  pod 'DisplaySwitcher', :git => 'https://github.com/Yalantis/DisplaySwitcher.git', :branch => 'master'
+  pod 'DisplaySwitcher', :git => 'https://github.com/SRozhina/DisplaySwitcher.git', :branch => 'master'
   pod 'SwinjectStoryboard'
 
 end
