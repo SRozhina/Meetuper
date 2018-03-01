@@ -127,8 +127,6 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         super.willTransition(from: oldLayout, to: newLayout)
         
         guard let oldDisplaySwitchLayout = oldLayout as? DisplaySwitchLayout else { return }
-        //TODO oldDisplaySwitchLayout.layoutState ??? layoutState in class should be public
-        //maybe create shared struct with user settings and save layout there
         let oldLatoutState = getLatoutState(oldDisplaySwitchLayout)
         if oldLatoutState == .list {
             // list -> grid
@@ -153,7 +151,7 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
             }
             transitGridLayout(attributes.transitionProgress)
         } else {
-            if attributes.transitionProgress > 0.2 {
+            if attributes.transitionProgress > 0.1 {
                 toggleListConstraintActive(value: true)
             }
             transitListLayout(attributes.transitionProgress)
