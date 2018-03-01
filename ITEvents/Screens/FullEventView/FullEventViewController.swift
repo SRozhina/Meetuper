@@ -3,6 +3,7 @@ import SafariServices
 
 class FullEventViewController: UIViewController {
     @IBOutlet weak private var stackView: UIStackView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     private let similarEventsService: ISimilarEventsDataService = SimilarEventsDataServiceMockImpl()
     private let dateFormatterService: IDateFormatterService = DateFormatterService()
@@ -15,9 +16,7 @@ class FullEventViewController: UIViewController {
         let eventView = EventView.initiateAndSetup(with: event, using: dateFormatterService)
         
         if let source = event.source, let url = event.url {
-            let showEventSource = ShowEventSource.initiateAndSetup(with: source, and: url)
-            showEventSource.showSourceButton.addTarget(self, action: #selector(openEventSource), for: .touchUpInside)
-            eventView.addArrangedSubview(showEventSource)
+            addEventSourceButton(in: eventView, for: source, url: url)
         }
         
         stackView.addArrangedSubview(eventView)
@@ -30,6 +29,7 @@ class FullEventViewController: UIViewController {
     }
     
     @objc private func showMoreButtonTapped(_ sender: UIButton) {
+        let scrollYOffset = scrollView.contentOffset.y + 100
         if similarEvents == nil {
             sender.isEnabled = false
             similarEventsService.fetchSimilarEvents(for: event.id) { events in
@@ -38,11 +38,18 @@ class FullEventViewController: UIViewController {
                 self.changeTitle(for: sender)
                 self.expandOrCollapseDescriptions()
                 sender.isEnabled = true
+                self.scrollView.setContentOffset(CGPoint(x: 0, y: scrollYOffset), animated: true)
             }
         } else {
             changeTitle(for: sender)
             expandOrCollapseDescriptions()
         }
+    }
+    
+    private func addEventSourceButton(in stackView: UIStackView, for source: EventSource, url: URL) {
+        let showEventSource = ShowEventSource.initiateAndSetup(with: source, and: url)
+        showEventSource.showSourceButton.addTarget(self, action: #selector(openEventSource), for: .touchUpInside)
+        stackView.addArrangedSubview(showEventSource)
     }
     
     private func createSimilarEventsViews() {
@@ -52,6 +59,7 @@ class FullEventViewController: UIViewController {
         descriptionsStackView.tag = 123
         for similarEvent in similarEvents! {
             let eventView = EventView.initiateAndSetup(with: similarEvent, using: dateFormatterService)
+            addEventSourceButton(in: eventView, for: similarEvent.source!, url: similarEvent.url!)
             let sourceLabel = createLabelFor(source: similarEvent.source!)
             eventView.insertArrangedSubview(sourceLabel, at: 0)
             descriptionsStackView.addArrangedSubview(eventView)
