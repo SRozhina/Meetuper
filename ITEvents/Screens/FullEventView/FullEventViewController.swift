@@ -5,8 +5,9 @@ class FullEventViewController: UIViewController {
     @IBOutlet weak private var stackView: UIStackView!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    private let similarEventsService: ISimilarEventsDataService = SimilarEventsDataServiceMockImpl()
-    private let dateFormatterService: IDateFormatterService = DateFormatterService()
+    var similarEventsService: ISimilarEventsDataService!
+    var dateFormatterService: IDateFormatterService!
+    
     var event: Event!
     private var similarEvents: [Event]?
     
