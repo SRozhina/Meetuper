@@ -12,8 +12,9 @@ class EventDataServiceMockImpl: IEventDataService {
         return Event(title: title,
                      startDate: startDate,
                      endDate: endDate,
-                     place: "",
+                     address: "",
                      city: "",
+                     country: "",
                      description: "",
                      tags: [],
                      image: image)

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="c0i-nj-d0z" customClass="EventInfo" customModule="ITEvents" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="503" height="309"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="pSv-Ne-fvu">
+                    <rect key="frame" x="10" y="10" width="503" height="309"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" image="js" translatesAutoresizingMaskIntoConstraints="NO" id="0FC-3F-Gkz" customClass="RoundedImageView" customModule="ITEvents" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="176" height="176"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="0FC-3F-Gkz" secondAttribute="height" multiplier="1:1" id="6kW-iB-3sL"/>
+                            </constraints>
+                        </imageView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="hvt-Bg-uFf">
+                            <rect key="frame" x="166" y="0.0" width="327" height="72"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hvb-CH-Ihb">
+                                    <rect key="frame" x="0.0" y="10" width="327" height="26.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rYg-B2-hLN">
+                                    <rect key="frame" x="0.0" y="51.5" width="327" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <edgeInsets key="layoutMargins" top="10" left="0.0" bottom="0.0" right="0.0"/>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="hvt-Bg-uFf" secondAttribute="bottom" priority="250" id="EXU-e5-9HZ"/>
+                        <constraint firstItem="0FC-3F-Gkz" firstAttribute="width" secondItem="pSv-Ne-fvu" secondAttribute="width" multiplier="0.35" id="d2T-S6-OdO"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="g80-t8-ESd" firstAttribute="trailing" secondItem="pSv-Ne-fvu" secondAttribute="trailing" constant="10" id="G8v-jV-veW"/>
+                <constraint firstItem="pSv-Ne-fvu" firstAttribute="leading" secondItem="g80-t8-ESd" secondAttribute="leading" constant="10" id="Wkz-LT-4nL"/>
+                <constraint firstItem="g80-t8-ESd" firstAttribute="bottom" secondItem="pSv-Ne-fvu" secondAttribute="bottom" constant="10" id="uCF-Ej-bQ4"/>
+                <constraint firstItem="pSv-Ne-fvu" firstAttribute="top" secondItem="g80-t8-ESd" secondAttribute="top" constant="10" id="xtA-d8-1rc"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="g80-t8-ESd"/>
+            <connections>
+                <outlet property="dateLabel" destination="rYg-B2-hLN" id="hnI-yS-oAt"/>
+                <outlet property="imageView" destination="0FC-3F-Gkz" id="ai2-mR-tMq"/>
+                <outlet property="titleLabel" destination="hvb-CH-Ihb" id="ExK-FN-mTn"/>
+            </connections>
+            <point key="canvasLocation" x="97.5" y="-67.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="js" width="100" height="100"/>
+    </resources>
+</document>
