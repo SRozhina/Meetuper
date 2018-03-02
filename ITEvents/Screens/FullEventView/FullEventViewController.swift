@@ -11,9 +11,7 @@ class FullEventViewController: UIViewController {
     var event: Event!
     private var similarEvents: [Event]?
     private var collapsed: Bool = true
-    
-    //TODO service for user settings
-    
+        
     private lazy var descriptionsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical

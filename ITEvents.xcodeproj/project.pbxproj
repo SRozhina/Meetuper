@@ -50,6 +50,13 @@
 		C3B882C7201A5D5C0031F261 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = C3B882C6201A5D5C0031F261 /* .swiftlint.yml */; };
 		C3CEBDBE201FADA9003CE306 /* EventCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3CEBDBD201FADA9003CE306 /* EventCollectionViewCell.xib */; };
 		C3D6115420484E8000D97B08 /* Swinject Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D6115320484E8000D97B08 /* Swinject Storyboard.swift */; };
+		C3D6115720497EE300D97B08 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D6115620497EE300D97B08 /* UserSettings.swift */; };
+		C3D6115920497EED00D97B08 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D6115820497EED00D97B08 /* Tag.swift */; };
+		C3D6115B20497EF900D97B08 /* EventSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D6115A20497EF900D97B08 /* EventSource.swift */; };
+		C3D6115D2049800D00D97B08 /* IUserSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D6115C2049800D00D97B08 /* IUserSettingsService.swift */; };
+		C3D6115F2049805B00D97B08 /* UserSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D6115E2049805B00D97B08 /* UserSettingsService.swift */; };
+		C3D611612049812900D97B08 /* ISettingsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D611602049812900D97B08 /* ISettingsStorage.swift */; };
+		C3E11B99204996160091DB5F /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E11B98204996160091DB5F /* NSAttributedString.swift */; };
 		C3E792E6202E413800876D6B /* IEventsDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E792E5202E413800876D6B /* IEventsDataService.swift */; };
 		C3E792E8202E416700876D6B /* EventsDataServiceMockImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E792E7202E416700876D6B /* EventsDataServiceMockImpl.swift */; };
 		C3FF3CFE204457AE00C65137 /* RoundedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FF3CFD204457AE00C65137 /* RoundedImageView.swift */; };
@@ -133,6 +140,13 @@
 		C3B882C6201A5D5C0031F261 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		C3CEBDBD201FADA9003CE306 /* EventCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventCollectionViewCell.xib; sourceTree = "<group>"; };
 		C3D6115320484E8000D97B08 /* Swinject Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swinject Storyboard.swift"; sourceTree = "<group>"; };
+		C3D6115620497EE300D97B08 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		C3D6115820497EED00D97B08 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		C3D6115A20497EF900D97B08 /* EventSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSource.swift; sourceTree = "<group>"; };
+		C3D6115C2049800D00D97B08 /* IUserSettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IUserSettingsService.swift; sourceTree = "<group>"; };
+		C3D6115E2049805B00D97B08 /* UserSettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsService.swift; sourceTree = "<group>"; };
+		C3D611602049812900D97B08 /* ISettingsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISettingsStorage.swift; sourceTree = "<group>"; };
+		C3E11B98204996160091DB5F /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
 		C3E792E5202E413800876D6B /* IEventsDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IEventsDataService.swift; sourceTree = "<group>"; };
 		C3E792E7202E416700876D6B /* EventsDataServiceMockImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsDataServiceMockImpl.swift; sourceTree = "<group>"; };
 		C3FF3CFD204457AE00C65137 /* RoundedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImageView.swift; sourceTree = "<group>"; };
@@ -205,6 +219,9 @@
 			isa = PBXGroup;
 			children = (
 				C391908B201E59D100CD7151 /* Event.swift */,
+				C3D6115620497EE300D97B08 /* UserSettings.swift */,
+				C3D6115820497EED00D97B08 /* Tag.swift */,
+				C3D6115A20497EF900D97B08 /* EventSource.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -307,6 +324,7 @@
 		C3B88296201A22520031F261 /* ITEvents */ = {
 			isa = PBXGroup;
 			children = (
+				C3E11B97204996010091DB5F /* Extensions */,
 				C3D6115520484E8800D97B08 /* DI container */,
 				C3E792E4202E411300876D6B /* Services */,
 				C391909F201E62FD00CD7151 /* Screens */,
@@ -344,6 +362,14 @@
 			path = "DI container";
 			sourceTree = "<group>";
 		};
+		C3E11B97204996010091DB5F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C3E11B98204996160091DB5F /* NSAttributedString.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		C3E792E4202E411300876D6B /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,6 +381,9 @@
 				C362DD942046FF4A00D301A6 /* SimilarEventsDataServiceMockImpl.swift */,
 				C362DD9820472D7B00D301A6 /* IDateFormatterService.swift */,
 				C362DD9A20472D9A00D301A6 /* DateFormatterService.swift */,
+				C3D6115C2049800D00D97B08 /* IUserSettingsService.swift */,
+				C3D6115E2049805B00D97B08 /* UserSettingsService.swift */,
+				C3D611602049812900D97B08 /* ISettingsStorage.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -610,11 +639,14 @@
 				C3B8829A201A22520031F261 /* FavoritesViewController.swift in Sources */,
 				C3E792E6202E413800876D6B /* IEventsDataService.swift in Sources */,
 				C362DD8B2046017400D301A6 /* IEventTagsDataService.swift in Sources */,
+				C3D6115720497EE300D97B08 /* UserSettings.swift in Sources */,
+				C3D6115920497EED00D97B08 /* Tag.swift in Sources */,
 				C39190A2201E632700CD7151 /* ProfileViewController.swift in Sources */,
 				C3FFADF0204207010021D167 /* EventInfo.swift in Sources */,
 				C362DD8D2046022700D301A6 /* EventTagsDataServiceMockImpl.swift in Sources */,
 				C3919097201E62B900CD7151 /* IFavoritePresenter.swift in Sources */,
 				C362DD8F2046E4F600D301A6 /* ISimilarEventsDataService.swift in Sources */,
+				C3D6115D2049800D00D97B08 /* IUserSettingsService.swift in Sources */,
 				C362DD9920472D7B00D301A6 /* IDateFormatterService.swift in Sources */,
 				C3FFADF2204209D60021D167 /* DecorationView.swift in Sources */,
 				C3919090201E604600CD7151 /* FavoritePresenter.swift in Sources */,
@@ -625,9 +657,12 @@
 				C329BDFE201BC90F00F32829 /* EventCollectionViewCell.swift in Sources */,
 				C317682F203ADFB500B21A6B /* EventView.swift in Sources */,
 				C3E792E8202E416700876D6B /* EventsDataServiceMockImpl.swift in Sources */,
+				C3E11B99204996160091DB5F /* NSAttributedString.swift in Sources */,
 				C3FF3D0E2044AE4500C65137 /* EventTags.swift in Sources */,
 				C362DD9B20472D9A00D301A6 /* DateFormatterService.swift in Sources */,
+				C3D6115F2049805B00D97B08 /* UserSettingsService.swift in Sources */,
 				C39190AF201E639500CD7151 /* IFullEventViewController.swift in Sources */,
+				C3D6115B20497EF900D97B08 /* EventSource.swift in Sources */,
 				C362DD952046FF4A00D301A6 /* SimilarEventsDataServiceMockImpl.swift in Sources */,
 				C3764B73202100AA0024CFA7 /* UIGradientImageView.swift in Sources */,
 				C391909D201E62E300CD7151 /* ISearchPresenter.swift in Sources */,
@@ -636,6 +671,7 @@
 				C39190A6201E634200CD7151 /* IProfileViewController.swift in Sources */,
 				C39190A4201E633500CD7151 /* ProfilePresenter.swift in Sources */,
 				C3FF3CFE204457AE00C65137 /* RoundedImageView.swift in Sources */,
+				C3D611612049812900D97B08 /* ISettingsStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

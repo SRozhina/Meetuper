@@ -1,4 +1,3 @@
-import Foundation
 import UIKit
 
 struct Event {
@@ -15,14 +14,4 @@ struct Event {
     let similarEventsCount: Int
     let source: EventSource?
     let url: URL?
-}
-
-struct Tag {
-    let id: Int
-    let name: String
-}
-
-struct EventSource {
-    let id: Int
-    let name: String
 }
