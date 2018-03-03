@@ -1,11 +1,11 @@
 import Foundation
 import UIKit
 
-class ShowEventSource: DecorationView {
+class ShowEventSourceView: UIView {
     @IBOutlet weak var showSourceButton: UIButton!
     
-    class func initiateAndSetup(with source: String) -> ShowEventSource {
-        let showEventSourceView = UINib(nibName: "ShowEventSource", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! ShowEventSource
+    class func initiateAndSetup(with source: String) -> ShowEventSourceView {
+        let showEventSourceView: ShowEventSourceView = SharedUtils.createPanelView(nibName: "ShowEventSourceView")
         //TODO define source and add webview which opened link
         return showEventSourceView
     }

@@ -31,10 +31,13 @@ class FavoritesViewController: UIViewController {
         let gridLayoutCellStaticHeight: CGFloat = view.frame.width / 2
         listLayout = DisplaySwitchLayout(staticCellHeight: listLayoutCellStaticHeihgt,
                                          nextLayoutStaticCellHeight: gridLayoutCellStaticHeight,
-                                         layoutState: .list, cellHeightPadding: 8, cellWidthPadding: 10)
+                                         layoutState: .list,
+                                         cellPadding: CGPoint(x: 10, y: 8))
         gridLayout = DisplaySwitchLayout(staticCellHeight: gridLayoutCellStaticHeight,
                                          nextLayoutStaticCellHeight: listLayoutCellStaticHeihgt,
-                                         layoutState: .grid, cellHeightPadding: 8, cellWidthPadding: 10)
+                                         layoutState: .grid,
+                                         cellPadding: CGPoint(x: 10, y: 8),
+                                         gridLayoutCountOfColumns: 2)
         
     }
     
@@ -99,6 +102,7 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
         
         return cell
     }
+    //MARK - API
     
     func collectionView(_ collectionView: UICollectionView,
                         transitionLayoutForOldLayout fromLayout: UICollectionViewLayout,

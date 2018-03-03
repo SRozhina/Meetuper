@@ -1,11 +1,11 @@
 import Foundation
 import UIKit
 
-class EventDescription: DecorationView {
+class EventDescriptionView: UIView {
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    class func initiateAndSetup(with description: String) -> EventDescription {
-        let eventDescriptionView = UINib(nibName: "EventDescription", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! EventDescription
+    class func initiateAndSetup(with description: String) -> EventDescriptionView {
+        let eventDescriptionView: EventDescriptionView = SharedUtils.createPanelView(nibName: "EventDescriptionView")
         eventDescriptionView.descriptionLabel.text = description
         return eventDescriptionView
     }

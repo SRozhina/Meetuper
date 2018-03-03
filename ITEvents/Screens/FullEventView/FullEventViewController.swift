@@ -2,6 +2,12 @@ import UIKit
 
 class FullEventViewController: UIViewController {
     @IBOutlet weak var stackView: UIStackView!
+    private let descriptionsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 15
+        return stackView
+    }()
     
     private let eventDataService: IEventDataService = EventDataServiceMockImpl()
     var event: Event!
@@ -12,17 +18,13 @@ class FullEventViewController: UIViewController {
         stackView.addArrangedSubview(eventView)
         
         let descriptionsCount = 2
-        let showMoreDescriptions = ShowMoreDescriptions.initiateAndSetup(with: descriptionsCount)
-        showMoreDescriptions.showMoreDescriptionsButton.addTarget(self, action: #selector(expandOrCollapseDescriptions), for: .touchUpInside)
-        stackView.addArrangedSubview(showMoreDescriptions)
+        let showMoreEvents = ShowMoreEventsView.initiateAndSetup(with: descriptionsCount)
+        showMoreEvents.showMoreEventsButton.addTarget(self, action: #selector(expandOrCollapseDescriptions), for: .touchUpInside)
+        stackView.addArrangedSubview(showMoreEvents)
         
-        let descriptionsStackView = UIStackView()
-        descriptionsStackView.axis = .vertical
-        descriptionsStackView.spacing = 15
-        descriptionsStackView.tag = 123
         for _ in 0..<descriptionsCount {
             let eventView = EventView.initiateAndSetup(with: event)
-            let sourceLabel = createLabelFor(source: "Event from Meetabit.com")
+            let sourceLabel = createSourceLabel(text: "Event from Meetabit.com")
             eventView.insertArrangedSubview(sourceLabel, at: 0)
             descriptionsStackView.addArrangedSubview(eventView)
         }
@@ -31,18 +33,16 @@ class FullEventViewController: UIViewController {
     }
     
     @objc func expandOrCollapseDescriptions(_ sender: UIButton) {
-        if let descriptionsStack = self.view.viewWithTag(123) as? UIStackView {
-            UIView.animate(withDuration: 0.3) {
-                descriptionsStack.isHidden = !descriptionsStack.isHidden
-            }
-            let title = ShowMoreDescriptions.getDescriptionFor(hidden: descriptionsStack.isHidden, count: 2) //TODO get count from event
-            sender.setTitle(title, for: .normal)
+        UIView.animate(withDuration: 0.3) {
+            self.descriptionsStackView.isHidden = !self.descriptionsStackView.isHidden
         }
+        let title = ShowMoreEventsView.getDescriptionFor(hidden: descriptionsStackView.isHidden, count: 2) //TODO get count from event
+        sender.setTitle(title, for: .normal)
     }
     
-    func createLabelFor(source: String) -> UILabel {
+    func createSourceLabel(text: String) -> UILabel {
         let sourceLabel = UILabel()
-        sourceLabel.text = source
+        sourceLabel.text = text
         sourceLabel.font = UIFont.systemFont(ofSize: 12)
         sourceLabel.textAlignment = .center
         sourceLabel.textColor = UIColor(red: 0.63, green: 0.63, blue: 0.63, alpha: 1)
