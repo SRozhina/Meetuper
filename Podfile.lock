@@ -2,11 +2,21 @@ PODS:
   - DisplaySwitcher (1.0.1)
 
 DEPENDENCIES:
-  - DisplaySwitcher
+  - DisplaySwitcher (from `https://github.com/SRozhina/DisplaySwitcher.git`, branch `master`)
+
+EXTERNAL SOURCES:
+  DisplaySwitcher:
+    :branch: master
+    :git: https://github.com/SRozhina/DisplaySwitcher.git
+
+CHECKOUT OPTIONS:
+  DisplaySwitcher:
+    :commit: 0fa58ccca5157d6a95f1440a334b9a8fc5f04c86
+    :git: https://github.com/SRozhina/DisplaySwitcher.git
 
 SPEC CHECKSUMS:
   DisplaySwitcher: 5f725284c28cdf22ea7ba2eee8e8f7e7cb9cdf87
 
-PODFILE CHECKSUM: 766893e365b30948336ff51d50ed5fd222579f66
+PODFILE CHECKSUM: a783c8ffb68452e5adb0c0a1fe2ee3098d110aef
 
 COCOAPODS: 1.3.1

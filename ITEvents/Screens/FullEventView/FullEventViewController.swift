@@ -2,7 +2,13 @@ import UIKit
 import SafariServices
 
 class FullEventViewController: UIViewController {
-    @IBOutlet weak private var stackView: UIStackView!
+    @IBOutlet weak var stackView: UIStackView!
+    private let descriptionsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 15
+        return stackView
+    }()
     
     private let similarEventsService: ISimilarEventsDataService = SimilarEventsDataServiceMockImpl()
     var event: Event!
@@ -10,11 +16,10 @@ class FullEventViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let eventView = EventView.initiateAndSetup(with: event)
         
         if let source = event.source, let url = event.url {
-            let showEventSource = ShowEventSource.initiateAndSetup(with: source, and: url)
+            let showEventSource = ShowEventSourceView.initiateAndSetup(with: source, and: url)
             showEventSource.showSourceButton.addTarget(self, action: #selector(openEventSource), for: .touchUpInside)
             eventView.addArrangedSubview(showEventSource)
         }
@@ -23,9 +28,9 @@ class FullEventViewController: UIViewController {
         
         if event.similarEventsCount == 0 { return }
         
-        let showMoreDescriptions = ShowMoreDescriptions.initiateAndSetup(with: event.similarEventsCount)
-        showMoreDescriptions.showMoreDescriptionsButton.addTarget(self, action: #selector(showMoreButtonTapped), for: .touchUpInside)
-        stackView.addArrangedSubview(showMoreDescriptions)
+        let showMoreEvents = ShowMoreEventsView.initiateAndSetup(with: event.similarEventsCount)
+        showMoreEvents.showMoreEventsButton.addTarget(self, action: #selector(showMoreButtonTapped), for: .touchUpInside)
+        stackView.addArrangedSubview(showMoreEvents)
     }
     
     @objc private func showMoreButtonTapped(_ sender: UIButton) {
@@ -35,20 +40,16 @@ class FullEventViewController: UIViewController {
                 self.similarEvents = events
                 self.createSimilarEventsViews()
                 self.changeTitle(for: sender)
-                self.expandOrCollapseDescriptions()
+                self.expandOrCollapseEvents()
                 sender.isEnabled = true
             }
         } else {
             changeTitle(for: sender)
-            expandOrCollapseDescriptions()
+            expandOrCollapseEvents()
         }
     }
     
     private func createSimilarEventsViews() {
-        let descriptionsStackView = UIStackView()
-        descriptionsStackView.axis = .vertical
-        descriptionsStackView.spacing = 15
-        descriptionsStackView.tag = 123
         for similarEvent in similarEvents! {
             let eventView = EventView.initiateAndSetup(with: similarEvent)
             let sourceLabel = createLabelFor(source: similarEvent.source!)
@@ -59,19 +60,15 @@ class FullEventViewController: UIViewController {
         stackView.addArrangedSubview(descriptionsStackView)
     }
     
-    private func expandOrCollapseDescriptions() {
-        if let descriptionsStack = self.view.viewWithTag(123) as? UIStackView {
-            UIView.animate(withDuration: 0.3) {
-                descriptionsStack.isHidden = !descriptionsStack.isHidden
-            }
+    private func expandOrCollapseEvents() {
+        UIView.animate(withDuration: 0.3) {
+            self.descriptionsStackView.isHidden = !self.descriptionsStackView.isHidden
         }
     }
     
     private func changeTitle(for button: UIButton) {
-        if let descriptionsStack = self.view.viewWithTag(123) as? UIStackView {
-            let title = ShowMoreDescriptions.getDescriptionFor(hidden: !descriptionsStack.isHidden, count: event.similarEventsCount)
-            button.setTitle(title, for: .normal)
-        }
+        let title = ShowMoreEventsView.getDescriptionFor(hidden: !descriptionsStackView.isHidden, count: event.similarEventsCount)
+        button.setTitle(title, for: .normal)
     }
     
     @objc private func openEventSource() {
