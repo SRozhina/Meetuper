@@ -52,7 +52,7 @@ class FullEventViewController: UIViewController {
     private func createSimilarEventsViews() {
         for similarEvent in similarEvents! {
             let eventView = EventView.initiateAndSetup(with: similarEvent)
-            let sourceLabel = createLabelFor(source: similarEvent.source!)
+            let sourceLabel = createSourceLabel(text: similarEvent.source!.name)
             eventView.insertArrangedSubview(sourceLabel, at: 0)
             descriptionsStackView.addArrangedSubview(eventView)
         }
@@ -76,9 +76,9 @@ class FullEventViewController: UIViewController {
         present(safariWebView, animated: true, completion: nil)
     }
     
-    private func createLabelFor(source: EventSource) -> UILabel {
+    private func createSourceLabel(text: String) -> UILabel {
         let sourceLabel = UILabel()
-        sourceLabel.text = "Event from \(source.name)"
+        sourceLabel.text = "Event from \(text)"
         sourceLabel.font = UIFont.systemFont(ofSize: 12)
         sourceLabel.textAlignment = .center
         sourceLabel.textColor = UIColor(red: 0.63, green: 0.63, blue: 0.63, alpha: 1)
