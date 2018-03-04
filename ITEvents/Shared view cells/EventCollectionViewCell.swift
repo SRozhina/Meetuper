@@ -127,19 +127,12 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         super.willTransition(from: oldLayout, to: newLayout)
         
         guard let oldDisplaySwitchLayout = oldLayout as? DisplaySwitchLayout else { return }
-        let oldLatoutState = getLatoutState(oldDisplaySwitchLayout)
-        if oldLatoutState == .list {
+        if oldDisplaySwitchLayout.layoutState == .list {
             // list -> grid
         } else {
             // grid -> list
             startListLayoutTransition()
         }
-    }
-    
-    private func getLatoutState(_ layout: DisplaySwitchLayout) -> LayoutState {
-        let mirror = Mirror(reflecting: layout)
-        let layoutStatePair = mirror.children.first { $0.label == "layoutState" }!
-        return layoutStatePair.value as! LayoutState
     }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
@@ -151,7 +144,7 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
             }
             transitGridLayout(attributes.transitionProgress)
         } else {
-            if attributes.transitionProgress > 0.1 {
+            if attributes.transitionProgress > 0.2 {
                 toggleListConstraintActive(value: true)
             }
             transitListLayout(attributes.transitionProgress)
