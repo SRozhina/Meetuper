@@ -44,4 +44,18 @@ class EventView: UIStackView {
             action(url)
         }
     }
+    
+    func createSourceLabel() {
+        let sourceLabel = EventView.createSourceLabel(text: event.source!.name)
+        insertArrangedSubview(sourceLabel, at: 0)
+    }
+    
+    private class func createSourceLabel(text: String) -> UILabel {
+        let sourceLabel = UILabel()
+        sourceLabel.text = "Event from \(text)"
+        sourceLabel.font = UIFont.systemFont(ofSize: 12)
+        sourceLabel.textAlignment = .center
+        sourceLabel.textColor = UIColor(red: 0.63, green: 0.63, blue: 0.63, alpha: 1)
+        return sourceLabel
+    }
 }

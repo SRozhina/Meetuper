@@ -43,8 +43,7 @@ class FullEventViewController: UIViewController {
     private func createSimilarEventsViews() {
         for similarEvent in similarEvents! {
             let eventView = EventView.initiateAndSetup(with: similarEvent, sourceOpenAction: openAction)
-            let sourceLabel = FullEventViewController.createSourceLabel(text: similarEvent.source!.name)
-            eventView.insertArrangedSubview(sourceLabel, at: 0)
+            eventView.createSourceLabel()
             descriptionsStackView.addArrangedSubview(eventView)
         }
         descriptionsStackView.isHidden = true
@@ -55,15 +54,6 @@ class FullEventViewController: UIViewController {
         UIView.animate(withDuration: 0.3) {
             self.descriptionsStackView.isHidden = !self.descriptionsStackView.isHidden
         }
-    }
-    
-    private class func createSourceLabel(text: String) -> UILabel {
-        let sourceLabel = UILabel()
-        sourceLabel.text = "Event from \(text)"
-        sourceLabel.font = UIFont.systemFont(ofSize: 12)
-        sourceLabel.textAlignment = .center
-        sourceLabel.textColor = UIColor(red: 0.63, green: 0.63, blue: 0.63, alpha: 1)
-        return sourceLabel
     }
     
     private func openAction(url: URL) {
