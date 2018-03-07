@@ -2,33 +2,60 @@ import Foundation
 import UIKit
 
 class EventView: UIStackView {
+    var sourceOpenAction: ((URL) -> Void)?
+    var event: Event!
     
-    class func initiateAndSetup(with event: Event) -> EventView {
-        let tempDescription = "19:10 - 19:40: “Svelte — «магический» фреймворк” Тим Маринин Поговорим про Svelte и подумаем зачем нам ещё один фреймворк, и что это значит, что в нём нет рантайма? 19:55 - 20:25: “ES2018?” Михаил Полубояринов 23–28 января 2018 г. прошел очередной митинг TC39, на котором обсуждалось то что пойдет в ES2018 и Михаилу хотелось бы поделиться с Вами результатами этого митинга. 20:40 - 21:20: “рефакторинг” Алексей Золотых Рефакторинг приложения является неотъемлемой частью разработки. В своем докладе я расскажу про практические аспекты этого процесса."
-        
+    class func initiateAndSetup(with event: Event, sourceOpenAction: ((URL) -> Void)? = nil) -> EventView {
         let eventView: EventView = SharedUtils.createPanelView(nibName: "EventView")
+        eventView.setup(with: event, and: sourceOpenAction)
+        return eventView
+    }
+    
+    private func setup(with event: Event, and sourceOpenAction: ((URL) -> Void)?) {
+        self.event = event
+        self.sourceOpenAction = sourceOpenAction
         
-        let eventInfo = EventInfoView.initiateAndSetup(withImage: event.image,
+        let eventInfo = EventInfoView.initiateAndSetup(with: event.image,
                                                        title: event.title,
                                                        date: "21 February, 19:00-22:00")
-        //TODO common date description for all project
-        eventView.addArrangedSubview(eventInfo)
         
-        let eventPlace = EventPlaceView.initiateAndSetup(withCity: event.city,
+        //TODO common date description for all project
+        addArrangedSubview(eventInfo)
+        
+        let eventPlace = EventPlaceView.initiateAndSetup(with: event.city,
                                                          country: event.country,
                                                          address: event.address)
-        eventView.addArrangedSubview(eventPlace)
+        addArrangedSubview(eventPlace)
         
-        let eventDescription = EventDescriptionView.initiateAndSetup(with: tempDescription)
-        //TODO event.description)
-        eventView.addArrangedSubview(eventDescription)
+        let eventDescription = EventDescriptionView.initiateAndSetup(with: event.description)
+        addArrangedSubview(eventDescription)
         
         let eventTags = EventTagsView.initiateAndSetup(with: event.tags)
-        eventView.addArrangedSubview(eventTags)
+        addArrangedSubview(eventTags)
         
-        let showEventSource = ShowEventSourceView.initiateAndSetup(with: "Show on Timapad")
-        eventView.addArrangedSubview(showEventSource)
-        
-        return eventView
+        if let source = event.source {
+            let showEventSource = ShowEventSourceView.initiateAndSetup(with: source.name, sourceOpenAction: openAction)
+            addArrangedSubview(showEventSource)
+        }
+    }
+    
+    private func openAction() {
+        if let action = sourceOpenAction, let url = event.url {
+            action(url)
+        }
+    }
+    
+    func createSourceLabel() {
+        let sourceLabel = EventView.createSourceLabel(text: event.source!.name)
+        insertArrangedSubview(sourceLabel, at: 0)
+    }
+    
+    private class func createSourceLabel(text: String) -> UILabel {
+        let sourceLabel = UILabel()
+        sourceLabel.text = "Event from \(text)"
+        sourceLabel.font = UIFont.systemFont(ofSize: 12)
+        sourceLabel.textAlignment = .center
+        sourceLabel.textColor = UIColor(red: 0.63, green: 0.63, blue: 0.63, alpha: 1)
+        return sourceLabel
     }
 }

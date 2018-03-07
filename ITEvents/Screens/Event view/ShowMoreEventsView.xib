@@ -23,6 +23,9 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <state key="normal" title="Show 2 more descriptions"/>
+                    <connections>
+                        <action selector="showMoreEventsTapped:" destination="ynZ-6B-NlN" eventType="touchUpInside" id="KEH-9C-els"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -2,11 +2,11 @@ import UIKit
 import DisplaySwitcher
 
 class FavoritesViewController: UIViewController {
-    private let eventDataService: IEventDataService = EventDataServiceMockImpl()
+    private let eventDataService: IEventsDataService = EventsDataServiceMockImpl()
     private var events = [Event]()
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var rotationButton: SwitchLayoutButton!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var rotationButton: SwitchLayoutButton!
     
     private var animationDuration: TimeInterval!
     private var listLayout: DisplaySwitchLayout!
@@ -18,7 +18,11 @@ class FavoritesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        events = eventDataService.fetchEvents()
+        eventDataService.fetchEvents { fetchedEvents in
+            self.events = fetchedEvents
+            self.collectionView.reloadData()
+        }
+        
         setProperties()
         registerNibs()
         setupCollectionView()
@@ -102,7 +106,6 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
         
         return cell
     }
-    //MARK - API
     
     func collectionView(_ collectionView: UICollectionView,
                         transitionLayoutForOldLayout fromLayout: UICollectionViewLayout,

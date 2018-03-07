@@ -1,7 +1,8 @@
 import UIKit
+import SafariServices
 
 class FullEventViewController: UIViewController {
-    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet private weak var stackView: UIStackView!
     private let descriptionsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -9,43 +10,54 @@ class FullEventViewController: UIViewController {
         return stackView
     }()
     
-    private let eventDataService: IEventDataService = EventDataServiceMockImpl()
+    private let similarEventsService: ISimilarEventsDataService = SimilarEventsDataServiceMockImpl()
     var event: Event!
+    private var similarEvents: [Event]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let eventView = EventView.initiateAndSetup(with: event)
+        
+        let eventView = EventView.initiateAndSetup(with: event, sourceOpenAction: openAction)
         stackView.addArrangedSubview(eventView)
         
-        let descriptionsCount = 2
-        let showMoreEvents = ShowMoreEventsView.initiateAndSetup(with: descriptionsCount)
-        showMoreEvents.showMoreEventsButton.addTarget(self, action: #selector(expandOrCollapseDescriptions), for: .touchUpInside)
-        stackView.addArrangedSubview(showMoreEvents)
+        if event.similarEventsCount == 0 { return }
         
-        for _ in 0..<descriptionsCount {
-            let eventView = EventView.initiateAndSetup(with: event)
-            let sourceLabel = createSourceLabel(text: "Event from Meetabit.com")
-            eventView.insertArrangedSubview(sourceLabel, at: 0)
+        let showMoreEvents = ShowMoreEventsView.initiateAndSetup(with: event.similarEventsCount, showOrHideEventsAction: showMoreButtonTapped)
+        stackView.addArrangedSubview(showMoreEvents)
+    }
+    
+    private func showMoreButtonTapped(completion: @escaping () -> Void) {
+        if similarEvents != nil {
+            expandOrCollapseEvents()
+            completion()
+            return
+        }
+        similarEventsService.fetchSimilarEvents(for: event.id) { events in
+            self.similarEvents = events
+            self.createSimilarEventsViews()
+            self.expandOrCollapseEvents()
+            completion()
+        }
+    }
+    
+    private func createSimilarEventsViews() {
+        for similarEvent in similarEvents! {
+            let eventView = EventView.initiateAndSetup(with: similarEvent, sourceOpenAction: openAction)
+            eventView.createSourceLabel()
             descriptionsStackView.addArrangedSubview(eventView)
         }
         descriptionsStackView.isHidden = true
         stackView.addArrangedSubview(descriptionsStackView)
     }
     
-    @objc func expandOrCollapseDescriptions(_ sender: UIButton) {
+    private func expandOrCollapseEvents() {
         UIView.animate(withDuration: 0.3) {
             self.descriptionsStackView.isHidden = !self.descriptionsStackView.isHidden
         }
-        let title = ShowMoreEventsView.getDescriptionFor(hidden: descriptionsStackView.isHidden, count: 2) //TODO get count from event
-        sender.setTitle(title, for: .normal)
     }
     
-    func createSourceLabel(text: String) -> UILabel {
-        let sourceLabel = UILabel()
-        sourceLabel.text = text
-        sourceLabel.font = UIFont.systemFont(ofSize: 12)
-        sourceLabel.textAlignment = .center
-        sourceLabel.textColor = UIColor(red: 0.63, green: 0.63, blue: 0.63, alpha: 1)
-        return sourceLabel
+    private func openAction(url: URL) {
+        let safariWebView = SFSafariViewController(url: url)
+        present(safariWebView, animated: true, completion: nil)
     }
 }
