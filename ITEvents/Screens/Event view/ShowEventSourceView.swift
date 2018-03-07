@@ -2,11 +2,20 @@ import Foundation
 import UIKit
 
 class ShowEventSourceView: UIView {
-    @IBOutlet weak var showSourceButton: UIButton!
+    @IBOutlet private var showSourceButton: UIButton!
+    var sourceOpenAction: (() -> Void)?
     
-    class func initiateAndSetup(with source: EventSource, and url: URL) -> ShowEventSourceView {
+    class func initiateAndSetup(with text: String, sourceOpenAction: (() -> Void)? = nil) -> ShowEventSourceView {
         let showEventSourceView: ShowEventSourceView = SharedUtils.createPanelView(nibName: "ShowEventSourceView")
-        showEventSourceView.showSourceButton.setTitle("Show on \(source.name)", for: .normal)
+        showEventSourceView.sourceOpenAction = sourceOpenAction
+        showEventSourceView.showSourceButton.setTitle("Show on \(text)", for: .normal)
         return showEventSourceView
     }
+    
+    @IBAction private func showEventSourceTapped(_ sender: UIButton) {
+        if let action = sourceOpenAction {
+            action()
+        }
+    }
 }
+ 

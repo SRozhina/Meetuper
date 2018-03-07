@@ -2,7 +2,7 @@ import UIKit
 import SafariServices
 
 class FullEventViewController: UIViewController {
-    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet private weak var stackView: UIStackView!
     private let descriptionsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -16,42 +16,33 @@ class FullEventViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let eventView = EventView.initiateAndSetup(with: event)
         
-        if let source = event.source, let url = event.url {
-            let showEventSource = ShowEventSourceView.initiateAndSetup(with: source, and: url)
-            showEventSource.showSourceButton.addTarget(self, action: #selector(openEventSource), for: .touchUpInside)
-            eventView.addArrangedSubview(showEventSource)
-        }
-        
+        let eventView = EventView.initiateAndSetup(with: event, sourceOpenAction: openAction)
         stackView.addArrangedSubview(eventView)
         
         if event.similarEventsCount == 0 { return }
         
-        let showMoreEvents = ShowMoreEventsView.initiateAndSetup(with: event.similarEventsCount)
-        showMoreEvents.showMoreEventsButton.addTarget(self, action: #selector(showMoreButtonTapped), for: .touchUpInside)
+        let showMoreEvents = ShowMoreEventsView.initiateAndSetup(with: event.similarEventsCount, showOrHideEventsAction: showMoreButtonTapped)
         stackView.addArrangedSubview(showMoreEvents)
     }
     
-    @objc private func showMoreButtonTapped(_ sender: UIButton) {
+    private func showMoreButtonTapped(completion: @escaping () -> Void) {
         if similarEvents == nil {
-            sender.isEnabled = false
             similarEventsService.fetchSimilarEvents(for: event.id) { events in
                 self.similarEvents = events
                 self.createSimilarEventsViews()
-                self.changeTitle(for: sender)
                 self.expandOrCollapseEvents()
-                sender.isEnabled = true
+                completion()
             }
         } else {
-            changeTitle(for: sender)
             expandOrCollapseEvents()
+            completion()
         }
     }
     
     private func createSimilarEventsViews() {
         for similarEvent in similarEvents! {
-            let eventView = EventView.initiateAndSetup(with: similarEvent)
+            let eventView = EventView.initiateAndSetup(with: similarEvent, sourceOpenAction: openAction)
             let sourceLabel = createSourceLabel(text: similarEvent.source!.name)
             eventView.insertArrangedSubview(sourceLabel, at: 0)
             descriptionsStackView.addArrangedSubview(eventView)
@@ -66,16 +57,6 @@ class FullEventViewController: UIViewController {
         }
     }
     
-    private func changeTitle(for button: UIButton) {
-        let title = ShowMoreEventsView.getDescriptionFor(hidden: !descriptionsStackView.isHidden, count: event.similarEventsCount)
-        button.setTitle(title, for: .normal)
-    }
-    
-    @objc private func openEventSource() {
-        let safariWebView = SFSafariViewController(url: event.url!)
-        present(safariWebView, animated: true, completion: nil)
-    }
-    
     private func createSourceLabel(text: String) -> UILabel {
         let sourceLabel = UILabel()
         sourceLabel.text = "Event from \(text)"
@@ -83,5 +64,10 @@ class FullEventViewController: UIViewController {
         sourceLabel.textAlignment = .center
         sourceLabel.textColor = UIColor(red: 0.63, green: 0.63, blue: 0.63, alpha: 1)
         return sourceLabel
+    }
+    
+    private func openAction(url: URL) {
+        let safariWebView = SFSafariViewController(url: url)
+        present(safariWebView, animated: true, completion: nil)
     }
 }

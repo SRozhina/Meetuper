@@ -5,8 +5,8 @@ class FavoritesViewController: UIViewController {
     private let eventDataService: IEventsDataService = EventsDataServiceMockImpl()
     private var events = [Event]()
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var rotationButton: SwitchLayoutButton!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var rotationButton: SwitchLayoutButton!
     
     private var animationDuration: TimeInterval!
     private var listLayout: DisplaySwitchLayout!

@@ -2,21 +2,39 @@ import Foundation
 import UIKit
 
 class ShowMoreEventsView: UIView {
-    @IBOutlet weak var showMoreEventsButton: UIButton!
+    @IBOutlet private weak var showMoreEventsButton: UIButton!
+    var showOrHideEventsAction: ((@escaping () -> Void) -> Void)?
+    private var descriptionsCount: Int = 0
+    private var collapsed: Bool = true
     
-    class func initiateAndSetup(with descriptionsCount: Int) -> ShowMoreEventsView {
+    class func initiateAndSetup(with descriptionsCount: Int, showOrHideEventsAction: ((@escaping () -> Void) -> Void)? = nil) -> ShowMoreEventsView {
         let showMoreEventsView: ShowMoreEventsView = SharedUtils.createPanelView(nibName: "ShowMoreEventsView")
-        let buttonTitle = ShowMoreEventsView.getDescriptionFor(hidden: true, count: descriptionsCount)
-        showMoreEventsView.showMoreEventsButton.setTitle(buttonTitle, for: .normal)
+        showMoreEventsView.showOrHideEventsAction = showOrHideEventsAction
+        showMoreEventsView.descriptionsCount = descriptionsCount
+        showMoreEventsView.setButtonTitle()
         return showMoreEventsView
     }
     
-    class func getDescriptionFor(hidden: Bool, count: Int) -> String {
-        if hidden {
-            return count == 1
-                ? "Show one more description"
-                : "Show \(count) more descriptions"
+    @IBAction private func showMoreEventsTapped(_ sender: UIButton) {
+        if let action = showOrHideEventsAction {
+            sender.isEnabled = false
+            action {
+                self.collapsed = !self.collapsed
+                self.setButtonTitle()
+                sender.isEnabled = true
+            }
         }
-        return "Show less descriptions"
+    }
+    
+    private func setButtonTitle() {
+        var title = ""
+        if collapsed {
+            title = descriptionsCount == 1
+                ? "Show one more description"
+                : "Show \(descriptionsCount) more descriptions"
+        } else {
+            title = "Show less descriptions"
+        }
+        showMoreEventsButton.setTitle(title, for: .normal)
     }
 }

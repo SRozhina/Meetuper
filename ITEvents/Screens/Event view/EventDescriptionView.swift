@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 class EventDescriptionView: UIView {
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var descriptionLabel: UILabel!
     
     class func initiateAndSetup(with description: String) -> EventDescriptionView {
         let eventDescriptionView: EventDescriptionView = SharedUtils.createPanelView(nibName: "EventDescriptionView")
