@@ -7,22 +7,22 @@ class EventView: UIStackView {
     
     class func initiateAndSetup(with event: Event, sourceOpenAction: ((URL) -> Void)? = nil) -> EventView {
         let eventView: EventView = SharedUtils.createPanelView(nibName: "EventView")
-        eventView.setup(with: event, sourceOpenAction)
+        eventView.setup(with: event, and: sourceOpenAction)
         return eventView
     }
     
-    private func setup(with event: Event, _ sourceOpenAction: ((URL) -> Void)?) {
+    private func setup(with event: Event, and sourceOpenAction: ((URL) -> Void)?) {
         self.event = event
         self.sourceOpenAction = sourceOpenAction
         
-        let eventInfo = EventInfoView.initiateAndSetup(withImage: event.image,
+        let eventInfo = EventInfoView.initiateAndSetup(with: event.image,
                                                        title: event.title,
                                                        date: "21 February, 19:00-22:00")
         
         //TODO common date description for all project
         addArrangedSubview(eventInfo)
         
-        let eventPlace = EventPlaceView.initiateAndSetup(withCity: event.city,
+        let eventPlace = EventPlaceView.initiateAndSetup(with: event.city,
                                                          country: event.country,
                                                          address: event.address)
         addArrangedSubview(eventPlace)
