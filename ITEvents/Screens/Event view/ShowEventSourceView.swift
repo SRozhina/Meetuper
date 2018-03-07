@@ -7,9 +7,13 @@ class ShowEventSourceView: UIView {
     
     class func initiateAndSetup(with text: String, sourceOpenAction: (() -> Void)? = nil) -> ShowEventSourceView {
         let showEventSourceView: ShowEventSourceView = SharedUtils.createPanelView(nibName: "ShowEventSourceView")
-        showEventSourceView.sourceOpenAction = sourceOpenAction
-        showEventSourceView.showSourceButton.setTitle("Show on \(text)", for: .normal)
+        showEventSourceView.setup(with: text, and: sourceOpenAction)
         return showEventSourceView
+    }
+    
+    private func setup(with text: String, and action: (() -> Void)? = nil) {
+        self.sourceOpenAction = action
+        self.showSourceButton.setTitle("Show on \(text)", for: .normal)
     }
     
     @IBAction private func showEventSourceTapped(_ sender: UIButton) {
