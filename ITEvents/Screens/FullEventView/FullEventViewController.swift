@@ -27,15 +27,15 @@ class FullEventViewController: UIViewController {
     }
     
     private func showMoreButtonTapped(completion: @escaping () -> Void) {
-        if similarEvents == nil {
-            similarEventsService.fetchSimilarEvents(for: event.id) { events in
-                self.similarEvents = events
-                self.createSimilarEventsViews()
-                self.expandOrCollapseEvents()
-                completion()
-            }
-        } else {
+        if similarEvents != nil {
             expandOrCollapseEvents()
+            completion()
+            return
+        }
+        similarEventsService.fetchSimilarEvents(for: event.id) { events in
+            self.similarEvents = events
+            self.createSimilarEventsViews()
+            self.expandOrCollapseEvents()
             completion()
         }
     }
