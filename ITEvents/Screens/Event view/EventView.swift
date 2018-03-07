@@ -3,19 +3,17 @@ import UIKit
 
 class EventView: UIStackView {
     var sourceOpenAction: ((URL) -> Void)?
-    var event: Event?
+    var event: Event!
     
     class func initiateAndSetup(with event: Event, sourceOpenAction: ((URL) -> Void)? = nil) -> EventView {
         let eventView: EventView = SharedUtils.createPanelView(nibName: "EventView")
-        eventView.sourceOpenAction = sourceOpenAction
-        eventView.setup(with: event)
+        eventView.setup(with: event, sourceOpenAction)
         return eventView
     }
     
-    private func setup(with event: Event?) {
-        guard let event = event else { return }
-        
+    private func setup(with event: Event, _ sourceOpenAction: ((URL) -> Void)?) {
         self.event = event
+        self.sourceOpenAction = sourceOpenAction
         
         let eventInfo = EventInfoView.initiateAndSetup(withImage: event.image,
                                                        title: event.title,
@@ -42,8 +40,8 @@ class EventView: UIStackView {
     }
     
     private func openAction() {
-        if let action = sourceOpenAction, let event = event {
-            action(event.url!)
+        if let action = sourceOpenAction, let url = event.url {
+            action(url)
         }
     }
 }

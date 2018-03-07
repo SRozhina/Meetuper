@@ -43,7 +43,7 @@ class FullEventViewController: UIViewController {
     private func createSimilarEventsViews() {
         for similarEvent in similarEvents! {
             let eventView = EventView.initiateAndSetup(with: similarEvent, sourceOpenAction: openAction)
-            let sourceLabel = createSourceLabel(text: similarEvent.source!.name)
+            let sourceLabel = FullEventViewController.createSourceLabel(text: similarEvent.source!.name)
             eventView.insertArrangedSubview(sourceLabel, at: 0)
             descriptionsStackView.addArrangedSubview(eventView)
         }
@@ -57,7 +57,7 @@ class FullEventViewController: UIViewController {
         }
     }
     
-    private func createSourceLabel(text: String) -> UILabel {
+    private class func createSourceLabel(text: String) -> UILabel {
         let sourceLabel = UILabel()
         sourceLabel.text = "Event from \(text)"
         sourceLabel.font = UIFont.systemFont(ofSize: 12)

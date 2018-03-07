@@ -9,10 +9,14 @@ class ShowMoreEventsView: UIView {
     
     class func initiateAndSetup(with descriptionsCount: Int, showOrHideEventsAction: ((@escaping () -> Void) -> Void)? = nil) -> ShowMoreEventsView {
         let showMoreEventsView: ShowMoreEventsView = SharedUtils.createPanelView(nibName: "ShowMoreEventsView")
-        showMoreEventsView.showOrHideEventsAction = showOrHideEventsAction
-        showMoreEventsView.descriptionsCount = descriptionsCount
-        showMoreEventsView.setButtonTitle()
+        showMoreEventsView.setup(with: descriptionsCount, action: showOrHideEventsAction)
         return showMoreEventsView
+    }
+    
+    private func setup(with descriptionsCount: Int, action showOrHideEventsAction: ((@escaping () -> Void) -> Void)? ) {
+        self.showOrHideEventsAction = showOrHideEventsAction
+        self.descriptionsCount = descriptionsCount
+        self.setButtonTitle()
     }
     
     @IBAction private func showMoreEventsTapped(_ sender: UIButton) {
@@ -27,14 +31,16 @@ class ShowMoreEventsView: UIView {
     }
     
     private func setButtonTitle() {
-        var title = ""
+        let title = ShowMoreEventsView.getButtonTitle(for: collapsed, and: descriptionsCount)
+        showMoreEventsButton.setTitle(title, for: .normal)
+    }
+    
+    private class func getButtonTitle(for collapsed: Bool, and descriptionsCount: Int) -> String {
         if collapsed {
-            title = descriptionsCount == 1
+            return descriptionsCount == 1
                 ? "Show one more description"
                 : "Show \(descriptionsCount) more descriptions"
-        } else {
-            title = "Show less descriptions"
         }
-        showMoreEventsButton.setTitle(title, for: .normal)
+        return "Show less descriptions"
     }
 }
