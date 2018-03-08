@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="ynZ-6B-NlN" customClass="ShowMoreDescriptions" customModule="ITEvents" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="ynZ-6B-NlN" customClass="ShowMoreEventsView" customModule="ITEvents" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -23,6 +23,9 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <state key="normal" title="Show 2 more descriptions"/>
+                    <connections>
+                        <action selector="showMoreEventsTapped:" destination="ynZ-6B-NlN" eventType="touchUpInside" id="KEH-9C-els"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -35,7 +38,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="UCZ-pC-xDP"/>
             <connections>
-                <outlet property="showMoreDescriptionsButton" destination="0P9-mA-fGZ" id="uGC-eN-KAJ"/>
+                <outlet property="showMoreEventsButton" destination="0P9-mA-fGZ" id="1Ab-Cp-eBb"/>
             </connections>
             <point key="canvasLocation" x="11.5" y="-346.5"/>
         </view>
