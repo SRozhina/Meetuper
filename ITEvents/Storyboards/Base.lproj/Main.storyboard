@@ -68,6 +68,7 @@
                     </view>
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
+                        <outlet property="scrollView" destination="tqc-J7-xiR" id="2rN-S8-2hr"/>
                         <outlet property="stackView" destination="evT-lg-y4W" id="sNC-kU-u1S"/>
                     </connections>
                 </viewController>
