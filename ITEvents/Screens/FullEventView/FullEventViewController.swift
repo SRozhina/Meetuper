@@ -57,8 +57,7 @@ class FullEventViewController: UIViewController {
     
     private func createSimilarEventsViews() {
         for similarEvent in similarEvents! {
-            let eventView = EventView.initiateAndSetup(with: similarEvent, using: dateFormatterService, sourceOpenAction: openAction)
-            eventView.createSourceLabel()
+            let eventView = EventView.initiateAndSetup(with: similarEvent, using: dateFormatterService, sourceOpenAction: openAction, isSimilar: true)
             descriptionsStackView.addArrangedSubview(eventView)
         }
         descriptionsStackView.isHidden = true

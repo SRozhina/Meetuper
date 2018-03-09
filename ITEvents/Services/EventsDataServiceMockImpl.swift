@@ -37,8 +37,15 @@ class EventsDataServiceMockImpl: IEventsDataService {
     }
     
     func fetchEvents(then completion: @escaping ([Event]) -> Void) {
-        let events = [
-            createEvent(id: 1,
+        let events = getEvents()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            completion(events)
+        }
+    }
+    
+    private func getEvents() -> [Event] {
+        return [createEvent(id: 1,
                         title: "PiterJS #21",
                         startDate: getDateFromString(stringDate: "2018-01-18 19:00:00"),
                         endDate: getDateFromString(stringDate: "2018-01-18 22:00:00"),
@@ -46,7 +53,7 @@ class EventsDataServiceMockImpl: IEventsDataService {
                         similarEventsCount: 0,
                         source: EventSource(id: 1, name: "Timepad"),
                         tags: [Tag(id: 1, name: "JavaScript")]),
-            createEvent(id: 2,
+                createEvent(id: 2,
                         title: "PiterCSS #25",
                         startDate: getDateFromString(stringDate: "2018-03-31 19:00:00"),
                         endDate: getDateFromString(stringDate: "2018-03-31 22:00:00"),
@@ -54,7 +61,7 @@ class EventsDataServiceMockImpl: IEventsDataService {
                         similarEventsCount: 1,
                         source: EventSource(id: 2, name: "Meetup.com"),
                         tags: [Tag(id: 1, name: "JavaScript"), Tag(id: 2, name: "Frontend")]),
-            createEvent(id: 3,
+                createEvent(id: 3,
                         title: "DartUp",
                         startDate: getDateFromString(stringDate: "2018-05-06 19:00:00"),
                         endDate: getDateFromString(stringDate: "2018-05-06 22:00:00"),
@@ -62,7 +69,7 @@ class EventsDataServiceMockImpl: IEventsDataService {
                         similarEventsCount: 2,
                         source: EventSource(id: 3, name: "Meetabit"),
                         tags: [Tag(id: 1, name: "JavaScript")]),
-            createEvent(id: 4,
+                createEvent(id: 4,
                         title: "EmberJS",
                         startDate: getDateFromString(stringDate: "2018-09-09 19:00:00"),
                         endDate: getDateFromString(stringDate: "2018-09-09 22:00:00"),
@@ -70,18 +77,13 @@ class EventsDataServiceMockImpl: IEventsDataService {
                         similarEventsCount: 0,
                         source: EventSource(id: 1, name: "Timepad"),
                         tags: [Tag(id: 1, name: "JavaScript")]),
-            createEvent(id: 5,
+                createEvent(id: 5,
                         title: "Yandex Frontend Meetup for Middle developers and higher",
                         startDate: getDateFromString(stringDate: "2018-12-23 19:00:00"),
                         endDate: getDateFromString(stringDate: "2018-12-24 22:00:00"),
                         image: UIImage(named: "yandex")!,
                         similarEventsCount: 1,
                         source: EventSource(id: 1, name: "Яндекс События"),
-                        tags: [Tag(id: 1, name: "JavaScript"), Tag(id: 2, name: "Frontend")])
-        ]
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            completion(events)
-        }
+                        tags: [Tag(id: 1, name: "JavaScript"), Tag(id: 2, name: "Frontend")])]
     }
 }

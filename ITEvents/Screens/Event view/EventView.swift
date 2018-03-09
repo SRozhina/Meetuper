@@ -7,15 +7,24 @@ class EventView: UIStackView {
 
     class func initiateAndSetup(with event: Event,
                                 using dateFormatterService: IDateFormatterService? = nil,
-                                sourceOpenAction: ((URL) -> Void)? = nil) -> EventView {
+                                sourceOpenAction: ((URL) -> Void)? = nil, isSimilar: Bool = false) -> EventView {
         let eventView: EventView = SharedUtils.createView(nibName: "EventView")
-        eventView.setup(with: event, using: dateFormatterService, and: sourceOpenAction)
+        eventView.setup(with: event, using: dateFormatterService, and: sourceOpenAction, isSimilar: isSimilar)
         return eventView
     }
     
-    private func setup(with event: Event, using dateFormatterService: IDateFormatterService?, and sourceOpenAction: ((URL) -> Void)?) {
+    private func setup(with event: Event,
+                       using dateFormatterService: IDateFormatterService?,
+                       and sourceOpenAction: ((URL) -> Void)?,
+                       isSimilar: Bool) {
         self.event = event
         self.sourceOpenAction = sourceOpenAction
+        
+        if isSimilar {
+            let sourceLabel = EventView.createSourceLabel(text: event.source!.name)
+            addArrangedSubview(sourceLabel)
+        }
+        
         let dateInterval = DateInterval(start: event.startDate, end: event.endDate)
         let eventInfo = EventInfoView.initiateAndSetup(with: event.image,
                                                        title: event.title,
@@ -45,11 +54,6 @@ class EventView: UIStackView {
         if let action = sourceOpenAction, let url = event.url {
             action(url)
         }
-    }
-    
-    func createSourceLabel() {
-        let sourceLabel = EventView.createSourceLabel(text: event.source!.name)
-        insertArrangedSubview(sourceLabel, at: 0)
     }
     
     private class func createSourceLabel(text: String) -> UILabel {
