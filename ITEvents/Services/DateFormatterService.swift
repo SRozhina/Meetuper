@@ -22,16 +22,22 @@ class DateFormatterService: IDateFormatterService {
     func getFormattedDateStringFrom(dateInterval: DateInterval, short: Bool) -> String {
         let sameDay = hasSameDay(dateInterval: dateInterval)
         let separator = sameDay ? "-" : " - "
-        var currentFormatter: DateFormatter
-        if short {
-            currentFormatter = shortDateFormatter
-        } else {
-            currentFormatter = longDateFormatter
-        }
-        let beginDate = currentFormatter.string(from: dateInterval.start)
-        let formatter = sameDay ? timeDateFormatter : currentFormatter
-        let endDate = formatter.string(from: dateInterval.end)
+        
+        let beginDateFormatter = getBeginDateFormatter(short: short)
+        let endDateFormatter = getEndDateFormatter(sameDay: sameDay, beginDateFormatter: beginDateFormatter)
+        
+        let beginDate = beginDateFormatter.string(from: dateInterval.start)
+        let endDate = endDateFormatter.string(from: dateInterval.end)
+        
         return "\(beginDate)\(separator)\(endDate)"
+    }
+    
+    private func getBeginDateFormatter(short: Bool) -> DateFormatter {
+        return short ? shortDateFormatter : longDateFormatter
+    }
+    
+    private func getEndDateFormatter(sameDay: Bool, beginDateFormatter: DateFormatter) -> DateFormatter {
+        return sameDay ? timeDateFormatter : beginDateFormatter
     }
     
     private func hasSameDay(dateInterval: DateInterval) -> Bool {

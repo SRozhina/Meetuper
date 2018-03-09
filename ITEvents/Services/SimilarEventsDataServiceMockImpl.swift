@@ -19,8 +19,7 @@ class SimilarEventsDataServiceMockImpl: ISimilarEventsDataService {
                              tags: [Tag]) -> Event {
         return Event(id: id,
                      title: title,
-                     startDate: startDate,
-                     endDate: endDate,
+                     dateInterval: DateInterval(start: startDate, end: endDate),
                      address: "Большой Сампсониевский проспект 28 к2 литД",
                      city: "Санкт-Петербург",
                      country: "Россия",
@@ -38,22 +37,20 @@ class SimilarEventsDataServiceMockImpl: ISimilarEventsDataService {
     
     func fetchSimilarEvents(for eventId: Int, then completion: @escaping ([Event]) -> Void) {
         let eventDictionary: [Int: [Event]] = [
-            2: [createEvent(id: 2,
+            2: [
+                createEvent(id: 2,
                             title: "PiterCSS #25",
                             startDate: getDateFromString(stringDate: "2018-03-31 19:00:00"),
                             endDate: getDateFromString(stringDate: "2018-03-31 22:00:00"),
                             image: UIImage(named: "pitercss")!,
                             similarEventsCount: 1,
                             source: EventSource(id: 2, name: "Meetup.com"),
-                            tags: [Tag(id: 1, name: "JavaScript"), Tag(id: 2, name: "Frontend")])],
-            3: [createEvent(id: 3,
-                            title: "DartUp",
-                            startDate: getDateFromString(stringDate: "2018-05-06 19:00:00"),
-                            endDate: getDateFromString(stringDate: "2018-05-06 22:00:00"),
-                            image: UIImage(named: "wrike")!,
-                            similarEventsCount: 2,
-                            source: EventSource(id: 3, name: "Meetabit"),
-                            tags: [Tag(id: 1, name: "JavaScript")]),
+                            tags: [
+                                Tag(id: 1, name: "JavaScript"),
+                                Tag(id: 2, name: "Frontend")
+                            ])
+            ],
+            3: [
                 createEvent(id: 3,
                             title: "DartUp",
                             startDate: getDateFromString(stringDate: "2018-05-06 19:00:00"),
@@ -61,16 +58,33 @@ class SimilarEventsDataServiceMockImpl: ISimilarEventsDataService {
                             image: UIImage(named: "wrike")!,
                             similarEventsCount: 2,
                             source: EventSource(id: 3, name: "Meetabit"),
-                            tags: [Tag(id: 1, name: "JavaScript")])],
-            5: [createEvent(id: 5,
+                            tags: [Tag(id: 1, name: "JavaScript")]
+                ),
+                createEvent(id: 3,
+                            title: "DartUp",
+                            startDate: getDateFromString(stringDate: "2018-05-06 19:00:00"),
+                            endDate: getDateFromString(stringDate: "2018-05-06 22:00:00"),
+                            image: UIImage(named: "wrike")!,
+                            similarEventsCount: 2,
+                            source: EventSource(id: 3, name: "Meetabit"),
+                            tags: [Tag(id: 1, name: "JavaScript")]
+                )
+            ],
+            5: [
+                createEvent(id: 5,
                             title: "Yandex Frontend Meetup for Middle developers and higher",
                             startDate: getDateFromString(stringDate: "2018-12-23 19:00:00"),
                             endDate: getDateFromString(stringDate: "2018-12-24 22:00:00"),
                             image: UIImage(named: "yandex")!,
                             similarEventsCount: 1,
                             source: EventSource(id: 1, name: "Яндекс События"),
-                            tags: [Tag(id: 1, name: "JavaScript"), Tag(id: 2, name: "Frontend")])]
+                            tags: [
+                                Tag(id: 1, name: "JavaScript"),
+                                Tag(id: 2, name: "Frontend")
+                            ]
+                )
             ]
+        ]
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             if let events = eventDictionary[eventId] {

@@ -5,22 +5,18 @@ class EventInfoView: UIView {
     @IBOutlet private weak var imageView: RoundedImageView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var dateLabel: UILabel!
-    private var dateFormatterService: IDateFormatterService?
     
     class func initiateAndSetup(with image: UIImage,
                                 title: String,
-                                dateInterval: DateInterval,
-                                short: Bool,
-                                using dateFormatterService: IDateFormatterService?) -> EventInfoView {
+                                date: String) -> EventInfoView {
         let eventInfoView: EventInfoView = SharedUtils.createPanelView(nibName: "EventInfoView")
-        eventInfoView.dateFormatterService = dateFormatterService
-        eventInfoView.setup(with: image, title: title, dateInterval: dateInterval, short: short)
+        eventInfoView.setup(with: image, title: title, date: date)
         return eventInfoView
     }
     
-    private func setup(with image: UIImage, title: String, dateInterval: DateInterval, short: Bool) {
+    private func setup(with image: UIImage, title: String, date: String) {
         imageView.image = image
         titleLabel.text = title
-        dateLabel.text = dateFormatterService?.getFormattedDateStringFrom(dateInterval: dateInterval, short: short) ?? ""
+        dateLabel.text = date
     }
 }

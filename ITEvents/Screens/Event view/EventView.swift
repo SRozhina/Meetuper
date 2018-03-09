@@ -6,15 +6,16 @@ class EventView: UIStackView {
     private var event: Event!
 
     class func initiateAndSetup(with event: Event,
-                                using dateFormatterService: IDateFormatterService? = nil,
-                                sourceOpenAction: ((URL) -> Void)? = nil, isSimilar: Bool = false) -> EventView {
+                                using dateFormatterService: IDateFormatterService,
+                                sourceOpenAction: ((URL) -> Void)? = nil,
+                                isSimilar: Bool = false) -> EventView {
         let eventView: EventView = SharedUtils.createView(nibName: "EventView")
         eventView.setup(with: event, using: dateFormatterService, and: sourceOpenAction, isSimilar: isSimilar)
         return eventView
     }
     
     private func setup(with event: Event,
-                       using dateFormatterService: IDateFormatterService?,
+                       using dateFormatterService: IDateFormatterService,
                        and sourceOpenAction: ((URL) -> Void)?,
                        isSimilar: Bool) {
         self.event = event
@@ -25,12 +26,10 @@ class EventView: UIStackView {
             addArrangedSubview(sourceLabel)
         }
         
-        let dateInterval = DateInterval(start: event.startDate, end: event.endDate)
+        let date = dateFormatterService.getFormattedDateStringFrom(dateInterval: event.dateInterval, short: false)
         let eventInfo = EventInfoView.initiateAndSetup(with: event.image,
                                                        title: event.title,
-                                                       dateInterval: dateInterval,
-                                                       short: false,
-                                                       using: dateFormatterService)
+                                                       date: date)
         addArrangedSubview(eventInfo)
         
         let eventPlace = EventPlaceView.initiateAndSetup(with: event.city,

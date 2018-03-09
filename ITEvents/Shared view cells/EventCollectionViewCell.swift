@@ -18,7 +18,7 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
     @IBOutlet private var titleListTrailingConstraint: NSLayoutConstraint!
     @IBOutlet private var dateListTrailingConstraint: NSLayoutConstraint!
     
-    private let dateFormatterService: IDateFormatterService = DateFormatterService()
+    private var dateFormatterService: IDateFormatterService!
     
     private let titleFontSize: CGFloat = 20
     private let dateFontSize: CGFloat = 14
@@ -142,10 +142,10 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         dateListLabel.isHidden = !value
     }
     
-    func setupCellWith(_ event: Event) {
+    func setup(with event: Event, using dateFormatterService: IDateFormatterService) {
+        self.dateFormatterService = dateFormatterService
         setTitle(event.title)
-        let dateInterval = DateInterval(start: event.startDate, end: event.endDate)
-        setDate(for: dateInterval)
+        setDate(for: event.dateInterval)
         setImage(event.image)
     }
     
