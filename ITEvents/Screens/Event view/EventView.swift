@@ -26,7 +26,7 @@ class EventView: UIStackView {
             addArrangedSubview(sourceLabel)
         }
         
-        let date = dateFormatterService.getFormattedDateStringFrom(dateInterval: event.dateInterval, short: false)
+        let date = dateFormatterService.formatDate(for: event.dateInterval, shortVersion: false)
         let eventInfo = EventInfoView.initiateAndSetup(with: event.image,
                                                        title: event.title,
                                                        date: date)

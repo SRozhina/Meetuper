@@ -19,11 +19,11 @@ class DateFormatterService: IDateFormatterService {
         return formatter
     }()
     
-    func getFormattedDateStringFrom(dateInterval: DateInterval, short: Bool) -> String {
+    func formatDate(for dateInterval: DateInterval, shortVersion: Bool) -> String {
         let sameDay = hasSameDay(dateInterval: dateInterval)
         let separator = sameDay ? "-" : " - "
         
-        let beginDateFormatter = getBeginDateFormatter(short: short)
+        let beginDateFormatter = getBeginDateFormatter(short: shortVersion)
         let endDateFormatter = getEndDateFormatter(sameDay: sameDay, beginDateFormatter: beginDateFormatter)
         
         let beginDate = beginDateFormatter.string(from: dateInterval.start)

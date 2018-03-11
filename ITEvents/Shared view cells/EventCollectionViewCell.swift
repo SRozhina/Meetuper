@@ -155,8 +155,8 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
     }
     
     private func setDate(for dateInterval: DateInterval) {
-        dateListLabel.text = dateFormatterService.getFormattedDateStringFrom(dateInterval: dateInterval, short: false)
-        dateGridLabel.text = dateFormatterService.getFormattedDateStringFrom(dateInterval: dateInterval, short: true)
+        dateListLabel.text = dateFormatterService.formatDate(for: dateInterval, shortVersion: false)
+        dateGridLabel.text = dateFormatterService.formatDate(for: dateInterval, shortVersion: true)
     }
     
     private func setImage(_ image: UIImage) {
