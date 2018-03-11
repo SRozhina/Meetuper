@@ -3,10 +3,11 @@ import DisplaySwitcher
 
 class FavoritesViewController: UIViewController {
     var eventDataService: IEventsDataService!
+    var dateFormatterService: IDateFormatterService!
     private var events = [Event]()
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var rotationButton: SwitchLayoutButton!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var rotationButton: SwitchLayoutButton!
     
     private var animationDuration: TimeInterval!
     private var listLayout: DisplaySwitchLayout!
@@ -101,7 +102,7 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
         case .grid:
             cell.setupGridLayout()
         }
-        cell.setupCellWith(event)
+        cell.setup(with: event, using: dateFormatterService)
         
         return cell
     }

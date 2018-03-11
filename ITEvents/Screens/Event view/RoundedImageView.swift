@@ -2,11 +2,6 @@ import Foundation
 import UIKit
 
 class RoundedImageView: UIImageView {
-    init() {
-        super.init(frame: CGRect.zero)
-        setup()
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()

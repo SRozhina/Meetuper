@@ -21,6 +21,7 @@ extension SwinjectStoryboard {
 
         defaultContainer.storyboardInitCompleted(FavoritesViewController.self) { r, c in
             c.eventDataService = r.resolve(IEventsDataService.self)!
+            c.dateFormatterService = r.resolve(IDateFormatterService.self)!
         }
         
         defaultContainer.storyboardInitCompleted(FullEventViewController.self) { r, c in

@@ -2,23 +2,65 @@ import Foundation
 import UIKit
 
 class EventView: UIStackView {
-    
-    class func initiateAndSetup(with event: Event, using dateFormatterService: IDateFormatterService) -> EventView {
-        let eventView = UINib(nibName: "EventView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! EventView
-        
-        let date = dateFormatterService.getFormattedDateStringFrom(start: event.startDate, end: event.endDate, short: false)
-        let eventInfo = EventInfo.initiateAndSetup(withImage: event.image, title: event.title, date: date)
-        eventView.addArrangedSubview(eventInfo)
-        
-        let eventPlace = EventPlace.initiateAndSetup(withCity: event.city, country: event.country, address: event.address)
-        eventView.addArrangedSubview(eventPlace)
-        
-        let eventDescription = EventDescription.initiateAndSetup(with: event.description)
-        eventView.addArrangedSubview(eventDescription)
-        
-        let eventTags = EventTags.initiateAndSetup(with: event.tags)
-        eventView.addArrangedSubview(eventTags)
-        
+    private var sourceOpenAction: ((URL) -> Void)?
+    private var event: Event!
+
+    class func initiateAndSetup(with event: Event,
+                                using dateFormatterService: IDateFormatterService,
+                                sourceOpenAction: ((URL) -> Void)? = nil,
+                                isSimilar: Bool = false) -> EventView {
+        let eventView: EventView = SharedUtils.createView(nibName: "EventView")
+        eventView.setup(with: event, using: dateFormatterService, and: sourceOpenAction, isSimilar: isSimilar)
         return eventView
+    }
+    
+    private func setup(with event: Event,
+                       using dateFormatterService: IDateFormatterService,
+                       and sourceOpenAction: ((URL) -> Void)?,
+                       isSimilar: Bool) {
+        self.event = event
+        self.sourceOpenAction = sourceOpenAction
+        
+        if isSimilar {
+            let sourceLabel = EventView.createSourceLabel(text: event.source!.name)
+            addArrangedSubview(sourceLabel)
+        }
+        
+        let date = dateFormatterService.formatDate(for: event.dateInterval, shortVersion: false)
+        let eventInfo = EventInfoView.initiateAndSetup(with: event.image,
+                                                       title: event.title,
+                                                       date: date)
+        addArrangedSubview(eventInfo)
+        
+        let eventPlace = EventPlaceView.initiateAndSetup(with: event.city,
+                                                         country: event.country,
+                                                         address: event.address)
+        addArrangedSubview(eventPlace)
+        
+        let eventDescription = EventDescriptionView.initiateAndSetup(with: event.description)
+        addArrangedSubview(eventDescription)
+        
+        let eventTags = EventTagsView.initiateAndSetup(with: event.tags)
+        addArrangedSubview(eventTags)
+        
+        if let source = event.source {
+            let showEventSource = ShowEventSourceView.initiateAndSetup(with: source.name, sourceOpenAction: openAction)
+            addArrangedSubview(showEventSource)
+        }
+    }
+    
+    private func openAction() {
+        if let action = sourceOpenAction, let url = event.url {
+            action(url)
+        }
+    }
+    
+    private class func createSourceLabel(text: String) -> UILabel {
+        let sourceLabel = UILabel()
+        sourceLabel.text = "Event from \(text)"
+        sourceLabel.font = UIFont.systemFont(ofSize: 12)
+        sourceLabel.textAlignment = .center
+        sourceLabel.textColor = UIColor(red: 0.63, green: 0.63, blue: 0.63, alpha: 1)
+        return sourceLabel
     }
 }

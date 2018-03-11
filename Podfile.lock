@@ -15,7 +15,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   DisplaySwitcher:
-    :commit: 7085cfde50e162ad47b39aea18b845209ce2308f
+    :commit: 0fa58ccca5157d6a95f1440a334b9a8fc5f04c86
     :git: https://github.com/SRozhina/DisplaySwitcher.git
 
 SPEC CHECKSUMS:

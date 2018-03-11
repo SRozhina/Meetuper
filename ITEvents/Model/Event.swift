@@ -3,8 +3,7 @@ import UIKit
 struct Event {
     let id: Int
     let title: String
-    let startDate: Date
-    let endDate: Date
+    let dateInterval: DateInterval
     let address: String
     let city: String
     let country: String
