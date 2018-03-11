@@ -2,8 +2,8 @@ import UIKit
 import DisplaySwitcher
 
 class FavoritesViewController: UIViewController {
-    private let eventDataService: IEventsDataService = EventsDataServiceMockImpl()
-    private var dateFormatterService: IDateFormatterService = DateFormatterService()
+    var eventDataService: IEventsDataService!
+    var dateFormatterService: IDateFormatterService!
     private var events = [Event]()
     
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -23,7 +23,6 @@ class FavoritesViewController: UIViewController {
             self.events = fetchedEvents
             self.collectionView.reloadData()
         }
-        
         setProperties()
         registerNibs()
         setupCollectionView()
@@ -33,7 +32,8 @@ class FavoritesViewController: UIViewController {
     private func setProperties() {
         animationDuration = 0.3
         let listLayoutCellStaticHeihgt: CGFloat = 85
-        let gridLayoutCellStaticHeight: CGFloat = view.frame.width / 2
+        let gridLayoutCellStaticHeight: CGFloat = 190
+        let gridColumnCount = floor(view.frame.width / 168)
         listLayout = DisplaySwitchLayout(staticCellHeight: listLayoutCellStaticHeihgt,
                                          nextLayoutStaticCellHeight: gridLayoutCellStaticHeight,
                                          layoutState: .list,
@@ -42,8 +42,7 @@ class FavoritesViewController: UIViewController {
                                          nextLayoutStaticCellHeight: listLayoutCellStaticHeihgt,
                                          layoutState: .grid,
                                          cellPadding: CGPoint(x: 10, y: 8),
-                                         gridLayoutCountOfColumns: 2)
-        
+                                         gridLayoutCountOfColumns: Int(gridColumnCount))
     }
     
     private func setupCollectionView() {

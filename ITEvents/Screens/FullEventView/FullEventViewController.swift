@@ -14,8 +14,9 @@ class FullEventViewController: UIViewController {
         return descriptionsStackView.isHidden
     }
     
-    private let similarEventsService: ISimilarEventsDataService = SimilarEventsDataServiceMockImpl()
-    private let dateFormatterService: IDateFormatterService = DateFormatterService()
+    var similarEventsService: ISimilarEventsDataService!
+    var dateFormatterService: IDateFormatterService!
+    
     var event: Event!
     private var similarEvents: [Event]?
     
