@@ -18,7 +18,7 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
     @IBOutlet private var titleListTrailingConstraint: NSLayoutConstraint!
     @IBOutlet private var dateListTrailingConstraint: NSLayoutConstraint!
     
-    private let dateFormatterService: IDateFormatterService = DateFormatterService()
+    private var dateFormatterService: IDateFormatterService!
     
     private let titleFontSize: CGFloat = 20
     private let dateFontSize: CGFloat = 14
@@ -111,21 +111,12 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         super.willTransition(from: oldLayout, to: newLayout)
         
         guard let oldDisplaySwitchLayout = oldLayout as? DisplaySwitchLayout else { return }
-        //TODO oldDisplaySwitchLayout.layoutState ??? layoutState in class should be public
-        //maybe create shared struct with user settings and save layout there
-        let oldLatoutState = getLatoutState(oldDisplaySwitchLayout)
-        if oldLatoutState == .list {
+        if oldDisplaySwitchLayout.layoutState == .list {
             // list -> grid
         } else {
             // grid -> list
             startListLayoutTransition()
         }
-    }
-    
-    private func getLatoutState(_ layout: DisplaySwitchLayout) -> LayoutState {
-        let mirror = Mirror(reflecting: layout)
-        let layoutStatePair = mirror.children.first { $0.label == "layoutState" }!
-        return layoutStatePair.value as! LayoutState
     }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
@@ -151,9 +142,10 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         dateListLabel.isHidden = !value
     }
     
-    func setupCellWith(_ event: Event) {
+    func setup(with event: Event, using dateFormatterService: IDateFormatterService) {
+        self.dateFormatterService = dateFormatterService
         setTitle(event.title)
-        setDate(from: event.startDate, to: event.endDate)
+        setDate(for: event.dateInterval)
         setImage(event.image)
     }
     
@@ -162,9 +154,9 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         titleGridLabel.text = title
     }
     
-    private func setDate(from start: Date, to end: Date) {
-        dateListLabel.text = dateFormatterService.getFormattedDateStringFrom(start: start, end: end, short: false)
-        dateGridLabel.text = dateFormatterService.getFormattedDateStringFrom(start: start, end: end, short: true)
+    private func setDate(for dateInterval: DateInterval) {
+        dateListLabel.text = dateFormatterService.formatDate(for: dateInterval, shortVersion: false)
+        dateGridLabel.text = dateFormatterService.formatDate(for: dateInterval, shortVersion: true)
     }
     
     private func setImage(_ image: UIImage) {

@@ -19,8 +19,7 @@ class EventsDataServiceMockImpl: IEventsDataService {
                              tags: [Tag]) -> Event {
         return Event(id: id,
                      title: title,
-                     startDate: startDate,
-                     endDate: endDate,
+                     dateInterval: DateInterval(start: startDate, end: endDate),
                      address: "Большой Сампсониевский проспект 28 к2 литД",
                      city: "Санкт-Петербург",
                      country: "Россия",
@@ -37,7 +36,15 @@ class EventsDataServiceMockImpl: IEventsDataService {
     }
     
     func fetchEvents(then completion: @escaping ([Event]) -> Void) {
-        let events = [
+        let events = getEvents()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            completion(events)
+        }
+    }
+    
+    private func getEvents() -> [Event] {
+        return [
             createEvent(id: 1,
                         title: "PiterJS #21",
                         startDate: getDateFromString(stringDate: "2018-01-18 19:00:00"),
@@ -53,7 +60,10 @@ class EventsDataServiceMockImpl: IEventsDataService {
                         image: UIImage(named: "pitercss")!,
                         similarEventsCount: 1,
                         source: EventSource(id: 2, name: "Meetup.com"),
-                        tags: [Tag(id: 1, name: "JavaScript"), Tag(id: 2, name: "Frontend")]),
+                        tags: [
+                            Tag(id: 1, name: "JavaScript"),
+                            Tag(id: 2, name: "Frontend")
+                        ]),
             createEvent(id: 3,
                         title: "DartUp",
                         startDate: getDateFromString(stringDate: "2018-05-06 19:00:00"),
@@ -77,11 +87,10 @@ class EventsDataServiceMockImpl: IEventsDataService {
                         image: UIImage(named: "yandex")!,
                         similarEventsCount: 1,
                         source: EventSource(id: 1, name: "Яндекс События"),
-                        tags: [Tag(id: 1, name: "JavaScript"), Tag(id: 2, name: "Frontend")])
+                        tags: [
+                            Tag(id: 1, name: "JavaScript"),
+                            Tag(id: 2, name: "Frontend")
+                        ])
         ]
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            completion(events)
-        }
     }
 }

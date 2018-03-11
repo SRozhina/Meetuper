@@ -1,5 +1,5 @@
 import Foundation
 
 protocol IDateFormatterService {
-    func getFormattedDateStringFrom(start: Date, end: Date, short: Bool) -> String
+    func formatDate(for dateInterval: DateInterval, shortVersion: Bool) -> String
 }

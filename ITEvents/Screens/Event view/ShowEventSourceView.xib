@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="Ysc-xr-Ruu" customClass="ShowEventSource" customModule="ITEvents" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="Ysc-xr-Ruu" customClass="ShowEventSourceView" customModule="ITEvents" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -23,6 +23,9 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <state key="normal" title="Show on Timepad"/>
+                    <connections>
+                        <action selector="showEventSourceTapped:" destination="Ysc-xr-Ruu" eventType="touchUpInside" id="kX4-OJ-0ph"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
