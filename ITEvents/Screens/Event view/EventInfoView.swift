@@ -6,7 +6,9 @@ class EventInfoView: UIView {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var dateLabel: UILabel!
     
-    class func initiateAndSetup(with image: UIImage, title: String, date: String) -> EventInfoView {
+    class func initiateAndSetup(with image: UIImage,
+                                title: String,
+                                date: String) -> EventInfoView {
         let eventInfoView: EventInfoView = SharedUtils.createPanelView(nibName: "EventInfoView")
         eventInfoView.setup(with: image, title: title, date: date)
         return eventInfoView

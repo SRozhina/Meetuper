@@ -8,26 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		9901D92B4C3F91783D96F1E6 /* Pods_ITEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01648EDF16EDD9EC7EB9596E /* Pods_ITEvents.framework */; };
+		C3005611205163A300875CCD /* EventPlaceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3005605205163A100875CCD /* EventPlaceView.xib */; };
+		C3005612205163A300875CCD /* EventTagsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3005606205163A100875CCD /* EventTagsView.xib */; };
+		C3005613205163A300875CCD /* EventDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3005607205163A200875CCD /* EventDescriptionView.xib */; };
+		C3005614205163A300875CCD /* EventTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3005608205163A200875CCD /* EventTagsView.swift */; };
+		C3005615205163A300875CCD /* EventInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3005609205163A200875CCD /* EventInfoView.xib */; };
+		C3005616205163A300875CCD /* ShowEventSourceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300560A205163A200875CCD /* ShowEventSourceView.swift */; };
+		C3005617205163A300875CCD /* ShowMoreEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300560B205163A200875CCD /* ShowMoreEventsView.swift */; };
+		C3005618205163A300875CCD /* ShowEventSourceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C300560C205163A200875CCD /* ShowEventSourceView.xib */; };
+		C3005619205163A300875CCD /* EventInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300560D205163A300875CCD /* EventInfoView.swift */; };
+		C300561A205163A300875CCD /* EventDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300560E205163A300875CCD /* EventDescriptionView.swift */; };
+		C300561B205163A300875CCD /* ShowMoreEventsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C300560F205163A300875CCD /* ShowMoreEventsView.xib */; };
+		C300561C205163A300875CCD /* EventPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3005610205163A300875CCD /* EventPlaceView.swift */; };
+		C30056252051681B00875CCD /* SharedUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30056242051681B00875CCD /* SharedUtils.swift */; };
 		C317682D203ADF8500B21A6B /* EventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C317682C203ADF8500B21A6B /* EventView.xib */; };
 		C317682F203ADFB500B21A6B /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C317682E203ADFB500B21A6B /* EventView.swift */; };
 		C329BDFE201BC90F00F32829 /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329BDFD201BC90F00F32829 /* EventCollectionViewCell.swift */; };
-		C32FF678204C8E3A004592D3 /* EventPlaceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32FF66D204C8E39004592D3 /* EventPlaceView.xib */; };
-		C32FF679204C8E3A004592D3 /* EventTagsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32FF66E204C8E39004592D3 /* EventTagsView.xib */; };
-		C32FF67A204C8E3A004592D3 /* EventDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32FF66F204C8E39004592D3 /* EventDescriptionView.xib */; };
-		C32FF67B204C8E3A004592D3 /* EventTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32FF670204C8E39004592D3 /* EventTagsView.swift */; };
-		C32FF67C204C8E3A004592D3 /* EventInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32FF671204C8E39004592D3 /* EventInfoView.xib */; };
-		C32FF67D204C8E3A004592D3 /* ShowMoreEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32FF672204C8E39004592D3 /* ShowMoreEventsView.swift */; };
-		C32FF67E204C8E3A004592D3 /* ShowEventSourceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32FF673204C8E3A004592D3 /* ShowEventSourceView.xib */; };
-		C32FF67F204C8E3A004592D3 /* EventInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32FF674204C8E3A004592D3 /* EventInfoView.swift */; };
-		C32FF680204C8E3A004592D3 /* EventDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32FF675204C8E3A004592D3 /* EventDescriptionView.swift */; };
-		C32FF681204C8E3A004592D3 /* ShowMoreEventsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32FF676204C8E3A004592D3 /* ShowMoreEventsView.xib */; };
-		C32FF682204C8E3A004592D3 /* EventPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32FF677204C8E3A004592D3 /* EventPlaceView.swift */; };
-		C32FF684204C8EA9004592D3 /* SharedUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32FF683204C8EA9004592D3 /* SharedUtils.swift */; };
-		C362DD8520459FBB00D301A6 /* ShowEventSourceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C362DD8420459FBB00D301A6 /* ShowEventSourceView.swift */; };
 		C362DD8B2046017400D301A6 /* IEventTagsDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C362DD8A2046017400D301A6 /* IEventTagsDataService.swift */; };
 		C362DD8D2046022700D301A6 /* EventTagsDataServiceMockImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C362DD8C2046022700D301A6 /* EventTagsDataServiceMockImpl.swift */; };
 		C362DD8F2046E4F600D301A6 /* ISimilarEventsDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C362DD8E2046E4F600D301A6 /* ISimilarEventsDataService.swift */; };
 		C362DD952046FF4A00D301A6 /* SimilarEventsDataServiceMockImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C362DD942046FF4A00D301A6 /* SimilarEventsDataServiceMockImpl.swift */; };
+		C362DD9920472D7B00D301A6 /* IDateFormatterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C362DD9820472D7B00D301A6 /* IDateFormatterService.swift */; };
+		C362DD9B20472D9A00D301A6 /* DateFormatterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C362DD9A20472D9A00D301A6 /* DateFormatterService.swift */; };
+		C362DD9D204733BB00D301A6 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = C362DD9C204733BB00D301A6 /* Podfile */; };
 		C3764B73202100AA0024CFA7 /* UIGradientImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3764B72202100AA0024CFA7 /* UIGradientImageView.swift */; };
 		C391908C201E59D100CD7151 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391908B201E59D100CD7151 /* Event.swift */; };
 		C3919090201E604600CD7151 /* FavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391908F201E604600CD7151 /* FavoritePresenter.swift */; };
@@ -81,26 +84,29 @@
 		01648EDF16EDD9EC7EB9596E /* Pods_ITEvents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ITEvents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		09058408E21C7D56F3F1A534 /* Pods-ITEvents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ITEvents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ITEvents/Pods-ITEvents.debug.xcconfig"; sourceTree = "<group>"; };
 		0CBFD89C81FCC879B485DC5E /* Pods-ITEvents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ITEvents.release.xcconfig"; path = "Pods/Target Support Files/Pods-ITEvents/Pods-ITEvents.release.xcconfig"; sourceTree = "<group>"; };
+		C3005605205163A100875CCD /* EventPlaceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventPlaceView.xib; sourceTree = "<group>"; };
+		C3005606205163A100875CCD /* EventTagsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventTagsView.xib; sourceTree = "<group>"; };
+		C3005607205163A200875CCD /* EventDescriptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventDescriptionView.xib; sourceTree = "<group>"; };
+		C3005608205163A200875CCD /* EventTagsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTagsView.swift; sourceTree = "<group>"; };
+		C3005609205163A200875CCD /* EventInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventInfoView.xib; sourceTree = "<group>"; };
+		C300560A205163A200875CCD /* ShowEventSourceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowEventSourceView.swift; sourceTree = "<group>"; };
+		C300560B205163A200875CCD /* ShowMoreEventsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMoreEventsView.swift; sourceTree = "<group>"; };
+		C300560C205163A200875CCD /* ShowEventSourceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowEventSourceView.xib; sourceTree = "<group>"; };
+		C300560D205163A300875CCD /* EventInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfoView.swift; sourceTree = "<group>"; };
+		C300560E205163A300875CCD /* EventDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDescriptionView.swift; sourceTree = "<group>"; };
+		C300560F205163A300875CCD /* ShowMoreEventsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowMoreEventsView.xib; sourceTree = "<group>"; };
+		C3005610205163A300875CCD /* EventPlaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPlaceView.swift; sourceTree = "<group>"; };
+		C30056242051681B00875CCD /* SharedUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SharedUtils.swift; path = ITEvents/Utilities/SharedUtils.swift; sourceTree = SOURCE_ROOT; };
 		C317682C203ADF8500B21A6B /* EventView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventView.xib; sourceTree = "<group>"; };
 		C317682E203ADFB500B21A6B /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		C329BDFD201BC90F00F32829 /* EventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionViewCell.swift; sourceTree = "<group>"; };
-		C32FF66D204C8E39004592D3 /* EventPlaceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventPlaceView.xib; sourceTree = "<group>"; };
-		C32FF66E204C8E39004592D3 /* EventTagsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventTagsView.xib; sourceTree = "<group>"; };
-		C32FF66F204C8E39004592D3 /* EventDescriptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventDescriptionView.xib; sourceTree = "<group>"; };
-		C32FF670204C8E39004592D3 /* EventTagsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTagsView.swift; sourceTree = "<group>"; };
-		C32FF671204C8E39004592D3 /* EventInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventInfoView.xib; sourceTree = "<group>"; };
-		C32FF672204C8E39004592D3 /* ShowMoreEventsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMoreEventsView.swift; sourceTree = "<group>"; };
-		C32FF673204C8E3A004592D3 /* ShowEventSourceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowEventSourceView.xib; sourceTree = "<group>"; };
-		C32FF674204C8E3A004592D3 /* EventInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfoView.swift; sourceTree = "<group>"; };
-		C32FF675204C8E3A004592D3 /* EventDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDescriptionView.swift; sourceTree = "<group>"; };
-		C32FF676204C8E3A004592D3 /* ShowMoreEventsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowMoreEventsView.xib; sourceTree = "<group>"; };
-		C32FF677204C8E3A004592D3 /* EventPlaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPlaceView.swift; sourceTree = "<group>"; };
-		C32FF683204C8EA9004592D3 /* SharedUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SharedUtils.swift; path = "ITEvents/New Group/SharedUtils.swift"; sourceTree = SOURCE_ROOT; };
-		C362DD8420459FBB00D301A6 /* ShowEventSourceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowEventSourceView.swift; sourceTree = "<group>"; };
 		C362DD8A2046017400D301A6 /* IEventTagsDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IEventTagsDataService.swift; sourceTree = "<group>"; };
 		C362DD8C2046022700D301A6 /* EventTagsDataServiceMockImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTagsDataServiceMockImpl.swift; sourceTree = "<group>"; };
 		C362DD8E2046E4F600D301A6 /* ISimilarEventsDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISimilarEventsDataService.swift; sourceTree = "<group>"; };
 		C362DD942046FF4A00D301A6 /* SimilarEventsDataServiceMockImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarEventsDataServiceMockImpl.swift; sourceTree = "<group>"; };
+		C362DD9820472D7B00D301A6 /* IDateFormatterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDateFormatterService.swift; sourceTree = "<group>"; };
+		C362DD9A20472D9A00D301A6 /* DateFormatterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterService.swift; sourceTree = "<group>"; };
+		C362DD9C204733BB00D301A6 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		C3764B72202100AA0024CFA7 /* UIGradientImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGradientImageView.swift; sourceTree = "<group>"; };
 		C391908B201E59D100CD7151 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		C391908F201E604600CD7151 /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePresenter.swift; sourceTree = "<group>"; };
@@ -174,10 +180,10 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		C32FF685204C8EAF004592D3 /* Utilities */ = {
+		C30056212051641300875CCD /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				C32FF683204C8EA9004592D3 /* SharedUtils.swift */,
+				C30056242051681B00875CCD /* SharedUtils.swift */,
 			);
 			name = Utilities;
 			path = "New Group";
@@ -269,20 +275,20 @@
 		C39190A9201E635500CD7151 /* Event view */ = {
 			isa = PBXGroup;
 			children = (
-				C317682C203ADF8500B21A6B /* EventView.xib */,
 				C317682E203ADFB500B21A6B /* EventView.swift */,
-				C32FF675204C8E3A004592D3 /* EventDescriptionView.swift */,
-				C32FF66F204C8E39004592D3 /* EventDescriptionView.xib */,
-				C32FF674204C8E3A004592D3 /* EventInfoView.swift */,
-				C32FF671204C8E39004592D3 /* EventInfoView.xib */,
-				C32FF677204C8E3A004592D3 /* EventPlaceView.swift */,
-				C32FF66D204C8E39004592D3 /* EventPlaceView.xib */,
-				C32FF670204C8E39004592D3 /* EventTagsView.swift */,
-				C32FF66E204C8E39004592D3 /* EventTagsView.xib */,
-				C362DD8420459FBB00D301A6 /* ShowEventSourceView.swift */,
-				C32FF673204C8E3A004592D3 /* ShowEventSourceView.xib */,
-				C32FF672204C8E39004592D3 /* ShowMoreEventsView.swift */,
-				C32FF676204C8E3A004592D3 /* ShowMoreEventsView.xib */,
+				C317682C203ADF8500B21A6B /* EventView.xib */,
+				C300560E205163A300875CCD /* EventDescriptionView.swift */,
+				C3005607205163A200875CCD /* EventDescriptionView.xib */,
+				C300560D205163A300875CCD /* EventInfoView.swift */,
+				C3005609205163A200875CCD /* EventInfoView.xib */,
+				C3005610205163A300875CCD /* EventPlaceView.swift */,
+				C3005605205163A100875CCD /* EventPlaceView.xib */,
+				C3005608205163A200875CCD /* EventTagsView.swift */,
+				C3005606205163A100875CCD /* EventTagsView.xib */,
+				C300560A205163A200875CCD /* ShowEventSourceView.swift */,
+				C300560C205163A200875CCD /* ShowEventSourceView.xib */,
+				C300560B205163A200875CCD /* ShowMoreEventsView.swift */,
+				C300560F205163A300875CCD /* ShowMoreEventsView.xib */,
 				C3FF3CFD204457AE00C65137 /* RoundedImageView.swift */,
 			);
 			path = "Event view";
@@ -292,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				C3B882C6201A5D5C0031F261 /* .swiftlint.yml */,
+				C362DD9C204733BB00D301A6 /* Podfile */,
 				C3B88296201A22520031F261 /* ITEvents */,
 				C3B882AB201A22520031F261 /* ITEventsTests */,
 				C3B882B6201A22520031F261 /* ITEventsUITests */,
@@ -306,7 +313,7 @@
 		C3B88296201A22520031F261 /* ITEvents */ = {
 			isa = PBXGroup;
 			children = (
-				C32FF685204C8EAF004592D3 /* Utilities */,
+				C30056212051641300875CCD /* Utilities */,
 				C3E792E4202E411300876D6B /* Services */,
 				C391909F201E62FD00CD7151 /* Screens */,
 				C391908A201E59BD00CD7151 /* Model */,
@@ -344,6 +351,8 @@
 				C362DD8C2046022700D301A6 /* EventTagsDataServiceMockImpl.swift */,
 				C362DD8E2046E4F600D301A6 /* ISimilarEventsDataService.swift */,
 				C362DD942046FF4A00D301A6 /* SimilarEventsDataServiceMockImpl.swift */,
+				C362DD9820472D7B00D301A6 /* IDateFormatterService.swift */,
+				C362DD9A20472D9A00D301A6 /* DateFormatterService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -481,14 +490,15 @@
 				C3CEBDBE201FADA9003CE306 /* EventCollectionViewCell.xib in Resources */,
 				C3B882C7201A5D5C0031F261 /* .swiftlint.yml in Resources */,
 				C3B882A2201A22520031F261 /* LaunchScreen.storyboard in Resources */,
+				C3005618205163A300875CCD /* ShowEventSourceView.xib in Resources */,
+				C3005612205163A300875CCD /* EventTagsView.xib in Resources */,
 				C317682D203ADF8500B21A6B /* EventView.xib in Resources */,
-				C32FF681204C8E3A004592D3 /* ShowMoreEventsView.xib in Resources */,
-				C32FF679204C8E3A004592D3 /* EventTagsView.xib in Resources */,
-				C32FF67A204C8E3A004592D3 /* EventDescriptionView.xib in Resources */,
-				C32FF67C204C8E3A004592D3 /* EventInfoView.xib in Resources */,
+				C300561B205163A300875CCD /* ShowMoreEventsView.xib in Resources */,
+				C3005613205163A300875CCD /* EventDescriptionView.xib in Resources */,
+				C362DD9D204733BB00D301A6 /* Podfile in Resources */,
 				C3B8829F201A22520031F261 /* Assets.xcassets in Resources */,
-				C32FF67E204C8E3A004592D3 /* ShowEventSourceView.xib in Resources */,
-				C32FF678204C8E3A004592D3 /* EventPlaceView.xib in Resources */,
+				C3005615205163A300875CCD /* EventInfoView.xib in Resources */,
+				C3005611205163A300875CCD /* EventPlaceView.xib in Resources */,
 				C3B8829D201A22520031F261 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -518,10 +528,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ITEvents/Pods-ITEvents-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/DisplaySwitcher/DisplaySwitcher.framework",
+				"${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework",
+				"${BUILT_PRODUCTS_DIR}/SwinjectStoryboard/SwinjectStoryboard.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DisplaySwitcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Swinject.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwinjectStoryboard.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -582,40 +596,42 @@
 			buildActionMask = 2147483647;
 			files = (
 				C391909B201E62D600CD7151 /* ISearchViewController.swift in Sources */,
+				C3005614205163A300875CCD /* EventTagsView.swift in Sources */,
 				C3919093201E608A00CD7151 /* SearchViewController.swift in Sources */,
 				C391908C201E59D100CD7151 /* Event.swift in Sources */,
 				C39190B5201E6B2C00CD7151 /* IEventCollectionViewCell.swift in Sources */,
+				C300561C205163A300875CCD /* EventPlaceView.swift in Sources */,
 				C39190AD201E638700CD7151 /* FullEventPresenter.swift in Sources */,
 				C3919099201E62C800CD7151 /* SearchPresenter.swift in Sources */,
 				C3919095201E62A800CD7151 /* IFavoriteViewController.swift in Sources */,
-				C362DD8520459FBB00D301A6 /* ShowEventSourceView.swift in Sources */,
 				C3B8829A201A22520031F261 /* FavoritesViewController.swift in Sources */,
 				C3E792E6202E413800876D6B /* IEventsDataService.swift in Sources */,
 				C362DD8B2046017400D301A6 /* IEventTagsDataService.swift in Sources */,
+				C30056252051681B00875CCD /* SharedUtils.swift in Sources */,
 				C39190A2201E632700CD7151 /* ProfileViewController.swift in Sources */,
 				C362DD8D2046022700D301A6 /* EventTagsDataServiceMockImpl.swift in Sources */,
 				C3919097201E62B900CD7151 /* IFavoritePresenter.swift in Sources */,
 				C362DD8F2046E4F600D301A6 /* ISimilarEventsDataService.swift in Sources */,
-				C32FF682204C8E3A004592D3 /* EventPlaceView.swift in Sources */,
+				C362DD9920472D7B00D301A6 /* IDateFormatterService.swift in Sources */,
 				C3919090201E604600CD7151 /* FavoritePresenter.swift in Sources */,
 				C39190A8201E634F00CD7151 /* IProfilePresenter.swift in Sources */,
 				C39190B1201E63C500CD7151 /* IFullEventPresenter.swift in Sources */,
 				C329BDFE201BC90F00F32829 /* EventCollectionViewCell.swift in Sources */,
+				C3005619205163A300875CCD /* EventInfoView.swift in Sources */,
 				C317682F203ADFB500B21A6B /* EventView.swift in Sources */,
-				C32FF67D204C8E3A004592D3 /* ShowMoreEventsView.swift in Sources */,
 				C3E792E8202E416700876D6B /* EventsDataServiceMockImpl.swift in Sources */,
-				C32FF67B204C8E3A004592D3 /* EventTagsView.swift in Sources */,
-				C32FF67F204C8E3A004592D3 /* EventInfoView.swift in Sources */,
+				C300561A205163A300875CCD /* EventDescriptionView.swift in Sources */,
+				C362DD9B20472D9A00D301A6 /* DateFormatterService.swift in Sources */,
 				C39190AF201E639500CD7151 /* IFullEventViewController.swift in Sources */,
 				C362DD952046FF4A00D301A6 /* SimilarEventsDataServiceMockImpl.swift in Sources */,
+				C3005616205163A300875CCD /* ShowEventSourceView.swift in Sources */,
 				C3764B73202100AA0024CFA7 /* UIGradientImageView.swift in Sources */,
-				C32FF684204C8EA9004592D3 /* SharedUtils.swift in Sources */,
 				C391909D201E62E300CD7151 /* ISearchPresenter.swift in Sources */,
 				C39190AB201E637600CD7151 /* FullEventViewController.swift in Sources */,
+				C3005617205163A300875CCD /* ShowMoreEventsView.swift in Sources */,
 				C3B88298201A22520031F261 /* AppDelegate.swift in Sources */,
 				C39190A6201E634200CD7151 /* IProfileViewController.swift in Sources */,
 				C39190A4201E633500CD7151 /* ProfilePresenter.swift in Sources */,
-				C32FF680204C8E3A004592D3 /* EventDescriptionView.swift in Sources */,
 				C3FF3CFE204457AE00C65137 /* RoundedImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

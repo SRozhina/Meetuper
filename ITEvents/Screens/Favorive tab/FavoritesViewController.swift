@@ -3,6 +3,7 @@ import DisplaySwitcher
 
 class FavoritesViewController: UIViewController {
     private let eventDataService: IEventsDataService = EventsDataServiceMockImpl()
+    private var dateFormatterService: IDateFormatterService = DateFormatterService()
     private var events = [Event]()
     
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -102,7 +103,7 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
         case .grid:
             cell.setupGridLayout()
         }
-        cell.setupCellWith(event)
+        cell.setup(with: event, using: dateFormatterService)
         
         return cell
     }

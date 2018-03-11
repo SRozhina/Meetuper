@@ -3,7 +3,7 @@ import UIKit
 
 class ShowEventSourceView: UIView {
     @IBOutlet private var showSourceButton: UIButton!
-    var sourceOpenAction: (() -> Void)?
+    private var sourceOpenAction: (() -> Void)?
     
     class func initiateAndSetup(with text: String, sourceOpenAction: (() -> Void)? = nil) -> ShowEventSourceView {
         let showEventSourceView: ShowEventSourceView = SharedUtils.createPanelView(nibName: "ShowEventSourceView")

@@ -3,7 +3,7 @@ import UIKit
 
 class ShowMoreEventsView: UIView {
     @IBOutlet private weak var showMoreEventsButton: UIButton!
-    var showOrHideEventsAction: ((@escaping () -> Void) -> Void)?
+    private var showOrHideEventsAction: ((@escaping () -> Void) -> Void)?
     private var descriptionsCount: Int = 0
     private var collapsed: Bool = true
     
