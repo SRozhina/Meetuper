@@ -6,9 +6,10 @@ class EventDescriptionView: UIView {
     
     class func initiateAndSetup(with description: String) -> EventDescriptionView {
         let eventDescriptionView: EventDescriptionView = SharedUtils.createPanelView(nibName: "EventDescriptionView")
-        eventDescriptionView.descriptionLabel.text = description
+
+        let font = UIFont.systemFont(ofSize: 15)
+        let formattedDescription = NSMutableAttributedString.create(html: description, with: font)
+        eventDescriptionView.descriptionLabel.attributedText = formattedDescription
         return eventDescriptionView
     }
-    
-    //TODO make text formatted from html https://stackoverflow.com/questions/37048759/swift-display-html-data-in-a-label-or-textview
 }
