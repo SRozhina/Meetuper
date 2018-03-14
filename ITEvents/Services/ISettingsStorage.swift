@@ -1,4 +1,4 @@
 protocol ISettingsStorage {
-    func fetchSettings() -> UserSettings
+    func fetchSettings(then completion: @escaping (UserSettings) -> Void)
     func saveSettings(settings: UserSettings) 
 }

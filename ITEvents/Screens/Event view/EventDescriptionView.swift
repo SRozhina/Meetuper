@@ -6,10 +6,10 @@ class EventDescriptionView: UIView {
     
     class func initiateAndSetup(with description: String) -> EventDescriptionView {
         let eventDescriptionView: EventDescriptionView = SharedUtils.createPanelView(nibName: "EventDescriptionView")
-        let attributedString = try? NSAttributedString(htmlString: description,
-                                                       font: UIFont.systemFont(ofSize: 15),
-                                                       useDocumentFontSize: false)
-        eventDescriptionView.descriptionLabel.attributedText = attributedString ?? NSAttributedString(string: description)
+
+        let font = UIFont.systemFont(ofSize: 15)
+        let formattedDescription = NSMutableAttributedString.create(html: description, with: font)
+        eventDescriptionView.descriptionLabel.attributedText = formattedDescription
         return eventDescriptionView
     }
 }
