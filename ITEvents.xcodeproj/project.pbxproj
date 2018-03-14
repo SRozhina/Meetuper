@@ -27,7 +27,6 @@
 		C30056382055AD6600875CCD /* Swinject Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30056372055AD6600875CCD /* Swinject Storyboard.swift */; };
 		C300563B2055ADEA00875CCD /* SharedUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300563A2055ADEA00875CCD /* SharedUtils.swift */; };
 		C300563F2059A7C400875CCD /* ISettingsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300563C2059A7C400875CCD /* ISettingsStorage.swift */; };
-		C30056402059A7C400875CCD /* IUserSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300563D2059A7C400875CCD /* IUserSettingsService.swift */; };
 		C317682D203ADF8500B21A6B /* EventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C317682C203ADF8500B21A6B /* EventView.xib */; };
 		C317682F203ADFB500B21A6B /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C317682E203ADFB500B21A6B /* EventView.swift */; };
 		C329BDFE201BC90F00F32829 /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329BDFD201BC90F00F32829 /* EventCollectionViewCell.swift */; };
@@ -110,7 +109,6 @@
 		C30056372055AD6600875CCD /* Swinject Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Swinject Storyboard.swift"; sourceTree = "<group>"; };
 		C300563A2055ADEA00875CCD /* SharedUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedUtils.swift; sourceTree = "<group>"; };
 		C300563C2059A7C400875CCD /* ISettingsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ISettingsStorage.swift; path = ITEvents/Services/ISettingsStorage.swift; sourceTree = SOURCE_ROOT; };
-		C300563D2059A7C400875CCD /* IUserSettingsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IUserSettingsService.swift; path = ITEvents/Services/IUserSettingsService.swift; sourceTree = SOURCE_ROOT; };
 		C317682C203ADF8500B21A6B /* EventView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventView.xib; sourceTree = "<group>"; };
 		C317682E203ADFB500B21A6B /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		C329BDFD201BC90F00F32829 /* EventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -388,7 +386,6 @@
 				C362DD9820472D7B00D301A6 /* IDateFormatterService.swift */,
 				C362DD9A20472D9A00D301A6 /* DateFormatterService.swift */,
 				C300563C2059A7C400875CCD /* ISettingsStorage.swift */,
-				C300563D2059A7C400875CCD /* IUserSettingsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -643,7 +640,6 @@
 				C3919099201E62C800CD7151 /* SearchPresenter.swift in Sources */,
 				C3919095201E62A800CD7151 /* IFavoriteViewController.swift in Sources */,
 				C3B8829A201A22520031F261 /* FavoritesViewController.swift in Sources */,
-				C30056402059A7C400875CCD /* IUserSettingsService.swift in Sources */,
 				C300562D2055AA6B00875CCD /* EventSource.swift in Sources */,
 				C3E792E6202E413800876D6B /* IEventsDataService.swift in Sources */,
 				C362DD8B2046017400D301A6 /* IEventTagsDataService.swift in Sources */,

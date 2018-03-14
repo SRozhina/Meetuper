@@ -18,7 +18,7 @@ extension NSMutableAttributedString {
     
     private func replaceFont(with font: UIFont) {
         beginEditing()
-        self.enumerateAttribute(.font, in: NSRange(location: 0, length: self.length)) { (value, range, _) in
+        enumerateAttribute(.font, in: NSRange(location: 0, length: self.length)) { (value, range, _) in
             if let currentFont = value as? UIFont {
                 let newFontDescriptor = currentFont.fontDescriptor
                     .withFamily(font.familyName)
