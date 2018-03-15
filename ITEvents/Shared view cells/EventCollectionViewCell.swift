@@ -1,8 +1,9 @@
 import UIKit
 import  Foundation
 import DisplaySwitcher
+import Reusable
 
-class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
+class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell, NibReusable {
     @IBOutlet private weak var titleListLabel: UILabel!
     @IBOutlet private weak var dateListLabel: UILabel!
     @IBOutlet private weak var titleGridLabel: UILabel!
@@ -39,6 +40,7 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell {
         layer.masksToBounds = false
         image.clipsToBounds = true
         image.layer.cornerRadius = cornerRadius
+        imageTrailingConstraint.priority = .required
     }
     
     func setupListLayout() {

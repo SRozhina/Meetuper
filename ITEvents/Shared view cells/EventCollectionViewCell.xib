@@ -12,39 +12,39 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EventCell" id="c2X-Pq-KXc" customClass="EventCollectionViewCell" customModule="ITEvents" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="372" height="105"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="c2X-Pq-KXc" customClass="EventCollectionViewCell" customModule="ITEvents" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="372" height="111"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                <rect key="frame" x="0.0" y="0.0" width="372" height="105"/>
+                <rect key="frame" x="0.0" y="0.0" width="372" height="111"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="js" translatesAutoresizingMaskIntoConstraints="NO" id="QJA-2s-7vh" customClass="UIGradientImageView" customModule="ITEvents" customModuleProvider="target">
-                        <rect key="frame" x="10" y="10" width="85" height="85"/>
+                        <rect key="frame" x="10" y="10" width="91" height="91"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="QJA-2s-7vh" secondAttribute="height" multiplier="1:1" id="XlW-RW-AAw"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="58A-Bw-L2K">
-                        <rect key="frame" x="105" y="78" width="262" height="17"/>
+                        <rect key="frame" x="111" y="84" width="256" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="ZqH-Hs-oXP">
-                        <rect key="frame" x="105" y="49" width="262" height="24"/>
+                        <rect key="frame" x="111" y="55" width="256" height="24"/>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="reZ-aN-uE3">
-                        <rect key="frame" x="10" y="46" width="357" height="24"/>
+                        <rect key="frame" x="10" y="52" width="357" height="24"/>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="sLq-o0-d1J">
-                        <rect key="frame" x="10" y="78" width="357" height="17"/>
+                        <rect key="frame" x="10" y="84" width="357" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -55,7 +55,7 @@
             <constraints>
                 <constraint firstItem="sLq-o0-d1J" firstAttribute="top" secondItem="reZ-aN-uE3" secondAttribute="bottom" constant="8" id="2eG-SH-sBU"/>
                 <constraint firstAttribute="trailing" secondItem="58A-Bw-L2K" secondAttribute="trailing" constant="5" id="4c7-BO-BTE"/>
-                <constraint firstItem="QJA-2s-7vh" firstAttribute="trailing" secondItem="c2X-Pq-KXc" secondAttribute="trailing" id="9EW-Qo-nD3"/>
+                <constraint firstItem="QJA-2s-7vh" firstAttribute="trailing" secondItem="c2X-Pq-KXc" secondAttribute="trailing" priority="750" id="9EW-Qo-nD3"/>
                 <constraint firstItem="58A-Bw-L2K" firstAttribute="top" secondItem="ZqH-Hs-oXP" secondAttribute="bottom" constant="5" id="Gsp-gJ-xZ9"/>
                 <constraint firstItem="ZqH-Hs-oXP" firstAttribute="leading" secondItem="QJA-2s-7vh" secondAttribute="trailing" constant="10" id="Kxg-d2-UJY"/>
                 <constraint firstAttribute="bottom" secondItem="58A-Bw-L2K" secondAttribute="bottom" constant="10" id="N9f-mb-FSD"/>
@@ -70,7 +70,7 @@
                 <constraint firstItem="reZ-aN-uE3" firstAttribute="leading" secondItem="c2X-Pq-KXc" secondAttribute="leading" constant="10" id="v1k-El-T0e"/>
                 <constraint firstAttribute="bottom" secondItem="sLq-o0-d1J" secondAttribute="bottom" constant="10" id="z5O-Q6-dJR"/>
             </constraints>
-            <size key="customSize" width="200" height="50"/>
+            <size key="customSize" width="200" height="56"/>
             <connections>
                 <outlet property="dateGridLabel" destination="sLq-o0-d1J" id="Fto-mK-FJu"/>
                 <outlet property="dateListLabel" destination="58A-Bw-L2K" id="GCv-2T-8it"/>
@@ -85,7 +85,7 @@
                 <outlet property="titleListLabel" destination="ZqH-Hs-oXP" id="1Oh-n3-aGR"/>
                 <outlet property="titleListTrailingConstraint" destination="pHj-3R-1K1" id="7HY-GK-UqW"/>
             </connections>
-            <point key="canvasLocation" x="-152" y="-1856.5"/>
+            <point key="canvasLocation" x="-152" y="-1853.5"/>
         </collectionViewCell>
     </objects>
     <resources>

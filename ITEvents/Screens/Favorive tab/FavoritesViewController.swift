@@ -1,5 +1,6 @@
 import UIKit
 import DisplaySwitcher
+import Reusable
 
 class FavoritesViewController: UIViewController {
     var eventDataService: IEventsDataService!
@@ -52,8 +53,7 @@ class FavoritesViewController: UIViewController {
     }
     
     private func registerNibs() {
-        let eventCellNib = UINib(nibName: "EventCollectionViewCell", bundle: nil)
-        collectionView.register(eventCellNib, forCellWithReuseIdentifier: "EventCell")
+        collectionView.register(cellType: EventCollectionViewCell.self)
     }
     
     @IBAction func changeLayout(_ sender: Any) {
@@ -94,8 +94,7 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let event = events[indexPath.row]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EventCell", for: indexPath)
-            as! IEventCollectionViewCell & UICollectionViewCell
+        let cell: EventCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         switch layoutState {
         case .list:
             cell.setupListLayout()

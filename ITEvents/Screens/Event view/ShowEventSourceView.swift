@@ -1,12 +1,13 @@
 import Foundation
 import UIKit
+import Reusable
 
-class ShowEventSourceView: UIView {
+class ShowEventSourceView: UIView, NibLoadable {
     @IBOutlet private var showSourceButton: UIButton!
     private var sourceOpenAction: (() -> Void)?
     
     class func initiateAndSetup(with text: String, sourceOpenAction: (() -> Void)? = nil) -> ShowEventSourceView {
-        let showEventSourceView: ShowEventSourceView = SharedUtils.createPanelView(nibName: "ShowEventSourceView")
+        let showEventSourceView: ShowEventSourceView = SharedUtils.createPanelView()
         showEventSourceView.setup(with: text, and: sourceOpenAction)
         return showEventSourceView
     }

@@ -1,14 +1,15 @@
 import Foundation
 import UIKit
+import Reusable
 
-class ShowMoreEventsView: UIView {
+class ShowMoreEventsView: UIView, NibLoadable {
     @IBOutlet private weak var showMoreEventsButton: UIButton!
     private var showOrHideEventsAction: ((@escaping () -> Void) -> Void)?
     private var descriptionsCount: Int = 0
     private var collapsed: Bool = true
     
     class func initiateAndSetup(with descriptionsCount: Int, showOrHideEventsAction: ((@escaping () -> Void) -> Void)? = nil) -> ShowMoreEventsView {
-        let showMoreEventsView: ShowMoreEventsView = SharedUtils.createPanelView(nibName: "ShowMoreEventsView")
+        let showMoreEventsView: ShowMoreEventsView = SharedUtils.createPanelView()
         showMoreEventsView.setup(with: descriptionsCount, action: showOrHideEventsAction)
         return showMoreEventsView
     }

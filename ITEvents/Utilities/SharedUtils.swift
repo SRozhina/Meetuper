@@ -1,13 +1,13 @@
 import UIKit
+import Reusable
 
 class SharedUtils {
-    static func createView<T: UIView>(nibName: String) -> T {
-        return UINib(nibName: nibName, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! T
+    static func createView<T: UIView & NibLoadable>() -> T {
+        return T.loadFromNib()
     }
     
-    static func createPanelView<T: UIView>(nibName: String) -> T {
-        let view = UINib(nibName: nibName, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! T
-        
+    static func createPanelView<T: UIView & NibLoadable>() -> T {
+        let view = T.loadFromNib()
         SharedUtils.decorateAsPanel(view: view)
         return view
     }
