@@ -1,7 +1,8 @@
 import Foundation
 import UIKit
+import Reusable
 
-class EventInfoView: UIView {
+class EventInfoView: UIView, NibLoadable {
     @IBOutlet private weak var imageView: RoundedImageView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var dateLabel: UILabel!
@@ -9,7 +10,7 @@ class EventInfoView: UIView {
     class func initiateAndSetup(with image: UIImage,
                                 title: String,
                                 date: String) -> EventInfoView {
-        let eventInfoView: EventInfoView = SharedUtils.createPanelView(nibName: "EventInfoView")
+        let eventInfoView: EventInfoView = SharedUtils.createPanelView()
         eventInfoView.setup(with: image, title: title, date: date)
         return eventInfoView
     }

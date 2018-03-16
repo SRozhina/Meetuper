@@ -1,7 +1,8 @@
 import Foundation
 import UIKit
+import Reusable
 
-class EventView: UIStackView {
+class EventView: UIStackView, NibLoadable {
     private var sourceOpenAction: ((URL) -> Void)?
     private var event: Event!
 
@@ -9,7 +10,7 @@ class EventView: UIStackView {
                                 using dateFormatterService: IDateFormatterService,
                                 sourceOpenAction: ((URL) -> Void)? = nil,
                                 isSimilar: Bool = false) -> EventView {
-        let eventView: EventView = SharedUtils.createView(nibName: "EventView")
+        let eventView: EventView = SharedUtils.createView()
         eventView.setup(with: event, using: dateFormatterService, and: sourceOpenAction, isSimilar: isSimilar)
         return eventView
     }
