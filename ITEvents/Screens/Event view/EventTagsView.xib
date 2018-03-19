@@ -12,27 +12,52 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="EventTagsView" customModule="ITEvents" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="138"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+        <view contentMode="scaleToFill" id="9mP-Aw-OCQ" customClass="EventTagsView" customModule="ITEvents" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tags" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GbH-8l-Pcb">
-                    <rect key="frame" x="15" y="10" width="350" height="118"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aYq-Jv-wg6" customClass="TagListView" customModule="TagListView">
+                    <rect key="frame" x="16" y="30" width="343" height="627"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="17"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="paddingY">
+                            <real key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="paddingX">
+                            <real key="value" value="12"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="marginY">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="marginX">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="enableRemoveButton" value="NO"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
+                            <color key="value" red="0.45098039220000002" green="0.78039215689999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="GbH-8l-Pcb" secondAttribute="trailing" constant="10" id="52G-zh-lk1"/>
-                <constraint firstItem="GbH-8l-Pcb" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="7x9-2s-9ov"/>
-                <constraint firstItem="GbH-8l-Pcb" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="USG-EC-DwO"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="GbH-8l-Pcb" secondAttribute="bottom" constant="10" id="bJJ-nM-6IG"/>
+                <constraint firstItem="wqF-Hs-e3o" firstAttribute="trailing" secondItem="aYq-Jv-wg6" secondAttribute="trailing" constant="16" id="D9B-ai-yzD"/>
+                <constraint firstItem="aYq-Jv-wg6" firstAttribute="top" secondItem="wqF-Hs-e3o" secondAttribute="top" constant="10" id="V74-BS-uZS"/>
+                <constraint firstItem="aYq-Jv-wg6" firstAttribute="leading" secondItem="wqF-Hs-e3o" secondAttribute="leading" constant="16" id="g0T-XM-eSV"/>
+                <constraint firstItem="wqF-Hs-e3o" firstAttribute="bottom" secondItem="aYq-Jv-wg6" secondAttribute="bottom" constant="10" id="gJX-DM-pSw"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="33.5" y="-211"/>
+            <viewLayoutGuide key="safeArea" id="wqF-Hs-e3o"/>
+            <connections>
+                <outlet property="tagListView" destination="aYq-Jv-wg6" id="gA2-Hb-7Xu"/>
+            </connections>
+            <point key="canvasLocation" x="75" y="-59"/>
         </view>
     </objects>
 </document>
