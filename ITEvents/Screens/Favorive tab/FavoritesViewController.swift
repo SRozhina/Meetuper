@@ -113,7 +113,13 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.isUserInteractionEnabled = false
         selectedEvent = events[indexPath.row]
         self.performSegue(withIdentifier: "Favorite_OpenEvent", sender: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionView.isUserInteractionEnabled = true
     }
 }
