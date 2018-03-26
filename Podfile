@@ -7,5 +7,6 @@ target 'ITEvents' do
   pod 'DisplaySwitcher', :git => 'https://github.com/Yalantis/DisplaySwitcher.git', :branch => 'master'
   pod 'SwinjectStoryboard'
   pod 'Reusable'
+  pod 'TagListView'
 
 end

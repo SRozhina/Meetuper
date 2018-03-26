@@ -61,7 +61,8 @@ class EventsDataServiceMockImpl: IEventsDataService {
                         image: UIImage(named: "js")!,
                         similarEventsCount: 0,
                         source: EventSource(id: 1, name: "Timepad"),
-                        tags: [Tag(id: 1, name: "JavaScript")]),
+                        tags: (0...10).map {Tag(id: $0, name: "JavaScript")}
+                        ),
             createEvent(id: 2,
                         title: "PiterCSS #25",
                         startDate: getDateFromString(stringDate: "2018-03-31 19:00:00"),
