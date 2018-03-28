@@ -41,7 +41,7 @@
 		C391908C201E59D100CD7151 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391908B201E59D100CD7151 /* Event.swift */; };
 		C3919090201E604600CD7151 /* FavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391908F201E604600CD7151 /* FavoritePresenter.swift */; };
 		C3919093201E608A00CD7151 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3919092201E608A00CD7151 /* SearchViewController.swift */; };
-		C3919095201E62A800CD7151 /* IFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3919094201E62A800CD7151 /* IFavoriteViewController.swift */; };
+		C3919095201E62A800CD7151 /* IFavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3919094201E62A800CD7151 /* IFavoriteView.swift */; };
 		C3919097201E62B900CD7151 /* IFavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3919096201E62B900CD7151 /* IFavoritePresenter.swift */; };
 		C3919099201E62C800CD7151 /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3919098201E62C800CD7151 /* SearchPresenter.swift */; };
 		C391909B201E62D600CD7151 /* ISearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391909A201E62D600CD7151 /* ISearchViewController.swift */; };
@@ -123,7 +123,7 @@
 		C391908B201E59D100CD7151 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		C391908F201E604600CD7151 /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePresenter.swift; sourceTree = "<group>"; };
 		C3919092201E608A00CD7151 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		C3919094201E62A800CD7151 /* IFavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IFavoriteViewController.swift; sourceTree = "<group>"; };
+		C3919094201E62A800CD7151 /* IFavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IFavoriteView.swift; sourceTree = "<group>"; };
 		C3919096201E62B900CD7151 /* IFavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IFavoritePresenter.swift; sourceTree = "<group>"; };
 		C3919098201E62C800CD7151 /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
 		C391909A201E62D600CD7151 /* ISearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISearchViewController.swift; sourceTree = "<group>"; };
@@ -262,7 +262,7 @@
 			children = (
 				C3B88299201A22520031F261 /* FavoritesViewController.swift */,
 				C391908F201E604600CD7151 /* FavoritePresenter.swift */,
-				C3919094201E62A800CD7151 /* IFavoriteViewController.swift */,
+				C3919094201E62A800CD7151 /* IFavoriteView.swift */,
 				C3919096201E62B900CD7151 /* IFavoritePresenter.swift */,
 			);
 			path = "Favorive tab";
@@ -642,7 +642,7 @@
 				C300563B2055ADEA00875CCD /* SharedUtils.swift in Sources */,
 				C39190AD201E638700CD7151 /* FullEventPresenter.swift in Sources */,
 				C3919099201E62C800CD7151 /* SearchPresenter.swift in Sources */,
-				C3919095201E62A800CD7151 /* IFavoriteViewController.swift in Sources */,
+				C3919095201E62A800CD7151 /* IFavoriteView.swift in Sources */,
 				C3B8829A201A22520031F261 /* FavoritesViewController.swift in Sources */,
 				C300562D2055AA6B00875CCD /* EventSource.swift in Sources */,
 				C3E792E6202E413800876D6B /* IEventsDataService.swift in Sources */,

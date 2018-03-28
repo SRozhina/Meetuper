@@ -3,8 +3,10 @@ import DisplaySwitcher
 import Reusable
 
 class FavoritesViewController: UIViewController {
-    var eventDataService: IEventsDataService!
-    var dateFormatterService: IDateFormatterService!
+    private let presenter: IFavoritePresenter!
+    //var eventDataService: IEventsDataService!
+    //var dateFormatterService: IDateFormatterService!
+    //var selectedEventService: ISelectedEventService!
     private var events = [Event]()
     
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -15,15 +17,11 @@ class FavoritesViewController: UIViewController {
     private var gridLayout: DisplaySwitchLayout!
     
     private var layoutState: LayoutState = .list
-    
-    private var selectedEvent: Event?
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        eventDataService.fetchEvents { fetchedEvents in
-            self.events = fetchedEvents
-            self.collectionView.reloadData()
-        }
+        events = presenter.getEvents()
+        collectionView.reloadData()
         setProperties()
         registerNibs()
         setupCollectionView()
