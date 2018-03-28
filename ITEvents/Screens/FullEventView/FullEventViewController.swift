@@ -16,13 +16,17 @@ class FullEventViewController: UIViewController {
     
     var similarEventsService: ISimilarEventsDataService!
     var dateFormatterService: IDateFormatterService!
+    var selectedEventService: ISelectedEventService!
     
     var event: Event!
     private var similarEvents: [Event]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if let selectedEvent = selectedEventService.selectedEvent {
+            event = selectedEvent
+        } else { return }
+
         let eventView = EventView.initiateAndSetup(with: event, using: dateFormatterService, sourceOpenAction: openAction)
         stackView.addArrangedSubview(eventView)
         
