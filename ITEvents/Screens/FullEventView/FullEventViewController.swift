@@ -23,9 +23,7 @@ class FullEventViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let selectedEvent = selectedEventService.selectedEvent {
-            event = selectedEvent
-        } else { return }
+        event = selectedEventService.selectedEvent!
 
         let eventView = EventView.initiateAndSetup(with: event, using: dateFormatterService, sourceOpenAction: openAction)
         stackView.addArrangedSubview(eventView)
