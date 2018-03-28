@@ -1,1 +1,3 @@
-protocol IFavoriveView
+protocol IFavoriveView {
+    
+}

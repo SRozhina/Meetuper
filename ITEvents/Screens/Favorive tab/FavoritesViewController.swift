@@ -3,10 +3,10 @@ import DisplaySwitcher
 import Reusable
 
 class FavoritesViewController: UIViewController {
-    private let presenter: IFavoritePresenter!
-    //var eventDataService: IEventsDataService!
-    //var dateFormatterService: IDateFormatterService!
-    //var selectedEventService: ISelectedEventService!
+    var presenter: IFavoritePresenter!
+    var eventDataService: IEventsDataService!
+    var dateFormatterService: IDateFormatterService!
+    var selectedEventService: ISelectedEventService!
     private var events = [Event]()
     
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -76,12 +76,6 @@ class FavoritesViewController: UIViewController {
     private func setButtonRotation(for layout: DisplaySwitchLayout) {
         rotationButton.isSelected = layout == listLayout
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let fullEventView = segue.destination as? FullEventViewController {
-            fullEventView.event = selectedEvent
-        }
-    }
 }
 
 extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -112,7 +106,7 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.isUserInteractionEnabled = false
-        selectedEvent = events[indexPath.row]
+        selectedEventService.selectedEvent = events[indexPath.row]
         self.performSegue(withIdentifier: "Favorite_OpenEvent", sender: nil)
     }
     
