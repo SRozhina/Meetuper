@@ -19,14 +19,20 @@ extension SwinjectStoryboard {
             return DateFormatterService()
         }.inObjectScope(.container)
 
+        defaultContainer.register(ISelectedEventService.self) { _ in
+            return SelectedEventService()
+        }.inObjectScope(.container)
+        
         defaultContainer.storyboardInitCompleted(FavoritesViewController.self) { r, c in
             c.eventDataService = r.resolve(IEventsDataService.self)!
             c.dateFormatterService = r.resolve(IDateFormatterService.self)!
+            c.selectedEventService = r.resolve(ISelectedEventService.self)!
         }
         
         defaultContainer.storyboardInitCompleted(FullEventViewController.self) { r, c in
             c.dateFormatterService = r.resolve(IDateFormatterService.self)!
             c.similarEventsService = r.resolve(ISimilarEventsDataService.self)!
+            c.selectedEventService = r.resolve(ISelectedEventService.self)!
         }
     }
 }
