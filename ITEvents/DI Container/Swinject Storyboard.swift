@@ -23,10 +23,15 @@ extension SwinjectStoryboard {
             return SelectedEventService()
         }.inObjectScope(.container)
         
+        defaultContainer.register(IFavoritePresenter.self) { r, v in
+            FavoritePresenter(view: v,
+                              eventDataService: r.resolve(IEventsDataService.self)!,
+                              dateFormatterService: r.resolve(IDateFormatterService.self)!,
+                              selectedEventService: r.resolve(ISelectedEventService.self)!)
+        }
+        
         defaultContainer.storyboardInitCompleted(FavoritesViewController.self) { r, c in
-            c.eventDataService = r.resolve(IEventsDataService.self)!
-            c.dateFormatterService = r.resolve(IDateFormatterService.self)!
-            c.selectedEventService = r.resolve(ISelectedEventService.self)!
+            c.presenter = r.resolve(IFavoritePresenter.self, argument: c as IFavoriveView)!
         }
         
         defaultContainer.storyboardInitCompleted(FullEventViewController.self) { r, c in

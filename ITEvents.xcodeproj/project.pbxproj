@@ -287,7 +287,6 @@
 			isa = PBXGroup;
 			children = (
 				C3FF3CFC2044578100C65137 /* FullEventView */,
-				C39190A9201E635500CD7151 /* Event view */,
 				C39190A0201E630B00CD7151 /* Profile tab */,
 				C3919091201E605E00CD7151 /* Search tab */,
 				C391908E201E5F0B00CD7151 /* Favorive tab */,
@@ -347,6 +346,7 @@
 		C3B88296201A22520031F261 /* ITEvents */ = {
 			isa = PBXGroup;
 			children = (
+				C3D302E7206BB374005F5445 /* Views */,
 				C30056392055AD9100875CCD /* Utilities */,
 				C30056362055AD4300875CCD /* DI Container */,
 				C30056332055ACE600875CCD /* Extensions */,
@@ -376,6 +376,14 @@
 				C3B882B9201A22520031F261 /* Info.plist */,
 			);
 			path = ITEventsUITests;
+			sourceTree = "<group>";
+		};
+		C3D302E7206BB374005F5445 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C39190A9201E635500CD7151 /* Event view */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		C3E792E4202E411300876D6B /* Services */ = {
