@@ -3,17 +3,14 @@ import Foundation
 class FavoritePresenter: IFavoritePresenter {
     var view: IFavoriveView!
     var eventDataService: IEventsDataService!
-    var dateFormatterService: IDateFormatterService!
     var selectedEventService: ISelectedEventService!
     private var isListLayout = true
     
     init(view: IFavoriveView,
          eventDataService: IEventsDataService,
-         dateFormatterService: IDateFormatterService,
          selectedEventService: ISelectedEventService) {
         self.view = view
         self.eventDataService = eventDataService
-        self.dateFormatterService = dateFormatterService
         self.selectedEventService = selectedEventService
     }
     
@@ -32,11 +29,7 @@ class FavoritePresenter: IFavoritePresenter {
         view.setButtonRotation(to: isListLayout)
     }
     
-    func setup(cell: EventCollectionViewCell, event: Event) {
-        view.setup(cell: cell, withLayout: isListLayout, event: event, dateFormatterService: dateFormatterService)
-    }
-    
-    func saveSelectedEvent(_ event: Event) {
+    func selectEvent(_ event: Event) {
         selectedEventService.selectedEvent = event
     }
     

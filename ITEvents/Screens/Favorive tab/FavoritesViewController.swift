@@ -4,6 +4,7 @@ import Reusable
 
 class FavoritesViewController: UIViewController, IFavoriveView {
     var presenter: IFavoritePresenter!
+    var dateFormatterService: IDateFormatterService!
     private var events = [Event]()
     
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -84,17 +85,13 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let event = events[indexPath.row]
         let cell: EventCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        presenter.setup(cell: cell, event: event)
-        return cell
-    }
-    
-    func setup(cell: EventCollectionViewCell, withLayout value: Bool, event: Event, dateFormatterService: IDateFormatterService) {
-        if value {
-           cell.setupListLayout()
+        if layoutState == .list {
+            cell.setupListLayout()
         } else {
             cell.setupGridLayout()
         }
         cell.setup(with: event, using: dateFormatterService)
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -105,7 +102,7 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.isUserInteractionEnabled = false
-        presenter.saveSelectedEvent(events[indexPath.row])
+        presenter.selectEvent(events[indexPath.row])
         self.performSegue(withIdentifier: "Favorite_OpenEvent", sender: nil)
     }
     
