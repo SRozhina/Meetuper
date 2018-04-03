@@ -4,7 +4,7 @@ class FavoritePresenter: IFavoritePresenter {
     var view: IFavoriveView!
     var eventDataService: IEventsDataService!
     var selectedEventService: ISelectedEventService!
-    private var isListLayout = true
+    private var isListLayoutSelected = true
     
     init(view: IFavoriveView,
          eventDataService: IEventsDataService,
@@ -19,14 +19,12 @@ class FavoritePresenter: IFavoritePresenter {
             self.view.setEvents(fetchedEvents)
             completion()
         }
-        view.setButtonRotation(to: isListLayout)
-        view.setLayoutState(to: isListLayout)
+        view.toggleListLayout(to: isListLayoutSelected)
     }
     
-    func changeLayoutState() {
-        isListLayout = !isListLayout
-        view.setLayoutState(to: isListLayout)
-        view.setButtonRotation(to: isListLayout)
+    func toggleLayoutState() {
+        isListLayoutSelected = !isListLayoutSelected
+        view.toggleListLayout(to: isListLayoutSelected)
     }
     
     func selectEvent(_ event: Event) {

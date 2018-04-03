@@ -25,8 +25,18 @@ class FavoritesViewController: UIViewController, IFavoriveView {
         registerNibs()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionView.isUserInteractionEnabled = true
+    }
+    
     func setEvents(_ events: [Event]) {
         self.events = events
+    }
+    
+    func toggleListLayout(to list: Bool) {
+        layoutState = list ? .list : .grid
+        rotationButton.isSelected = list
     }
     
     private func setUpLayouts() {
@@ -54,7 +64,7 @@ class FavoritesViewController: UIViewController, IFavoriveView {
     }
     
     @IBAction func changeLayout(_ sender: Any) {
-        presenter.changeLayoutState()
+        presenter.toggleLayoutState()
         let layout = getCurrentLayout()
         let transitionManager = TransitionManager(duration: animationDuration,
                                                   collectionView: collectionView,
@@ -63,16 +73,8 @@ class FavoritesViewController: UIViewController, IFavoriveView {
         transitionManager.startInteractiveTransition()
     }
     
-    func setLayoutState(to value: Bool) {
-        self.layoutState = value ? .list : .grid
-    }
-    
     private func getCurrentLayout() -> DisplaySwitchLayout {
         return layoutState == .list ? listLayout : gridLayout
-    }
-    
-    func setButtonRotation(to value: Bool) {
-        rotationButton.isSelected = value
     }
 }
 
@@ -104,10 +106,5 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
         collectionView.isUserInteractionEnabled = false
         presenter.selectEvent(events[indexPath.row])
         self.performSegue(withIdentifier: "Favorite_OpenEvent", sender: nil)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        collectionView.isUserInteractionEnabled = true
     }
 }
