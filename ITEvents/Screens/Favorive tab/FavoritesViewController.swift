@@ -63,7 +63,7 @@ class FavoritesViewController: UIViewController, IFavoriveView {
         collectionView.register(cellType: EventCollectionViewCell.self)
     }
     
-    @IBAction func changeLayout(_ sender: Any) {
+    @IBAction private func changeLayout(_ sender: Any) {
         presenter.toggleLayoutState()
         let layout = getCurrentLayout()
         let transitionManager = TransitionManager(duration: animationDuration,

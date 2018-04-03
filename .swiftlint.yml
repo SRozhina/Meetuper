@@ -4,6 +4,10 @@ excluded:
  - Pods
  - MBUITest
 
+opt_in_rules:
+- private_outlet
+- private_action
+
 disabled_rules:
  - trailing_whitespace
  - force_cast
