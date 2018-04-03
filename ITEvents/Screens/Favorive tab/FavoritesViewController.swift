@@ -2,37 +2,44 @@ import UIKit
 import DisplaySwitcher
 import Reusable
 
-class FavoritesViewController: UIViewController {
-    var eventDataService: IEventsDataService!
+class FavoritesViewController: UIViewController, IFavoriveView {
+    var presenter: IFavoritePresenter!
     var dateFormatterService: IDateFormatterService!
-    var selectedEventService: ISelectedEventService!
     private var events = [Event]()
     
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var rotationButton: SwitchLayoutButton!
     
-    private var animationDuration: TimeInterval!
+    private var animationDuration: TimeInterval = 0.3
     private var listLayout: DisplaySwitchLayout!
     private var gridLayout: DisplaySwitchLayout!
     
-    private var layoutState: LayoutState = .list
-    
-    private var selectedEvent: Event?
-    
+    private var layoutState: LayoutState!
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        eventDataService.fetchEvents { fetchedEvents in
-            self.events = fetchedEvents
-            self.collectionView.reloadData()
-        }
-        setProperties()
-        registerNibs()
+        presenter.setup(then: { self.collectionView.reloadData() })
+        setUpLayouts()
         setupCollectionView()
         rotationButton.animationDuration = animationDuration
+        registerNibs()
     }
     
-    private func setProperties() {
-        animationDuration = 0.3
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionView.isUserInteractionEnabled = true
+    }
+    
+    func setEvents(_ events: [Event]) {
+        self.events = events
+    }
+    
+    func toggleListLayout(to list: Bool) {
+        layoutState = list ? .list : .grid
+        rotationButton.isSelected = list
+    }
+    
+    private func setUpLayouts() {
         let listLayoutCellStaticHeihgt: CGFloat = 85
         let gridLayoutCellStaticHeight: CGFloat = 190
         let gridColumnCount = floor(view.frame.width / 168)
@@ -50,34 +57,24 @@ class FavoritesViewController: UIViewController {
     private func setupCollectionView() {
         let layout = getCurrentLayout()
         collectionView.collectionViewLayout = layout
-        setButtonRotation(for: layout)
     }
     
     private func registerNibs() {
         collectionView.register(cellType: EventCollectionViewCell.self)
     }
     
-    @IBAction func changeLayout(_ sender: Any) {
-        if layoutState == .list {
-            layoutState = .grid
-        } else {
-            layoutState = .list
-        }
+    @IBAction private func changeLayout(_ sender: Any) {
+        presenter.toggleLayoutState()
         let layout = getCurrentLayout()
         let transitionManager = TransitionManager(duration: animationDuration,
                                                   collectionView: collectionView,
                                                   destinationLayout: layout,
                                                   layoutState: layoutState)
         transitionManager.startInteractiveTransition()
-        setButtonRotation(for: layout)
     }
     
     private func getCurrentLayout() -> DisplaySwitchLayout {
         return layoutState == .list ? listLayout : gridLayout
-    }
-    
-    private func setButtonRotation(for layout: DisplaySwitchLayout) {
-        rotationButton.isSelected = layout == listLayout
     }
 }
 
@@ -90,14 +87,12 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let event = events[indexPath.row]
         let cell: EventCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        switch layoutState {
-        case .list:
+        if layoutState == .list {
             cell.setupListLayout()
-        case .grid:
+        } else {
             cell.setupGridLayout()
         }
         cell.setup(with: event, using: dateFormatterService)
-        
         return cell
     }
     
@@ -109,13 +104,7 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.isUserInteractionEnabled = false
-        selectedEvent = events[indexPath.row]
-        selectedEventService.selectedEvent = selectedEvent
+        presenter.selectEvent(events[indexPath.row])
         self.performSegue(withIdentifier: "Favorite_OpenEvent", sender: nil)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        collectionView.isUserInteractionEnabled = true
     }
 }

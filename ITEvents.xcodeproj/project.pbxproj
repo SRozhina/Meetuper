@@ -43,7 +43,7 @@
 		C391908C201E59D100CD7151 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391908B201E59D100CD7151 /* Event.swift */; };
 		C3919090201E604600CD7151 /* FavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391908F201E604600CD7151 /* FavoritePresenter.swift */; };
 		C3919093201E608A00CD7151 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3919092201E608A00CD7151 /* SearchViewController.swift */; };
-		C3919095201E62A800CD7151 /* IFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3919094201E62A800CD7151 /* IFavoriteViewController.swift */; };
+		C3919095201E62A800CD7151 /* IFavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3919094201E62A800CD7151 /* IFavoriteView.swift */; };
 		C3919097201E62B900CD7151 /* IFavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3919096201E62B900CD7151 /* IFavoritePresenter.swift */; };
 		C3919099201E62C800CD7151 /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3919098201E62C800CD7151 /* SearchPresenter.swift */; };
 		C391909B201E62D600CD7151 /* ISearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391909A201E62D600CD7151 /* ISearchViewController.swift */; };
@@ -127,7 +127,7 @@
 		C391908B201E59D100CD7151 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		C391908F201E604600CD7151 /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePresenter.swift; sourceTree = "<group>"; };
 		C3919092201E608A00CD7151 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		C3919094201E62A800CD7151 /* IFavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IFavoriteViewController.swift; sourceTree = "<group>"; };
+		C3919094201E62A800CD7151 /* IFavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IFavoriteView.swift; sourceTree = "<group>"; };
 		C3919096201E62B900CD7151 /* IFavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IFavoritePresenter.swift; sourceTree = "<group>"; };
 		C3919098201E62C800CD7151 /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
 		C391909A201E62D600CD7151 /* ISearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISearchViewController.swift; sourceTree = "<group>"; };
@@ -266,7 +266,7 @@
 			children = (
 				C3B88299201A22520031F261 /* FavoritesViewController.swift */,
 				C391908F201E604600CD7151 /* FavoritePresenter.swift */,
-				C3919094201E62A800CD7151 /* IFavoriteViewController.swift */,
+				C3919094201E62A800CD7151 /* IFavoriteView.swift */,
 				C3919096201E62B900CD7151 /* IFavoritePresenter.swift */,
 			);
 			path = "Favorive tab";
@@ -287,7 +287,6 @@
 			isa = PBXGroup;
 			children = (
 				C3FF3CFC2044578100C65137 /* FullEventView */,
-				C39190A9201E635500CD7151 /* Event view */,
 				C39190A0201E630B00CD7151 /* Profile tab */,
 				C3919091201E605E00CD7151 /* Search tab */,
 				C391908E201E5F0B00CD7151 /* Favorive tab */,
@@ -347,6 +346,7 @@
 		C3B88296201A22520031F261 /* ITEvents */ = {
 			isa = PBXGroup;
 			children = (
+				C3D302E7206BB374005F5445 /* Views */,
 				C30056392055AD9100875CCD /* Utilities */,
 				C30056362055AD4300875CCD /* DI Container */,
 				C30056332055ACE600875CCD /* Extensions */,
@@ -376,6 +376,14 @@
 				C3B882B9201A22520031F261 /* Info.plist */,
 			);
 			path = ITEventsUITests;
+			sourceTree = "<group>";
+		};
+		C3D302E7206BB374005F5445 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C39190A9201E635500CD7151 /* Event view */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		C3E792E4202E411300876D6B /* Services */ = {
@@ -482,7 +490,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Sofia;
 				TargetAttributes = {
 					C3B88293201A22510031F261 = {
@@ -649,7 +657,7 @@
 				C34C4F82206B89FD001A61A9 /* ISelectedEventService.swift in Sources */,
 				C39190AD201E638700CD7151 /* FullEventPresenter.swift in Sources */,
 				C3919099201E62C800CD7151 /* SearchPresenter.swift in Sources */,
-				C3919095201E62A800CD7151 /* IFavoriteViewController.swift in Sources */,
+				C3919095201E62A800CD7151 /* IFavoriteView.swift in Sources */,
 				C3B8829A201A22520031F261 /* FavoritesViewController.swift in Sources */,
 				C300562D2055AA6B00875CCD /* EventSource.swift in Sources */,
 				C3E792E6202E413800876D6B /* IEventsDataService.swift in Sources */,
@@ -752,6 +760,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -759,6 +768,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -809,6 +819,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -816,6 +827,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

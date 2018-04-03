@@ -1,9 +1,7 @@
-//
-//  IFavoritePresenter.swift
-//  ITEvents
-//
-//  Created by Sofia on 28/01/2018.
-//  Copyright © 2018 Sofia. All rights reserved.
-//
-
-import Foundation
+protocol IFavoritePresenter {
+    func setup(then completion: @escaping () -> Void)
+    
+    func toggleLayoutState()
+        
+    func selectEvent(_ event: Event)
+}
