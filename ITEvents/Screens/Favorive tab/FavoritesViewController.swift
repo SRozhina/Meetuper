@@ -5,7 +5,10 @@ import Reusable
 class FavoritesViewController: UIViewController, IFavoriveView {
     var presenter: IFavoritePresenter!
     var dateFormatterService: IDateFormatterService!
+    //TODO
+    var userSettingsService: IUserSettingsService!
     private var events = [Event]()
+    private var userSettings: UserSettings!
     
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var rotationButton: SwitchLayoutButton!
@@ -18,6 +21,10 @@ class FavoritesViewController: UIViewController, IFavoriveView {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        //TODO
+        userSettingsService.fetchSettings { settings in
+            self.userSettings = settings
+        }
         presenter.setup(then: { self.collectionView.reloadData() })
         setUpLayouts()
         setupCollectionView()
@@ -29,7 +36,12 @@ class FavoritesViewController: UIViewController, IFavoriveView {
         super.viewDidAppear(animated)
         collectionView.isUserInteractionEnabled = true
     }
-    
+
+    //TODO
+    override func viewDidDisappear(_ animated: Bool) {
+        userSettingsService.save(settings: userSettings)
+    }
+
     func setEvents(_ events: [Event]) {
         self.events = events
     }
@@ -69,12 +81,12 @@ class FavoritesViewController: UIViewController, IFavoriveView {
         let transitionManager = TransitionManager(duration: animationDuration,
                                                   collectionView: collectionView,
                                                   destinationLayout: layout,
-                                                  layoutState: layoutState)
+                                                  layoutState: userSettings.currentLayoutState)
         transitionManager.startInteractiveTransition()
     }
     
     private func getCurrentLayout() -> DisplaySwitchLayout {
-        return layoutState == .list ? listLayout : gridLayout
+        return userSettings.currentLayoutState == .list ? listLayout : gridLayout
     }
 }
 
