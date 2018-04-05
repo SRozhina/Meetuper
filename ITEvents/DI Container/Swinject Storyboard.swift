@@ -34,10 +34,15 @@ extension SwinjectStoryboard {
             c.presenter = r.resolve(IFavoritePresenter.self, argument: c as IFavoriveView)!
         }
         
+        defaultContainer.register(IFullEventPresenter.self) { r, v in
+            FullEventPresenter(view: v,
+                               selectedEventService: r.resolve(ISelectedEventService.self)!,
+                               dateFormatterService: r.resolve(IDateFormatterService.self)!,
+                               similarEventsService: r.resolve(ISimilarEventsDataService.self)!)
+        }
+        
         defaultContainer.storyboardInitCompleted(FullEventViewController.self) { r, c in
-            c.dateFormatterService = r.resolve(IDateFormatterService.self)!
-            c.similarEventsService = r.resolve(ISimilarEventsDataService.self)!
-            c.selectedEventService = r.resolve(ISelectedEventService.self)!
+            c.presenter = r.resolve(IFullEventPresenter.self, argument: c as IFullEventView)!
         }
     }
 }
