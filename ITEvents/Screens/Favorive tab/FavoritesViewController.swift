@@ -5,10 +5,7 @@ import Reusable
 class FavoritesViewController: UIViewController, IFavoriveView {
     var presenter: IFavoritePresenter!
     var dateFormatterService: IDateFormatterService!
-    //TODO
-    var userSettingsService: IUserSettingsService!
     private var events = [Event]()
-    private var userSettings: UserSettings!
     
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var rotationButton: SwitchLayoutButton!
@@ -21,11 +18,7 @@ class FavoritesViewController: UIViewController, IFavoriveView {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        //TODO
-        userSettingsService.fetchSettings { settings in
-            self.userSettings = settings
-        }
-        presenter.setup(then: { self.collectionView.reloadData() })
+        presenter.setup { self.collectionView.reloadData() }
         setUpLayouts()
         setupCollectionView()
         rotationButton.animationDuration = animationDuration
@@ -37,9 +30,9 @@ class FavoritesViewController: UIViewController, IFavoriveView {
         collectionView.isUserInteractionEnabled = true
     }
 
-    //TODO
-    override func viewDidDisappear(_ animated: Bool) {
-        userSettingsService.save(settings: userSettings)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        presenter.saveStateBeforeDisappear(isListLayoutSelected: layoutState == .list)
     }
 
     func setEvents(_ events: [Event]) {
@@ -81,12 +74,12 @@ class FavoritesViewController: UIViewController, IFavoriveView {
         let transitionManager = TransitionManager(duration: animationDuration,
                                                   collectionView: collectionView,
                                                   destinationLayout: layout,
-                                                  layoutState: userSettings.currentLayoutState)
+                                                  layoutState: layoutState)
         transitionManager.startInteractiveTransition()
     }
     
     private func getCurrentLayout() -> DisplaySwitchLayout {
-        return userSettings.currentLayoutState == .list ? listLayout : gridLayout
+        return layoutState == .list ? listLayout : gridLayout
     }
 }
 

@@ -4,4 +4,6 @@ protocol IFavoritePresenter {
     func toggleLayoutState()
         
     func selectEvent(_ event: Event)
+    
+    func saveStateBeforeDisappear(isListLayoutSelected: Bool)
 }

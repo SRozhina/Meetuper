@@ -27,10 +27,16 @@ extension SwinjectStoryboard {
             return UserSettingsService()
         }.inObjectScope(.container)
         
+        defaultContainer.register(IFavoritePresenter.self) { r, v in
+            FavoritePresenter(view: v,
+                              eventDataService: r.resolve(IEventsDataService.self)!,
+                              selectedEventService: r.resolve(ISelectedEventService.self)!,
+                              userSettingsService: r.resolve(IUserSettingsService.self)!)
+        }
+        
         defaultContainer.storyboardInitCompleted(FavoritesViewController.self) { r, c in
             c.dateFormatterService = r.resolve(IDateFormatterService.self)!
             c.presenter = r.resolve(IFavoritePresenter.self, argument: c as IFavoriveView)!
-            c.userSettingsService = r.resolve(IUserSettingsService.self)!
         }
 
         defaultContainer.storyboardInitCompleted(FullEventViewController.self) { r, c in

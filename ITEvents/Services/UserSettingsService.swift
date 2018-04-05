@@ -4,33 +4,35 @@ import UIKit
 
 class UserSettingsService: IUserSettingsService {
     let entityName = "Settings"
+    
     func fetchSettings(then completion: @escaping (UserSettings) -> Void) {
-        let managedContext = getContext()
-        
-        let settingsFetch = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-        let settings = try? managedContext.fetch(settingsFetch).first
-        if let fetchedSettings = settings as? UserSettings {
-            completion(fetchedSettings)
-        } else {
-            completion(UserSettings(currentLayoutState: .list))
-        }
+        let settings = getOrCreateSettings()
+        var userSettings = UserSettings(isListLayoutSelected: true)
+        let isList = settings.value(forKey: "isListLayoutSelected") as! Bool
+        userSettings.isListLayoutSelected = isList
+        completion(userSettings)
     }
     
     func save(settings: UserSettings) {
-        let managedContext = getContext()
-        let settingsEntity = NSEntityDescription.entity(forEntityName: entityName, in: managedContext)!
-        let savedSettings = NSManagedObject(entity: settingsEntity, insertInto: managedContext)
-        savedSettings.setValue(settings.currentLayoutState, forKey: "isListLayoutSelected")
-        
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Error: \(error.localizedDescription)")
-        }
+        let savedSettings = getOrCreateSettings()
+        savedSettings.isListLayoutSelected = settings.isListLayoutSelected
+        try? getContext().save()
     }
     
     private func getContext() -> NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
+    }
+    
+    private func getOrCreateSettings() -> Settings {
+        let managedContext = getContext()
+        let request: NSFetchRequest<Settings> = Settings.fetchRequest()
+        let results = try? managedContext.fetch(request)
+        if let result = results?.last {
+            return result
+        } else {
+            let entity = Settings.entity()
+            return Settings(entity: entity, insertInto: managedContext)
+        }
     }
 }
