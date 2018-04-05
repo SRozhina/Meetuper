@@ -18,7 +18,7 @@ class FavoritesViewController: UIViewController, IFavoriveView {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.setup { self.collectionView.reloadData() }
+        presenter.setup(then: { self.collectionView.reloadData() })
         setUpLayouts()
         setupCollectionView()
         rotationButton.animationDuration = animationDuration
