@@ -1,5 +1,5 @@
 protocol IFullEventView {
-    func createEventView(with event: Event, using dateFormatterService: IDateFormatterService, isSimilar: Bool)
-    func createAddShowMoreEventsButton(for eventsCount: Int)
+    func createEventView(with event: EventViewModel, isSimilar: Bool)
     
+    func createShowMoreEventsButton(for eventsCount: Int)
 }

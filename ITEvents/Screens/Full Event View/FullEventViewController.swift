@@ -22,18 +22,15 @@ class FullEventViewController: UIViewController, IFullEventView {
         presenter.setup()
     }
     
-    func createEventView(with event: Event, using dateFormatterService: IDateFormatterService, isSimilar: Bool) {
+    func createEventView(with event: EventViewModel, isSimilar: Bool) {
         let eventView = EventView.initiateAndSetup(with: event,
-                                                   using: dateFormatterService,
-                                                   sourceOpenAction: openAction, isSimilar: isSimilar)
-        if isSimilar {
-            descriptionsStackView.addArrangedSubview(eventView)
-            return
-        }
-        stackView.addArrangedSubview(eventView)
+                                                   sourceOpenAction: openAction,
+                                                   isSimilar: isSimilar)
+        let stackViewToAddEvent: UIStackView = isSimilar ? descriptionsStackView : stackView
+        stackViewToAddEvent.addArrangedSubview(eventView)
     }
     
-    func createAddShowMoreEventsButton(for eventsCount: Int) {
+    func createShowMoreEventsButton(for eventsCount: Int) {
         let showMoreEvents = ShowMoreEventsView.initiateAndSetup(with: eventsCount,
                                                                  showOrHideEventsAction: showMoreButtonTapped)
         stackView.addArrangedSubview(showMoreEvents)
@@ -42,7 +39,7 @@ class FullEventViewController: UIViewController, IFullEventView {
     
     private func showMoreButtonTapped(completion: @escaping () -> Void) {
         let scrollYOffset = stackView.frame.height
-        presenter.updateSimilarEvents {
+        presenter.requestSimilarEvents {
             self.expandOrCollapseEvents()
             if !self.isSimilarEventsCollapsed {
                 self.scrollView.setContentOffset(CGPoint(x: 0, y: scrollYOffset), animated: true)

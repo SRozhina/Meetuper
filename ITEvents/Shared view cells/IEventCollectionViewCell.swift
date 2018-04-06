@@ -1,7 +1,7 @@
 import UIKit
 
 protocol IEventCollectionViewCell {
-    func setup(with event: Event, using dateFormatterService: IDateFormatterService)
+    func setup(with event: FavoriteEventViewModel)
     func setupGridLayout()
     func setupListLayout()
 }

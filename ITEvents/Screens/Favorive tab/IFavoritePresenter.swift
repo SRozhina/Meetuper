@@ -3,7 +3,7 @@ protocol IFavoritePresenter {
     
     func toggleLayoutState()
     
-    func selectEvent(_ event: Event)
+    func selectEvent(with eventId: Int)
     
     func storeLayoutState()
 }

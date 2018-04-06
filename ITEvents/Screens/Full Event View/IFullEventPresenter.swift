@@ -1,4 +1,5 @@
 protocol IFullEventPresenter {
     func setup()
-    func updateSimilarEvents(completion: @escaping () -> Void)
+    
+    func requestSimilarEvents(completion: @escaping () -> Void)
 }
