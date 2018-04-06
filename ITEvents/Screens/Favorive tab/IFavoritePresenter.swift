@@ -1,7 +1,9 @@
 protocol IFavoritePresenter {
-    func setup(then completion: @escaping () -> Void)
+    func setup()
     
     func toggleLayoutState()
-        
+    
     func selectEvent(_ event: Event)
+    
+    func storeLayoutState()
 }
