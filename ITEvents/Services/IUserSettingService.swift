@@ -1,5 +1,5 @@
 protocol IUserSettingsService {
-    func fetchSettings(then completion: @escaping (UserSettings) -> Void)
+    func fetchSettings() -> UserSettings
     
     func save(settings: UserSettings)
 }

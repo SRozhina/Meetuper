@@ -5,27 +5,26 @@ import UIKit
 class UserSettingsService: IUserSettingsService {
     let entityName = "Settings"
     
-    func fetchSettings(then completion: @escaping (UserSettings) -> Void) {
+    func fetchSettings() -> UserSettings {
         let settings = getOrCreateSettings()
         var userSettings = UserSettings(isListLayoutSelected: true)
         let isList = settings.value(forKey: "isListLayoutSelected") as! Bool
         userSettings.isListLayoutSelected = isList
-        completion(userSettings)
+        return userSettings
     }
     
     func save(settings: UserSettings) {
         let savedSettings = getOrCreateSettings()
         savedSettings.isListLayoutSelected = settings.isListLayoutSelected
-        try? getContext().save()
+        getApp().saveContext()
     }
     
-    private func getContext() -> NSManagedObjectContext {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        return appDelegate.persistentContainer.viewContext
+    private func getApp() -> AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
     }
     
     private func getOrCreateSettings() -> Settings {
-        let managedContext = getContext()
+        let managedContext = getApp().persistentContainer.viewContext
         let request: NSFetchRequest<Settings> = Settings.fetchRequest()
         let results = try? managedContext.fetch(request)
         if let result = results?.last {

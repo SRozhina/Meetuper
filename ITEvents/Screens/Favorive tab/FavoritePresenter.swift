@@ -17,15 +17,13 @@ class FavoritePresenter: IFavoritePresenter {
         self.userSettingsService = userSettingsService
     }
     
-    func setup(then completion: @escaping () -> Void) {
-        userSettingsService.fetchSettings { settings in
-            self.userSettings = settings
-        }
-        eventDataService.fetchEvents { fetchedEvents in
+    func setup() {
+        userSettings = userSettingsService.fetchSettings()
+        self.view.toggleListLayout(to: userSettings.isListLayoutSelected)
+        
+        self.eventDataService.fetchEvents(then: { fetchedEvents in
             self.view.setEvents(fetchedEvents)
-            completion()
-        }
-        view.toggleListLayout(to: userSettings.isListLayoutSelected)
+        })
     }
     
     func toggleLayoutState() {
@@ -37,8 +35,7 @@ class FavoritePresenter: IFavoritePresenter {
         selectedEventService.selectedEvent = event
     }
     
-    func saveStateBeforeDisappear(isListLayoutSelected: Bool) {
-        userSettings.isListLayoutSelected = isListLayoutSelected
+    func destroy() {
         userSettingsService.save(settings: userSettings)
     }
 }

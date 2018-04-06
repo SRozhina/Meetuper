@@ -18,11 +18,14 @@ class FavoritesViewController: UIViewController, IFavoriveView {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.setup(then: { self.collectionView.reloadData() })
+        
         setUpLayouts()
-        setupCollectionView()
         rotationButton.animationDuration = animationDuration
         registerNibs()
+        
+        presenter.setup()
+        
+        setupCollectionView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -32,11 +35,12 @@ class FavoritesViewController: UIViewController, IFavoriveView {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        presenter.saveStateBeforeDisappear(isListLayoutSelected: layoutState == .list)
+        presenter.destroy()
     }
 
     func setEvents(_ events: [Event]) {
         self.events = events
+        collectionView.reloadData()
     }
     
     func toggleListLayout(to list: Bool) {
