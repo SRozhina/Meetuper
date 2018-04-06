@@ -18,20 +18,24 @@ class FavoritesViewController: UIViewController, IFavoriveView {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.setup(then: { self.collectionView.reloadData() })
+        
         setUpLayouts()
-        setupCollectionView()
         rotationButton.animationDuration = animationDuration
         registerNibs()
+        
+        presenter.setup()
+        
+        setupCollectionView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         collectionView.isUserInteractionEnabled = true
     }
-    
+
     func setEvents(_ events: [Event]) {
         self.events = events
+        collectionView.reloadData()
     }
     
     func toggleListLayout(to list: Bool) {
@@ -105,6 +109,7 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.isUserInteractionEnabled = false
         presenter.selectEvent(events[indexPath.row])
+        presenter.storeLayoutState()
         self.performSegue(withIdentifier: "Favorite_OpenEvent", sender: nil)
     }
 }
