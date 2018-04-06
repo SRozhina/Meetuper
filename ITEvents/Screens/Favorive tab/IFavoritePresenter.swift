@@ -5,5 +5,5 @@ protocol IFavoritePresenter {
     
     func selectEvent(_ event: Event)
     
-    func destroy()
+    func storeLayoutState()
 }

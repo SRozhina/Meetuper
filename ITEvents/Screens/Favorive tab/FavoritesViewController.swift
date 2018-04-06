@@ -33,11 +33,6 @@ class FavoritesViewController: UIViewController, IFavoriveView {
         collectionView.isUserInteractionEnabled = true
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        presenter.destroy()
-    }
-
     func setEvents(_ events: [Event]) {
         self.events = events
         collectionView.reloadData()
@@ -114,6 +109,7 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.isUserInteractionEnabled = false
         presenter.selectEvent(events[indexPath.row])
+        presenter.storeLayoutState()
         self.performSegue(withIdentifier: "Favorite_OpenEvent", sender: nil)
     }
 }

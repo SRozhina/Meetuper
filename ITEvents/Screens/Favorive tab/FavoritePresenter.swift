@@ -35,7 +35,7 @@ class FavoritePresenter: IFavoritePresenter {
         selectedEventService.selectedEvent = event
     }
     
-    func destroy() {
+    func storeLayoutState() {
         userSettingsService.save(settings: userSettings)
     }
 }
