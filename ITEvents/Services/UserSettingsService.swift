@@ -8,8 +8,9 @@ class UserSettingsService: IUserSettingsService {
     func fetchSettings() -> UserSettings {
         let settings = getOrCreateSettings()
         var userSettings = UserSettings(isListLayoutSelected: true)
-        let isList = settings.value(forKey: "isListLayoutSelected") as! Bool
-        userSettings.isListLayoutSelected = isList
+        if let isList = settings.value(forKey: "isListLayoutSelected") as? Bool {
+            userSettings.isListLayoutSelected = isList
+        }
         return userSettings
     }
     

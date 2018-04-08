@@ -4,33 +4,30 @@ import Reusable
 
 class EventView: UIStackView, NibLoadable {
     private var sourceOpenAction: ((URL) -> Void)?
-    private var event: Event!
+    private var event: EventViewModel!
 
-    class func initiateAndSetup(with event: Event,
-                                using dateFormatterService: IDateFormatterService,
+    class func initiateAndSetup(with event: EventViewModel,
                                 sourceOpenAction: ((URL) -> Void)? = nil,
                                 isSimilar: Bool = false) -> EventView {
         let eventView: EventView = SharedUtils.createView()
-        eventView.setup(with: event, using: dateFormatterService, and: sourceOpenAction, isSimilar: isSimilar)
+        eventView.setup(with: event, and: sourceOpenAction, isSimilar: isSimilar)
         return eventView
     }
     
-    private func setup(with event: Event,
-                       using dateFormatterService: IDateFormatterService,
+    private func setup(with event: EventViewModel,
                        and sourceOpenAction: ((URL) -> Void)?,
                        isSimilar: Bool) {
         self.event = event
         self.sourceOpenAction = sourceOpenAction
         
         if isSimilar {
-            let sourceLabel = EventView.createSourceLabel(text: event.source!.name)
+            let sourceLabel = EventView.createSourceLabel(text: event.sourceName!)
             addArrangedSubview(sourceLabel)
         }
-        
-        let date = dateFormatterService.formatDate(for: event.dateInterval, shortVersion: false)
+
         let eventInfo = EventInfoView.initiateAndSetup(with: event.image,
                                                        title: event.title,
-                                                       date: date)
+                                                       date: event.date)
         addArrangedSubview(eventInfo)
         
         let eventPlace = EventPlaceView.initiateAndSetup(with: event.city,
@@ -44,8 +41,8 @@ class EventView: UIStackView, NibLoadable {
         let eventTags = EventTagsView.initiateAndSetup(with: event.tags)
         addArrangedSubview(eventTags)
         
-        if let source = event.source {
-            let showEventSource = ShowEventSourceView.initiateAndSetup(with: source.name, sourceOpenAction: openAction)
+        if let sourceName = event.sourceName {
+            let showEventSource = ShowEventSourceView.initiateAndSetup(with: sourceName, sourceOpenAction: openAction)
             addArrangedSubview(showEventSource)
         }
     }

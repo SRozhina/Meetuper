@@ -4,8 +4,7 @@ import Reusable
 
 class FavoritesViewController: UIViewController, IFavoriveView {
     var presenter: IFavoritePresenter!
-    var dateFormatterService: IDateFormatterService!
-    private var events = [Event]()
+    private var events = [FavoriteEventViewModel]()
     
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var rotationButton: SwitchLayoutButton!
@@ -33,7 +32,7 @@ class FavoritesViewController: UIViewController, IFavoriveView {
         collectionView.isUserInteractionEnabled = true
     }
 
-    func setEvents(_ events: [Event]) {
+    func setEvents(_ events: [FavoriteEventViewModel]) {
         self.events = events
         collectionView.reloadData()
     }
@@ -96,7 +95,7 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
         } else {
             cell.setupGridLayout()
         }
-        cell.setup(with: event, using: dateFormatterService)
+        cell.setup(with: event)
         return cell
     }
     
@@ -108,7 +107,7 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.isUserInteractionEnabled = false
-        presenter.selectEvent(events[indexPath.row])
+        presenter.selectEvent(with: events[indexPath.row].id)
         presenter.storeLayoutState()
         self.performSegue(withIdentifier: "Favorite_OpenEvent", sender: nil)
     }
