@@ -27,13 +27,13 @@ class FavoritePresenter: IFavoritePresenter {
         
         self.eventDataService.fetchEvents(then: { fetchedEvents in
             self.events = fetchedEvents
-            let eventViewModels = fetchedEvents.map({
+            let eventViewModels = fetchedEvents.map {
                 FavoriteEventViewModel(id: $0.id,
                                        title: $0.title,
                                        shortDate: self.dateFormatterService.formatDate(for: $0.dateInterval, shortVersion: true),
                                        longDate: self.dateFormatterService.formatDate(for: $0.dateInterval, shortVersion: false),
                                        image: $0.image)
-            })
+            }
             self.view.setEvents(eventViewModels)
         })
     }
@@ -44,8 +44,7 @@ class FavoritePresenter: IFavoritePresenter {
     }
     
     func selectEvent(with eventId: Int) {
-        let eventIndex = events.index(where: {$0.id == eventId })!
-        selectedEventService.selectedEvent = events[eventIndex]
+        selectedEventService.selectedEvent = events.first(where: { $0.id == eventId })
     }
     
     func storeLayoutState() {

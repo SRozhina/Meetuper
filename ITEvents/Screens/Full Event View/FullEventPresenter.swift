@@ -33,14 +33,14 @@ class FullEventPresenter: IFullEventPresenter {
         similarEventsService.fetchSimilarEvents(for: event.id) { events in
             self.similarEvents = events
             if !events.isEmpty {
-                self.createSimilarEventViews()
+                self.createSimilarEventViews(from: events)
                 completion()
             }
         }
     }
     
-    private func createSimilarEventViews() {
-        for similarEvent in similarEvents! {
+    private func createSimilarEventViews(from similarEvents: [Event]) {
+        for similarEvent in similarEvents {
             let eventViewModel = createEventViewModel(from: similarEvent)
             self.view.createEventView(with: eventViewModel, isSimilar: true)
         }
