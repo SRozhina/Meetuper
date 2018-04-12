@@ -49,8 +49,11 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell, N
         imageTrailingConstraint.isActive = false
         imageAspectRatioConstraint.isActive = true
         
-        dateGridLabel.alpha = 0
-        titleGridLabel.alpha = 0
+        titleListTrailingConstraint.isActive = true
+        dateListTrailingConstraint.isActive = true
+        
+        setLabelsOpacity(to: 1)
+        image.setGradientOpacity(to: 0)
     }
     
     private func startListLayoutTransition() {
@@ -58,18 +61,17 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell, N
     }
     
     func setupGridLayout() {
-        imageAspectRatioConstraint.isActive = false
-        imageTrailingConstraint.isActive = true
-        
         imageTopConstraint.constant = 0
         imageBottomConstraint.constant = 0
         imageLeadingConstraint.constant = 0
         
+        imageAspectRatioConstraint.isActive = false
+        imageTrailingConstraint.isActive = true
+        
         titleListTrailingConstraint.isActive = false
         dateListTrailingConstraint.isActive = false
         
-        titleListLabel.isHidden = true
-        dateListLabel.isHidden = true
+        setLabelsOpacity(to: 0)
         image.setGradientOpacity(to: 1)
     }
     
@@ -86,6 +88,10 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell, N
         imageLeadingConstraint.constant *= reverseProgress
         
         image.setGradientOpacity(to: progress)
+        
+        if progress > 0.9 {
+            toggleListConstraintActive(value: false)
+        }
     }
     
     private func setLabelsOpacity(to alpha: CGFloat) {
@@ -105,6 +111,10 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell, N
         dateGridLabel.font = dateGridLabel.font.withSize(dateFontSize * alpha)
         
         image.setGradientOpacity(to: 1 - progress)
+        
+        if progress > 0.2 {
+            toggleListConstraintActive(value: true)
+        }
     }
     
     override func willTransition(from oldLayout: UICollectionViewLayout, to newLayout: UICollectionViewLayout) {
@@ -123,14 +133,8 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell, N
         super.apply(layoutAttributes)
         guard let attributes = layoutAttributes as? DisplaySwitchLayoutAttributes, attributes.transitionProgress > 0 else { return }
         if attributes.layoutState == .grid {
-            if attributes.transitionProgress > 0.9 {
-                toggleListConstraintActive(value: false)
-            }
             transitGridLayout(attributes.transitionProgress)
         } else {
-            if attributes.transitionProgress > 0.2 {
-                toggleListConstraintActive(value: true)
-            }
             transitListLayout(attributes.transitionProgress)
         }
     }
@@ -142,7 +146,7 @@ class EventCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell, N
         dateListLabel.isHidden = !value
     }
     
-    func setup(with event: FavoriteEventViewModel) {
+    func setup(with event: EventCollectionCellViewModel) {
         setTitle(event.title)
         setDate(for: event.shortDate, and: event.longDate)
         setImage(event.image)

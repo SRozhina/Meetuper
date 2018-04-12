@@ -1,9 +1,7 @@
-//
-//  ISearchPresenter.swift
-//  ITEvents
-//
-//  Created by Sofia on 28/01/2018.
-//  Copyright © 2018 Sofia. All rights reserved.
-//
-
-import Foundation
+protocol ISearchPresenter {
+    func setup()
+    
+    func setupBeforeViewAppear(then completion: (() -> Void)?)
+    
+    func selectEvent(with eventId: Int)
+}

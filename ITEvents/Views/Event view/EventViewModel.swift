@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-struct FavoriteEventViewModel {
+struct EventCollectionCellViewModel {
     let id: Int
     let title: String
     let shortDate: String
