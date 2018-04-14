@@ -51,9 +51,8 @@ class FullEventViewController: UIViewController, IFullEventView {
         let descriptionHeight = descriptionsStackView.frame.height
         let stackViewHeight = stackView.frame.height
         let viewHeight = view.frame.height
-        let mainEventHeight = stackViewHeight - descriptionHeight
         if descriptionHeight > viewHeight {
-            return mainEventHeight
+            return stackViewHeight - descriptionHeight
         } else if stackViewHeight > viewHeight {
             return scrollView.contentSize.height - scrollView.bounds.size.height
         }
