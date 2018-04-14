@@ -1,7 +1,7 @@
 protocol ISearchPresenter {
     func setup()
     
-    func setupBeforeViewAppear(then completion: (() -> Void)?)
+    func activate()
     
     func selectEvent(with eventId: Int)
 }

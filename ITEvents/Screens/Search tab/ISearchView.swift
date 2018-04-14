@@ -1,7 +1,5 @@
-protocol ISearchView {
-    func setupCollectionViewLayout(for isList: Bool)
-    
-    func setLayoutState(for isList: Bool)
+protocol ISearchView {    
+    func toggleLayout(for isList: Bool)
     
     func setEvents(_ events: [EventCollectionCellViewModel])
 }

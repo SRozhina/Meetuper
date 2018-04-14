@@ -17,7 +17,6 @@ class FavoritesViewController: UIViewController, IFavoriveView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpLayouts()
         rotationButton.animationDuration = animationDuration
         registerNibs()

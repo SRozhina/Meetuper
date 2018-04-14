@@ -29,10 +29,10 @@ class FavoritePresenter: IFavoritePresenter {
             self.events = fetchedEvents
             let eventViewModels = fetchedEvents.map {
                 EventCollectionCellViewModel(id: $0.id,
-                                       title: $0.title,
-                                       shortDate: self.dateFormatterService.formatDate(for: $0.dateInterval, shortVersion: true),
-                                       longDate: self.dateFormatterService.formatDate(for: $0.dateInterval, shortVersion: false),
-                                       image: $0.image)
+                                             title: $0.title,
+                                             shortDate: self.dateFormatterService.formatDate(for: $0.dateInterval, shortVersion: true),
+                                             longDate: self.dateFormatterService.formatDate(for: $0.dateInterval, shortVersion: false),
+                                             image: $0.image)
             }
             self.view.setEvents(eventViewModels)
         })

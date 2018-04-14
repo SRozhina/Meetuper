@@ -243,17 +243,16 @@
             </objects>
             <point key="canvasLocation" x="-1018.4" y="-530.28485757121439"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Events Tab Bar Controller-->
         <scene sceneID="fuZ-ug-wJo">
             <objects>
-                <tabBarController id="9Yi-Er-GNF" sceneMemberID="viewController">
+                <tabBarController id="9Yi-Er-GNF" customClass="EventsTabBarController" customModule="ITEvents" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Qga-Dj-xg6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <outlet property="tabBar" destination="Qga-Dj-xg6" id="Kf8-Vc-D52"/>
                         <segue destination="FHi-IN-npX" kind="relationship" relationship="viewControllers" id="OOM-m4-HlQ"/>
                         <segue destination="oyJ-bY-GMR" kind="relationship" relationship="viewControllers" id="8gA-kX-GTr"/>
                         <segue destination="iGc-Us-BUP" kind="relationship" relationship="viewControllers" id="d5e-Ax-Y10"/>
@@ -301,11 +300,11 @@
             </objects>
             <point key="canvasLocation" x="-1886.4000000000001" y="178.11094452773614"/>
         </scene>
-        <!--Pofile-->
+        <!--Profile-->
         <scene sceneID="pb9-fC-jxs">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iGc-Us-BUP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Pofile" image="Profile Inactive" selectedImage="Profile" id="0hy-gr-FTq"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="Profile Inactive" selectedImage="Profile" id="0hy-gr-FTq"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="w0z-JU-UUs">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>

@@ -6,7 +6,6 @@ extension UICollectionViewDataSource {
                                     cellForItemAt indexPath: IndexPath,
                                     event: EventCollectionCellViewModel,
                                     layoutState: LayoutState) -> UICollectionViewCell {
-        //Do we really need to have full array for every cell?
         let cell: EventCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         if layoutState == .list {
             cell.setupListLayout()

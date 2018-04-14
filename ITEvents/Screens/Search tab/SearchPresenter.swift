@@ -20,7 +20,7 @@ class SearchPresenter: ISearchPresenter {
     }
     
     func setup() {
-        setupBeforeViewAppear()
+        activate()
         
         eventDataService.fetchEvents(then: { fetchedEvents in
             self.events = fetchedEvents
@@ -35,13 +35,11 @@ class SearchPresenter: ISearchPresenter {
         })
     }
     
-    func setupBeforeViewAppear(then completion: (() -> Void)? = nil) {
-        let isListLayoutSelected = userSettingsService.fetchSettings().isListLayoutSelected
-        if isListLayoutCurrent == isListLayoutSelected { return }
-        isListLayoutCurrent = isListLayoutSelected
-        view.setLayoutState(for: isListLayoutSelected)
-        view.setupCollectionViewLayout(for: isListLayoutSelected)
-        completion?()
+    func activate() {
+        let settings = userSettingsService.fetchSettings()
+        if isListLayoutCurrent == settings.isListLayoutSelected { return }
+        isListLayoutCurrent = settings.isListLayoutSelected
+        view.toggleLayout(for: settings.isListLayoutSelected)
     }
     
     func selectEvent(with eventId: Int) {

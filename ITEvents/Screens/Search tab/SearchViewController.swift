@@ -2,7 +2,7 @@ import UIKit
 import DisplaySwitcher
 import Reusable
 
-class SearchViewController: UIViewController, ISearchView {
+class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable {
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
     
@@ -23,23 +23,20 @@ class SearchViewController: UIViewController, ISearchView {
         collectionView.isUserInteractionEnabled = true
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        presenter.setupBeforeViewAppear(then: { self.collectionView.reloadData() })
-    }
-    
-    func setupCollectionViewLayout(for isList: Bool) {
+    func toggleLayout(for isList: Bool) {
         layout = createDisplaySwitcherLayout(forList: isList, viewWidth: view.frame.width)
         collectionView.collectionViewLayout = layout
-    }
-    
-    func setLayoutState(for isList: Bool) {
         layoutState = isList ? .list : .grid
     }
     
     func setEvents(_ events: [EventCollectionCellViewModel]) {
         self.events = events
         collectionView.reloadData()
+    }
+    
+    func handleSelection() {
+        presenter.activate()
+        self.collectionView.reloadData()
     }
     
     private func registerNibs() {
