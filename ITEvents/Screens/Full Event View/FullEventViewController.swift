@@ -12,10 +12,6 @@ class FullEventViewController: UIViewController, IFullEventView {
         return stackView
     }()
     var presenter: IFullEventPresenter!
-    private var isSimilarEventsCollapsed: Bool {
-        get { return descriptionsStackView.isHidden }
-        set { descriptionsStackView.isHidden = newValue }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,24 +34,35 @@ class FullEventViewController: UIViewController, IFullEventView {
     }
     
     private func showMoreButtonTapped(completion: @escaping () -> Void) {
-        let scrollYOffset = stackView.frame.height
         presenter.requestSimilarEvents {
             self.expandOrCollapseEvents()
-            if !self.isSimilarEventsCollapsed {
-                self.scrollView.setContentOffset(CGPoint(x: 0, y: scrollYOffset), animated: true)
+            
+            if !self.descriptionsStackView.isHidden {
+                self.scrollView.layoutIfNeeded()
+                let scrollOffsetPoint = CGPoint(x: 0, y: self.getScrollYOffset())
+                self.scrollView.setContentOffset(scrollOffsetPoint, animated: true)
             }
+            
             completion()
         }
     }
     
-    private func expandOrCollapseEvents() {
-        if !isSimilarEventsCollapsed {
-            UIView.animate(withDuration: 0.3) {
-                self.isSimilarEventsCollapsed = !self.isSimilarEventsCollapsed
-            }
-            return
+    private func getScrollYOffset() -> CGFloat {
+        let descriptionHeight = descriptionsStackView.frame.height
+        let stackViewHeight = stackView.frame.height
+        let viewHeight = view.frame.height
+        if descriptionHeight > viewHeight {
+            return stackViewHeight - descriptionHeight
+        } else if stackViewHeight > viewHeight {
+            return scrollView.contentSize.height - scrollView.bounds.size.height
         }
-        isSimilarEventsCollapsed = !isSimilarEventsCollapsed
+        return 0
+    }
+    
+    private func expandOrCollapseEvents() {
+            UIView.animate(withDuration: 0.3) {
+                self.descriptionsStackView.isHidden = !self.descriptionsStackView.isHidden
+            }
     }
     
     private func openAction(url: URL) {

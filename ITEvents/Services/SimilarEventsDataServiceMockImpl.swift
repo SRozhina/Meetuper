@@ -81,18 +81,22 @@ class SimilarEventsDataServiceMockImpl: ISimilarEventsDataService {
                 )
             ],
             5: [
-                createEvent(id: 5,
-                            title: "Yandex Frontend Meetup for Middle developers and higher",
-                            startDate: getDateFromString(stringDate: "2018-12-23 19:00:00"),
-                            endDate: getDateFromString(stringDate: "2018-12-24 22:00:00"),
-                            image: UIImage(named: "yandex")!,
-                            similarEventsCount: 1,
-                            source: EventSource(id: 1, name: "Яндекс События"),
-                            tags: [
-                                Tag(id: 1, name: "JavaScript"),
-                                Tag(id: 2, name: "Frontend")
-                            ]
-                )
+                Event(id: 5,
+                      title: "Yandex Frontend Meetup for Middle developers and higher",
+                      dateInterval: DateInterval(start: getDateFromString(stringDate: "2018-12-23 19:00:00"),
+                                                 end: getDateFromString(stringDate: "2018-12-24 22:00:00")),
+                      address: "Большой Сампсониевский проспект 28 к2 литД",
+                      city: "Санкт-Петербург",
+                      country: "Россия",
+                      description: "Short description for iPad",
+                      tags: [
+                            Tag(id: 1, name: "JavaScript"),
+                            Tag(id: 2, name: "Frontend")
+                            ],
+                      image: UIImage(named: "yandex")!,
+                      similarEventsCount: 1,
+                      source: EventSource(id: 1, name: "Яндекс События"),
+                      url: URL(string: "https://pitercss.timepad.ru/event/457262/"))
             ]
         ]
         
