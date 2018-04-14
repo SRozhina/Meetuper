@@ -1,11 +1,11 @@
 import Foundation
 
 class FavoritePresenter: IFavoritePresenter {
-    var view: IFavoriveView!
-    var eventDataService: IEventsDataService!
+    let view: IFavoriveView!
+    let eventDataService: IEventsDataService!
     var selectedEventService: ISelectedEventService!
-    var userSettingsService: IUserSettingsService!
-    var dateFormatterService: IDateFormatterService!
+    let userSettingsService: IUserSettingsService!
+    let dateFormatterService: IDateFormatterService!
     private var userSettings: UserSettings!
     private var events: [Event]!
     
@@ -23,16 +23,16 @@ class FavoritePresenter: IFavoritePresenter {
     
     func setup() {
         userSettings = userSettingsService.fetchSettings()
-        self.view.toggleListLayout(to: userSettings.isListLayoutSelected)
+        view.toggleListLayout(to: userSettings.isListLayoutSelected)
         
-        self.eventDataService.fetchEvents(then: { fetchedEvents in
+        eventDataService.fetchEvents(then: { fetchedEvents in
             self.events = fetchedEvents
             let eventViewModels = fetchedEvents.map {
-                FavoriteEventViewModel(id: $0.id,
-                                       title: $0.title,
-                                       shortDate: self.dateFormatterService.formatDate(for: $0.dateInterval, shortVersion: true),
-                                       longDate: self.dateFormatterService.formatDate(for: $0.dateInterval, shortVersion: false),
-                                       image: $0.image)
+                EventCollectionCellViewModel(id: $0.id,
+                                             title: $0.title,
+                                             shortDate: self.dateFormatterService.formatDate(for: $0.dateInterval, shortVersion: true),
+                                             longDate: self.dateFormatterService.formatDate(for: $0.dateInterval, shortVersion: false),
+                                             image: $0.image)
             }
             self.view.setEvents(eventViewModels)
         })
@@ -41,13 +41,10 @@ class FavoritePresenter: IFavoritePresenter {
     func toggleLayoutState() {
         userSettings.isListLayoutSelected = !userSettings.isListLayoutSelected
         view.toggleListLayout(to: userSettings.isListLayoutSelected)
+        userSettingsService.save(settings: userSettings)
     }
     
     func selectEvent(with eventId: Int) {
         selectedEventService.selectedEvent = events.first(where: { $0.id == eventId })
-    }
-    
-    func storeLayoutState() {
-        userSettingsService.save(settings: userSettings)
     }
 }

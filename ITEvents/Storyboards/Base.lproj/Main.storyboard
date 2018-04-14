@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Yi-Er-GNF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Yi-Er-GNF">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,21 +14,76 @@
         <!--Search-->
         <scene sceneID="UPk-zH-435">
             <objects>
-                <viewController id="RD7-ji-xpX" sceneMemberID="viewController">
+                <viewController id="RD7-ji-xpX" customClass="SearchViewController" customModule="ITEvents" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ryD-h5-4DR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="abN-bg-gHP">
+                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="RD7-ji-xpX" id="nxX-sx-Zns"/>
+                                </connections>
+                            </searchBar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Usl-gx-WpU">
+                                <rect key="frame" x="0.0" y="120" width="375" height="498"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jJe-1L-6Se">
+                                    <size key="itemSize" width="220" height="130"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="20"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EventCell" id="szX-zC-eqE" customClass="EventCollectionViewCell" customModule="ITEvents" customModuleProvider="target">
+                                        <rect key="frame" x="77.5" y="0.0" width="220" height="130"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="220" height="130"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="RD7-ji-xpX" id="Ixe-cC-aGq"/>
+                                    <outlet property="delegate" destination="RD7-ji-xpX" id="QqG-hd-BRB"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="3Df-NG-hJa" firstAttribute="trailing" secondItem="Usl-gx-WpU" secondAttribute="trailing" id="1Zd-xm-zNK"/>
+                            <constraint firstItem="3Df-NG-hJa" firstAttribute="bottom" secondItem="Usl-gx-WpU" secondAttribute="bottom" id="B8K-bS-KOD"/>
+                            <constraint firstItem="abN-bg-gHP" firstAttribute="trailing" secondItem="3Df-NG-hJa" secondAttribute="trailing" id="M9U-8j-QAi"/>
+                            <constraint firstItem="abN-bg-gHP" firstAttribute="top" secondItem="3Df-NG-hJa" secondAttribute="top" id="ZzB-Y6-jGj"/>
+                            <constraint firstItem="Usl-gx-WpU" firstAttribute="leading" secondItem="3Df-NG-hJa" secondAttribute="leading" id="e5b-Rx-tLe"/>
+                            <constraint firstItem="Usl-gx-WpU" firstAttribute="top" secondItem="abN-bg-gHP" secondAttribute="bottom" id="eAL-LA-6g2"/>
+                            <constraint firstItem="abN-bg-gHP" firstAttribute="leading" secondItem="3Df-NG-hJa" secondAttribute="leading" id="zRK-Jn-rgM"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="3Df-NG-hJa"/>
                     </view>
                     <navigationItem key="navigationItem" title="Search" id="O9W-XF-rJo"/>
                     <connections>
+                        <outlet property="collectionView" destination="Usl-gx-WpU" id="dyk-K0-dlz"/>
+                        <outlet property="searchBar" destination="abN-bg-gHP" id="Ac2-Ss-qhp"/>
+                        <outlet property="searchDisplayController" destination="Ing-lR-9v8" id="U7W-cF-dxQ"/>
                         <segue destination="Xbi-tk-Qub" kind="show" identifier="Search_OpenEvent" id="9SO-cF-Njo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KEo-8V-UsT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="Ing-lR-9v8">
+                    <connections>
+                        <outlet property="delegate" destination="RD7-ji-xpX" id="SCR-gR-gLb"/>
+                        <outlet property="searchBar" destination="abN-bg-gHP" id="gUC-rZ-MIf"/>
+                        <outlet property="searchContentsController" destination="RD7-ji-xpX" id="FCt-FS-vb1"/>
+                        <outlet property="searchResultsDataSource" destination="RD7-ji-xpX" id="4g1-6O-Fxq"/>
+                        <outlet property="searchResultsDelegate" destination="RD7-ji-xpX" id="bkf-Ez-VY2"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="-1018" y="179"/>
+            <point key="canvasLocation" x="-1018.4" y="178.56071964017991"/>
         </scene>
         <!--Full Event View Controller-->
         <scene sceneID="w6Y-gd-5N7">
@@ -88,7 +143,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="xfd-0W-TCm"/>
                     <connections>
-                        <segue destination="Xbi-tk-Qub" kind="show" identifier="Profile_OpenEvent" action="showDetailViewController:sender:" id="XIz-NE-dz2"/>
+                        <segue destination="Xbi-tk-Qub" kind="show" identifier="Profile_OpenEvent" id="XIz-NE-dz2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FOY-B6-KhO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -188,10 +243,10 @@
             </objects>
             <point key="canvasLocation" x="-1018.4" y="-530.28485757121439"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Events Tab Bar Controller-->
         <scene sceneID="fuZ-ug-wJo">
             <objects>
-                <tabBarController id="9Yi-Er-GNF" sceneMemberID="viewController">
+                <tabBarController id="9Yi-Er-GNF" customClass="EventsTabBarController" customModule="ITEvents" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Qga-Dj-xg6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -245,11 +300,11 @@
             </objects>
             <point key="canvasLocation" x="-1886.4000000000001" y="178.11094452773614"/>
         </scene>
-        <!--Pofile-->
+        <!--Profile-->
         <scene sceneID="pb9-fC-jxs">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iGc-Us-BUP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Pofile" image="Profile Inactive" selectedImage="Profile" id="0hy-gr-FTq"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="Profile Inactive" selectedImage="Profile" id="0hy-gr-FTq"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="w0z-JU-UUs">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -270,6 +325,6 @@
         <image name="Profile Inactive" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dEb-y7-KcZ"/>
+        <segue reference="9SO-cF-Njo"/>
     </inferredMetricsTieBreakers>
 </document>

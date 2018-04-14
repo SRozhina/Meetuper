@@ -4,7 +4,7 @@ import Reusable
 
 class FavoritesViewController: UIViewController, IFavoriveView {
     var presenter: IFavoritePresenter!
-    private var events = [FavoriteEventViewModel]()
+    private var events = [EventCollectionCellViewModel]()
     
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var rotationButton: SwitchLayoutButton!
@@ -14,10 +14,9 @@ class FavoritesViewController: UIViewController, IFavoriveView {
     private var gridLayout: DisplaySwitchLayout!
     
     private var layoutState: LayoutState!
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpLayouts()
         rotationButton.animationDuration = animationDuration
         registerNibs()
@@ -31,8 +30,8 @@ class FavoritesViewController: UIViewController, IFavoriveView {
         super.viewDidAppear(animated)
         collectionView.isUserInteractionEnabled = true
     }
-
-    func setEvents(_ events: [FavoriteEventViewModel]) {
+    
+    func setEvents(_ events: [EventCollectionCellViewModel]) {
         self.events = events
         collectionView.reloadData()
     }
@@ -43,18 +42,9 @@ class FavoritesViewController: UIViewController, IFavoriveView {
     }
     
     private func setUpLayouts() {
-        let listLayoutCellStaticHeihgt: CGFloat = 85
-        let gridLayoutCellStaticHeight: CGFloat = 190
-        let gridColumnCount = floor(view.frame.width / 168)
-        listLayout = DisplaySwitchLayout(staticCellHeight: listLayoutCellStaticHeihgt,
-                                         nextLayoutStaticCellHeight: gridLayoutCellStaticHeight,
-                                         layoutState: .list,
-                                         cellPadding: CGPoint(x: 10, y: 8))
-        gridLayout = DisplaySwitchLayout(staticCellHeight: gridLayoutCellStaticHeight,
-                                         nextLayoutStaticCellHeight: listLayoutCellStaticHeihgt,
-                                         layoutState: .grid,
-                                         cellPadding: CGPoint(x: 10, y: 8),
-                                         gridLayoutCountOfColumns: Int(gridColumnCount))
+        let viewWidth = view.frame.width
+        listLayout = createDisplaySwitcherLayout(forList: true, viewWidth: viewWidth)
+        gridLayout = createDisplaySwitcherLayout(forList: false, viewWidth: viewWidth)
     }
     
     private func setupCollectionView() {
@@ -88,15 +78,10 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let event = events[indexPath.row]
-        let cell: EventCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        if layoutState == .list {
-            cell.setupListLayout()
-        } else {
-            cell.setupGridLayout()
-        }
-        cell.setup(with: event)
-        return cell
+        return getEventCollectionViewCell(collectionView,
+                                          cellForItemAt: indexPath,
+                                          event: events[indexPath.row],
+                                          layoutState: layoutState)
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -108,7 +93,6 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.isUserInteractionEnabled = false
         presenter.selectEvent(with: events[indexPath.row].id)
-        presenter.storeLayoutState()
         self.performSegue(withIdentifier: "Favorite_OpenEvent", sender: nil)
     }
 }

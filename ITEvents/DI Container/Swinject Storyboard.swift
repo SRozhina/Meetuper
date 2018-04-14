@@ -49,5 +49,17 @@ extension SwinjectStoryboard {
         defaultContainer.storyboardInitCompleted(FullEventViewController.self) { r, c in
             c.presenter = r.resolve(IFullEventPresenter.self, argument: c as IFullEventView)!
         }
+        
+        defaultContainer.register(ISearchPresenter.self) { r, v in
+            SearchPresenter(view: v,
+                            eventDataService: r.resolve(IEventsDataService.self)!,
+                            selectedEventService: r.resolve(ISelectedEventService.self)!,
+                            userSettingsService: r.resolve(IUserSettingsService.self)!,
+                            dateFormatterService: r.resolve(IDateFormatterService.self)!)
+        }
+        
+        defaultContainer.storyboardInitCompleted(SearchViewController.self) { r, c in
+            c.presenter = r.resolve(ISearchPresenter.self, argument: c as ISearchView)!
+        }
     }
 }
