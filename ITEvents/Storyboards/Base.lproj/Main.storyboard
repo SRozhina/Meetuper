@@ -19,14 +19,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="abN-bg-gHP">
-                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
-                                <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="RD7-ji-xpX" id="nxX-sx-Zns"/>
-                                </connections>
-                            </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Usl-gx-WpU">
                                 <rect key="frame" x="0.0" y="120" width="375" height="498"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -51,6 +43,14 @@
                                     <outlet property="delegate" destination="RD7-ji-xpX" id="QqG-hd-BRB"/>
                                 </connections>
                             </collectionView>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="abN-bg-gHP">
+                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="RD7-ji-xpX" id="wRO-DF-Nt8"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -67,7 +67,7 @@
                     <navigationItem key="navigationItem" title="Search" id="O9W-XF-rJo"/>
                     <connections>
                         <outlet property="collectionView" destination="Usl-gx-WpU" id="dyk-K0-dlz"/>
-                        <outlet property="searchBar" destination="abN-bg-gHP" id="Ac2-Ss-qhp"/>
+                        <outlet property="searchBar" destination="abN-bg-gHP" id="oVY-l4-jeg"/>
                         <outlet property="searchDisplayController" destination="Ing-lR-9v8" id="U7W-cF-dxQ"/>
                         <segue destination="Xbi-tk-Qub" kind="show" identifier="Search_OpenEvent" id="9SO-cF-Njo"/>
                     </connections>
@@ -76,7 +76,6 @@
                 <searchDisplayController id="Ing-lR-9v8">
                     <connections>
                         <outlet property="delegate" destination="RD7-ji-xpX" id="SCR-gR-gLb"/>
-                        <outlet property="searchBar" destination="abN-bg-gHP" id="gUC-rZ-MIf"/>
                         <outlet property="searchContentsController" destination="RD7-ji-xpX" id="FCt-FS-vb1"/>
                         <outlet property="searchResultsDataSource" destination="RD7-ji-xpX" id="4g1-6O-Fxq"/>
                         <outlet property="searchResultsDelegate" destination="RD7-ji-xpX" id="bkf-Ez-VY2"/>

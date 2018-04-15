@@ -24,14 +24,8 @@ class SearchPresenter: ISearchPresenter {
         
         eventDataService.fetchEvents(then: { fetchedEvents in
             self.events = fetchedEvents
-            let eventViewModels = fetchedEvents.map {
-                EventCollectionCellViewModel(id: $0.id,
-                                       title: $0.title,
-                                       shortDate: self.dateFormatterService.formatDate(for: $0.dateInterval, shortVersion: true),
-                                       longDate: self.dateFormatterService.formatDate(for: $0.dateInterval, shortVersion: false),
-                                       image: $0.image)
-            }
-            self.view.setEvents(eventViewModels)
+            let eventCollectionCellViewModels = self.makeEventCollectionCellViewModelsFrom(events: self.events)
+            self.view.setEvents(eventCollectionCellViewModels)
         })
     }
     
@@ -44,5 +38,24 @@ class SearchPresenter: ISearchPresenter {
     
     func selectEvent(with eventId: Int) {
         selectedEventService.selectedEvent = events.first(where: { $0.id == eventId })
+    }
+    
+    func searchBy(text: String, tags: [Tag]) {
+        eventDataService.searchEventsBy(text: text, tags: tags, then: { fetchedEvents in
+            self.events = fetchedEvents
+            let eventCollectionCellViewModels = self.makeEventCollectionCellViewModelsFrom(events: fetchedEvents)
+            self.view.setEvents(eventCollectionCellViewModels)
+        })
+        
+    }
+    
+    private func makeEventCollectionCellViewModelsFrom(events: [Event]) -> [EventCollectionCellViewModel] {
+        return events.map {
+            EventCollectionCellViewModel(id: $0.id,
+                                         title: $0.title,
+                                         shortDate: self.dateFormatterService.formatDate(for: $0.dateInterval, shortVersion: true),
+                                         longDate: self.dateFormatterService.formatDate(for: $0.dateInterval, shortVersion: false),
+                                         image: $0.image)
+        }
     }
 }
