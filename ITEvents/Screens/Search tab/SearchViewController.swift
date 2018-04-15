@@ -12,7 +12,7 @@ class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable
     private var layout: DisplaySwitchLayout!
     private var layoutState: LayoutState!
     
-    private var fetchEventsDebounced: ((String) -> Void)!
+    private var fetchEventsDebounced: ((String, Bool) -> Void)!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +51,7 @@ class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable
         collectionView.register(cellType: EventCollectionViewCell.self)
     }
     
-    private func fetchEvents(searchText: String) {
+    private func fetchEvents(searchText: String, isDelayNeeded: Bool) {
         presenter.searchBy(text: searchText, tags: [])
     }
 }
@@ -79,10 +79,10 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let searchText = searchBar.text ?? ""
         let searchTags = [Tag]()
-        fetchEventsDebounced(searchText)
+        fetchEventsDebounced(searchText, false)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        fetchEventsDebounced(searchText)
+        fetchEventsDebounced(searchText, true)
     }
 }
