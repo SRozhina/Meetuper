@@ -9,6 +9,36 @@ class EventsDataServiceMockImpl: IEventsDataService {
         return formatter
     }()
     
+    func fetchFavoriteEvents(then completion: @escaping EventsDataServiceCallback) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            let events = self.getEvents()
+            completion(events)
+        }
+    }
+    
+    func searchEvents(indexRange: Range<Int>, text: String, tags: [Tag], then completion: @escaping EventsDataServiceCallback) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            let events = self.getEvents()
+            let filteredEvents = events.filter({
+                $0.title.lowercased().contains(text.lowercased()) ||
+                    $0.description.lowercased().contains(text.lowercased())
+            })
+            let updatedIndexRange = filteredEvents.count < indexRange.upperBound
+                ? indexRange.lowerBound..<filteredEvents.count
+                : indexRange
+            let filteredEventsSlice = filteredEvents[updatedIndexRange]
+            completion(Array(filteredEventsSlice))
+        }
+    }
+    
+    func fetchEvents(indexRange: Range<Int>, then completion: @escaping EventsDataServiceCallback) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            let events = self.getEvents()
+            let eventsSlice = events[indexRange]
+            completion(Array(eventsSlice))
+        }
+    }
+    
     private func createEvent(id: Int,
                              title: String,
                              startDate: Date,
@@ -44,79 +74,65 @@ class EventsDataServiceMockImpl: IEventsDataService {
         return dateFormatter.date(from: stringDate)!
     }
     
-    func fetchEvents(then completion: @escaping ([Event]) -> Void) {
-        let events = getEvents()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            completion(events)
-        }
-    }
-    
     private func getEvents() -> [Event] {
-        return [
-            createEvent(id: 1,
-                        title: "PiterJS #21",
-                        startDate: getDateFromString(stringDate: "2018-01-18 19:00:00"),
-                        endDate: getDateFromString(stringDate: "2018-01-18 22:00:00"),
-                        image: UIImage(named: "js")!,
-                        similarEventsCount: 0,
-                        source: EventSource(id: 1, name: "Timepad"),
-                        tags: (0...10).map {Tag(id: $0, name: "JavaScript")}
-                        ),
-            createEvent(id: 2,
-                        title: "PiterCSS #25",
-                        startDate: getDateFromString(stringDate: "2018-03-31 19:00:00"),
-                        endDate: getDateFromString(stringDate: "2018-03-31 22:00:00"),
-                        image: UIImage(named: "pitercss")!,
-                        similarEventsCount: 1,
-                        source: EventSource(id: 2, name: "Meetup.com"),
-                        tags: [
-                            Tag(id: 1, name: "JavaScript"),
-                            Tag(id: 2, name: "Frontend")
-                        ]),
-            createEvent(id: 3,
-                        title: "DartUp",
-                        startDate: getDateFromString(stringDate: "2018-05-06 19:00:00"),
-                        endDate: getDateFromString(stringDate: "2018-05-06 22:00:00"),
-                        image: UIImage(named: "wrike")!,
-                        similarEventsCount: 2,
-                        source: EventSource(id: 3, name: "Meetabit"),
-                        tags: [Tag(id: 1, name: "JavaScript")]),
-            createEvent(id: 4,
-                        title: "EmberJS",
-                        startDate: getDateFromString(stringDate: "2018-09-09 19:00:00"),
-                        endDate: getDateFromString(stringDate: "2018-09-09 22:00:00"),
-                        image: UIImage(named: "ember")!,
-                        similarEventsCount: 0,
-                        source: EventSource(id: 1, name: "Timepad"),
-                        tags: [Tag(id: 1, name: "JavaScript")]),
-            Event(id: 5,
-                  title: "Yandex Frontend Meetup for Middle developers and higher",
-                  dateInterval: DateInterval(start: getDateFromString(stringDate: "2018-12-23 19:00:00"),
-                                             end: getDateFromString(stringDate: "2018-12-24 22:00:00")),
-                  address: "Большой Сампсониевский проспект 28 к2 литД",
-                  city: "Санкт-Петербург",
-                  country: "Россия",
-                  description: "Short description for iPad",
-                  tags: [
-                    Tag(id: 1, name: "JavaScript"),
-                    Tag(id: 2, name: "Frontend")
-                ],
-                  image: UIImage(named: "yandex")!,
-                  similarEventsCount: 1,
-                  source: EventSource(id: 1, name: "Яндекс События"),
-                  url: URL(string: "https://pitercss.timepad.ru/event/457262/"))
-        ]
-    }
-    
-    func searchEventsBy(text: String, tags: [Tag], then completion: @escaping ([Event]) -> Void) {
-        let events = getEvents()
-        let filteredEvents = events.filter({
-            $0.title.lowercased().contains(text.lowercased()) ||
-            $0.description.lowercased().contains(text.lowercased())
-        })
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            completion(filteredEvents)
+        var events = [Event]()
+        for _ in 0..<6 {
+            events.append(contentsOf:
+            [
+                createEvent(id: 1,
+                            title: "PiterJS #21",
+                            startDate: getDateFromString(stringDate: "2018-01-18 19:00:00"),
+                            endDate: getDateFromString(stringDate: "2018-01-18 22:00:00"),
+                            image: UIImage(named: "js")!,
+                            similarEventsCount: 0,
+                            source: EventSource(id: 1, name: "Timepad"),
+                            tags: (0...10).map {Tag(id: $0, name: "JavaScript")}
+                ),
+                createEvent(id: 2,
+                            title: "PiterCSS #25",
+                            startDate: getDateFromString(stringDate: "2018-03-31 19:00:00"),
+                            endDate: getDateFromString(stringDate: "2018-03-31 22:00:00"),
+                            image: UIImage(named: "pitercss")!,
+                            similarEventsCount: 1,
+                            source: EventSource(id: 2, name: "Meetup.com"),
+                            tags: [
+                                Tag(id: 1, name: "JavaScript"),
+                                Tag(id: 2, name: "Frontend")
+                    ]),
+                createEvent(id: 3,
+                            title: "DartUp",
+                            startDate: getDateFromString(stringDate: "2018-05-06 19:00:00"),
+                            endDate: getDateFromString(stringDate: "2018-05-06 22:00:00"),
+                            image: UIImage(named: "wrike")!,
+                            similarEventsCount: 2,
+                            source: EventSource(id: 3, name: "Meetabit"),
+                            tags: [Tag(id: 1, name: "JavaScript")]),
+                createEvent(id: 4,
+                            title: "EmberJS",
+                            startDate: getDateFromString(stringDate: "2018-09-09 19:00:00"),
+                            endDate: getDateFromString(stringDate: "2018-09-09 22:00:00"),
+                            image: UIImage(named: "ember")!,
+                            similarEventsCount: 0,
+                            source: EventSource(id: 1, name: "Timepad"),
+                            tags: [Tag(id: 1, name: "JavaScript")]),
+                Event(id: 5,
+                      title: "Yandex Frontend Meetup for Middle developers and higher",
+                      dateInterval: DateInterval(start: getDateFromString(stringDate: "2018-12-23 19:00:00"),
+                                                 end: getDateFromString(stringDate: "2018-12-24 22:00:00")),
+                      address: "Большой Сампсониевский проспект 28 к2 литД",
+                      city: "Санкт-Петербург",
+                      country: "Россия",
+                      description: "Short description for iPad",
+                      tags: [
+                        Tag(id: 1, name: "JavaScript"),
+                        Tag(id: 2, name: "Frontend")
+                    ],
+                      image: UIImage(named: "yandex")!,
+                      similarEventsCount: 1,
+                      source: EventSource(id: 1, name: "Яндекс События"),
+                      url: URL(string: "https://pitercss.timepad.ru/event/457262/"))
+            ])
         }
+        return events
     }
 }

@@ -22,7 +22,7 @@ class SearchPresenter: ISearchPresenter {
     func setup() {
         activate()
         
-        eventDataService.fetchEvents(then: { fetchedEvents in
+        eventDataService.fetchFavoriteEvents(then: { fetchedEvents in
             self.events = fetchedEvents
             let eventCollectionCellViewModels = self.makeEventCollectionCellViewModelsFrom(events: self.events)
             self.view.setEvents(eventCollectionCellViewModels)
@@ -41,12 +41,22 @@ class SearchPresenter: ISearchPresenter {
     }
     
     func searchBy(text: String, tags: [Tag]) {
-        eventDataService.searchEventsBy(text: text, tags: tags, then: { fetchedEvents in
-            self.events = fetchedEvents
-            let eventCollectionCellViewModels = self.makeEventCollectionCellViewModelsFrom(events: fetchedEvents)
-            self.view.setEvents(eventCollectionCellViewModels)
+        if text == "" {
+            eventDataService.fetchEvents(indexRange: 0..<20) { fetchedEvents in
+                self.transfrom(fetchedEvents: fetchedEvents)
+            }
+            return
+        }
+        eventDataService.searchEvents(indexRange: 0..<20, text: text, tags: tags, then: { fetchedEvents in
+            self.transfrom(fetchedEvents: fetchedEvents)
         })
         
+    }
+    
+    private func transfrom(fetchedEvents: [Event]) {
+        events = fetchedEvents
+        let eventCollectionCellViewModels = makeEventCollectionCellViewModelsFrom(events: fetchedEvents)
+        view.setEvents(eventCollectionCellViewModels)
     }
     
     private func makeEventCollectionCellViewModelsFrom(events: [Event]) -> [EventCollectionCellViewModel] {

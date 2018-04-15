@@ -25,7 +25,7 @@ class FavoritePresenter: IFavoritePresenter {
         userSettings = userSettingsService.fetchSettings()
         view.toggleListLayout(to: userSettings.isListLayoutSelected)
         
-        eventDataService.fetchEvents(then: { fetchedEvents in
+        eventDataService.fetchFavoriteEvents(then: { fetchedEvents in
             self.events = fetchedEvents
             let eventViewModels = fetchedEvents.map {
                 EventCollectionCellViewModel(id: $0.id,
