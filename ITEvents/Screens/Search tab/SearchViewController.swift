@@ -11,6 +11,7 @@ class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable
     
     private var layout: DisplaySwitchLayout!
     private var layoutState: LayoutState!
+    private var loadInProgress: Bool = false
     
     private var fetchEventsDebounced: ((String, Bool) -> Void)!
     
@@ -94,13 +95,14 @@ extension SearchViewController: UISearchBarDelegate {
 
 extension SearchViewController {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if loadInProgress { return }
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         if offsetY > contentHeight - scrollView.frame.size.height {
-            self.collectionView.isScrollEnabled = false
+            loadInProgress = true
             presenter.loadEventsBlock(for: searchBar.text ?? "", tags: [], then: {
                 self.collectionView.reloadData()
-                self.collectionView.isScrollEnabled = true
+                self.loadInProgress = false
             })
         }
     }

@@ -52,9 +52,7 @@ class SearchPresenter: ISearchPresenter {
     }
     
     func loadEventsBlock(for text: String, tags: [Tag], then completion: @escaping () -> Void) {
-        //TODO have a problem with events range ???
         let range: Range<Int> = events.count..<events.count + 10
-        print(range)
         if text == "" && tags.isEmpty {
             eventDataService.fetchEvents(indexRange: range) { fetchedEvents in
                 self.handleNewFetchedEvents(fetchedEvents, isAdditional: true)
