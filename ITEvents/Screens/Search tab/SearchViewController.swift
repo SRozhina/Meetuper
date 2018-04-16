@@ -5,7 +5,6 @@ import Reusable
 class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable {
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
-    
     var presenter: ISearchPresenter!
     private var events = [EventCollectionCellViewModel]()
     
@@ -84,7 +83,6 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let searchText = searchBar.text ?? ""
-        let searchTags = [Tag]()
         fetchEventsDebounced(searchText, false)
     }
     
