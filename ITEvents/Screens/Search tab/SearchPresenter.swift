@@ -22,10 +22,8 @@ class SearchPresenter: ISearchPresenter {
     func setup() {
         activate()
         
-        eventDataService.fetchFavoriteEvents(then: { fetchedEvents in
-            self.events = fetchedEvents
-            let eventCollectionCellViewModels = self.makeEventCollectionCellViewModelsFrom(events: self.events)
-            self.view.setEvents(eventCollectionCellViewModels)
+        eventDataService.fetchEvents(indexRange: 0..<10, then: { fetchedEvents in
+            self.handleNewFetchedEvents(fetchedEvents, isAdditional: false)
         })
     }
     
@@ -41,21 +39,42 @@ class SearchPresenter: ISearchPresenter {
     }
     
     func searchBy(text: String, tags: [Tag]) {
-        if text == "" {
-            eventDataService.fetchEvents(indexRange: 0..<20) { fetchedEvents in
-                self.transfrom(fetchedEvents: fetchedEvents)
+        if text == "" && tags.isEmpty {
+            eventDataService.fetchEvents(indexRange: 0..<10) { fetchedEvents in
+                self.handleNewFetchedEvents(fetchedEvents, isAdditional: false)
             }
             return
         }
-        eventDataService.searchEvents(indexRange: 0..<20, text: text, tags: tags, then: { fetchedEvents in
-            self.transfrom(fetchedEvents: fetchedEvents)
+        eventDataService.searchEvents(indexRange: 0..<10, text: text, tags: tags, then: { fetchedEvents in
+            self.handleNewFetchedEvents(fetchedEvents, isAdditional: false)
         })
         
     }
     
-    private func transfrom(fetchedEvents: [Event]) {
-        events = fetchedEvents
-        let eventCollectionCellViewModels = makeEventCollectionCellViewModelsFrom(events: fetchedEvents)
+    func loadEventsBlock(for text: String, tags: [Tag], then completion: @escaping () -> Void) {
+        //TODO have a problem with events range ???
+        let range: Range<Int> = events.count..<events.count + 10
+        print(range)
+        if text == "" && tags.isEmpty {
+            eventDataService.fetchEvents(indexRange: range) { fetchedEvents in
+                self.handleNewFetchedEvents(fetchedEvents, isAdditional: true)
+                completion()
+            }
+            return
+        }
+        eventDataService.searchEvents(indexRange: range, text: text, tags: tags, then: { fetchedEvents in
+            self.handleNewFetchedEvents(fetchedEvents, isAdditional: true)
+            completion()
+        })
+    }
+    
+    private func handleNewFetchedEvents(_ fetchedEvents: [Event], isAdditional: Bool) {
+        if isAdditional {
+            events.append(contentsOf: fetchedEvents)
+        } else {
+            events = fetchedEvents
+        }
+        let eventCollectionCellViewModels = makeEventCollectionCellViewModelsFrom(events: events)
         view.setEvents(eventCollectionCellViewModels)
     }
     

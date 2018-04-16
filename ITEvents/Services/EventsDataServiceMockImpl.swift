@@ -34,7 +34,10 @@ class EventsDataServiceMockImpl: IEventsDataService {
     func fetchEvents(indexRange: Range<Int>, then completion: @escaping EventsDataServiceCallback) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             let events = self.getEvents()
-            let eventsSlice = events[indexRange]
+            let updatedIndexRange = events.count < indexRange.upperBound
+                ? indexRange.lowerBound..<events.count
+                : indexRange
+            let eventsSlice = events[updatedIndexRange]
             completion(Array(eventsSlice))
         }
     }
@@ -76,7 +79,7 @@ class EventsDataServiceMockImpl: IEventsDataService {
     
     private func getEvents() -> [Event] {
         var events = [Event]()
-        for _ in 0..<6 {
+        for _ in 0..<50 {
             events.append(contentsOf:
             [
                 createEvent(id: 1,

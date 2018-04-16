@@ -55,11 +55,11 @@
                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="3Df-NG-hJa" firstAttribute="trailing" secondItem="Usl-gx-WpU" secondAttribute="trailing" id="1Zd-xm-zNK"/>
+                            <constraint firstItem="Usl-gx-WpU" firstAttribute="top" secondItem="abN-bg-gHP" secondAttribute="bottom" id="AGs-8k-8W3"/>
                             <constraint firstItem="3Df-NG-hJa" firstAttribute="bottom" secondItem="Usl-gx-WpU" secondAttribute="bottom" id="B8K-bS-KOD"/>
                             <constraint firstItem="abN-bg-gHP" firstAttribute="trailing" secondItem="3Df-NG-hJa" secondAttribute="trailing" id="M9U-8j-QAi"/>
                             <constraint firstItem="abN-bg-gHP" firstAttribute="top" secondItem="3Df-NG-hJa" secondAttribute="top" id="ZzB-Y6-jGj"/>
                             <constraint firstItem="Usl-gx-WpU" firstAttribute="leading" secondItem="3Df-NG-hJa" secondAttribute="leading" id="e5b-Rx-tLe"/>
-                            <constraint firstItem="Usl-gx-WpU" firstAttribute="top" secondItem="abN-bg-gHP" secondAttribute="bottom" id="eAL-LA-6g2"/>
                             <constraint firstItem="abN-bg-gHP" firstAttribute="leading" secondItem="3Df-NG-hJa" secondAttribute="leading" id="zRK-Jn-rgM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3Df-NG-hJa"/>

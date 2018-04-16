@@ -18,7 +18,7 @@ class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable
         super.viewDidLoad()
         registerNibs()
         presenter.setup()
-        
+        collectionView.addInfiniteScroll(handler: { _ in })
         fetchEventsDebounced = debounce(
             delay: DispatchTimeInterval.seconds(2),
             queue: DispatchQueue.main,
@@ -39,12 +39,12 @@ class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable
     
     func setEvents(_ events: [EventCollectionCellViewModel]) {
         self.events = events
-        collectionView.reloadData()
+        updateCollectionView()
     }
     
     func handleSelection() {
         presenter.activate()
-        self.collectionView.reloadData()
+        updateCollectionView()
     }
     
     private func registerNibs() {
@@ -53,6 +53,11 @@ class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable
     
     private func fetchEvents(searchText: String, isDelayNeeded: Bool) {
         presenter.searchBy(text: searchText, tags: [])
+    }
+    
+    private func updateCollectionView() {
+        collectionView.reloadData()
+        collectionView.finishInfiniteScroll()
     }
 }
 
@@ -84,5 +89,19 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         fetchEventsDebounced(searchText, true)
+    }
+}
+
+extension SearchViewController {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        if offsetY > contentHeight - scrollView.frame.size.height {
+            self.collectionView.isScrollEnabled = false
+            presenter.loadEventsBlock(for: searchBar.text ?? "", tags: [], then: {
+                self.collectionView.reloadData()
+                self.collectionView.isScrollEnabled = true
+            })
+        }
     }
 }
