@@ -3,11 +3,14 @@ import DisplaySwitcher
 import Reusable
 
 class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable {
+    var presenter: ISearchPresenter!
+
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
-    var presenter: ISearchPresenter!
-    private var events = [EventCollectionCellViewModel]()
+    @IBOutlet private weak var activityIndicatorViewHeight: NSLayoutConstraint!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
+    private var events = [EventCollectionCellViewModel]()
     private var layout: DisplaySwitchLayout!
     private var layoutState: LayoutState!
     private var loadInProgress: Bool = false
@@ -18,7 +21,7 @@ class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable
         super.viewDidLoad()
         registerNibs()
         presenter.setup()
-        collectionView.addInfiniteScroll(handler: { _ in })
+        collectionView.contentInset =  UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
         fetchEventsDebounced = debounce(
             delay: DispatchTimeInterval.seconds(2),
             queue: DispatchQueue.main,
@@ -39,12 +42,12 @@ class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable
     
     func setEvents(_ events: [EventCollectionCellViewModel]) {
         self.events = events
-        updateCollectionView()
+        collectionView.reloadData()
     }
     
     func handleSelection() {
         presenter.activate()
-        updateCollectionView()
+        collectionView.reloadData()
     }
     
     private func registerNibs() {
@@ -53,11 +56,6 @@ class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable
     
     private func fetchEvents(searchText: String, isDelayNeeded: Bool) {
         presenter.searchBy(text: searchText, tags: [])
-    }
-    
-    private func updateCollectionView() {
-        collectionView.reloadData()
-        collectionView.finishInfiniteScroll()
     }
 }
 
@@ -92,16 +90,26 @@ extension SearchViewController: UISearchBarDelegate {
 }
 
 extension SearchViewController {
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if loadInProgress { return }
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
-        if offsetY > contentHeight - scrollView.frame.size.height {
-            loadInProgress = true
+        if offsetY >= contentHeight - scrollView.frame.size.height {
+            toggleActivityIndicator(visibility: true)
             presenter.loadEventsBlock(for: searchBar.text ?? "", tags: [], then: {
+                self.toggleActivityIndicator(visibility: false)
                 self.collectionView.reloadData()
-                self.loadInProgress = false
             })
         }
+    }
+    
+    private func toggleActivityIndicator(visibility: Bool) {
+        let height: CGFloat = visibility ? 40 : 0
+        visibility ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
+        UIView.animate(withDuration: 0.2) {
+            self.activityIndicatorViewHeight.constant = height
+            self.view.layoutSubviews()
+        }
+        loadInProgress = visibility
     }
 }
