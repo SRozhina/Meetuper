@@ -8,6 +8,6 @@ target 'ITEvents' do
   pod 'SwinjectStoryboard'
   pod 'Reusable'
   pod 'TagListView'
-  pod 'UIScrollView-InfiniteScroll'
+  pod 'UIScrollView-InfiniteScroll', :git => 'https://github.com/pronebird/UIScrollView-InfiniteScroll', :branch => 'master'
 
 end
