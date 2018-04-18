@@ -4,7 +4,7 @@ import Reusable
 
 class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable {
     var presenter: ISearchPresenter!
-
+    
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var activityIndicatorViewHeight: NSLayoutConstraint!
@@ -40,9 +40,16 @@ class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable
         layoutState = isList ? .list : .grid
     }
     
-    func setEvents(_ events: [EventCollectionCellViewModel]) {
-        self.events = events
+    func setEvents(_ fetchedEvents: [EventCollectionCellViewModel]) {
+        self.events = fetchedEvents
         collectionView.reloadData()
+        collectionView.contentOffset.y = 0
+    }
+    
+    func insertEvents(_ fetchedEvents: [EventCollectionCellViewModel], at indexes: [Int]) {
+        events.append(contentsOf: fetchedEvents)
+        let indexPaths = indexes.map { IndexPath(row: $0, section: 0)}
+        collectionView.insertItems(at: indexPaths)
     }
     
     func handleSelection() {
@@ -55,7 +62,7 @@ class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable
     }
     
     private func fetchEvents(searchText: String, isDelayNeeded: Bool) {
-        presenter.searchBy(text: searchText, tags: [])
+        presenter.loadEventsBlock(for: searchText, tags: [], isAdditional: false, then: nil)
     }
 }
 
@@ -66,9 +73,9 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return getEventCollectionViewCell(collectionView,
-                                              cellForItemAt: indexPath,
-                                              event: events[indexPath.row],
-                                              layoutState: layoutState)
+                                          cellForItemAt: indexPath,
+                                          event: events[indexPath.row],
+                                          layoutState: layoutState)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -96,9 +103,8 @@ extension SearchViewController {
         let contentHeight = scrollView.contentSize.height
         if offsetY >= contentHeight - scrollView.frame.size.height {
             toggleActivityIndicator(visibility: true)
-            presenter.loadEventsBlock(for: searchBar.text ?? "", tags: [], then: {
+            presenter.loadEventsBlock(for: searchBar.text ?? "", tags: [], isAdditional: true, then: {
                 self.toggleActivityIndicator(visibility: false)
-                self.collectionView.reloadData()
             })
         }
     }
@@ -109,6 +115,9 @@ extension SearchViewController {
         UIView.animate(withDuration: 0.2) {
             self.activityIndicatorViewHeight.constant = height
             self.view.layoutSubviews()
+            if !visibility {
+                self.collectionView.contentOffset.y += 40
+            }
         }
         loadInProgress = visibility
     }
