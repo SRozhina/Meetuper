@@ -4,7 +4,10 @@ class SearchPresenter: ISearchPresenter {
     var selectedEventService: ISelectedEventService!
     let userSettingsService: IUserSettingsService!
     let dateFormatterService: IDateFormatterService!
-    private var events: [Event]!
+    private var events: [Event]! {
+        willSet { oldEventsCount = events?.count ?? 0 }
+    }
+    private var oldEventsCount = 0
     private var isListLayoutCurrent: Bool!
     
     init(view: ISearchView,
@@ -23,7 +26,7 @@ class SearchPresenter: ISearchPresenter {
         activate()
         
         eventDataService.fetchEvents(indexRange: 0..<10, then: { fetchedEvents in
-            self.handleNewFetchedEvents(fetchedEvents, isAdditional: false)
+            self.appendEvents(fetchedEvents, isAdditional: false)
         })
     }
     
@@ -37,43 +40,33 @@ class SearchPresenter: ISearchPresenter {
     func selectEvent(with eventId: Int) {
         selectedEventService.selectedEvent = events.first(where: { $0.id == eventId })
     }
-    
-    func searchBy(text: String, tags: [Tag]) {
-        if text == "" && tags.isEmpty {
-            eventDataService.fetchEvents(indexRange: 0..<10) { fetchedEvents in
-                self.handleNewFetchedEvents(fetchedEvents, isAdditional: false)
-            }
-            return
-        }
-        eventDataService.searchEvents(indexRange: 0..<10, text: text, tags: tags, then: { fetchedEvents in
-            self.handleNewFetchedEvents(fetchedEvents, isAdditional: false)
-        })
-        
-    }
-    
-    func loadEventsBlock(for text: String, tags: [Tag], then completion: @escaping () -> Void) {
+
+    func loadEventsBlock(for text: String, tags: [Tag], isAdditional: Bool, then completion: (() -> Void)?) {
         let range: Range<Int> = events.count..<events.count + 10
         if text == "" && tags.isEmpty {
             eventDataService.fetchEvents(indexRange: range) { fetchedEvents in
-                self.handleNewFetchedEvents(fetchedEvents, isAdditional: true)
-                completion()
+                self.appendEvents(fetchedEvents, isAdditional: isAdditional)
+                completion?()
             }
             return
         }
         eventDataService.searchEvents(indexRange: range, text: text, tags: tags, then: { fetchedEvents in
-            self.handleNewFetchedEvents(fetchedEvents, isAdditional: true)
-            completion()
+            self.appendEvents(fetchedEvents, isAdditional: isAdditional)
+            completion?()
         })
     }
     
-    private func handleNewFetchedEvents(_ fetchedEvents: [Event], isAdditional: Bool) {
+    private func appendEvents(_ fetchedEvents: [Event], isAdditional: Bool) {
         if isAdditional {
             events.append(contentsOf: fetchedEvents)
+            let eventCollectionCellViewModels = makeEventCollectionCellViewModelsFrom(events: fetchedEvents)
+            let indexes = Array(oldEventsCount..<events.count)
+            view.insertEvents(eventCollectionCellViewModels, at: indexes)
         } else {
             events = fetchedEvents
+            let eventCollectionCellViewModels = makeEventCollectionCellViewModelsFrom(events: events)
+            view.setEvents(eventCollectionCellViewModels)
         }
-        let eventCollectionCellViewModels = makeEventCollectionCellViewModelsFrom(events: events)
-        view.setEvents(eventCollectionCellViewModels)
     }
     
     private func makeEventCollectionCellViewModelsFrom(events: [Event]) -> [EventCollectionCellViewModel] {
