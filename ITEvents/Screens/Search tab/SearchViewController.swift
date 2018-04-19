@@ -11,22 +11,16 @@ class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
     private var events = [EventCollectionCellViewModel]()
+
     private var layout: DisplaySwitchLayout!
     private var layoutState: LayoutState!
     private var loadInProgress: Bool = false
-    
-    private var fetchEventsDebounced: ((String, Bool) -> Void)!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         registerNibs()
         presenter.setup()
         collectionView.contentInset =  UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
-        fetchEventsDebounced = debounce(
-            delay: DispatchTimeInterval.seconds(2),
-            queue: DispatchQueue.main,
-            action: fetchEvents
-        )
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -53,10 +47,6 @@ class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable
     private func registerNibs() {
         collectionView.register(cellType: EventCollectionViewCell.self)
     }
-    
-    private func fetchEvents(searchText: String, isDelayNeeded: Bool) {
-        presenter.searchBy(text: searchText, tags: [])
-    }
 }
 
 extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -81,11 +71,12 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let searchText = searchBar.text ?? ""
-        fetchEventsDebounced(searchText, false)
+        let searchTags = [Tag]()
+        presenter.searchEvents(by: searchText, and: searchTags, isDelayNeeded: false)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        fetchEventsDebounced(searchText, true)
+        presenter.searchEvents(by: searchText, and: [], isDelayNeeded: true)
     }
 }
 

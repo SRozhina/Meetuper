@@ -19,14 +19,14 @@ func createDisplaySwitcherLayout(forList: Bool, viewWidth: CGFloat) -> DisplaySw
 }
 
 // https://gist.github.com/simme/b78d10f0b29325743a18c905c5512788
-func debounce<T>(delay: DispatchTimeInterval,
-                 queue: DispatchQueue = .main,
-                 action: @escaping ((T, Bool) -> Void)
-    ) -> (T, Bool) -> Void {
+func debounce<T, M>(delay: DispatchTimeInterval,
+                    queue: DispatchQueue = .main,
+                    action: @escaping ((T, [M], Bool) -> Void)
+    ) -> (T, [M], Bool) -> Void {
     var currentWorkItem: DispatchWorkItem?
-    return { parameter, isDelayNeeded in
+    return { parameter1, parameters2, isDelayNeeded in
         currentWorkItem?.cancel()
-        currentWorkItem = DispatchWorkItem { action(parameter, isDelayNeeded) }
+        currentWorkItem = DispatchWorkItem { action(parameter1, parameters2, isDelayNeeded) }
         let deadline = DispatchTime.now() + (isDelayNeeded ? delay : DispatchTimeInterval.seconds(0))
         queue.asyncAfter(deadline: deadline, execute: currentWorkItem!)
     }
