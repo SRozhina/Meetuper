@@ -109,7 +109,7 @@ class EventsDataServiceMockImpl: IEventsDataService {
         ]
     }
     
-    func searchEventsBy(text: String, tags: [Tag], then completion: @escaping ([Event]) -> Void) {
+    func searchEvents(by text: String, and tags: [Tag], then completion: @escaping ([Event]) -> Void) {
         let events = getEvents()
         let filteredEvents = events.filter({
             $0.title.lowercased().contains(text.lowercased()) ||
