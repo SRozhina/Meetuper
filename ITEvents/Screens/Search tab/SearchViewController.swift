@@ -42,7 +42,9 @@ class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable
         //it should be in another place or I should rename the method but I don't know! Help me! You're the best in renaming and refactoring! I love you!
         loadInProgress = false
         if self.events.count == events.count {
-            let yOffset = collectionView.contentSize.height - collectionView.bounds.height - footerHeight
+            let yOffset = collectionView.contentSize.height - footerHeight > collectionView.bounds.height
+                            ? collectionView.contentSize.height - collectionView.bounds.height - footerHeight
+                            : 0
             collectionView.contentOffset.y = yOffset
         }
         
@@ -58,9 +60,16 @@ class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable
     private func registerNibs() {
         collectionView.register(cellType: EventCollectionViewCell.self)
     }
+    
+    private func prepareCollectioViewForNewSearchResults() {
+        events = []
+        loadInProgress = true
+        collectionView.contentOffset.y = 0
+        collectionView.reloadData()
+    }
 }
 
-extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return events.count
     }
@@ -76,29 +85,6 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         collectionView.isUserInteractionEnabled = false
         presenter.selectEvent(with: events[indexPath.row].id)
         self.performSegue(withIdentifier: "Search_OpenEvent", sender: nil)
-    }
-}
-
-extension SearchViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        let searchParameters = SearchParameters(text: searchText, tags: searchTags)
-        presenter.searchEvents(by: searchParameters, isDelayNeeded: false)
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let searchParameters = SearchParameters(text: searchText, tags: searchTags)
-        presenter.searchEvents(by: searchParameters, isDelayNeeded: true)
-    }
-}
-
-extension SearchViewController {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.frame.size.height {
-            loadInProgress = true
-            collectionView.reloadData()
-            let searchParameters = SearchParameters(text: searchText, tags: searchTags)
-            presenter.searchEvents(by: searchParameters, isDelayNeeded: true)
-        }
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -117,6 +103,32 @@ extension SearchViewController {
             return footer
         default:
             assert(false, "Unexpected element kind")
+        }
+    }
+}
+
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let searchParameters = SearchParameters(text: searchText, tags: searchTags)
+        prepareCollectioViewForNewSearchResults()
+        searchBar.resignFirstResponder()
+        presenter.searchEvents(by: searchParameters, isDelayNeeded: false)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let searchParameters = SearchParameters(text: searchText, tags: searchTags)
+        prepareCollectioViewForNewSearchResults()
+        presenter.searchEvents(by: searchParameters, isDelayNeeded: true)
+    }
+}
+
+extension SearchViewController {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.frame.size.height {
+            loadInProgress = true
+            collectionView.reloadData()
+            let searchParameters = SearchParameters(text: searchText, tags: searchTags)
+            presenter.searchEvents(by: searchParameters, isDelayNeeded: true)
         }
     }
 }

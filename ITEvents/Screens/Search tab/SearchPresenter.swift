@@ -22,6 +22,7 @@ class SearchPresenter: ISearchPresenter {
         self.userSettingsService = userSettingsService
         self.dateFormatterService = dateFormatterService
         
+        //TODO implement request cancelation
         searchEventsDebounced = debounce(
             delay: DispatchTimeInterval.seconds(2),
             queue: DispatchQueue.main,
@@ -32,7 +33,7 @@ class SearchPresenter: ISearchPresenter {
     func setup() {
         activate()
         let parameters = SearchParameters(text: "", tags: [])
-        searchEvents(by: parameters, isDelayNeeded: false)
+        searchEventDebouncedAction(by: parameters)
     }
     
     func activate() {

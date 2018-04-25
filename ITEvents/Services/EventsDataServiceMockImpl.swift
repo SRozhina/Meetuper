@@ -85,7 +85,7 @@ class EventsDataServiceMockImpl: IEventsDataService {
     
     private func getEvents() -> [Event] {
         var events = [Event]()
-        for _ in 0..<5 {
+        for _ in 0..<10 {
             events.append(contentsOf:
             [
                 createEvent(id: 1,
