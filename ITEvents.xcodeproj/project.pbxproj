@@ -15,9 +15,11 @@
 		C30056382055AD6600875CCD /* Swinject Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30056372055AD6600875CCD /* Swinject Storyboard.swift */; };
 		C300563B2055ADEA00875CCD /* SharedUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300563A2055ADEA00875CCD /* SharedUtils.swift */; };
 		C300563F2059A7C400875CCD /* ISettingsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300563C2059A7C400875CCD /* ISettingsStorage.swift */; };
+		C318F82A209094A700D4730E /* EventsCollectionViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C318F829209094A700D4730E /* EventsCollectionViewFooter.swift */; };
 		C329A990207B763500DF4394 /* UICollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329A98F207B763500DF4394 /* UICollectionViewDataSource.swift */; };
 		C329A992207B768000DF4394 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329A991207B768000DF4394 /* Global.swift */; };
 		C329BDFE201BC90F00F32829 /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329BDFD201BC90F00F32829 /* EventCollectionViewCell.swift */; };
+		C32B19A72090C151000AA917 /* SearchParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B19A62090C151000AA917 /* SearchParameters.swift */; };
 		C34758592074F90F009FAA5F /* IFavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34758582074F90F009FAA5F /* IFavoriteView.swift */; };
 		C34758692074F942009FAA5F /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C347585A2074F940009FAA5F /* EventView.swift */; };
 		C347586A2074F942009FAA5F /* RoundedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C347585B2074F940009FAA5F /* RoundedImageView.swift */; };
@@ -106,9 +108,11 @@
 		C30056372055AD6600875CCD /* Swinject Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Swinject Storyboard.swift"; sourceTree = "<group>"; };
 		C300563A2055ADEA00875CCD /* SharedUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedUtils.swift; sourceTree = "<group>"; };
 		C300563C2059A7C400875CCD /* ISettingsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ISettingsStorage.swift; path = ITEvents/Services/ISettingsStorage.swift; sourceTree = SOURCE_ROOT; };
+		C318F829209094A700D4730E /* EventsCollectionViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsCollectionViewFooter.swift; sourceTree = "<group>"; };
 		C329A98F207B763500DF4394 /* UICollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewDataSource.swift; sourceTree = "<group>"; };
 		C329A991207B768000DF4394 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		C329BDFD201BC90F00F32829 /* EventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionViewCell.swift; sourceTree = "<group>"; };
+		C32B19A62090C151000AA917 /* SearchParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParameters.swift; sourceTree = "<group>"; };
 		C34758582074F90F009FAA5F /* IFavoriteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFavoriteView.swift; sourceTree = "<group>"; };
 		C347585A2074F940009FAA5F /* EventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		C347585B2074F940009FAA5F /* RoundedImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedImageView.swift; sourceTree = "<group>"; };
@@ -293,19 +297,21 @@
 				C300562B2055AA6B00875CCD /* Tag.swift */,
 				C30056292055AA6B00875CCD /* UserSettings.swift */,
 				C391908B201E59D100CD7151 /* Event.swift */,
+				C32B19A62090C151000AA917 /* SearchParameters.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		C391908D201E5EF800CD7151 /* Shared view cells */ = {
+		C391908D201E5EF800CD7151 /* Shared collection view elements */ = {
 			isa = PBXGroup;
 			children = (
 				C329BDFD201BC90F00F32829 /* EventCollectionViewCell.swift */,
 				C3CEBDBD201FADA9003CE306 /* EventCollectionViewCell.xib */,
 				C3764B72202100AA0024CFA7 /* UIGradientImageView.swift */,
 				C39190B4201E6B2C00CD7151 /* IEventCollectionViewCell.swift */,
+				C318F829209094A700D4730E /* EventsCollectionViewFooter.swift */,
 			);
-			path = "Shared view cells";
+			path = "Shared collection view elements";
 			sourceTree = "<group>";
 		};
 		C391908E201E5F0B00CD7151 /* Favorive tab */ = {
@@ -381,7 +387,7 @@
 				C391909F201E62FD00CD7151 /* Screens */,
 				C391908A201E59BD00CD7151 /* Model */,
 				C3919088201E597D00CD7151 /* Supporting files */,
-				C391908D201E5EF800CD7151 /* Shared view cells */,
+				C391908D201E5EF800CD7151 /* Shared collection view elements */,
 				C3919089201E599000CD7151 /* Storyboards */,
 			);
 			path = ITEvents;
@@ -690,6 +696,7 @@
 				C39190A2201E632700CD7151 /* ProfileViewController.swift in Sources */,
 				C362DD8D2046022700D301A6 /* EventTagsDataServiceMockImpl.swift in Sources */,
 				C3919097201E62B900CD7151 /* IFavoritePresenter.swift in Sources */,
+				C32B19A72090C151000AA917 /* SearchParameters.swift in Sources */,
 				C362DD8F2046E4F600D301A6 /* ISimilarEventsDataService.swift in Sources */,
 				C362DD9920472D7B00D301A6 /* IDateFormatterService.swift in Sources */,
 				C347586E2074F942009FAA5F /* ShowEventSourceView.swift in Sources */,
@@ -705,6 +712,7 @@
 				C34758592074F90F009FAA5F /* IFavoriteView.swift in Sources */,
 				C3D547642078104A009ABC73 /* IFullEventView.swift in Sources */,
 				C362DD9B20472D9A00D301A6 /* DateFormatterService.swift in Sources */,
+				C318F82A209094A700D4730E /* EventsCollectionViewFooter.swift in Sources */,
 				C34758732074F942009FAA5F /* EventInfoView.swift in Sources */,
 				C30056352055AD0600875CCD /* NSMutableAttributedString.swift in Sources */,
 				C347586A2074F942009FAA5F /* RoundedImageView.swift in Sources */,

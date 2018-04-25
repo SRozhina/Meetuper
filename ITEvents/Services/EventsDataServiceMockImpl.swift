@@ -16,12 +16,18 @@ class EventsDataServiceMockImpl: IEventsDataService {
         }
     }
     
-    func searchEvents(indexRange: Range<Int>, text: String, tags: [Tag], then completion: @escaping EventsDataServiceCallback) {
+    func searchEvents(indexRange: Range<Int>, parameters: SearchParameters, then completion: @escaping EventsDataServiceCallback) {
+        if parameters.text == "" && parameters.tags.isEmpty {
+            fetchEvents(indexRange: indexRange) {fetchedEvents in
+                completion(fetchedEvents)
+            }
+            return
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             let events = self.getEvents()
             let filteredEvents = events.filter({
-                $0.title.lowercased().contains(text.lowercased()) ||
-                    $0.description.lowercased().contains(text.lowercased())
+                $0.title.lowercased().contains(parameters.text.lowercased()) ||
+                $0.description.lowercased().contains(parameters.text.lowercased())
             })
             let updatedIndexRange = filteredEvents.count < indexRange.upperBound
                 ? indexRange.lowerBound..<filteredEvents.count
@@ -79,7 +85,7 @@ class EventsDataServiceMockImpl: IEventsDataService {
     
     private func getEvents() -> [Event] {
         var events = [Event]()
-        for _ in 0..<50 {
+        for _ in 0..<5 {
             events.append(contentsOf:
             [
                 createEvent(id: 1,

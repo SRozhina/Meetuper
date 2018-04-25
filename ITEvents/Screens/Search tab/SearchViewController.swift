@@ -14,7 +14,10 @@ class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable
 
     private var layout: DisplaySwitchLayout!
     private var layoutState: LayoutState!
-    private var loadInProgress: Bool = false
+    private var loadInProgress: Bool = true
+    private var searchText: String { return searchBar.text ?? "" }
+    private var searchTags: [Tag] = []
+    private let footerHeight: CGFloat = 50
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,11 +33,19 @@ class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable
     
     func toggleLayout(for isList: Bool) {
         layout = createDisplaySwitcherLayout(forList: isList, viewWidth: view.frame.width)
+
         collectionView.collectionViewLayout = layout
         layoutState = isList ? .list : .grid
     }
     
     func setEvents(_ events: [EventCollectionCellViewModel]) {
+        //it should be in another place or I should rename the method but I don't know! Help me! You're the best in renaming and refactoring! I love you!
+        loadInProgress = false
+        if self.events.count == events.count {
+            let yOffset = collectionView.contentSize.height - collectionView.bounds.height - footerHeight
+            collectionView.contentOffset.y = yOffset
+        }
+        
         self.events = events
         collectionView.reloadData()
     }
@@ -49,7 +60,7 @@ class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable
     }
 }
 
-extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return events.count
     }
@@ -70,37 +81,42 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        let searchText = searchBar.text ?? ""
-        let searchTags = [Tag]()
-        presenter.searchEvents(by: searchText, and: searchTags, isDelayNeeded: false)
+        let searchParameters = SearchParameters(text: searchText, tags: searchTags)
+        presenter.searchEvents(by: searchParameters, isDelayNeeded: false)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        presenter.searchEvents(by: searchText, and: [], isDelayNeeded: true)
+        let searchParameters = SearchParameters(text: searchText, tags: searchTags)
+        presenter.searchEvents(by: searchParameters, isDelayNeeded: true)
     }
 }
 
 extension SearchViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if loadInProgress { return }
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        if offsetY >= contentHeight - scrollView.frame.size.height {
-            toggleActivityIndicator(visibility: true)
-            presenter.loadEventsBlock(for: searchBar.text ?? "", tags: [], then: {
-                self.toggleActivityIndicator(visibility: false)
-                self.collectionView.reloadData()
-            })
+        if scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.frame.size.height {
+            loadInProgress = true
+            collectionView.reloadData()
+            let searchParameters = SearchParameters(text: searchText, tags: searchTags)
+            presenter.searchEvents(by: searchParameters, isDelayNeeded: true)
         }
     }
     
-    private func toggleActivityIndicator(visibility: Bool) {
-        let height: CGFloat = visibility ? 40 : 0
-        visibility ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
-        UIView.animate(withDuration: 0.2) {
-            self.activityIndicatorViewHeight.constant = height
-            self.view.layoutSubviews()
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionElementKindSectionFooter:
+            let footer = collectionView.dequeueReusableSupplementaryView(
+                ofKind: UICollectionElementKindSectionFooter,
+                withReuseIdentifier: "Footer", for: indexPath) as! EventsCollectionViewFooter
+            if loadInProgress {
+                footer.showFooter(withHeight: footerHeight)
+            } else {
+                footer.hideFooter()
+            }
+            return footer
+        default:
+            assert(false, "Unexpected element kind")
         }
-        loadInProgress = visibility
     }
 }
