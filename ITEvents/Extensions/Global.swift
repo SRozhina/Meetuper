@@ -17,3 +17,17 @@ func createDisplaySwitcherLayout(forList: Bool, viewWidth: CGFloat) -> DisplaySw
                                gridLayoutCountOfColumns: Int(gridColumnCount))
     
 }
+
+// https://gist.github.com/simme/b78d10f0b29325743a18c905c5512788
+func debounce<T1, T2>(delay: DispatchTimeInterval,
+                    queue: DispatchQueue = .main,
+                    action: @escaping ((T1, T2, Bool) -> Void)
+    ) -> (T1, T2, Bool) -> Void {
+    var currentWorkItem: DispatchWorkItem?
+    return { parameter1, parameters2, isDelayNeeded in
+        currentWorkItem?.cancel()
+        currentWorkItem = DispatchWorkItem { action(parameter1, parameters2, isDelayNeeded) }
+        let deadline = DispatchTime.now() + (isDelayNeeded ? delay : DispatchTimeInterval.seconds(0))
+        queue.asyncAfter(deadline: deadline, execute: currentWorkItem!)
+    }
+}

@@ -108,4 +108,15 @@ class EventsDataServiceMockImpl: IEventsDataService {
                   url: URL(string: "https://pitercss.timepad.ru/event/457262/"))
         ]
     }
+    
+    func searchEvents(by text: String, and tags: [Tag], then completion: @escaping ([Event]) -> Void) {
+        let events = getEvents()
+        let filteredEvents = events.filter({
+            $0.title.lowercased().contains(text.lowercased()) ||
+            $0.description.lowercased().contains(text.lowercased())
+        })
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            completion(filteredEvents)
+        }
+    }
 }

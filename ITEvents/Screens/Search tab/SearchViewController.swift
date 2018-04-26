@@ -11,7 +11,7 @@ class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable
     
     private var layout: DisplaySwitchLayout!
     private var layoutState: LayoutState!
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         registerNibs()
@@ -61,5 +61,16 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         presenter.selectEvent(with: events[indexPath.row].id)
         self.performSegue(withIdentifier: "Search_OpenEvent", sender: nil)
     }
+}
+
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let searchText = searchBar.text ?? ""
+        let searchTags = [Tag]()
+        presenter.searchEvents(by: searchText, and: searchTags, isDelayNeeded: false)
+    }
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        presenter.searchEvents(by: searchText, and: [], isDelayNeeded: true)
+    }
 }

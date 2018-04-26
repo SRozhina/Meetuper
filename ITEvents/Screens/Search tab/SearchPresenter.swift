@@ -1,3 +1,5 @@
+import Foundation
+
 class SearchPresenter: ISearchPresenter {
     let view: ISearchView!
     let eventDataService: IEventsDataService!
@@ -24,14 +26,8 @@ class SearchPresenter: ISearchPresenter {
         
         eventDataService.fetchEvents(then: { fetchedEvents in
             self.events = fetchedEvents
-            let eventViewModels = fetchedEvents.map {
-                EventCollectionCellViewModel(id: $0.id,
-                                       title: $0.title,
-                                       shortDate: self.dateFormatterService.formatDate(for: $0.dateInterval, shortVersion: true),
-                                       longDate: self.dateFormatterService.formatDate(for: $0.dateInterval, shortVersion: false),
-                                       image: $0.image)
-            }
-            self.view.setEvents(eventViewModels)
+            let eventCollectionCellViewModels = self.events.map { self.createEventCollectionCellViewModel(event: $0)}
+            self.view.setEvents(eventCollectionCellViewModels)
         })
     }
     
@@ -44,5 +40,22 @@ class SearchPresenter: ISearchPresenter {
     
     func selectEvent(with eventId: Int) {
         selectedEventService.selectedEvent = events.first(where: { $0.id == eventId })
+    }
+    
+    func searchEvents(by text: String, and tags: [Tag], isDelayNeeded: Bool) {
+        eventDataService.searchEvents(by: text, and: tags, then: { fetchedEvents in
+            self.events = fetchedEvents
+            let eventCollectionCellViewModels = self.events.map { self.createEventCollectionCellViewModel(event: $0)}
+            self.view.setEvents(eventCollectionCellViewModels)
+        })
+        
+    }
+    
+    private func createEventCollectionCellViewModel(event: Event) -> EventCollectionCellViewModel {
+        return EventCollectionCellViewModel(id: event.id,
+                                            title: event.title,
+                                            shortDate: self.dateFormatterService.formatDate(for: event.dateInterval, shortVersion: true),
+                                            longDate: self.dateFormatterService.formatDate(for: event.dateInterval, shortVersion: false),
+                                            image: event.image)
     }
 }
