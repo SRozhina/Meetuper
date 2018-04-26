@@ -3,16 +3,16 @@ import SwinjectStoryboard
 
 extension SwinjectStoryboard {
     @objc class func setup() {
-        defaultContainer.register(IEventsDataService.self) { _ in
-            return EventsDataServiceMockImpl()
+        defaultContainer.register(IEventsStorage.self) { _ in
+            return EventsStorageMockImpl()
         }.inObjectScope(.container)
         
-        defaultContainer.register(IEventTagsDataService.self) { _ in
-            return EventTagsDataServiceMockImpl()
+        defaultContainer.register(IEventTagsStorage.self) { _ in
+            return EventTagsStorageMockImpl()
         }.inObjectScope(.container)
         
-        defaultContainer.register(ISimilarEventsDataService.self) { _ in
-            return SimilarEventsDataServiceMockImpl()
+        defaultContainer.register(ISimilarEventsStorage.self) { _ in
+            return SimilarEventsStorageMockImpl()
         }.inObjectScope(.container)
         
         defaultContainer.register(IDateFormatterService.self) { _ in
@@ -29,7 +29,7 @@ extension SwinjectStoryboard {
         
         defaultContainer.register(IFavoritePresenter.self) { r, v in
             FavoritePresenter(view: v,
-                              eventDataService: r.resolve(IEventsDataService.self)!,
+                              eventDataService: r.resolve(IEventsStorage.self)!,
                               selectedEventService: r.resolve(ISelectedEventService.self)!,
                               userSettingsService: r.resolve(IUserSettingsService.self)!,
                               dateFormatterService: r.resolve(IDateFormatterService.self)!)
@@ -43,7 +43,7 @@ extension SwinjectStoryboard {
             FullEventPresenter(view: v,
                                selectedEventService: r.resolve(ISelectedEventService.self)!,
                                dateFormatterService: r.resolve(IDateFormatterService.self)!,
-                               similarEventsService: r.resolve(ISimilarEventsDataService.self)!)
+                               similarEventsService: r.resolve(ISimilarEventsStorage.self)!)
         }
         
         defaultContainer.storyboardInitCompleted(FullEventViewController.self) { r, c in
@@ -52,7 +52,7 @@ extension SwinjectStoryboard {
         
         defaultContainer.register(ISearchPresenter.self) { r, v in
             SearchPresenter(view: v,
-                            eventDataService: r.resolve(IEventsDataService.self)!,
+                            eventDataService: r.resolve(IEventsStorage.self)!,
                             selectedEventService: r.resolve(ISelectedEventService.self)!,
                             userSettingsService: r.resolve(IUserSettingsService.self)!,
                             dateFormatterService: r.resolve(IDateFormatterService.self)!)

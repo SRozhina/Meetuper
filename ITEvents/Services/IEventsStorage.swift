@@ -1,4 +1,4 @@
-protocol IEventsDataService {
+protocol IEventsStorage {
     func fetchEvents(then completion: @escaping ([Event]) -> Void)
     
     func searchEvents(by text: String, and tags: [Tag], then completion: @escaping ([Event]) -> Void)

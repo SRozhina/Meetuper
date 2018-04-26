@@ -1,6 +1,6 @@
 import Foundation
 
-class EventTagsDataServiceMockImpl: IEventTagsDataService {
+class EventTagsStorageMockImpl: IEventTagsStorage {
     func fetchTags(then completion: @escaping ([Tag]) -> Void) {
         let tags = [
             Tag(id: 1, name: "JavaScript"),

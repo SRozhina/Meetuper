@@ -2,7 +2,7 @@ import Foundation
 
 class FavoritePresenter: IFavoritePresenter {
     let view: IFavoriveView!
-    let eventDataService: IEventsDataService!
+    let eventDataService: IEventsStorage!
     var selectedEventService: ISelectedEventService!
     let userSettingsService: IUserSettingsService!
     let dateFormatterService: IDateFormatterService!
@@ -10,7 +10,7 @@ class FavoritePresenter: IFavoritePresenter {
     private var events: [Event]!
     
     init(view: IFavoriveView,
-         eventDataService: IEventsDataService,
+         eventDataService: IEventsStorage,
          selectedEventService: ISelectedEventService,
          userSettingsService: IUserSettingsService,
          dateFormatterService: IDateFormatterService) {

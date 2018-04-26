@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class SimilarEventsDataServiceMockImpl: ISimilarEventsDataService {
+class SimilarEventsStorageMockImpl: ISimilarEventsStorage {
     
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()

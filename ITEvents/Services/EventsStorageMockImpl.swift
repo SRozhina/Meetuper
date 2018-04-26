@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class EventsDataServiceMockImpl: IEventsDataService {
+class EventsStorageMockImpl: IEventsStorage {
     
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()

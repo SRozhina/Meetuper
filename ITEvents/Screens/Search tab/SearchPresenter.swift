@@ -2,7 +2,7 @@ import Foundation
 
 class SearchPresenter: ISearchPresenter {
     let view: ISearchView!
-    let eventDataService: IEventsDataService!
+    let eventDataService: IEventsStorage!
     var selectedEventService: ISelectedEventService!
     let userSettingsService: IUserSettingsService!
     let dateFormatterService: IDateFormatterService!
@@ -10,7 +10,7 @@ class SearchPresenter: ISearchPresenter {
     private var isListLayoutCurrent: Bool!
     
     init(view: ISearchView,
-         eventDataService: IEventsDataService,
+         eventDataService: IEventsStorage,
          selectedEventService: ISelectedEventService,
          userSettingsService: IUserSettingsService,
          dateFormatterService: IDateFormatterService) {
