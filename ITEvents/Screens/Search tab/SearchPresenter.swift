@@ -8,7 +8,6 @@ class SearchPresenter: ISearchPresenter {
     let dateFormatterService: IDateFormatterService!
     private var events: [Event]!
     private var isListLayoutCurrent: Bool!
-    private var fetchEventsDebounced: ((String, [Tag], Bool) -> Void)!
     
     init(view: ISearchView,
          eventDataService: IEventsDataService,
@@ -37,11 +36,6 @@ class SearchPresenter: ISearchPresenter {
         if isListLayoutCurrent == settings.isListLayoutSelected { return }
         isListLayoutCurrent = settings.isListLayoutSelected
         view.toggleLayout(for: settings.isListLayoutSelected)
-        fetchEventsDebounced = debounce(
-            delay: DispatchTimeInterval.seconds(2),
-            queue: DispatchQueue.main,
-            action: searchEvents
-        )
     }
     
     func selectEvent(with eventId: Int) {
