@@ -7,8 +7,6 @@ class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable
 
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet private weak var activityIndicatorViewHeight: NSLayoutConstraint!
-    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
     private var events = [EventCollectionCellViewModel]()
 
@@ -23,7 +21,6 @@ class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable
         super.viewDidLoad()
         registerNibs()
         presenter.setup()
-        collectionView.contentInset =  UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -96,7 +93,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
                 ofKind: UICollectionElementKindSectionFooter,
                 withReuseIdentifier: "Footer", for: indexPath) as! EventsCollectionViewFooter
             if loadInProgress {
-                footer.showFooter(withHeight: footerHeight)
+                footer.showFooter()
             } else {
                 footer.hideFooter()
             }

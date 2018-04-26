@@ -37,7 +37,7 @@ class EventsDataServiceMockImpl: IEventsDataService {
         }
     }
     
-    func fetchEvents(indexRange: Range<Int>, then completion: @escaping EventsDataServiceCallback) {
+    private func fetchEvents(indexRange: Range<Int>, then completion: @escaping EventsDataServiceCallback) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             let events = self.getEvents()
             let updatedIndexRange = events.count < indexRange.upperBound

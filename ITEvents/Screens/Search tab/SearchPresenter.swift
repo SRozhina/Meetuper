@@ -49,7 +49,6 @@ class SearchPresenter: ISearchPresenter {
     
     func searchEvents(by parameters: SearchParameters, isDelayNeeded: Bool) {
         searchEventsDebounced(parameters, isDelayNeeded)
-
     }
     
     private func searchEventDebouncedAction(by parameters: SearchParameters) {
@@ -60,6 +59,7 @@ class SearchPresenter: ISearchPresenter {
         let range: Range<Int> = events.count..<events.count + 10
         eventDataService.searchEvents(indexRange: range, parameters: parameters, then: { fetchedEvents in
             self.events.append(contentsOf: fetchedEvents)
+            //Could change the code to appent (not replace) events in View so we will create less models?
             let eventCollectionCellViewModels = self.events.map { self.createEventCollectionCellViewModel(event: $0)}
             self.view.setEvents(eventCollectionCellViewModels)
         })

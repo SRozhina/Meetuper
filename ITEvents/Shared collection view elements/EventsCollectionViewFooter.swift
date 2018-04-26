@@ -3,13 +3,13 @@ import UIKit
 class EventsCollectionViewFooter: UICollectionReusableView {
     @IBOutlet weak private var activityIndicator: UIActivityIndicatorView!
     
-    func showFooter(withHeight height: CGFloat) {
-        frame.size.height = height
+    func showFooter() {
+        isHidden = false
         activityIndicator.startAnimating()
     }
     
     func hideFooter() {
-        frame.size.height = 0
+        isHidden = true
         activityIndicator.stopAnimating()
     }
 }
