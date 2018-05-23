@@ -7,7 +7,8 @@ class FavoritePresenter: IFavoritePresenter {
     let userSettingsService: IUserSettingsService!
     let dateFormatterService: IDateFormatterService!
     private var userSettings: UserSettings!
-    private var events: [Event]!
+    private var events: [Event] = []
+    private var eventsTotal = 0
     
     init(view: IFavoriveView,
          eventDataService: IEventsDataService,
@@ -27,6 +28,7 @@ class FavoritePresenter: IFavoritePresenter {
         
         eventDataService.fetchFavoriteEvents(then: { fetchedEvents, total in
             self.events = fetchedEvents
+            self.eventsTotal = total
             let eventViewModels = fetchedEvents.map(self.createViewModel)
             self.view.setEvents(eventViewModels)
         })
