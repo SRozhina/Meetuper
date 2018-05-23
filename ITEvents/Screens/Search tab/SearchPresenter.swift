@@ -36,6 +36,11 @@ class SearchPresenter: ISearchPresenter {
         searchEventDebouncedAction()
     }
     
+    func updateViewSettings() {
+        let userSettings = userSettingsService.fetchSettings()
+        view.setLayout(to: userSettings.isListLayoutSelected)
+    }
+    
     func selectEvent(with eventId: Int) {
         selectedEventService.selectedEvent = events.first(where: { $0.id == eventId })
     }

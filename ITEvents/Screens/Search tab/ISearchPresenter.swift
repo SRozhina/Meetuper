@@ -8,4 +8,6 @@ protocol ISearchPresenter {
     func forceEventSearching()
     
     func searchEvents(by newSearchParameters: SearchParameters)
+    
+    func updateViewSettings()
 }

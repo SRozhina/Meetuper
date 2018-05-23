@@ -270,10 +270,10 @@
             </objects>
             <point key="canvasLocation" x="-1018.4" y="-530.28485757121439"/>
         </scene>
-        <!--Events Tab Bar Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="fuZ-ug-wJo">
             <objects>
-                <tabBarController id="9Yi-Er-GNF" customClass="EventsTabBarController" customModule="ITEvents" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="9Yi-Er-GNF" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Qga-Dj-xg6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

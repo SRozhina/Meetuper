@@ -10,7 +10,7 @@ class SearchViewController: UIViewController, ISearchView {
     
     private var events = [EventCollectionCellViewModel]()
 
-    private var isList: Bool = true
+    private var isList: Bool!
     private var loadInProgress: Bool = true
     private var searchText: String { return searchBar.text ?? "" }
     private var searchTags: [Tag] = []
@@ -22,9 +22,21 @@ class SearchViewController: UIViewController, ISearchView {
         presenter.setup()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        presenter.updateViewSettings()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         collectionView.isUserInteractionEnabled = true
+    }
+    
+    func setLayout(to isListLayout: Bool) {
+        if isList != isListLayout {
+            isList = isListLayout
+            collectionView.reloadData()
+        }
     }
     
     func clearEvents() {
@@ -64,6 +76,8 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         cell.setup(with: event)
         return cell
     }
+    
+    
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,

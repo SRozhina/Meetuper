@@ -77,7 +77,6 @@
 		C3D547642078104A009ABC73 /* IFullEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D547632078104A009ABC73 /* IFullEventView.swift */; };
 		C3D547662078208F009ABC73 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D547652078208F009ABC73 /* EventViewModel.swift */; };
 		C3DBDFA820726BAB002A35EB /* IUserSettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DBDFA720726BAB002A35EB /* IUserSettingService.swift */; };
-		C3E2B5002081460A00801970 /* EventsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E2B4FF2081460A00801970 /* EventsTabBarController.swift */; };
 		C3E792E6202E413800876D6B /* IEventsDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E792E5202E413800876D6B /* IEventsDataService.swift */; };
 		C3E792E8202E416700876D6B /* EventsDataServiceMockImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E792E7202E416700876D6B /* EventsDataServiceMockImpl.swift */; };
 		C3FFF10A20726CEB00ADF407 /* UserSettingsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C3FFF10820726CEB00ADF407 /* UserSettingsModel.xcdatamodeld */; };
@@ -180,7 +179,6 @@
 		C3D547632078104A009ABC73 /* IFullEventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFullEventView.swift; sourceTree = "<group>"; };
 		C3D547652078208F009ABC73 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		C3DBDFA720726BAB002A35EB /* IUserSettingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IUserSettingService.swift; sourceTree = "<group>"; };
-		C3E2B4FF2081460A00801970 /* EventsTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EventsTabBarController.swift; path = ITEvents/Screens/EventsTabBarController.swift; sourceTree = SOURCE_ROOT; };
 		C3E792E5202E413800876D6B /* IEventsDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IEventsDataService.swift; sourceTree = "<group>"; };
 		C3E792E7202E416700876D6B /* EventsDataServiceMockImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsDataServiceMockImpl.swift; sourceTree = "<group>"; };
 		C3FFF10920726CEB00ADF407 /* UserSettingsModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserSettingsModel.xcdatamodel; sourceTree = "<group>"; };
@@ -351,7 +349,6 @@
 		C391909F201E62FD00CD7151 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				C3E2B4FF2081460A00801970 /* EventsTabBarController.swift */,
 				C3FF3CFC2044578100C65137 /* Full Event View */,
 				C39190A0201E630B00CD7151 /* Profile tab */,
 				C3919091201E605E00CD7151 /* Search tab */,
@@ -717,7 +714,6 @@
 				C3919090201E604600CD7151 /* FavoritePresenter.swift in Sources */,
 				C39190A8201E634F00CD7151 /* IProfilePresenter.swift in Sources */,
 				C39190B1201E63C500CD7151 /* IFullEventPresenter.swift in Sources */,
-				C3E2B5002081460A00801970 /* EventsTabBarController.swift in Sources */,
 				C329BDFE201BC90F00F32829 /* EventCollectionViewCell.swift in Sources */,
 				C300562E2055AA6B00875CCD /* Tag.swift in Sources */,
 				C34C4F84206B8A51001A61A9 /* SelectedEventService.swift in Sources */,
