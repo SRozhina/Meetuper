@@ -8,43 +8,31 @@ class EventsDataServiceMockImpl: IEventsDataService {
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return formatter
     }()
-    
+        
     func fetchFavoriteEvents(then completion: @escaping EventsDataServiceCallback) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             let events = self.getEvents()
-            completion(events)
+            completion(events, events.count)
         }
     }
     
     func searchEvents(indexRange: Range<Int>, parameters: SearchParameters, then completion: @escaping EventsDataServiceCallback) {
-        if parameters.text == "" && parameters.tags.isEmpty {
-            fetchEvents(indexRange: indexRange) {fetchedEvents in
-                completion(fetchedEvents)
-            }
-            return
-        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             let events = self.getEvents()
-            let filteredEvents = events.filter({
-                $0.title.lowercased().contains(parameters.text.lowercased()) ||
-                $0.description.lowercased().contains(parameters.text.lowercased())
-            })
+            var filteredEvents = events
+            
+            if parameters.text != "" || !parameters.tags.isEmpty {
+                filteredEvents = events.filter({
+                    $0.title.lowercased().contains(parameters.text.lowercased()) ||
+                    $0.description.lowercased().contains(parameters.text.lowercased())
+                })
+            }
+            
             let updatedIndexRange = filteredEvents.count < indexRange.upperBound
                 ? indexRange.lowerBound..<filteredEvents.count
                 : indexRange
             let filteredEventsSlice = filteredEvents[updatedIndexRange]
-            completion(Array(filteredEventsSlice))
-        }
-    }
-    
-    private func fetchEvents(indexRange: Range<Int>, then completion: @escaping EventsDataServiceCallback) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            let events = self.getEvents()
-            let updatedIndexRange = events.count < indexRange.upperBound
-                ? indexRange.lowerBound..<events.count
-                : indexRange
-            let eventsSlice = events[updatedIndexRange]
-            completion(Array(eventsSlice))
+            completion(Array(filteredEventsSlice), filteredEvents.count)
         }
     }
     
@@ -139,7 +127,15 @@ class EventsDataServiceMockImpl: IEventsDataService {
                       image: UIImage(named: "yandex")!,
                       similarEventsCount: 1,
                       source: EventSource(id: 1, name: "Яндекс События"),
-                      url: URL(string: "https://pitercss.timepad.ru/event/457262/"))
+                      url: URL(string: "https://pitercss.timepad.ru/event/457262/")),
+                createEvent(id: 6,
+                            title: "DagistanCSS",
+                            startDate: getDateFromString(stringDate: "2011-09-09 19:00:00"),
+                            endDate: getDateFromString(stringDate: "2011-09-09 22:00:00"),
+                            image: UIImage(named: "ember")!,
+                            similarEventsCount: 0,
+                            source: EventSource(id: 1, name: "Timepad"),
+                            tags: [Tag(id: 1, name: "JavaScript")])
             ])
         }
         return events

@@ -11,7 +11,7 @@ PODS:
   - TagListView (1.3.0)
 
 DEPENDENCIES:
-  - DisplaySwitcher (from `https://github.com/SRozhina/DisplaySwitcher.git`, branch `master`)
+  - DisplaySwitcher (from `https://github.com/Yalantis/DisplaySwitcher.git`, branch `master`)
   - Reusable
   - SwinjectStoryboard
   - TagListView
@@ -19,12 +19,12 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   DisplaySwitcher:
     :branch: master
-    :git: https://github.com/SRozhina/DisplaySwitcher.git
+    :git: https://github.com/Yalantis/DisplaySwitcher.git
 
 CHECKOUT OPTIONS:
   DisplaySwitcher:
-    :commit: a768ffea149caff50b22c4792d01034da47846a9
-    :git: https://github.com/SRozhina/DisplaySwitcher.git
+    :commit: a02d5a14562de988286d430c9e4b5b8cfb4893e1
+    :git: https://github.com/Yalantis/DisplaySwitcher.git
 
 SPEC CHECKSUMS:
   DisplaySwitcher: 5f725284c28cdf22ea7ba2eee8e8f7e7cb9cdf87
@@ -33,6 +33,6 @@ SPEC CHECKSUMS:
   SwinjectStoryboard: 92e75763c3299cdf627bef98a5180dc894864336
   TagListView: 669f7d4455003c877655875d34829731c4191528
 
-PODFILE CHECKSUM: 1d53a5af725fcc31b9f2ab78de87a39385f4487c
+PODFILE CHECKSUM: c5d7e6b4b3f288a97ea51544fd56c21cb1507514
 
 COCOAPODS: 1.3.1

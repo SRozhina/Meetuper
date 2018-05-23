@@ -7,9 +7,11 @@ class SearchPresenter: ISearchPresenter {
     let userSettingsService: IUserSettingsService!
     let dateFormatterService: IDateFormatterService!
     private var events: [Event] = []
+    private var eventViewModels: [EventCollectionCellViewModel] = []
     private var isListLayoutCurrent: Bool!
-    private var searchEventsDebounced: ((SearchParameters, Bool) -> Void)!
-    private var searchText: String = ""
+    private var searchEventsDebounced: ((Bool) -> Void)!
+    private var searchParameters = SearchParameters()
+    private var eventsTotal = 0
     
     init(view: ISearchView,
          eventDataService: IEventsDataService,
@@ -31,41 +33,60 @@ class SearchPresenter: ISearchPresenter {
     }
     
     func setup() {
-        activate()
-        let parameters = SearchParameters(text: "", tags: [])
-        searchEventDebouncedAction(by: parameters)
-    }
-    
-    func activate() {
-        let settings = userSettingsService.fetchSettings()
-        if isListLayoutCurrent == settings.isListLayoutSelected { return }
-        isListLayoutCurrent = settings.isListLayoutSelected
-        view.toggleLayout(for: settings.isListLayoutSelected)
+        searchEventDebouncedAction()
     }
     
     func selectEvent(with eventId: Int) {
         selectedEventService.selectedEvent = events.first(where: { $0.id == eventId })
     }
-    
-    func searchEvents(by parameters: SearchParameters, isDelayNeeded: Bool) {
-        searchEventsDebounced(parameters, isDelayNeeded)
-    }
-    
-    private func searchEventDebouncedAction(by parameters: SearchParameters) {
-        if searchText != parameters.text {
-            events.removeAll()
-            searchText = parameters.text
+
+    func searchMoreEvents() {
+        if eventsTotal == events.count {
+            return
         }
-        let range: Range<Int> = events.count..<events.count + 10
-        eventDataService.searchEvents(indexRange: range, parameters: parameters, then: { fetchedEvents in
+        
+        view.toggleProgressIndicator(shown: true)
+        
+        eventDataService.searchEvents(indexRange: events.count..<events.count + 10, parameters: searchParameters, then: { fetchedEvents, total in
+            self.eventsTotal = total
+            
             self.events.append(contentsOf: fetchedEvents)
-            //Could change the code to appent (not replace) events in View so we will create less models?
-            let eventCollectionCellViewModels = self.events.map { self.createEventCollectionCellViewModel(event: $0)}
-            self.view.setEvents(eventCollectionCellViewModels)
+            self.eventViewModels.append(contentsOf: fetchedEvents.map(self.createEventViewModel))
+            
+            self.view.setEvents(self.eventViewModels)
+            self.view.toggleProgressIndicator(shown: false)
         })
     }
     
-    private func createEventCollectionCellViewModel(event: Event) -> EventCollectionCellViewModel {
+    func forceEventSearching() {
+        view.clearEvents()
+        searchEventsDebounced(false)
+    }
+    
+    func searchEvents(by newSearchParameters: SearchParameters) {
+        searchParameters = newSearchParameters
+        view.clearEvents()
+        searchEventsDebounced(true)
+    }
+    
+    private func searchEventDebouncedAction() {
+        view.toggleProgressIndicator(shown: true)
+        
+        events.removeAll()
+        eventViewModels.removeAll()
+         
+        eventDataService.searchEvents(indexRange: 0..<10, parameters: searchParameters, then: { fetchedEvents, total in
+            self.eventsTotal = total
+            
+            self.events.append(contentsOf: fetchedEvents)
+            self.eventViewModels.append(contentsOf: fetchedEvents.map(self.createEventViewModel))
+            
+            self.view.toggleProgressIndicator(shown: false)
+            self.view.setEvents(self.eventViewModels)
+        })
+    }
+    
+    private func createEventViewModel(event: Event) -> EventCollectionCellViewModel {
         return EventCollectionCellViewModel(id: event.id,
                                             title: event.title,
                                             shortDate: self.dateFormatterService.formatDate(for: event.dateInterval, shortVersion: true),

@@ -1,8 +1,8 @@
 import UIKit
-import DisplaySwitcher
 import Reusable
 
-class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable {
+class SearchViewController: UIViewController, ISearchView {
+    
     var presenter: ISearchPresenter!
 
     @IBOutlet private weak var searchBar: UISearchBar!
@@ -10,8 +10,7 @@ class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable
     
     private var events = [EventCollectionCellViewModel]()
 
-    private var layout: DisplaySwitchLayout!
-    private var layoutState: LayoutState!
+    private var isList: Bool = true
     private var loadInProgress: Bool = true
     private var searchText: String { return searchBar.text ?? "" }
     private var searchTags: [Tag] = []
@@ -28,54 +27,51 @@ class SearchViewController: UIViewController, ISearchView, ITabBarItemSelectable
         collectionView.isUserInteractionEnabled = true
     }
     
-    func toggleLayout(for isList: Bool) {
-        layout = createDisplaySwitcherLayout(forList: isList, viewWidth: view.frame.width)
-
-        collectionView.collectionViewLayout = layout
-        layoutState = isList ? .list : .grid
+    func clearEvents() {
+        loadInProgress = true
+        setEvents([])
     }
     
     func setEvents(_ events: [EventCollectionCellViewModel]) {
-        //it should be in another place or I should rename the method but I don't know! Help me! You're the best in renaming and refactoring! I love you!
-        loadInProgress = false
-        if self.events.count == events.count {
-            let yOffset = collectionView.contentSize.height - footerHeight > collectionView.bounds.height
-                            ? collectionView.contentSize.height - collectionView.bounds.height - footerHeight
-                            : 0
-            collectionView.contentOffset.y = yOffset
-        }
-        
         self.events = events
         collectionView.reloadData()
     }
     
-    func handleSelection() {
-        presenter.activate()
+    func toggleProgressIndicator(shown: Bool) {
+        loadInProgress = shown
         collectionView.reloadData()
     }
     
     private func registerNibs() {
-        collectionView.register(cellType: EventCollectionViewCell.self)
-    }
-    
-    private func prepareCollectioViewForNewSearchResults() {
-        events = []
-        loadInProgress = true
-        collectionView.contentOffset.y = 0
-        collectionView.reloadData()
+        collectionView.register(cellType: ListCollectionViewCell.self)
+        collectionView.register(cellType: GridCollectionViewCell.self)
     }
 }
 
-extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return events.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return getEventCollectionViewCell(collectionView,
-                                              cellForItemAt: indexPath,
-                                              event: events[indexPath.row],
-                                              layoutState: layoutState)
+        let event = events[indexPath.row]
+        if isList {
+            let cell: ListCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+            cell.setup(with: event)
+            return cell
+        }
+        let cell: GridCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        cell.setup(with: event)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if isList {
+            return CGSize(width: view.frame.width - 20, height: 80)
+        }
+        return CGSize(width: (view.frame.width - 40) / 2, height: 180)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -88,44 +84,49 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
-        case UICollectionElementKindSectionFooter:
-            let footer = collectionView.dequeueReusableSupplementaryView(
-                ofKind: UICollectionElementKindSectionFooter,
-                withReuseIdentifier: "Footer", for: indexPath) as! EventsCollectionViewFooter
-            if loadInProgress {
-                footer.showFooter()
-            } else {
-                footer.hideFooter()
+            case UICollectionElementKindSectionFooter:
+                let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter,
+                                                                             withReuseIdentifier: "Footer",
+                                                                             for: indexPath) as! EventsCollectionViewFooter
+                if loadInProgress {
+                    footer.showFooter()
+                } else {
+                    footer.hideFooter()
+                }
+                return footer
+            default:
+                assert(false, "Unexpected element kind")
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForFooterInSection section: Int) -> CGSize {
+        if loadInProgress {
+            return CGSize(width: view.frame.width, height: footerHeight)
+        }
+        return CGSize.zero
+    }
+
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let lastEventIndex = events.count - 1
+        if indexPath.row == lastEventIndex && !loadInProgress {
+            DispatchQueue.main.async {
+                self.presenter.searchMoreEvents()
             }
-            return footer
-        default:
-            assert(false, "Unexpected element kind")
+            
         }
     }
 }
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        let searchParameters = SearchParameters(text: searchText, tags: searchTags)
-        prepareCollectioViewForNewSearchResults()
-        searchBar.resignFirstResponder()
-        presenter.searchEvents(by: searchParameters, isDelayNeeded: false)
+        searchBar.resignFirstResponder() //remove keyboard
+        
+        presenter.forceEventSearching()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let searchParameters = SearchParameters(text: searchText, tags: searchTags)
-        prepareCollectioViewForNewSearchResults()
-        presenter.searchEvents(by: searchParameters, isDelayNeeded: true)
-    }
-}
-
-extension SearchViewController {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.frame.size.height {
-            loadInProgress = true
-            collectionView.reloadData()
-            let searchParameters = SearchParameters(text: searchText, tags: searchTags)
-            presenter.searchEvents(by: searchParameters, isDelayNeeded: true)
-        }
+        presenter.searchEvents(by: SearchParameters(text: searchText, tags: searchTags))
     }
 }

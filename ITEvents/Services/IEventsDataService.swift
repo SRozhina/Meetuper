@@ -1,4 +1,4 @@
-typealias EventsDataServiceCallback = ([Event]) -> Void
+typealias EventsDataServiceCallback = ([Event], Int) -> Void
 
 protocol IEventsDataService {
     func fetchFavoriteEvents(then completion: @escaping EventsDataServiceCallback)
