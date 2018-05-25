@@ -16,15 +16,15 @@ class EventsDataServiceMockImpl: IEventsDataService {
         }
     }
     
-    func searchEvents(indexRange: Range<Int>, parameters: SearchParameters, then completion: @escaping EventsDataServiceCallback) {
+    func searchEvents(indexRange: Range<Int>, searchText: String, searchTags: [Tag], then completion: @escaping EventsDataServiceCallback) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             let events = self.getEvents()
             var filteredEvents = events
             
-            if parameters.text != "" || !parameters.tags.isEmpty {
+            if searchText != "" || !searchTags.isEmpty {
                 filteredEvents = events.filter({
-                    $0.title.lowercased().contains(parameters.text.lowercased()) ||
-                    $0.description.lowercased().contains(parameters.text.lowercased())
+                    $0.title.lowercased().contains(searchText.lowercased()) ||
+                    $0.description.lowercased().contains(searchText.lowercased())
                 })
             }
             
