@@ -29,7 +29,7 @@ extension SwinjectStoryboard {
         
         defaultContainer.register(IFavoritePresenter.self) { r, v in
             FavoritePresenter(view: v,
-                              eventDataService: r.resolve(IEventsStorage.self)!,
+                              eventStorage: r.resolve(IEventsStorage.self)!,
                               selectedEventService: r.resolve(ISelectedEventService.self)!,
                               userSettingsService: r.resolve(IUserSettingsService.self)!,
                               dateFormatterService: r.resolve(IDateFormatterService.self)!)
@@ -52,7 +52,7 @@ extension SwinjectStoryboard {
         
         defaultContainer.register(ISearchPresenter.self) { r, v in
             SearchPresenter(view: v,
-                            eventDataService: r.resolve(IEventsStorage.self)!,
+                            eventStorage: r.resolve(IEventsStorage.self)!,
                             selectedEventService: r.resolve(ISelectedEventService.self)!,
                             userSettingsService: r.resolve(IUserSettingsService.self)!,
                             dateFormatterService: r.resolve(IDateFormatterService.self)!)

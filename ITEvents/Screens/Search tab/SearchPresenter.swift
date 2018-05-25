@@ -2,7 +2,7 @@ import Foundation
 
 class SearchPresenter: ISearchPresenter {
     let view: ISearchView!
-    let eventDataService: IEventsStorage!
+    let eventStorage: IEventsStorage!
     var selectedEventService: ISelectedEventService!
     let userSettingsService: IUserSettingsService!
     let dateFormatterService: IDateFormatterService!
@@ -10,12 +10,12 @@ class SearchPresenter: ISearchPresenter {
     private var isListLayoutCurrent: Bool!
     
     init(view: ISearchView,
-         eventDataService: IEventsStorage,
+         eventStorage: IEventsStorage,
          selectedEventService: ISelectedEventService,
          userSettingsService: IUserSettingsService,
          dateFormatterService: IDateFormatterService) {
         self.view = view
-        self.eventDataService = eventDataService
+        self.eventStorage = eventStorage
         self.selectedEventService = selectedEventService
         self.userSettingsService = userSettingsService
         self.dateFormatterService = dateFormatterService
@@ -24,7 +24,7 @@ class SearchPresenter: ISearchPresenter {
     func setup() {
         activate()
         
-        eventDataService.fetchEvents(then: { fetchedEvents in
+        eventStorage.fetchEvents(then: { fetchedEvents in
             self.events = fetchedEvents
             let eventCollectionCellViewModels = self.events.map { self.createEventCollectionCellViewModel(event: $0)}
             self.view.setEvents(eventCollectionCellViewModels)
@@ -43,7 +43,7 @@ class SearchPresenter: ISearchPresenter {
     }
     
     func searchEvents(by text: String, and tags: [Tag], isDelayNeeded: Bool) {
-        eventDataService.searchEvents(by: text, and: tags, then: { fetchedEvents in
+        eventStorage.searchEvents(by: text, and: tags, then: { fetchedEvents in
             self.events = fetchedEvents
             let eventCollectionCellViewModels = self.events.map { self.createEventCollectionCellViewModel(event: $0)}
             self.view.setEvents(eventCollectionCellViewModels)

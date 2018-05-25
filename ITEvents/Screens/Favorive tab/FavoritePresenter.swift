@@ -2,7 +2,7 @@ import Foundation
 
 class FavoritePresenter: IFavoritePresenter {
     let view: IFavoriveView!
-    let eventDataService: IEventsStorage!
+    let eventStorage: IEventsStorage!
     var selectedEventService: ISelectedEventService!
     let userSettingsService: IUserSettingsService!
     let dateFormatterService: IDateFormatterService!
@@ -10,12 +10,12 @@ class FavoritePresenter: IFavoritePresenter {
     private var events: [Event]!
     
     init(view: IFavoriveView,
-         eventDataService: IEventsStorage,
+         eventStorage: IEventsStorage,
          selectedEventService: ISelectedEventService,
          userSettingsService: IUserSettingsService,
          dateFormatterService: IDateFormatterService) {
         self.view = view
-        self.eventDataService = eventDataService
+        self.eventStorage = eventStorage
         self.selectedEventService = selectedEventService
         self.userSettingsService = userSettingsService
         self.dateFormatterService = dateFormatterService
@@ -25,7 +25,7 @@ class FavoritePresenter: IFavoritePresenter {
         userSettings = userSettingsService.fetchSettings()
         view.toggleListLayout(to: userSettings.isListLayoutSelected)
         
-        eventDataService.fetchEvents(then: { fetchedEvents in
+        eventStorage.fetchEvents(then: { fetchedEvents in
             self.events = fetchedEvents
             let eventViewModels = fetchedEvents.map {
                 EventCollectionCellViewModel(id: $0.id,
