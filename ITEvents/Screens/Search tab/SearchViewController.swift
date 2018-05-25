@@ -68,10 +68,9 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if isList {
-            return CGSize(width: view.frame.width - 20, height: 80)
-        }
-        return CGSize(width: (view.frame.width - 40) / 2, height: 180)
+        return isList
+            ? CGSize(width: view.frame.width - 20, height: 80)
+            : CGSize(width: (view.frame.width - 40) / 2, height: 180)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -102,10 +101,9 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForFooterInSection section: Int) -> CGSize {
-        if loadInProgress {
-            return CGSize(width: view.frame.width, height: footerHeight)
-        }
-        return CGSize.zero
+        return loadInProgress
+            ? CGSize(width: view.frame.width, height: footerHeight)
+            : CGSize.zero
     }
 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -127,6 +125,6 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        presenter.searchEvents(by: SearchParameters(text: searchText, tags: searchTags))
+        presenter.searchEvents(by: searchText, and: searchTags)
     }
 }

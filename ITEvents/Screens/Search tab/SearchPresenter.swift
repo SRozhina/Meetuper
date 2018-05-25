@@ -10,7 +10,8 @@ class SearchPresenter: ISearchPresenter {
     private var eventViewModels: [EventCollectionCellViewModel] = []
     private var isListLayoutCurrent: Bool!
     private var searchEventsDebounced: ((Bool) -> Void)!
-    private var searchParameters = SearchParameters()
+    private var searchText: String = ""
+    private var searchTags: [Tag] = []
     private var eventsTotal = 0
     
     init(view: ISearchView,
@@ -37,7 +38,7 @@ class SearchPresenter: ISearchPresenter {
     }
     
     func selectEvent(with eventId: Int) {
-        selectedEventService.selectedEvent = events.first(where: { $0.id == eventId })
+        selectedEventService.selectedEvent = events.first { $0.id == eventId }
     }
 
     func searchMoreEvents() {
@@ -47,15 +48,10 @@ class SearchPresenter: ISearchPresenter {
         
         view.toggleProgressIndicator(shown: true)
         
-        eventDataService.searchEvents(indexRange: events.count..<events.count + 10, parameters: searchParameters, then: { fetchedEvents, total in
-            self.eventsTotal = total
-            
-            self.events.append(contentsOf: fetchedEvents)
-            self.eventViewModels.append(contentsOf: fetchedEvents.map(self.createEventViewModel))
-            
-            self.view.setEvents(self.eventViewModels)
-            self.view.toggleProgressIndicator(shown: false)
-        })
+        eventDataService.searchEvents(indexRange: events.count..<events.count + 10,
+                                      searchText: searchText,
+                                      searchTags: searchTags,
+                                      then: { self.eventSearchCompletedAction($0, total: $1) })
     }
     
     func forceEventSearching() {
@@ -63,8 +59,9 @@ class SearchPresenter: ISearchPresenter {
         searchEventsDebounced(false)
     }
     
-    func searchEvents(by newSearchParameters: SearchParameters) {
-        searchParameters = newSearchParameters
+    func searchEvents(by newSearchText: String, and newSearchTags: [Tag]) {
+        searchText = newSearchText
+        searchTags = newSearchTags
         view.clearEvents()
         searchEventsDebounced(true)
     }
@@ -75,15 +72,20 @@ class SearchPresenter: ISearchPresenter {
         events.removeAll()
         eventViewModels.removeAll()
          
-        eventDataService.searchEvents(indexRange: 0..<10, parameters: searchParameters, then: { fetchedEvents, total in
-            self.eventsTotal = total
-            
-            self.events.append(contentsOf: fetchedEvents)
-            self.eventViewModels.append(contentsOf: fetchedEvents.map(self.createEventViewModel))
-            
-            self.view.toggleProgressIndicator(shown: false)
-            self.view.setEvents(self.eventViewModels)
-        })
+        eventDataService.searchEvents(indexRange: 0..<10,
+                                      searchText: searchText,
+                                      searchTags: searchTags,
+                                      then: { self.eventSearchCompletedAction($0, total: $1) })
+    }
+    
+    private func eventSearchCompletedAction(_ fetchedEvents: [Event], total: Int) {
+        self.eventsTotal = total
+        
+        self.events.append(contentsOf: fetchedEvents)
+        self.eventViewModels.append(contentsOf: fetchedEvents.map(self.createEventViewModel))
+        
+        self.view.setEvents(self.eventViewModels)
+        self.view.toggleProgressIndicator(shown: false)
     }
     
     private func createEventViewModel(event: Event) -> EventCollectionCellViewModel {
