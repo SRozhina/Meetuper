@@ -51,7 +51,7 @@ class SearchPresenter: ISearchPresenter {
         eventDataService.searchEvents(indexRange: events.count..<events.count + 10,
                                       searchText: searchText,
                                       searchTags: searchTags,
-                                      then: { self.eventSearchCompletedAction($0, total: $1) })
+                                      then: self.appendFoundEvents)
     }
     
     func forceEventSearching() {
@@ -75,10 +75,10 @@ class SearchPresenter: ISearchPresenter {
         eventDataService.searchEvents(indexRange: 0..<10,
                                       searchText: searchText,
                                       searchTags: searchTags,
-                                      then: { self.eventSearchCompletedAction($0, total: $1) })
+                                      then: self.appendFoundEvents)
     }
     
-    private func eventSearchCompletedAction(_ fetchedEvents: [Event], total: Int) {
+    private func appendFoundEvents(_ fetchedEvents: [Event], total: Int) {
         self.eventsTotal = total
         
         self.events.append(contentsOf: fetchedEvents)
