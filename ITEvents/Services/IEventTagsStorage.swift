@@ -1,5 +1,5 @@
 import Foundation
 
-protocol IEventTagsDataService {
+protocol IEventTagsStorage {
     func fetchTags(then completion: @escaping ([Tag]) -> Void)
 }

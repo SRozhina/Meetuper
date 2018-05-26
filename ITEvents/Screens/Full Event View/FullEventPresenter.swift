@@ -1,7 +1,7 @@
 class FullEventPresenter: IFullEventPresenter {
     var selectedEventService: ISelectedEventService!
     var dateFormatterService: IDateFormatterService!
-    var similarEventsService: ISimilarEventsDataService!
+    var similarEventsService: ISimilarEventsStorage!
     var view: IFullEventView!
     private var event: Event!
     private var similarEvents: [Event]?
@@ -9,7 +9,7 @@ class FullEventPresenter: IFullEventPresenter {
     init(view: IFullEventView,
          selectedEventService: ISelectedEventService,
          dateFormatterService: IDateFormatterService,
-         similarEventsService: ISimilarEventsDataService) {
+         similarEventsService: ISimilarEventsStorage) {
         self.selectedEventService = selectedEventService
         self.dateFormatterService = dateFormatterService
         self.similarEventsService = similarEventsService
