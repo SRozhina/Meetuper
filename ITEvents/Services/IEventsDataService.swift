@@ -1,7 +1,9 @@
+typealias EventsDataServiceCallback = ([Event], Int) -> Void
+
 protocol IEventsDataService {
-    func fetchEvents(then completion: @escaping ([Event]) -> Void)
+    func fetchFavoriteEvents(then completion: @escaping EventsDataServiceCallback)
     
-    func searchEvents(by text: String, and tags: [Tag], then completion: @escaping ([Event]) -> Void)
+    func searchEvents(indexRange: Range<Int>, searchText: String, searchTags: [Tag], then completion: @escaping EventsDataServiceCallback)
     
     //TODO for dates from json https://useyourloaf.com/blog/swift-codable-with-custom-dates/
 }

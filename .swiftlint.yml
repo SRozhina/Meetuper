@@ -12,6 +12,7 @@ disabled_rules:
  - trailing_whitespace
  - force_cast
  - identifier_name
+ - switch_case_alignment
 
 line_length: 150
 warning: 150

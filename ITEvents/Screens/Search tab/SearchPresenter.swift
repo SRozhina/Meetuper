@@ -1,13 +1,18 @@
 import Foundation
 
-class SearchPresenter: ISearchPresenter {
+class SearchPresenter: ISearchPresenter {    
     let view: ISearchView!
     let eventDataService: IEventsDataService!
     var selectedEventService: ISelectedEventService!
     let userSettingsService: IUserSettingsService!
     let dateFormatterService: IDateFormatterService!
-    private var events: [Event]!
+    private var events: [Event] = []
+    private var eventViewModels: [EventCollectionCellViewModel] = []
     private var isListLayoutCurrent: Bool!
+    private var searchEventsDebounced: ((Bool) -> Void)!
+    private var searchText: String = ""
+    private var searchTags: [Tag] = []
+    private var eventsTotal = 0
     
     init(view: ISearchView,
          eventDataService: IEventsDataService,
@@ -19,39 +24,71 @@ class SearchPresenter: ISearchPresenter {
         self.selectedEventService = selectedEventService
         self.userSettingsService = userSettingsService
         self.dateFormatterService = dateFormatterService
+        
+        //TODO implement request cancelation
+        searchEventsDebounced = debounce(
+            delay: DispatchTimeInterval.seconds(2),
+            queue: DispatchQueue.main,
+            action: searchEventDebouncedAction
+        )
     }
     
     func setup() {
-        activate()
-        
-        eventDataService.fetchEvents(then: { fetchedEvents in
-            self.events = fetchedEvents
-            let eventCollectionCellViewModels = self.events.map { self.createEventCollectionCellViewModel(event: $0)}
-            self.view.setEvents(eventCollectionCellViewModels)
-        })
-    }
-    
-    func activate() {
-        let settings = userSettingsService.fetchSettings()
-        if isListLayoutCurrent == settings.isListLayoutSelected { return }
-        isListLayoutCurrent = settings.isListLayoutSelected
-        view.toggleLayout(for: settings.isListLayoutSelected)
+        searchEventDebouncedAction()
     }
     
     func selectEvent(with eventId: Int) {
-        selectedEventService.selectedEvent = events.first(where: { $0.id == eventId })
+        selectedEventService.selectedEvent = events.first { $0.id == eventId }
     }
-    
-    func searchEvents(by text: String, and tags: [Tag], isDelayNeeded: Bool) {
-        eventDataService.searchEvents(by: text, and: tags, then: { fetchedEvents in
-            self.events = fetchedEvents
-            let eventCollectionCellViewModels = self.events.map { self.createEventCollectionCellViewModel(event: $0)}
-            self.view.setEvents(eventCollectionCellViewModels)
-        })
+
+    func searchMoreEvents() {
+        if eventsTotal == events.count {
+            return
+        }
         
+        view.toggleProgressIndicator(shown: true)
+        
+        eventDataService.searchEvents(indexRange: events.count..<events.count + 10,
+                                      searchText: searchText,
+                                      searchTags: searchTags,
+                                      then: self.appendFoundEvents)
     }
     
-    private func createEventCollectionCellViewModel(event: Event) -> EventCollectionCellViewModel {
+    func forceEventSearching() {
+        view.clearEvents()
+        searchEventsDebounced(false)
+    }
+    
+    func searchEvents(by newSearchText: String, and newSearchTags: [Tag]) {
+        searchText = newSearchText
+        searchTags = newSearchTags
+        view.clearEvents()
+        searchEventsDebounced(true)
+    }
+    
+    private func searchEventDebouncedAction() {
+        view.toggleProgressIndicator(shown: true)
+        
+        events.removeAll()
+        eventViewModels.removeAll()
+         
+        eventDataService.searchEvents(indexRange: 0..<10,
+                                      searchText: searchText,
+                                      searchTags: searchTags,
+                                      then: self.appendFoundEvents)
+    }
+    
+    private func appendFoundEvents(_ fetchedEvents: [Event], total: Int) {
+        self.eventsTotal = total
+        
+        self.events.append(contentsOf: fetchedEvents)
+        self.eventViewModels.append(contentsOf: fetchedEvents.map(self.createEventViewModel))
+        
+        self.view.setEvents(self.eventViewModels)
+        self.view.toggleProgressIndicator(shown: false)
+    }
+    
+    private func createEventViewModel(event: Event) -> EventCollectionCellViewModel {
         return EventCollectionCellViewModel(id: event.id,
                                             title: event.title,
                                             shortDate: self.dateFormatterService.formatDate(for: event.dateInterval, shortVersion: true),

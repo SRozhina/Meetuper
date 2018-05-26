@@ -8,6 +8,7 @@ class FavoritePresenter: IFavoritePresenter {
     let dateFormatterService: IDateFormatterService!
     private var userSettings: UserSettings!
     private var events: [Event]!
+    private var eventsTotal = 0
     
     init(view: IFavoriveView,
          eventDataService: IEventsDataService,
@@ -25,15 +26,10 @@ class FavoritePresenter: IFavoritePresenter {
         userSettings = userSettingsService.fetchSettings()
         view.toggleListLayout(to: userSettings.isListLayoutSelected)
         
-        eventDataService.fetchEvents(then: { fetchedEvents in
+        eventDataService.fetchFavoriteEvents(then: { fetchedEvents, total in
             self.events = fetchedEvents
-            let eventViewModels = fetchedEvents.map {
-                EventCollectionCellViewModel(id: $0.id,
-                                             title: $0.title,
-                                             shortDate: self.dateFormatterService.formatDate(for: $0.dateInterval, shortVersion: true),
-                                             longDate: self.dateFormatterService.formatDate(for: $0.dateInterval, shortVersion: false),
-                                             image: $0.image)
-            }
+            self.eventsTotal = total
+            let eventViewModels = fetchedEvents.map(self.createViewModel)
             self.view.setEvents(eventViewModels)
         })
     }
@@ -46,5 +42,13 @@ class FavoritePresenter: IFavoritePresenter {
     
     func selectEvent(with eventId: Int) {
         selectedEventService.selectedEvent = events.first(where: { $0.id == eventId })
+    }
+    
+    private func createViewModel(event: Event) -> EventCollectionCellViewModel {
+        return EventCollectionCellViewModel(id: event.id,
+                                            title: event.title,
+                                            shortDate: self.dateFormatterService.formatDate(for: event.dateInterval, shortVersion: true),
+                                            longDate: self.dateFormatterService.formatDate(for: event.dateInterval, shortVersion: false),
+                                            image: event.image)
     }
 }
