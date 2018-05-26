@@ -1,40 +1,13 @@
 import Foundation
 import UIKit
 
-class EventsDataServiceMockImpl: IEventsDataService {
+class SimilarEventsStorageMockImpl: ISimilarEventsStorage {
     
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return formatter
     }()
-        
-    func fetchFavoriteEvents(then completion: @escaping EventsDataServiceCallback) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            let events = self.getEvents()
-            completion(events, events.count)
-        }
-    }
-    
-    func searchEvents(indexRange: Range<Int>, searchText: String, searchTags: [Tag], then completion: @escaping EventsDataServiceCallback) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            let events = self.getEvents()
-            var filteredEvents = events
-            
-            if searchText != "" || !searchTags.isEmpty {
-                filteredEvents = events.filter({
-                    $0.title.lowercased().contains(searchText.lowercased()) ||
-                    $0.description.lowercased().contains(searchText.lowercased())
-                })
-            }
-            
-            let updatedIndexRange = filteredEvents.count < indexRange.upperBound
-                ? indexRange.lowerBound..<filteredEvents.count
-                : indexRange
-            let filteredEventsSlice = filteredEvents[updatedIndexRange]
-            completion(Array(filteredEventsSlice), filteredEvents.count)
-        }
-    }
     
     private func createEvent(id: Int,
                              title: String,
@@ -71,20 +44,10 @@ class EventsDataServiceMockImpl: IEventsDataService {
         return dateFormatter.date(from: stringDate)!
     }
     
-    private func getEvents() -> [Event] {
-        var events = [Event]()
-        for _ in 0..<10 {
-            events.append(contentsOf:
+    func fetchSimilarEvents(for eventId: Int, then completion: @escaping ([Event]) -> Void) {
+        let eventDictionary: [Int: [Event]] =
             [
-                createEvent(id: 1,
-                            title: "PiterJS #21",
-                            startDate: getDateFromString(stringDate: "2018-01-18 19:00:00"),
-                            endDate: getDateFromString(stringDate: "2018-01-18 22:00:00"),
-                            image: UIImage(named: "js")!,
-                            similarEventsCount: 0,
-                            source: EventSource(id: 1, name: "Timepad"),
-                            tags: (0...10).map {Tag(id: $0, name: "JavaScript")}
-                ),
+            2: [
                 createEvent(id: 2,
                             title: "PiterCSS #25",
                             startDate: getDateFromString(stringDate: "2018-03-31 19:00:00"),
@@ -95,7 +58,9 @@ class EventsDataServiceMockImpl: IEventsDataService {
                             tags: [
                                 Tag(id: 1, name: "JavaScript"),
                                 Tag(id: 2, name: "Frontend")
-                    ]),
+                            ])
+            ],
+            3: [
                 createEvent(id: 3,
                             title: "DartUp",
                             startDate: getDateFromString(stringDate: "2018-05-06 19:00:00"),
@@ -103,15 +68,19 @@ class EventsDataServiceMockImpl: IEventsDataService {
                             image: UIImage(named: "wrike")!,
                             similarEventsCount: 2,
                             source: EventSource(id: 3, name: "Meetabit"),
-                            tags: [Tag(id: 1, name: "JavaScript")]),
-                createEvent(id: 4,
-                            title: "EmberJS",
-                            startDate: getDateFromString(stringDate: "2018-09-09 19:00:00"),
-                            endDate: getDateFromString(stringDate: "2018-09-09 22:00:00"),
-                            image: UIImage(named: "ember")!,
-                            similarEventsCount: 0,
-                            source: EventSource(id: 1, name: "Timepad"),
-                            tags: [Tag(id: 1, name: "JavaScript")]),
+                            tags: [Tag(id: 1, name: "JavaScript")]
+                ),
+                createEvent(id: 3,
+                            title: "DartUp",
+                            startDate: getDateFromString(stringDate: "2018-05-06 19:00:00"),
+                            endDate: getDateFromString(stringDate: "2018-05-06 22:00:00"),
+                            image: UIImage(named: "wrike")!,
+                            similarEventsCount: 2,
+                            source: EventSource(id: 3, name: "Meetabit"),
+                            tags: [Tag(id: 1, name: "JavaScript")]
+                )
+            ],
+            5: [
                 Event(id: 5,
                       title: "Yandex Frontend Meetup for Middle developers and higher",
                       dateInterval: DateInterval(start: getDateFromString(stringDate: "2018-12-23 19:00:00"),
@@ -121,23 +90,20 @@ class EventsDataServiceMockImpl: IEventsDataService {
                       country: "Россия",
                       description: "Short description for iPad",
                       tags: [
-                        Tag(id: 1, name: "JavaScript"),
-                        Tag(id: 2, name: "Frontend")
-                    ],
+                            Tag(id: 1, name: "JavaScript"),
+                            Tag(id: 2, name: "Frontend")
+                            ],
                       image: UIImage(named: "yandex")!,
                       similarEventsCount: 1,
                       source: EventSource(id: 1, name: "Яндекс События"),
-                      url: URL(string: "https://pitercss.timepad.ru/event/457262/")),
-                createEvent(id: 6,
-                            title: "DagistanCSS",
-                            startDate: getDateFromString(stringDate: "2011-09-09 19:00:00"),
-                            endDate: getDateFromString(stringDate: "2011-09-09 22:00:00"),
-                            image: UIImage(named: "ember")!,
-                            similarEventsCount: 0,
-                            source: EventSource(id: 1, name: "Timepad"),
-                            tags: [Tag(id: 1, name: "JavaScript")])
-            ])
+                      url: URL(string: "https://pitercss.timepad.ru/event/457262/"))
+            ]
+        ]
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            if let events = eventDictionary[eventId] {
+                completion(events)
+            }
         }
-        return events
     }
 }

@@ -2,7 +2,7 @@ import Foundation
 
 class SearchPresenter: ISearchPresenter {    
     let view: ISearchView!
-    let eventDataService: IEventsDataService!
+    let eventStorage: IEventsStorage!
     var selectedEventService: ISelectedEventService!
     let userSettingsService: IUserSettingsService!
     let dateFormatterService: IDateFormatterService!
@@ -15,12 +15,12 @@ class SearchPresenter: ISearchPresenter {
     private var eventsTotal = 0
     
     init(view: ISearchView,
-         eventDataService: IEventsDataService,
+         eventStorage: IEventsStorage,
          selectedEventService: ISelectedEventService,
          userSettingsService: IUserSettingsService,
          dateFormatterService: IDateFormatterService) {
         self.view = view
-        self.eventDataService = eventDataService
+        self.eventStorage = eventStorage
         self.selectedEventService = selectedEventService
         self.userSettingsService = userSettingsService
         self.dateFormatterService = dateFormatterService
@@ -48,7 +48,7 @@ class SearchPresenter: ISearchPresenter {
         
         view.toggleProgressIndicator(shown: true)
         
-        eventDataService.searchEvents(indexRange: events.count..<events.count + 10,
+        eventStorage.searchEvents(indexRange: events.count..<events.count + 10,
                                       searchText: searchText,
                                       searchTags: searchTags,
                                       then: self.appendFoundEvents)
@@ -72,7 +72,7 @@ class SearchPresenter: ISearchPresenter {
         events.removeAll()
         eventViewModels.removeAll()
          
-        eventDataService.searchEvents(indexRange: 0..<10,
+        eventStorage.searchEvents(indexRange: 0..<10,
                                       searchText: searchText,
                                       searchTags: searchTags,
                                       then: self.appendFoundEvents)
