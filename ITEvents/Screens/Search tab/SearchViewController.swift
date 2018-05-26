@@ -32,7 +32,7 @@ class SearchViewController: UIViewController, ISearchView {
         collectionView.isUserInteractionEnabled = true
     }
     
-    func setLayout(to isListLayout: Bool) {
+    func toggleLayout(value isListLayout: Bool) {
         if isList != isListLayout {
             isList = isListLayout
             collectionView.reloadData()

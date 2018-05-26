@@ -39,7 +39,7 @@ class SearchPresenter: ISearchPresenter {
     
     func updateViewSettings() {
         let userSettings = userSettingsService.fetchSettings()
-        view.setLayout(to: userSettings.isListLayoutSelected)
+        view.toggleLayout(value: userSettings.isListLayoutSelected)
     }
     
     func selectEvent(with eventId: Int) {

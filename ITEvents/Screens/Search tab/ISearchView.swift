@@ -6,5 +6,5 @@ protocol ISearchView {
     
     func toggleProgressIndicator(shown: Bool)
     
-    func setLayout(to isListLayout: Bool)
+    func toggleLayout(value isListLayout: Bool)
 }
