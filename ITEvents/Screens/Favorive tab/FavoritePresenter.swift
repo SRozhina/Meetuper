@@ -7,7 +7,7 @@ class FavoritePresenter: IFavoritePresenter {
     let userSettingsService: IUserSettingsService!
     let dateFormatterService: IDateFormatterService!
     private var userSettings: UserSettings!
-    private var events: [Event]!
+    private var events: [Event] = []
     private var eventsTotal = 0
     
     init(view: IFavoriveView,

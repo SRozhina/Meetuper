@@ -10,7 +10,7 @@ class SearchViewController: UIViewController, ISearchView {
     
     private var events = [EventCollectionCellViewModel]()
 
-    private var isList: Bool = true
+    private var isListLayoutSelected: Bool!
     private var loadInProgress: Bool = true
     private var searchText: String { return searchBar.text ?? "" }
     private var searchTags: [Tag] = []
@@ -22,9 +22,21 @@ class SearchViewController: UIViewController, ISearchView {
         presenter.setup()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        //TODO implement notifying about layout changes when settings are ready
+        presenter.updateViewSettings()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         collectionView.isUserInteractionEnabled = true
+    }
+    
+    func toggleLayout(value isListLayout: Bool) {
+        if isListLayoutSelected == isListLayout { return }
+        isListLayoutSelected = isListLayout
+        collectionView.reloadData()
     }
     
     func clearEvents() {
@@ -55,7 +67,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let event = events[indexPath.row]
-        if isList {
+        if isListLayoutSelected {
             let cell: ListCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
             cell.setup(with: event)
             return cell
@@ -68,7 +80,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return isList
+        return isListLayoutSelected
             ? CGSize(width: view.frame.width - 20, height: 80)
             : CGSize(width: (view.frame.width - 40) / 2, height: 180)
     }
