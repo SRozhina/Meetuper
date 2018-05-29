@@ -7,19 +7,26 @@ class SearchViewController: UIViewController, ISearchView {
 
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
-    
-    private var events = [EventCollectionCellViewModel]()
-
-    private var isList: Bool!
-    private var loadInProgress: Bool = true
+    private var eventCollectionViewCommon: IEventCollectionViewCommon!
     private var searchText: String { return searchBar.text ?? "" }
     private var searchTags: [Tag] = []
-    private let footerHeight: CGFloat = 50
-
+    
+    private var events = [EventCollectionCellViewModel]() {
+        didSet {
+            eventCollectionViewCommon.setEvents(events)
+            collectionView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         registerNibs()
+        eventCollectionViewCommon = EventCollectionViewCommon(viewWidth: view.frame.width,
+                                                              selectedEventAction: selectedEventAction,
+                                                              lastCellWillDisplayAction: lastCellWillDisplayAction)
         presenter.setup()
+        collectionView.dataSource = eventCollectionViewCommon
+        collectionView.delegate = eventCollectionViewCommon
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,24 +40,22 @@ class SearchViewController: UIViewController, ISearchView {
     }
     
     func toggleLayout(value isListLayout: Bool) {
-        if isList != isListLayout {
-            isList = isListLayout
-            collectionView.reloadData()
-        }
+        if eventCollectionViewCommon.getLoagingState() == isListLayout { return }
+        eventCollectionViewCommon.toggleLayout(value: isListLayout)
+        collectionView.reloadData()
     }
     
     func clearEvents() {
-        loadInProgress = true
+        eventCollectionViewCommon.toggleLoadingProgressState(true)
         setEvents([])
     }
     
     func setEvents(_ events: [EventCollectionCellViewModel]) {
         self.events = events
-        collectionView.reloadData()
     }
     
     func toggleProgressIndicator(shown: Bool) {
-        loadInProgress = shown
+        eventCollectionViewCommon.toggleLoadingProgressState(shown)
         collectionView.reloadData()
     }
     
@@ -58,73 +63,18 @@ class SearchViewController: UIViewController, ISearchView {
         collectionView.register(cellType: ListCollectionViewCell.self)
         collectionView.register(cellType: GridCollectionViewCell.self)
     }
-}
-
-extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return events.count
-    }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let event = events[indexPath.row]
-        if isList {
-            let cell: ListCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-            cell.setup(with: event)
-            return cell
-        }
-        let cell: GridCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.setup(with: event)
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return isList
-            ? CGSize(width: view.frame.width - 20, height: 80)
-            : CGSize(width: (view.frame.width - 40) / 2, height: 180)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.isUserInteractionEnabled = false
+    private func selectedEventAction(for indexPath: IndexPath) {
         presenter.selectEvent(with: events[indexPath.row].id)
         self.performSegue(withIdentifier: "Search_OpenEvent", sender: nil)
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        viewForSupplementaryElementOfKind kind: String,
-                        at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-            case UICollectionElementKindSectionFooter:
-                let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter,
-                                                                             withReuseIdentifier: "Footer",
-                                                                             for: indexPath) as! EventsCollectionViewFooter
-                if loadInProgress {
-                    footer.showFooter()
-                } else {
-                    footer.hideFooter()
-                }
-                return footer
-            default:
-                assert(false, "Unexpected element kind")
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        referenceSizeForFooterInSection section: Int) -> CGSize {
-        return loadInProgress
-            ? CGSize(width: view.frame.width, height: footerHeight)
-            : CGSize.zero
-    }
-
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    private func lastCellWillDisplayAction(for indexPath: IndexPath) {
         let lastEventIndex = events.count - 1
-        if indexPath.row == lastEventIndex && !loadInProgress {
+        if indexPath.row == lastEventIndex && !eventCollectionViewCommon.getLoagingState() {
             DispatchQueue.main.async {
                 self.presenter.searchMoreEvents()
             }
-            
         }
     }
 }

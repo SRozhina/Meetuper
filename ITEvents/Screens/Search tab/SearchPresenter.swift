@@ -34,6 +34,7 @@ class SearchPresenter: ISearchPresenter {
     }
     
     func setup() {
+        updateViewSettings()
         searchEventDebouncedAction()
     }
     

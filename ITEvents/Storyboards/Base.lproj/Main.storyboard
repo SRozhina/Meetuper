@@ -207,10 +207,6 @@
                                         <rect key="value" x="0.0" y="0.0" width="10" height="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <outlet property="dataSource" destination="l4M-Ct-4fJ" id="Rss-vm-dIm"/>
-                                    <outlet property="delegate" destination="l4M-Ct-4fJ" id="6BE-gp-rn2"/>
-                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
