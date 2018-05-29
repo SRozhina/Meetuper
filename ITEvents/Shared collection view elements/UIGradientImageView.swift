@@ -30,7 +30,7 @@ class UIGradientImageView: UIImageView {
         setGragientLayer(color: UIColor.white)
     }
     
-    //TODO remove code when will remove DisplaySwitcher from FavoriteEventsView
+    //TODO remove code when we remove DisplaySwitcher from FavoriteEventsView
     func setGradientOpacity(to opacity: CGFloat) {
         CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
         gradientLayer.opacity = Float(opacity)
