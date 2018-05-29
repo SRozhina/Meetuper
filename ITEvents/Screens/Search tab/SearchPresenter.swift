@@ -13,6 +13,7 @@ class SearchPresenter: ISearchPresenter {
     private var searchText: String = ""
     private var searchTags: [Tag] = []
     private var eventsTotal = 0
+    private var searchCancelation: Cancelation?
     
     init(view: ISearchView,
          eventStorage: IEventsStorage,
@@ -25,7 +26,6 @@ class SearchPresenter: ISearchPresenter {
         self.userSettingsService = userSettingsService
         self.dateFormatterService = dateFormatterService
         
-        //TODO implement request cancelation
         searchEventsDebounced = debounce(
             delay: DispatchTimeInterval.seconds(2),
             queue: DispatchQueue.main,
@@ -53,10 +53,10 @@ class SearchPresenter: ISearchPresenter {
         
         view.toggleProgressIndicator(shown: true)
         
-        eventStorage.searchEvents(indexRange: events.count..<events.count + 10,
-                                      searchText: searchText,
-                                      searchTags: searchTags,
-                                      then: self.appendFoundEvents)
+        _ = eventStorage.searchEvents(indexRange: events.count..<events.count + 10,
+                                  searchText: searchText,
+                                  searchTags: searchTags,
+                                  then: self.appendFoundEvents)
     }
     
     func forceEventSearching() {
@@ -76,11 +76,12 @@ class SearchPresenter: ISearchPresenter {
         
         events.removeAll()
         eventViewModels.removeAll()
-         
-        eventStorage.searchEvents(indexRange: 0..<10,
-                                      searchText: searchText,
-                                      searchTags: searchTags,
-                                      then: self.appendFoundEvents)
+        
+        searchCancelation?.cancel()
+        searchCancelation = eventStorage.searchEvents(indexRange: 0..<10,
+                                                      searchText: searchText,
+                                                      searchTags: searchTags,
+                                                      then: self.appendFoundEvents)
     }
     
     private func appendFoundEvents(_ fetchedEvents: [Event], total: Int) {

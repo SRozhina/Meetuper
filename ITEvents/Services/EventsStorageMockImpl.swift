@@ -8,15 +8,21 @@ class EventsStorageMockImpl: IEventsStorage {
         return formatter
     }()
         
-    func fetchFavoriteEvents(then completion: @escaping EventsStorageCallback) {
+    func fetchFavoriteEvents(then completion: @escaping EventRequestCallback) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             let events = self.getEvents()
             completion(events, events.count)
         }
     }
     
-    func searchEvents(indexRange: Range<Int>, searchText: String, searchTags: [Tag], then completion: @escaping EventsStorageCallback) {
+    func searchEvents(indexRange: Range<Int>, searchText: String, searchTags: [Tag], then completion: @escaping EventRequestCallback) -> Cancelation {
+        let cancelation = Cancelation()
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            if cancelation.canceled {
+                return
+            }
+            
             let events = self.getEvents()
             var filteredEvents = events
             
@@ -33,6 +39,8 @@ class EventsStorageMockImpl: IEventsStorage {
             let filteredEventsSlice = filteredEvents[updatedIndexRange]
             completion(Array(filteredEventsSlice), filteredEvents.count)
         }
+        
+        return cancelation
     }
     
     private func createEvent(id: Int,
