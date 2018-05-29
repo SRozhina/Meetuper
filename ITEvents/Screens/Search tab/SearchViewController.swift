@@ -31,6 +31,7 @@ class SearchViewController: UIViewController, ISearchView {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        //TODO implement notifying about layout changes when settings are ready
         presenter.updateViewSettings()
     }
     
