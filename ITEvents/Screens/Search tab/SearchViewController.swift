@@ -20,13 +20,8 @@ class SearchViewController: UIViewController, ISearchView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        registerNibs()
-        eventCollectionViewCommon = EventCollectionViewCommon(viewWidth: view.frame.width,
-                                                              selectedEventAction: selectedEventAction,
-                                                              lastCellWillDisplayAction: lastCellWillDisplayAction)
+        setupViewController()
         presenter.setup()
-        collectionView.dataSource = eventCollectionViewCommon
-        collectionView.delegate = eventCollectionViewCommon
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +33,15 @@ class SearchViewController: UIViewController, ISearchView {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         collectionView.isUserInteractionEnabled = true
+    }
+    
+    private func setupViewController() {
+        registerNibs()
+        eventCollectionViewCommon = EventCollectionViewCommon(viewWidth: view.frame.width,
+                                                              selectedEventAction: selectedEventAction,
+                                                              lastCellWillDisplayAction: lastCellWillDisplayAction)
+        collectionView.dataSource = eventCollectionViewCommon
+        collectionView.delegate = eventCollectionViewCommon
     }
     
     func toggleLayout(value isListLayout: Bool) {

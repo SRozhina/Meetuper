@@ -76,14 +76,6 @@ class EventCollectionViewCommon: NSObject, IEventCollectionViewCommon {
         lastCellWillDisplayAction?(indexPath)
     }
     
-    func setup(with viewWidth: CGFloat,
-               selectedEventAction: ((IndexPath) -> Void)? = nil,
-               lastCellWillDisplayAction: ((IndexPath) -> Void)? = nil) {
-        self.viewWidth = viewWidth
-        self.selectedEventAction = selectedEventAction
-        self.lastCellWillDisplayAction = lastCellWillDisplayAction
-    }
-    
     func setEvents(_ newEvents: [EventCollectionCellViewModel]) {
         self.events = newEvents
     }
