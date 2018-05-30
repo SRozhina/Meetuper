@@ -97,7 +97,7 @@ class EventCollectionViewCommon: NSObject, IEventCollectionViewCommon {
         isListLayoutSelected = isListLayout
     }
     
-    func getLoagingState() -> Bool {
+    func getLoadingState() -> Bool {
         return loadInProgress
     }
     
@@ -114,7 +114,7 @@ protocol IEventCollectionViewCommon: UICollectionViewDelegateFlowLayout, UIColle
     
     func toggleLayout(value isListLayout: Bool)
     
-    func getLoagingState() -> Bool
+    func getLoadingState() -> Bool
     
     func getLayoutState() -> Bool
 }

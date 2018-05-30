@@ -41,7 +41,7 @@ class SearchViewController: UIViewController, ISearchView {
     }
     
     func toggleLayout(value isListLayout: Bool) {
-        if eventCollectionViewCommon.getLoagingState() == isListLayout { return }
+        if eventCollectionViewCommon.getLayoutState() == isListLayout { return }
         eventCollectionViewCommon.toggleLayout(value: isListLayout)
         collectionView.reloadData()
     }
@@ -72,7 +72,7 @@ class SearchViewController: UIViewController, ISearchView {
     
     private func lastCellWillDisplayAction(for indexPath: IndexPath) {
         let lastEventIndex = events.count - 1
-        if indexPath.row == lastEventIndex && !eventCollectionViewCommon.getLoagingState() {
+        if indexPath.row == lastEventIndex && !eventCollectionViewCommon.getLoadingState() {
             DispatchQueue.main.async {
                 self.presenter.searchMoreEvents()
             }
