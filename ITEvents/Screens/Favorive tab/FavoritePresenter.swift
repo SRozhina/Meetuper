@@ -23,8 +23,7 @@ class FavoritePresenter: IFavoritePresenter {
     }
     
     func setup() {
-        userSettings = userSettingsService.fetchSettings()
-        view.toggleListLayout(to: userSettings.isListLayoutSelected)
+        updateViewSettings()
         
         eventStorage.fetchFavoriteEvents(then: { fetchedEvents, total in
             self.events = fetchedEvents
@@ -34,14 +33,13 @@ class FavoritePresenter: IFavoritePresenter {
         })
     }
     
-    func toggleLayoutState() {
-        userSettings.isListLayoutSelected = !userSettings.isListLayoutSelected
-        view.toggleListLayout(to: userSettings.isListLayoutSelected)
-        userSettingsService.save(settings: userSettings)
-    }
-    
     func selectEvent(with eventId: Int) {
         selectedEventService.selectedEvent = events.first(where: { $0.id == eventId })
+    }
+    
+    func updateViewSettings() {
+        let userSettings = userSettingsService.fetchSettings()
+        view.toggleLayout(value: userSettings.isListLayoutSelected)
     }
     
     private func createViewModel(event: Event) -> EventCollectionCellViewModel {

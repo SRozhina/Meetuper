@@ -44,6 +44,11 @@ class SearchViewController: UIViewController, ISearchView {
         collectionView.delegate = eventCollectionViewCommon
     }
     
+    private func registerNibs() {
+        collectionView.register(cellType: ListCollectionViewCell.self)
+        collectionView.register(cellType: GridCollectionViewCell.self)
+    }
+    
     func toggleLayout(value isListLayout: Bool) {
         if eventCollectionViewCommon.getLayoutState() == isListLayout { return }
         eventCollectionViewCommon.toggleLayout(value: isListLayout)
@@ -64,12 +69,8 @@ class SearchViewController: UIViewController, ISearchView {
         collectionView.reloadData()
     }
     
-    private func registerNibs() {
-        collectionView.register(cellType: ListCollectionViewCell.self)
-        collectionView.register(cellType: GridCollectionViewCell.self)
-    }
-    
     private func selectedEventAction(for indexPath: IndexPath) {
+        collectionView.isUserInteractionEnabled = false
         presenter.selectEvent(with: events[indexPath.row].id)
         self.performSegue(withIdentifier: "Search_OpenEvent", sender: nil)
     }

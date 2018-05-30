@@ -1,5 +1,5 @@
 protocol IFavoriveView {
     func setEvents(_ events: [EventCollectionCellViewModel])
     
-    func toggleListLayout(to list: Bool)
+    func toggleLayout(value isListLayout: Bool)
 }

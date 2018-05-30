@@ -20,21 +20,11 @@ class UIGradientImageView: UIImageView {
         setGragientLayer()
     }
     
-    func setGragientLayer(color: UIColor) {
+    func setGragientLayer(color: UIColor = .white, opacity: Float = 0) {
         gradientLayer.colors = [color.withAlphaComponent(0).cgColor,
                                 color.withAlphaComponent(1).cgColor]
+        gradientLayer.opacity = opacity
         self.layer.addSublayer(gradientLayer)
-    }
-    
-    private func setGragientLayer() {
-        setGragientLayer(color: UIColor.white)
-    }
-    
-    //TODO remove code when we remove DisplaySwitcher from FavoriteEventsView
-    func setGradientOpacity(to opacity: CGFloat) {
-        CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
-        gradientLayer.opacity = Float(opacity)
-        CATransaction.commit()
     }
     
     override func layoutSubviews() {
