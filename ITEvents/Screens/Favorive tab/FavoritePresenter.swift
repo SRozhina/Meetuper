@@ -8,6 +8,7 @@ class FavoritePresenter: IFavoritePresenter {
     let dateFormatterService: IDateFormatterService!
     private var userSettings: UserSettings!
     private var events: [Event] = []
+    private var eventViewModels: [EventCollectionCellViewModel] = []
     private var eventsTotal = 0
     
     init(view: IFavoriveView,
@@ -25,12 +26,7 @@ class FavoritePresenter: IFavoritePresenter {
     func setup() {
         updateViewSettings()
         
-        eventStorage.fetchFavoriteEvents(then: { fetchedEvents, total in
-            self.events = fetchedEvents
-            self.eventsTotal = total
-            let eventViewModels = fetchedEvents.map(self.createViewModel)
-            self.view.setEvents(eventViewModels)
-        })
+        eventStorage.fetchFavoriteEvents(indexRange: 0..<10, then: appendEvents)
     }
     
     func selectEvent(with eventId: Int) {
@@ -42,7 +38,28 @@ class FavoritePresenter: IFavoritePresenter {
         view.toggleLayout(value: userSettings.isListLayoutSelected)
     }
     
-    private func createViewModel(event: Event) -> EventCollectionCellViewModel {
+    func loadMoreEvents() {
+        if eventsTotal == events.count {
+            return
+        }
+        
+        view.toggleProgressIndicator(shown: true)
+        
+        eventStorage.fetchFavoriteEvents(indexRange: events.count..<events.count + 10,
+                                         then: self.appendEvents)
+    }
+    
+    private func appendEvents(_ fetchedEvents: [Event], total: Int) {
+        self.eventsTotal = total
+        
+        self.events.append(contentsOf: fetchedEvents)
+        self.eventViewModels.append(contentsOf: fetchedEvents.map(createEventViewModel))
+        
+        self.view.setEvents(self.eventViewModels)
+        self.view.toggleProgressIndicator(shown: false)
+    }
+    
+    private func createEventViewModel(event: Event) -> EventCollectionCellViewModel {
         return EventCollectionCellViewModel(id: event.id,
                                             title: event.title,
                                             shortDate: self.dateFormatterService.formatDate(for: event.dateInterval, shortVersion: true),

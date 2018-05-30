@@ -35,7 +35,7 @@ class FavoritesViewController: UIViewController, IFavoriveView {
         registerNibs()
         eventCollectionViewCommon = EventCollectionViewCommon(viewWidth: view.frame.width,
                                                               selectedEventAction: selectedEventAction,
-                                                              lastCellWillDisplayAction: nil)
+                                                              lastCellWillDisplayAction: lastCellWillDisplayAction)
         collectionView.delegate = eventCollectionViewCommon
         collectionView.dataSource = eventCollectionViewCommon
     }
@@ -55,7 +55,6 @@ class FavoritesViewController: UIViewController, IFavoriveView {
         self.events = events
     }
     
-    //TODO add to protocol when implement partially loading data
     func toggleProgressIndicator(shown: Bool) {
         eventCollectionViewCommon.toggleLoadingProgressState(shown)
         collectionView.reloadData()
@@ -65,5 +64,14 @@ class FavoritesViewController: UIViewController, IFavoriveView {
         collectionView.isUserInteractionEnabled = false
         presenter.selectEvent(with: events[indexPath.row].id)
         self.performSegue(withIdentifier: "Favorite_OpenEvent", sender: nil)
+    }
+    
+    private func lastCellWillDisplayAction(for indexPath: IndexPath) {
+        let lastEventIndex = events.count - 1
+        if indexPath.row == lastEventIndex && !eventCollectionViewCommon.getLoadingState() {
+            DispatchQueue.main.async {
+                self.presenter.loadMoreEvents()
+            }
+        }
     }
 }

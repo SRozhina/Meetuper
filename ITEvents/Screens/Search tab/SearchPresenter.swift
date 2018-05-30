@@ -86,13 +86,13 @@ class SearchPresenter: ISearchPresenter {
     }
     
     private func appendFoundEvents(_ fetchedEvents: [Event], total: Int) {
-        self.eventsTotal = total
+        eventsTotal = total
         
-        self.events.append(contentsOf: fetchedEvents)
-        self.eventViewModels.append(contentsOf: fetchedEvents.map(self.createEventViewModel))
+        events.append(contentsOf: fetchedEvents)
+        eventViewModels.append(contentsOf: fetchedEvents.map(createEventViewModel))
         
-        self.view.setEvents(self.eventViewModels)
-        self.view.toggleProgressIndicator(shown: false)
+        view.setEvents(self.eventViewModels)
+        view.toggleProgressIndicator(shown: false)
     }
     
     private func createEventViewModel(event: Event) -> EventCollectionCellViewModel {

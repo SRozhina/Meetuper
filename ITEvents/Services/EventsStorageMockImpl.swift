@@ -8,10 +8,16 @@ class EventsStorageMockImpl: IEventsStorage {
         return formatter
     }()
         
-    func fetchFavoriteEvents(then completion: @escaping EventRequestCallback) {
+    func fetchFavoriteEvents(indexRange: Range<Int>,then completion: @escaping EventRequestCallback) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             let events = self.getEvents()
-            completion(events, events.count)
+            
+            let updatedIndexRange = events.count < indexRange.upperBound
+                ? indexRange.lowerBound..<events.count
+                : indexRange
+            
+            let eventsSlice = events[updatedIndexRange]
+            completion(Array(eventsSlice), events.count)            
         }
     }
     
