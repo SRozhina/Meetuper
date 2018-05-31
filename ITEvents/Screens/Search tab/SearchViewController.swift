@@ -27,7 +27,7 @@ class SearchViewController: UIViewController, ISearchView {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         //TODO implement notifying about layout changes when settings are ready
-        presenter.updateViewSettings()
+        presenter.activate()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,13 +45,13 @@ class SearchViewController: UIViewController, ISearchView {
     }
     
     func toggleLayout(value isListLayout: Bool) {
-        if eventCollectionViewCommon.getLayoutState() == isListLayout { return }
+        if eventCollectionViewCommon.isListLayoutSelected == isListLayout { return }
         eventCollectionViewCommon.toggleLayout(value: isListLayout)
         collectionView.reloadData()
     }
     
     func clearEvents() {
-        eventCollectionViewCommon.toggleLoadingProgressState(true)
+        eventCollectionViewCommon.toggleLoadingMoreEvents(true)
         setEvents([])
     }
     
@@ -60,7 +60,7 @@ class SearchViewController: UIViewController, ISearchView {
     }
     
     func toggleProgressIndicator(shown: Bool) {
-        eventCollectionViewCommon.toggleLoadingProgressState(shown)
+        eventCollectionViewCommon.toggleLoadingMoreEvents(shown)
         collectionView.reloadData()
     }
     
@@ -76,7 +76,7 @@ class SearchViewController: UIViewController, ISearchView {
     
     private func lastCellWillDisplayAction(for indexPath: IndexPath) {
         let lastEventIndex = events.count - 1
-        if indexPath.row == lastEventIndex && !eventCollectionViewCommon.getLoadingState() {
+        if indexPath.row == lastEventIndex && !eventCollectionViewCommon.isLoadingMoreEvents {
             DispatchQueue.main.async {
                 self.presenter.searchMoreEvents()
             }

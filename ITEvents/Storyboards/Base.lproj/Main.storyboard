@@ -66,6 +66,9 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="56"/>
                                 <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                <connections>
+                                    <outlet property="delegate" destination="RD7-ji-xpX" id="lgj-fy-AIB"/>
+                                </connections>
                             </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -344,6 +347,6 @@
         <image name="Profile Inactive" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9SO-cF-Njo"/>
+        <segue reference="dEb-y7-KcZ"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -4,8 +4,8 @@ class EventCollectionViewCommon: NSObject, IEventCollectionViewCommon {
     private var selectedEventAction: ((IndexPath) -> Void)?
     private var lastCellWillDisplayAction: ((IndexPath) -> Void)?
     private var events = [EventCollectionCellViewModel]()
-    private var isListLayoutSelected: Bool = true
-    private var loadInProgress: Bool = true
+    public private(set) var isListLayoutSelected: Bool = true
+    public private(set) var isLoadingMoreEvents: Bool = true
     private var viewWidth: CGFloat!
     
     init(viewWidth: CGFloat,
@@ -40,7 +40,7 @@ class EventCollectionViewCommon: NSObject, IEventCollectionViewCommon {
             let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter,
                                                                          withReuseIdentifier: "Footer",
                                                                          for: indexPath) as! EventsCollectionViewFooter
-            if loadInProgress {
+            if isLoadingMoreEvents {
                 footer.showFooter()
             } else {
                 footer.hideFooter()
@@ -54,7 +54,7 @@ class EventCollectionViewCommon: NSObject, IEventCollectionViewCommon {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForFooterInSection section: Int) -> CGSize {
-        return loadInProgress
+        return isLoadingMoreEvents
             ? CGSize(width: viewWidth, height: 50)
             : CGSize.zero
     }
@@ -80,33 +80,24 @@ class EventCollectionViewCommon: NSObject, IEventCollectionViewCommon {
         self.events = newEvents
     }
     
-    func toggleLoadingProgressState(_ value: Bool) {
-        loadInProgress = value
+    func toggleLoadingMoreEvents(_ value: Bool) {
+        isLoadingMoreEvents = value
     }
     
     func toggleLayout(value isListLayout: Bool) {
         if isListLayoutSelected == isListLayout { return }
         isListLayoutSelected = isListLayout
     }
-    
-    func getLoadingState() -> Bool {
-        return loadInProgress
-    }
-    
-    //Do not know how to name it
-    func getLayoutState() -> Bool {
-        return isListLayoutSelected
-    }
 }
 
 protocol IEventCollectionViewCommon: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    var isListLayoutSelected: Bool { get }
+    
+    var isLoadingMoreEvents: Bool { get }
+    
     func setEvents(_ newEvents: [EventCollectionCellViewModel])
     
-    func toggleLoadingProgressState(_ value: Bool)
+    func toggleLoadingMoreEvents(_ value: Bool)
     
     func toggleLayout(value isListLayout: Bool)
-    
-    func getLoadingState() -> Bool
-    
-    func getLayoutState() -> Bool
 }
