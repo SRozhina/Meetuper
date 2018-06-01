@@ -88,7 +88,7 @@
                         <outlet property="collectionView" destination="Usl-gx-WpU" id="dyk-K0-dlz"/>
                         <outlet property="searchBar" destination="abN-bg-gHP" id="oVY-l4-jeg"/>
                         <outlet property="searchDisplayController" destination="Ing-lR-9v8" id="U7W-cF-dxQ"/>
-                        <segue destination="Xbi-tk-Qub" kind="show" identifier="Search_OpenEvent" id="9SO-cF-Njo"/>
+                        <segue destination="Xbi-tk-Qub" kind="show" identifier="OpenEvent" id="9SO-cF-Njo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KEo-8V-UsT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -160,7 +160,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="xfd-0W-TCm"/>
                     <connections>
-                        <segue destination="Xbi-tk-Qub" kind="show" identifier="Profile_OpenEvent" id="XIz-NE-dz2"/>
+                        <segue destination="Xbi-tk-Qub" kind="show" identifier="OpenEvent" id="XIz-NE-dz2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FOY-B6-KhO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -193,7 +193,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </view>
                                         <connections>
-                                            <segue destination="Xbi-tk-Qub" kind="show" identifier="Favorite_OpenEvent" id="dEb-y7-KcZ"/>
+                                            <segue destination="Xbi-tk-Qub" kind="show" identifier="OpenEvent" id="dEb-y7-KcZ"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -347,6 +347,6 @@
         <image name="Profile Inactive" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dEb-y7-KcZ"/>
+        <segue reference="XIz-NE-dz2"/>
     </inferredMetricsTieBreakers>
 </document>

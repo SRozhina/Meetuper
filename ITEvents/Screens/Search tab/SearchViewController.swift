@@ -7,16 +7,12 @@ class SearchViewController: UIViewController, ISearchView {
 
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
+    
     private var eventCollectionViewCommon: IEventCollectionViewCommon!
     private var searchText: String { return searchBar.text ?? "" }
     private var searchTags: [Tag] = []
     
-    private var events = [EventCollectionCellViewModel]() {
-        didSet {
-            eventCollectionViewCommon.setEvents(events)
-            collectionView.reloadData()
-        }
-    }
+    private var events = [EventCollectionCellViewModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +22,6 @@ class SearchViewController: UIViewController, ISearchView {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        //TODO implement notifying about layout changes when settings are ready
         presenter.activate()
     }
     
@@ -38,6 +33,7 @@ class SearchViewController: UIViewController, ISearchView {
     private func setupViewController() {
         registerNibs()
         eventCollectionViewCommon = EventCollectionViewCommon(viewWidth: view.frame.width,
+                                                              collectionView: collectionView,
                                                               selectedEventAction: selectedEventAction,
                                                               lastCellWillDisplayAction: lastCellWillDisplayAction)
         collectionView.dataSource = eventCollectionViewCommon
@@ -46,22 +42,24 @@ class SearchViewController: UIViewController, ISearchView {
     
     func toggleLayout(value isListLayout: Bool) {
         if eventCollectionViewCommon.isListLayoutSelected == isListLayout { return }
-        eventCollectionViewCommon.toggleLayout(value: isListLayout)
-        collectionView.reloadData()
+        eventCollectionViewCommon.toggleListLayout()
     }
     
     func clearEvents() {
-        eventCollectionViewCommon.toggleLoadingMoreEvents(true)
         setEvents([])
     }
     
     func setEvents(_ events: [EventCollectionCellViewModel]) {
         self.events = events
+        eventCollectionViewCommon.setEvents(events)
     }
     
-    func toggleProgressIndicator(shown: Bool) {
-        eventCollectionViewCommon.toggleLoadingMoreEvents(shown)
-        collectionView.reloadData()
+    func showLoadingIndicator() {
+        eventCollectionViewCommon.showLoadingIndicator()
+    }
+    
+    func hideLoadingIndicator() {
+        eventCollectionViewCommon.hideLoadingIndicator()
     }
     
     private func registerNibs() {
@@ -69,17 +67,15 @@ class SearchViewController: UIViewController, ISearchView {
         collectionView.register(cellType: GridCollectionViewCell.self)
     }
     
-    private func selectedEventAction(for indexPath: IndexPath) {
-        presenter.selectEvent(with: events[indexPath.row].id)
-        self.performSegue(withIdentifier: "Search_OpenEvent", sender: nil)
+    private func selectedEventAction(for event: EventCollectionCellViewModel) {
+        collectionView.isUserInteractionEnabled = false
+        presenter.selectEvent(with: event.id)
+        self.performSegue(withIdentifier: "OpenEvent", sender: nil)
     }
     
-    private func lastCellWillDisplayAction(for indexPath: IndexPath) {
-        let lastEventIndex = events.count - 1
-        if indexPath.row == lastEventIndex && !eventCollectionViewCommon.isLoadingMoreEvents {
-            DispatchQueue.main.async {
-                self.presenter.searchMoreEvents()
-            }
+    private func lastCellWillDisplayAction() {
+        DispatchQueue.main.async {
+            self.presenter.searchMoreEvents()
         }
     }
 }
@@ -87,8 +83,6 @@ class SearchViewController: UIViewController, ISearchView {
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder() //remove keyboard
-        
-        presenter.forceEventSearching()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
