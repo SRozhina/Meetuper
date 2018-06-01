@@ -74,7 +74,7 @@
 		C3C6051220BA021E00606B30 /* SimilarEventsStorageMockImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6050C20BA021E00606B30 /* SimilarEventsStorageMockImpl.swift */; };
 		C3C6051320BA021E00606B30 /* EventTagsStorageMockImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6050D20BA021E00606B30 /* EventTagsStorageMockImpl.swift */; };
 		C3C6051520BAC04400606B30 /* Cancelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6051420BAC04400606B30 /* Cancelation.swift */; };
-		C3C6051720BC8B5E00606B30 /* EventCollectionViewCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6051620BC8B5E00606B30 /* EventCollectionViewCommon.swift */; };
+		C3C6051720BC8B5E00606B30 /* EventCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6051620BC8B5E00606B30 /* EventCollectionViewHandler.swift */; };
 		C3CEBDBE201FADA9003CE306 /* EventCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3CEBDBD201FADA9003CE306 /* EventCollectionViewCell.xib */; };
 		C3D547642078104A009ABC73 /* IFullEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D547632078104A009ABC73 /* IFullEventView.swift */; };
 		C3D547662078208F009ABC73 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D547652078208F009ABC73 /* EventViewModel.swift */; };
@@ -176,7 +176,7 @@
 		C3C6050C20BA021E00606B30 /* SimilarEventsStorageMockImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimilarEventsStorageMockImpl.swift; sourceTree = "<group>"; };
 		C3C6050D20BA021E00606B30 /* EventTagsStorageMockImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTagsStorageMockImpl.swift; sourceTree = "<group>"; };
 		C3C6051420BAC04400606B30 /* Cancelation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancelation.swift; sourceTree = "<group>"; };
-		C3C6051620BC8B5E00606B30 /* EventCollectionViewCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionViewCommon.swift; sourceTree = "<group>"; };
+		C3C6051620BC8B5E00606B30 /* EventCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionViewHandler.swift; sourceTree = "<group>"; };
 		C3CEBDBD201FADA9003CE306 /* EventCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventCollectionViewCell.xib; sourceTree = "<group>"; };
 		C3D547632078104A009ABC73 /* IFullEventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFullEventView.swift; sourceTree = "<group>"; };
 		C3D547652078208F009ABC73 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
@@ -353,7 +353,7 @@
 				C39190A0201E630B00CD7151 /* Profile tab */,
 				C3919091201E605E00CD7151 /* Search tab */,
 				C391908E201E5F0B00CD7151 /* Favorive tab */,
-				C3C6051620BC8B5E00606B30 /* EventCollectionViewCommon.swift */,
+				C3C6051620BC8B5E00606B30 /* EventCollectionViewHandler.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -694,7 +694,7 @@
 				C34C4F82206B89FD001A61A9 /* ISelectedEventService.swift in Sources */,
 				C3C6051120BA021E00606B30 /* EventsStorageMockImpl.swift in Sources */,
 				C39190AD201E638700CD7151 /* FullEventPresenter.swift in Sources */,
-				C3C6051720BC8B5E00606B30 /* EventCollectionViewCommon.swift in Sources */,
+				C3C6051720BC8B5E00606B30 /* EventCollectionViewHandler.swift in Sources */,
 				C3919099201E62C800CD7151 /* SearchPresenter.swift in Sources */,
 				C3FFF10A20726CEB00ADF407 /* UserSettingsModel.xcdatamodeld in Sources */,
 				C3B8829A201A22520031F261 /* FavoritesViewController.swift in Sources */,

@@ -8,7 +8,7 @@ class SearchViewController: UIViewController, ISearchView {
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
     
-    private var eventCollectionViewCommon: IEventCollectionViewCommon!
+    private var eventCollectionViewCommon: IEventCollectionViewHandler!
     private var searchText: String { return searchBar.text ?? "" }
     private var searchTags: [Tag] = []
     
@@ -32,7 +32,7 @@ class SearchViewController: UIViewController, ISearchView {
     
     private func setupViewController() {
         registerNibs()
-        eventCollectionViewCommon = EventCollectionViewCommon(viewWidth: view.frame.width,
+        eventCollectionViewCommon = EventCollectionViewHandler(viewWidth: view.frame.width,
                                                               collectionView: collectionView,
                                                               selectedEventAction: selectedEventAction,
                                                               lastCellWillDisplayAction: lastCellWillDisplayAction)

@@ -3,7 +3,7 @@ import UIKit
 typealias SelectedEventCallback = (EventCollectionCellViewModel) -> Void
 typealias LastCellWillDisplayActionCallback = () -> Void
 
-class EventCollectionViewCommon: NSObject, IEventCollectionViewCommon {
+class EventCollectionViewHandler: NSObject, IEventCollectionViewHandler {
     private var selectedEventAction: SelectedEventCallback?
     private var lastCellWillDisplayAction: LastCellWillDisplayActionCallback?
     private var events = [EventCollectionCellViewModel]()
@@ -105,7 +105,7 @@ class EventCollectionViewCommon: NSObject, IEventCollectionViewCommon {
     }
 }
 
-protocol IEventCollectionViewCommon: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+protocol IEventCollectionViewHandler: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     var isListLayoutSelected: Bool { get }
     
     var isLoadingIndicatorShown: Bool { get }
