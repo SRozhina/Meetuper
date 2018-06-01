@@ -34,11 +34,11 @@ class SearchPresenter: ISearchPresenter {
     }
     
     func setup() {
-        updateViewSettings()
         searchEventDebouncedAction()
     }
     
-    func updateViewSettings() {
+    func activate() {
+        //TODO implement notifying about layout changes when settings are ready
         let userSettings = userSettingsService.fetchSettings()
         view.toggleLayout(value: userSettings.isListLayoutSelected)
     }
@@ -52,7 +52,7 @@ class SearchPresenter: ISearchPresenter {
             return
         }
         
-        view.toggleProgressIndicator(shown: true)
+        view.showLoadingIndicator()
         
         _ = eventStorage.searchEvents(indexRange: events.count..<events.count + 10,
                                   searchText: searchText,
@@ -61,19 +61,19 @@ class SearchPresenter: ISearchPresenter {
     }
     
     func forceEventSearching() {
-        view.clearEvents()
+        clearViewEvents()
         searchEventsDebounced(false)
     }
     
     func searchEvents(by newSearchText: String, and newSearchTags: [Tag]) {
         searchText = newSearchText
         searchTags = newSearchTags
-        view.clearEvents()
+        clearViewEvents()
         searchEventsDebounced(true)
     }
     
     private func searchEventDebouncedAction() {
-        view.toggleProgressIndicator(shown: true)
+        view.showLoadingIndicator()
         
         events.removeAll()
         eventViewModels.removeAll()
@@ -85,14 +85,19 @@ class SearchPresenter: ISearchPresenter {
                                                       then: self.appendFoundEvents)
     }
     
+    private func clearViewEvents() {
+        view.showLoadingIndicator()
+        view.clearEvents()
+    }
+    
     private func appendFoundEvents(_ fetchedEvents: [Event], total: Int) {
-        eventsTotal = total
+        self.eventsTotal = total
         
-        events.append(contentsOf: fetchedEvents)
-        eventViewModels.append(contentsOf: fetchedEvents.map(createEventViewModel))
+        self.events.append(contentsOf: fetchedEvents)
+        self.eventViewModels.append(contentsOf: fetchedEvents.map(createEventViewModel))
         
-        view.setEvents(self.eventViewModels)
-        view.toggleProgressIndicator(shown: false)
+        self.view.setEvents(self.eventViewModels)
+        self.view.hideLoadingIndicator()
     }
     
     private func createEventViewModel(event: Event) -> EventCollectionCellViewModel {
