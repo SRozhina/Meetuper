@@ -6,7 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -178,15 +178,15 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="e9t-ED-VKi">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Tv0-jF-bof">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="16" minimumInteritemSpacing="0.0" id="Tv0-jF-bof">
                                     <size key="itemSize" width="140" height="96"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="20"/>
+                                    <size key="footerReferenceSize" width="50" height="50"/>
+                                    <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="5"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EventCell" id="qLl-4a-8Je" customClass="EventCollectionViewCell" customModule="ITEvents" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="140" height="96"/>
+                                        <rect key="frame" x="10" y="10" width="140" height="96"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="140" height="96"/>
@@ -197,15 +197,29 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="Footer" id="M7S-Sa-Kpq" customClass="EventsCollectionViewFooter" customModule="ITEvents" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="111" width="375" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ZOz-dD-dQo">
+                                            <rect key="frame" x="8" y="8" width="359" height="34"/>
+                                        </activityIndicatorView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="ZOz-dD-dQo" firstAttribute="top" secondItem="M7S-Sa-Kpq" secondAttribute="topMargin" id="5JD-aJ-1bV"/>
+                                        <constraint firstItem="ZOz-dD-dQo" firstAttribute="leading" secondItem="M7S-Sa-Kpq" secondAttribute="leadingMargin" id="Iod-JZ-Jij"/>
+                                        <constraint firstItem="ZOz-dD-dQo" firstAttribute="bottom" secondItem="M7S-Sa-Kpq" secondAttribute="bottomMargin" id="JY8-8q-2Mt"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="ZOz-dD-dQo" secondAttribute="trailing" id="TNS-0h-LSf"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="activityIndicator" destination="ZOz-dD-dQo" id="iiN-Kr-MOj"/>
+                                    </connections>
+                                </collectionReusableView>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="rect" keyPath="contentInset">
                                         <rect key="value" x="0.0" y="0.0" width="10" height="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <outlet property="dataSource" destination="l4M-Ct-4fJ" id="VDY-sA-FuJ"/>
-                                    <outlet property="delegate" destination="l4M-Ct-4fJ" id="4vY-ey-HIJ"/>
-                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
@@ -217,48 +231,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mlJ-uE-zFF"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Favorites" id="qL7-rN-98E">
-                        <barButtonItem key="rightBarButtonItem" width="60" id="1Zf-Xi-xkh">
-                            <view key="customView" contentMode="scaleToFill" id="e4u-oV-WFv" userLabel="Container View">
-                                <rect key="frame" x="288" y="5.5" width="71" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m7r-bL-T6M" userLabel="Switch Layout Button">
-                                        <rect key="frame" x="0.0" y="0.0" width="71" height="33"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <action selector="changeLayout:" destination="l4M-Ct-4fJ" eventType="touchUpInside" id="trL-fe-4kb"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kaH-5x-ntj" customClass="SwitchLayoutButton" customModule="DisplaySwitcher">
-                                        <rect key="frame" x="42" y="2" width="29" height="29"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="kaH-5x-ntj" secondAttribute="height" multiplier="1:1" id="suG-Nr-YdL"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
-                                                <color key="value" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="m7r-bL-T6M" firstAttribute="top" secondItem="e4u-oV-WFv" secondAttribute="top" id="KLT-Ld-Iv5"/>
-                                    <constraint firstAttribute="bottom" secondItem="m7r-bL-T6M" secondAttribute="bottom" id="cyO-2w-JMU"/>
-                                    <constraint firstItem="kaH-5x-ntj" firstAttribute="top" secondItem="e4u-oV-WFv" secondAttribute="top" constant="2" id="fMg-gv-1Td"/>
-                                    <constraint firstAttribute="bottom" secondItem="kaH-5x-ntj" secondAttribute="bottom" constant="2" id="msN-KF-Uho"/>
-                                    <constraint firstItem="m7r-bL-T6M" firstAttribute="leading" secondItem="e4u-oV-WFv" secondAttribute="leading" id="nYv-pD-y4D"/>
-                                    <constraint firstAttribute="trailing" secondItem="kaH-5x-ntj" secondAttribute="trailing" id="ub8-j5-3ct"/>
-                                    <constraint firstAttribute="trailing" secondItem="m7r-bL-T6M" secondAttribute="trailing" id="ztw-3r-U3J"/>
-                                </constraints>
-                            </view>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Favorites" id="qL7-rN-98E"/>
                     <connections>
                         <outlet property="collectionView" destination="e9t-ED-VKi" id="H7t-4a-8vk"/>
-                        <outlet property="rotationButton" destination="kaH-5x-ntj" id="vxl-Cd-pcZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7UJ-3O-fP6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -347,6 +322,6 @@
         <image name="Profile Inactive" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XIz-NE-dz2"/>
+        <segue reference="dEb-y7-KcZ"/>
     </inferredMetricsTieBreakers>
 </document>

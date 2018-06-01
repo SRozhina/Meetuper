@@ -3,5 +3,6 @@ protocol IFavoriveView {
     
     func toggleLayout(value isListLayout: Bool)
     
-    func toggleProgressIndicator(shown: Bool)
+    func showLoadingIndicator()
+    func hideLoadingIndicator()
 }

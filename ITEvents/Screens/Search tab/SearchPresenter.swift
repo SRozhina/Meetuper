@@ -47,7 +47,7 @@ class SearchPresenter: ISearchPresenter {
         selectedEventService.selectedEvent = events.first { $0.id == eventId }
     }
 
-    func searchMoreEvents() {
+    func loadMoreEvents() {
         if eventsTotal == events.count {
             return
         }
@@ -55,9 +55,9 @@ class SearchPresenter: ISearchPresenter {
         view.showLoadingIndicator()
         
         _ = eventStorage.searchEvents(indexRange: events.count..<events.count + 10,
-                                  searchText: searchText,
-                                  searchTags: searchTags,
-                                  then: self.appendFoundEvents)
+                                      searchText: searchText,
+                                      searchTags: searchTags,
+                                      then: appendEvents)
     }
     
     func forceEventSearching() {
@@ -82,7 +82,7 @@ class SearchPresenter: ISearchPresenter {
         searchCancelation = eventStorage.searchEvents(indexRange: 0..<10,
                                                       searchText: searchText,
                                                       searchTags: searchTags,
-                                                      then: self.appendFoundEvents)
+                                                      then: appendEvents)
     }
     
     private func clearViewEvents() {
@@ -90,7 +90,7 @@ class SearchPresenter: ISearchPresenter {
         view.clearEvents()
     }
     
-    private func appendFoundEvents(_ fetchedEvents: [Event], total: Int) {
+    private func appendEvents(_ fetchedEvents: [Event], total: Int) {
         self.eventsTotal = total
         
         self.events.append(contentsOf: fetchedEvents)

@@ -3,7 +3,7 @@ protocol ISearchPresenter {
         
     func selectEvent(with eventId: Int)
     
-    func searchMoreEvents()
+    func loadMoreEvents()
     
     func forceEventSearching()
     

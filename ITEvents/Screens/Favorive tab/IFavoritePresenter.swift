@@ -3,7 +3,7 @@ protocol IFavoritePresenter {
         
     func selectEvent(with eventId: Int)
     
-    func updateViewSettings()
+    func activate()
     
     func loadMoreEvents()
 }

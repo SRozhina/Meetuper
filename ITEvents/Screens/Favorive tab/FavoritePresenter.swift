@@ -10,6 +10,8 @@ class FavoritePresenter: IFavoritePresenter {
     private var events: [Event] = []
     private var eventViewModels: [EventCollectionCellViewModel] = []
     private var eventsTotal = 0
+    //TODO implement service
+    private var favoriteTags: [Tag] = []
     
     init(view: IFavoriveView,
          eventStorage: IEventsStorage,
@@ -24,16 +26,18 @@ class FavoritePresenter: IFavoritePresenter {
     }
     
     func setup() {
-        updateViewSettings()
-        
-        eventStorage.fetchFavoriteEvents(indexRange: 0..<10, then: appendEvents)
+        _ = eventStorage.searchEvents(indexRange: events.count..<events.count + 10,
+                                      searchText: "",
+                                      searchTags: favoriteTags,
+                                      then: appendEvents)
     }
     
     func selectEvent(with eventId: Int) {
         selectedEventService.selectedEvent = events.first(where: { $0.id == eventId })
     }
     
-    func updateViewSettings() {
+    func activate() {
+        //TODO implement notifying about layout changes when settings are ready
         let userSettings = userSettingsService.fetchSettings()
         view.toggleLayout(value: userSettings.isListLayoutSelected)
     }
@@ -43,27 +47,29 @@ class FavoritePresenter: IFavoritePresenter {
             return
         }
         
-        view.toggleProgressIndicator(shown: true)
+        view.showLoadingIndicator()
         
-        eventStorage.fetchFavoriteEvents(indexRange: events.count..<events.count + 10,
-                                         then: self.appendEvents)
+        _ = eventStorage.searchEvents(indexRange: events.count..<events.count + 10,
+                                      searchText: "",
+                                      searchTags: favoriteTags,
+                                      then: appendEvents)
     }
     
     private func appendEvents(_ fetchedEvents: [Event], total: Int) {
-        self.eventsTotal = total
+        eventsTotal = total
         
-        self.events.append(contentsOf: fetchedEvents)
-        self.eventViewModels.append(contentsOf: fetchedEvents.map(createEventViewModel))
+        events.append(contentsOf: fetchedEvents)
+        eventViewModels.append(contentsOf: fetchedEvents.map(createEventViewModel))
         
-        self.view.setEvents(self.eventViewModels)
-        self.view.toggleProgressIndicator(shown: false)
+        view.setEvents(eventViewModels)
+        view.hideLoadingIndicator()
     }
     
     private func createEventViewModel(event: Event) -> EventCollectionCellViewModel {
         return EventCollectionCellViewModel(id: event.id,
                                             title: event.title,
-                                            shortDate: self.dateFormatterService.formatDate(for: event.dateInterval, shortVersion: true),
-                                            longDate: self.dateFormatterService.formatDate(for: event.dateInterval, shortVersion: false),
+                                            shortDate: dateFormatterService.formatDate(for: event.dateInterval, shortVersion: true),
+                                            longDate: dateFormatterService.formatDate(for: event.dateInterval, shortVersion: false),
                                             image: event.image)
     }
 }

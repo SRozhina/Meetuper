@@ -6,13 +6,8 @@ class FavoritesViewController: UIViewController, IFavoriveView {
     var presenter: IFavoritePresenter!
     
     @IBOutlet private weak var collectionView: UICollectionView!
-    private var eventCollectionViewCommon: IEventCollectionViewCommon!
-    private var events = [EventCollectionCellViewModel]() {
-        didSet {
-            eventCollectionViewCommon.setEvents(events)
-            collectionView.reloadData()
-        }
-    }
+    private var eventCollectionViewHandler: IEventCollectionViewHandler!
+    private var events = [EventCollectionCellViewModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +17,7 @@ class FavoritesViewController: UIViewController, IFavoriveView {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        //TODO implement notifying about layout changes when settings are ready
-        presenter.updateViewSettings()
+        presenter.activate()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -33,11 +27,12 @@ class FavoritesViewController: UIViewController, IFavoriveView {
     
     private func setupViewController() {
         registerNibs()
-        eventCollectionViewCommon = EventCollectionViewCommon(viewWidth: view.frame.width,
-                                                              selectedEventAction: selectedEventAction,
-                                                              lastCellWillDisplayAction: lastCellWillDisplayAction)
-        collectionView.delegate = eventCollectionViewCommon
-        collectionView.dataSource = eventCollectionViewCommon
+        eventCollectionViewHandler = EventCollectionViewHandler(viewWidth: view.frame.width,
+                                                               collectionView: collectionView,
+                                                               selectedEventAction: selectedEventAction,
+                                                               lastCellWillDisplayAction: lastCellWillDisplayAction)
+        collectionView.delegate = eventCollectionViewHandler
+        collectionView.dataSource = eventCollectionViewHandler
     }
     
     private func registerNibs() {
@@ -46,32 +41,33 @@ class FavoritesViewController: UIViewController, IFavoriveView {
     }
     
     func toggleLayout(value isListLayout: Bool) {
-        if eventCollectionViewCommon.getLayoutState() == isListLayout { return }
-        eventCollectionViewCommon.toggleLayout(value: isListLayout)
-        collectionView.reloadData()
+        if eventCollectionViewHandler.isListLayoutSelected == isListLayout { return }
+        eventCollectionViewHandler.toggleListLayout()
     }
     
     func setEvents(_ events: [EventCollectionCellViewModel]) {
         self.events = events
+        eventCollectionViewHandler.setEvents(events)
     }
     
-    func toggleProgressIndicator(shown: Bool) {
-        eventCollectionViewCommon.toggleLoadingProgressState(shown)
-        collectionView.reloadData()
+    func showLoadingIndicator() {
+        eventCollectionViewHandler.showLoadingIndicator()
     }
     
-    private func selectedEventAction(for indexPath: IndexPath) {
+    func hideLoadingIndicator() {
+        eventCollectionViewHandler.hideLoadingIndicator()
+    }
+    
+    private func selectedEventAction(for event: EventCollectionCellViewModel) {
         collectionView.isUserInteractionEnabled = false
-        presenter.selectEvent(with: events[indexPath.row].id)
-        self.performSegue(withIdentifier: "Favorite_OpenEvent", sender: nil)
+        presenter.selectEvent(with: event.id)
+        self.performSegue(withIdentifier: "OpenEvent", sender: nil)
     }
     
-    private func lastCellWillDisplayAction(for indexPath: IndexPath) {
-        let lastEventIndex = events.count - 1
-        if indexPath.row == lastEventIndex && !eventCollectionViewCommon.getLoadingState() {
-            DispatchQueue.main.async {
-                self.presenter.loadMoreEvents()
-            }
+    private func lastCellWillDisplayAction() {
+        DispatchQueue.main.async {
+            self.presenter.loadMoreEvents()
         }
+        
     }
 }
