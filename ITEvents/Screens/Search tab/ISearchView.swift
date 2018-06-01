@@ -4,7 +4,8 @@ protocol ISearchView {
     
     func clearEvents()
     
-    func toggleProgressIndicator(shown: Bool)
+    func showLoadingIndicator()
+    func hideLoadingIndicator()
     
     func toggleLayout(value isListLayout: Bool)
 }

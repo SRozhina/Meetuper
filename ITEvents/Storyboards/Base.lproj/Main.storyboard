@@ -61,17 +61,13 @@
                                         <rect key="value" x="0.0" y="0.0" width="10" height="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <outlet property="dataSource" destination="RD7-ji-xpX" id="Ixe-cC-aGq"/>
-                                    <outlet property="delegate" destination="RD7-ji-xpX" id="QqG-hd-BRB"/>
-                                </connections>
                             </collectionView>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="abN-bg-gHP">
                                 <rect key="frame" x="0.0" y="64" width="375" height="56"/>
                                 <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                 <connections>
-                                    <outlet property="delegate" destination="RD7-ji-xpX" id="wRO-DF-Nt8"/>
+                                    <outlet property="delegate" destination="RD7-ji-xpX" id="lgj-fy-AIB"/>
                                 </connections>
                             </searchBar>
                         </subviews>
@@ -92,13 +88,12 @@
                         <outlet property="collectionView" destination="Usl-gx-WpU" id="dyk-K0-dlz"/>
                         <outlet property="searchBar" destination="abN-bg-gHP" id="oVY-l4-jeg"/>
                         <outlet property="searchDisplayController" destination="Ing-lR-9v8" id="U7W-cF-dxQ"/>
-                        <segue destination="Xbi-tk-Qub" kind="show" identifier="Search_OpenEvent" id="9SO-cF-Njo"/>
+                        <segue destination="Xbi-tk-Qub" kind="show" identifier="OpenEvent" id="9SO-cF-Njo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KEo-8V-UsT" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <searchDisplayController id="Ing-lR-9v8">
                     <connections>
-                        <outlet property="delegate" destination="RD7-ji-xpX" id="SCR-gR-gLb"/>
                         <outlet property="searchContentsController" destination="RD7-ji-xpX" id="FCt-FS-vb1"/>
                         <outlet property="searchResultsDataSource" destination="RD7-ji-xpX" id="4g1-6O-Fxq"/>
                         <outlet property="searchResultsDelegate" destination="RD7-ji-xpX" id="bkf-Ez-VY2"/>
@@ -165,7 +160,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="xfd-0W-TCm"/>
                     <connections>
-                        <segue destination="Xbi-tk-Qub" kind="show" identifier="Profile_OpenEvent" id="XIz-NE-dz2"/>
+                        <segue destination="Xbi-tk-Qub" kind="show" identifier="OpenEvent" id="XIz-NE-dz2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FOY-B6-KhO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -198,7 +193,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </view>
                                         <connections>
-                                            <segue destination="Xbi-tk-Qub" kind="show" identifier="Favorite_OpenEvent" id="dEb-y7-KcZ"/>
+                                            <segue destination="Xbi-tk-Qub" kind="show" identifier="OpenEvent" id="dEb-y7-KcZ"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -208,8 +203,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <outlet property="dataSource" destination="l4M-Ct-4fJ" id="Rss-vm-dIm"/>
-                                    <outlet property="delegate" destination="l4M-Ct-4fJ" id="6BE-gp-rn2"/>
+                                    <outlet property="dataSource" destination="l4M-Ct-4fJ" id="VDY-sA-FuJ"/>
+                                    <outlet property="delegate" destination="l4M-Ct-4fJ" id="4vY-ey-HIJ"/>
                                 </connections>
                             </collectionView>
                         </subviews>
@@ -352,6 +347,6 @@
         <image name="Profile Inactive" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dEb-y7-KcZ"/>
+        <segue reference="XIz-NE-dz2"/>
     </inferredMetricsTieBreakers>
 </document>

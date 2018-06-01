@@ -9,5 +9,5 @@ protocol ISearchPresenter {
     
     func searchEvents(by searchText: String, and searchTags: [Tag])
     
-    func updateViewSettings()
+    func activate()
 }
