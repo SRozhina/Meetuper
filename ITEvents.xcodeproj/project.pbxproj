@@ -15,6 +15,7 @@
 		C30056382055AD6600875CCD /* Swinject Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30056372055AD6600875CCD /* Swinject Storyboard.swift */; };
 		C300563B2055ADEA00875CCD /* SharedUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300563A2055ADEA00875CCD /* SharedUtils.swift */; };
 		C318F82A209094A700D4730E /* EventsCollectionViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C318F829209094A700D4730E /* EventsCollectionViewFooter.swift */; };
+		C327C96E20C1BFD50075A0E3 /* IEventCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C327C96D20C1BFD50075A0E3 /* IEventCollectionViewHandler.swift */; };
 		C329A992207B768000DF4394 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329A991207B768000DF4394 /* Global.swift */; };
 		C34758592074F90F009FAA5F /* IFavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34758582074F90F009FAA5F /* IFavoriteView.swift */; };
 		C34758692074F942009FAA5F /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C347585A2074F940009FAA5F /* EventView.swift */; };
@@ -108,6 +109,7 @@
 		C30056372055AD6600875CCD /* Swinject Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Swinject Storyboard.swift"; sourceTree = "<group>"; };
 		C300563A2055ADEA00875CCD /* SharedUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedUtils.swift; sourceTree = "<group>"; };
 		C318F829209094A700D4730E /* EventsCollectionViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsCollectionViewFooter.swift; sourceTree = "<group>"; };
+		C327C96D20C1BFD50075A0E3 /* IEventCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IEventCollectionViewHandler.swift; sourceTree = "<group>"; };
 		C329A991207B768000DF4394 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		C34758582074F90F009FAA5F /* IFavoriteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFavoriteView.swift; sourceTree = "<group>"; };
 		C347585A2074F940009FAA5F /* EventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 				C3919091201E605E00CD7151 /* Search tab */,
 				C391908E201E5F0B00CD7151 /* Favorive tab */,
 				C3C6051620BC8B5E00606B30 /* EventCollectionViewHandler.swift */,
+				C327C96D20C1BFD50075A0E3 /* IEventCollectionViewHandler.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -689,6 +692,7 @@
 				C300562D2055AA6B00875CCD /* EventSource.swift in Sources */,
 				C3DBDFA820726BAB002A35EB /* IUserSettingService.swift in Sources */,
 				C34758702074F942009FAA5F /* ShowMoreEventsView.swift in Sources */,
+				C327C96E20C1BFD50075A0E3 /* IEventCollectionViewHandler.swift in Sources */,
 				C34758722074F942009FAA5F /* EventPlaceView.swift in Sources */,
 				C34758692074F942009FAA5F /* EventView.swift in Sources */,
 				C300562C2055AA6B00875CCD /* UserSettings.swift in Sources */,
