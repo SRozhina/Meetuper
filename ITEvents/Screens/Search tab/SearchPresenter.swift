@@ -52,12 +52,7 @@ class SearchPresenter: ISearchPresenter {
             return
         }
         
-        view.showLoadingIndicator()
-        
-        _ = eventStorage.searchEvents(indexRange: events.count..<events.count + 10,
-                                      searchText: searchText,
-                                      searchTags: searchTags,
-                                      then: appendEvents)
+        loadBatchEvents()
     }
     
     func forceEventSearching() {
@@ -73,16 +68,26 @@ class SearchPresenter: ISearchPresenter {
     }
     
     private func searchEventDebouncedAction() {
-        view.showLoadingIndicator()
+        //view.showLoadingIndicator()
         
         events.removeAll()
         eventViewModels.removeAll()
         
         searchCancelation?.cancel()
-        searchCancelation = eventStorage.searchEvents(indexRange: 0..<10,
-                                                      searchText: searchText,
-                                                      searchTags: searchTags,
-                                                      then: appendEvents)
+        loadBatchEvents()
+//        searchCancelation = eventStorage.searchEvents(indexRange: 0..<10,
+//                                                      searchText: searchText,
+//                                                      searchTags: searchTags,
+//                                                      then: appendEvents)
+    }
+    
+    private func loadBatchEvents() {
+        view.showLoadingIndicator()
+        
+        _ = eventStorage.searchEvents(indexRange: events.count..<events.count + 10,
+                                      searchText: searchText,
+                                      searchTags: searchTags,
+                                      then: appendEvents)
     }
     
     private func clearViewEvents() {

@@ -26,10 +26,7 @@ class FavoritePresenter: IFavoritePresenter {
     }
     
     func setup() {
-        _ = eventStorage.searchEvents(indexRange: events.count..<events.count + 10,
-                                      searchText: "",
-                                      searchTags: favoriteTags,
-                                      then: appendEvents)
+        loadBatchEvents()
     }
     
     func selectEvent(with eventId: Int) {
@@ -47,6 +44,10 @@ class FavoritePresenter: IFavoritePresenter {
             return
         }
         
+        loadBatchEvents()
+    }
+    
+    private func loadBatchEvents() {
         view.showLoadingIndicator()
         
         _ = eventStorage.searchEvents(indexRange: events.count..<events.count + 10,

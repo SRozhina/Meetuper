@@ -11,9 +11,7 @@ class SearchViewController: UIViewController, ISearchView {
     private var eventCollectionViewHandler: IEventCollectionViewHandler!
     private var searchText: String { return searchBar.text ?? "" }
     private var searchTags: [Tag] = []
-    
-    private var events = [EventCollectionCellViewModel]()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewController()
@@ -41,8 +39,7 @@ class SearchViewController: UIViewController, ISearchView {
     }
     
     func toggleLayout(value isListLayout: Bool) {
-        if eventCollectionViewHandler.isListLayoutSelected == isListLayout { return }
-        eventCollectionViewHandler.toggleListLayout()
+        eventCollectionViewHandler.toggleListLayout(value: isListLayout)
     }
     
     func clearEvents() {
@@ -50,7 +47,6 @@ class SearchViewController: UIViewController, ISearchView {
     }
     
     func setEvents(_ events: [EventCollectionCellViewModel]) {
-        self.events = events
         eventCollectionViewHandler.setEvents(events)
     }
     

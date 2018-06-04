@@ -99,7 +99,9 @@ class EventCollectionViewHandler: NSObject, IEventCollectionViewHandler {
         collectionView.reloadData()
     }
     
-    func toggleListLayout() {
+    func toggleListLayout(value isListLayout: Bool) {
+        if isListLayoutSelected == isListLayout { return }
+
         isListLayoutSelected = !isListLayoutSelected
         collectionView.reloadData()
     }

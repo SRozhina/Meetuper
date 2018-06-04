@@ -7,7 +7,6 @@ class FavoritesViewController: UIViewController, IFavoriveView {
     
     @IBOutlet private weak var collectionView: UICollectionView!
     private var eventCollectionViewHandler: IEventCollectionViewHandler!
-    private var events = [EventCollectionCellViewModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,12 +40,10 @@ class FavoritesViewController: UIViewController, IFavoriveView {
     }
     
     func toggleLayout(value isListLayout: Bool) {
-        if eventCollectionViewHandler.isListLayoutSelected == isListLayout { return }
-        eventCollectionViewHandler.toggleListLayout()
+        eventCollectionViewHandler.toggleListLayout(value: isListLayout)
     }
     
     func setEvents(_ events: [EventCollectionCellViewModel]) {
-        self.events = events
         eventCollectionViewHandler.setEvents(events)
     }
     
