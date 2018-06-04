@@ -9,7 +9,7 @@ class FavoritePresenter: IFavoritePresenter {
     private var userSettings: UserSettings!
     private var events: [Event] = []
     private var eventViewModels: [EventCollectionCellViewModel] = []
-    private var eventsTotal = 0
+    private var eventsTotal = -1
     //TODO implement service
     private var favoriteTags: [Tag] = []
     

@@ -12,7 +12,7 @@ class SearchPresenter: ISearchPresenter {
     private var searchEventsDebounced: ((Bool) -> Void)!
     private var searchText: String = ""
     private var searchTags: [Tag] = []
-    private var eventsTotal = 0
+    private var eventsTotal = -1
     private var searchCancelation: Cancelation?
     
     init(view: ISearchView,
@@ -68,17 +68,12 @@ class SearchPresenter: ISearchPresenter {
     }
     
     private func searchEventDebouncedAction() {
-        //view.showLoadingIndicator()
         
         events.removeAll()
         eventViewModels.removeAll()
         
         searchCancelation?.cancel()
         loadBatchEvents()
-//        searchCancelation = eventStorage.searchEvents(indexRange: 0..<10,
-//                                                      searchText: searchText,
-//                                                      searchTags: searchTags,
-//                                                      then: appendEvents)
     }
     
     private func loadBatchEvents() {
