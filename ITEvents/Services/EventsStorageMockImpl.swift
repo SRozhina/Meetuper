@@ -7,13 +7,6 @@ class EventsStorageMockImpl: IEventsStorage {
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return formatter
     }()
-        
-    func fetchFavoriteEvents(then completion: @escaping EventRequestCallback) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            let events = self.getEvents()
-            completion(events, events.count)
-        }
-    }
     
     func searchEvents(indexRange: Range<Int>, searchText: String, searchTags: [Tag], then completion: @escaping EventRequestCallback) -> Cancelation {
         let cancelation = Cancelation()

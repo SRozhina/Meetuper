@@ -1,29 +1,22 @@
 import UIKit
-import DisplaySwitcher
 import Reusable
 
 class FavoritesViewController: UIViewController, IFavoriveView {
+    
     var presenter: IFavoritePresenter!
-    private var events = [EventCollectionCellViewModel]()
     
     @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet private weak var rotationButton: SwitchLayoutButton!
-    
-    private var animationDuration: TimeInterval = 0.3
-    private var listLayout: DisplaySwitchLayout!
-    private var gridLayout: DisplaySwitchLayout!
-    
-    private var layoutState: LayoutState!
+    private var eventCollectionViewHandler: IEventCollectionViewHandler!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpLayouts()
-        rotationButton.animationDuration = animationDuration
-        registerNibs()
-        
+        setupViewController()
         presenter.setup()
-        
-        setupCollectionView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        presenter.activate()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -31,68 +24,47 @@ class FavoritesViewController: UIViewController, IFavoriveView {
         collectionView.isUserInteractionEnabled = true
     }
     
-    func setEvents(_ events: [EventCollectionCellViewModel]) {
-        self.events = events
-        collectionView.reloadData()
-    }
-    
-    func toggleListLayout(to list: Bool) {
-        layoutState = list ? .list : .grid
-        rotationButton.isSelected = list
-    }
-    
-    private func setUpLayouts() {
-        let viewWidth = view.frame.width
-        listLayout = createDisplaySwitcherLayout(forList: true, viewWidth: viewWidth)
-        gridLayout = createDisplaySwitcherLayout(forList: false, viewWidth: viewWidth)
-    }
-    
-    private func setupCollectionView() {
-        let layout = getCurrentLayout()
-        collectionView.collectionViewLayout = layout
+    private func setupViewController() {
+        registerNibs()
+        eventCollectionViewHandler = EventCollectionViewHandler(viewWidth: view.frame.width,
+                                                               collectionView: collectionView,
+                                                               selectedEventAction: selectedEventAction,
+                                                               lastCellWillDisplayAction: lastCellWillDisplayAction)
+        collectionView.delegate = eventCollectionViewHandler
+        collectionView.dataSource = eventCollectionViewHandler
     }
     
     private func registerNibs() {
-        collectionView.register(cellType: EventCollectionViewCell.self)
+        collectionView.register(cellType: ListCollectionViewCell.self)
+        collectionView.register(cellType: GridCollectionViewCell.self)
     }
     
-    @IBAction private func changeLayout(_ sender: Any) {
-        presenter.toggleLayoutState()
-        let layout = getCurrentLayout()
-        let transitionManager = TransitionManager(duration: animationDuration,
-                                                  collectionView: collectionView,
-                                                  destinationLayout: layout,
-                                                  layoutState: layoutState)
-        transitionManager.startInteractiveTransition()
+    func toggleLayout(value isListLayout: Bool) {
+        eventCollectionViewHandler.toggleListLayout(value: isListLayout)
     }
     
-    private func getCurrentLayout() -> DisplaySwitchLayout {
-        return layoutState == .list ? listLayout : gridLayout
-    }
-}
-
-extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return events.count
+    func setEvents(_ events: [EventCollectionCellViewModel]) {
+        eventCollectionViewHandler.setEvents(events)
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return getEventCollectionViewCell(collectionView,
-                                          cellForItemAt: indexPath,
-                                          event: events[indexPath.row],
-                                          layoutState: layoutState)
+    func showLoadingIndicator() {
+        eventCollectionViewHandler.showLoadingIndicator()
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        transitionLayoutForOldLayout fromLayout: UICollectionViewLayout,
-                        newLayout toLayout: UICollectionViewLayout) -> UICollectionViewTransitionLayout {
-        return TransitionLayout(currentLayout: fromLayout, nextLayout: toLayout)
+    func hideLoadingIndicator() {
+        eventCollectionViewHandler.hideLoadingIndicator()
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    private func selectedEventAction(for event: EventCollectionCellViewModel) {
         collectionView.isUserInteractionEnabled = false
-        presenter.selectEvent(with: events[indexPath.row].id)
-        self.performSegue(withIdentifier: "Favorite_OpenEvent", sender: nil)
+        presenter.selectEvent(with: event.id)
+        self.performSegue(withIdentifier: "OpenEvent", sender: nil)
+    }
+    
+    private func lastCellWillDisplayAction() {
+        DispatchQueue.main.async {
+            self.presenter.loadMoreEvents()
+        }
+        
     }
 }

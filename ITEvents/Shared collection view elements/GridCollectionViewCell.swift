@@ -20,7 +20,7 @@ class GridCollectionViewCell: UICollectionViewCell, IEventCollectionViewCell, Ni
         layer.masksToBounds = false
         image.clipsToBounds = true
         image.layer.cornerRadius = 14
-        image.setGradientOpacity(to: 1)
+        image.setGragientLayer(opacity: 1)
     }
     
     func setup(with event: EventCollectionCellViewModel) {

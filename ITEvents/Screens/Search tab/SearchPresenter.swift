@@ -12,7 +12,7 @@ class SearchPresenter: ISearchPresenter {
     private var searchEventsDebounced: ((Bool) -> Void)!
     private var searchText: String = ""
     private var searchTags: [Tag] = []
-    private var eventsTotal = 0
+    private var eventsTotal = -1
     private var searchCancelation: Cancelation?
     
     init(view: ISearchView,
@@ -47,17 +47,12 @@ class SearchPresenter: ISearchPresenter {
         selectedEventService.selectedEvent = events.first { $0.id == eventId }
     }
 
-    func searchMoreEvents() {
+    func loadMoreEvents() {
         if eventsTotal == events.count {
             return
         }
         
-        view.showLoadingIndicator()
-        
-        _ = eventStorage.searchEvents(indexRange: events.count..<events.count + 10,
-                                  searchText: searchText,
-                                  searchTags: searchTags,
-                                  then: self.appendFoundEvents)
+        loadBatchEvents()
     }
     
     func forceEventSearching() {
@@ -73,16 +68,21 @@ class SearchPresenter: ISearchPresenter {
     }
     
     private func searchEventDebouncedAction() {
-        view.showLoadingIndicator()
         
         events.removeAll()
         eventViewModels.removeAll()
         
         searchCancelation?.cancel()
-        searchCancelation = eventStorage.searchEvents(indexRange: 0..<10,
-                                                      searchText: searchText,
-                                                      searchTags: searchTags,
-                                                      then: self.appendFoundEvents)
+        loadBatchEvents()
+    }
+    
+    private func loadBatchEvents() {
+        view.showLoadingIndicator()
+        
+        _ = eventStorage.searchEvents(indexRange: events.count..<events.count + 10,
+                                      searchText: searchText,
+                                      searchTags: searchTags,
+                                      then: appendEvents)
     }
     
     private func clearViewEvents() {
@@ -90,11 +90,11 @@ class SearchPresenter: ISearchPresenter {
         view.clearEvents()
     }
     
-    private func appendFoundEvents(_ fetchedEvents: [Event], total: Int) {
+    private func appendEvents(_ fetchedEvents: [Event], total: Int) {
         self.eventsTotal = total
         
         self.events.append(contentsOf: fetchedEvents)
-        self.eventViewModels.append(contentsOf: fetchedEvents.map(self.createEventViewModel))
+        self.eventViewModels.append(contentsOf: fetchedEvents.map(createEventViewModel))
         
         self.view.setEvents(self.eventViewModels)
         self.view.hideLoadingIndicator()

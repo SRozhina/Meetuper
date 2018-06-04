@@ -8,12 +8,10 @@ class SearchViewController: UIViewController, ISearchView {
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
     
-    private var eventCollectionViewCommon: IEventCollectionViewHandler!
+    private var eventCollectionViewHandler: IEventCollectionViewHandler!
     private var searchText: String { return searchBar.text ?? "" }
     private var searchTags: [Tag] = []
-    
-    private var events = [EventCollectionCellViewModel]()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewController()
@@ -32,17 +30,16 @@ class SearchViewController: UIViewController, ISearchView {
     
     private func setupViewController() {
         registerNibs()
-        eventCollectionViewCommon = EventCollectionViewHandler(viewWidth: view.frame.width,
+        eventCollectionViewHandler = EventCollectionViewHandler(viewWidth: view.frame.width,
                                                               collectionView: collectionView,
                                                               selectedEventAction: selectedEventAction,
                                                               lastCellWillDisplayAction: lastCellWillDisplayAction)
-        collectionView.dataSource = eventCollectionViewCommon
-        collectionView.delegate = eventCollectionViewCommon
+        collectionView.dataSource = eventCollectionViewHandler
+        collectionView.delegate = eventCollectionViewHandler
     }
     
     func toggleLayout(value isListLayout: Bool) {
-        if eventCollectionViewCommon.isListLayoutSelected == isListLayout { return }
-        eventCollectionViewCommon.toggleListLayout()
+        eventCollectionViewHandler.toggleListLayout(value: isListLayout)
     }
     
     func clearEvents() {
@@ -50,16 +47,15 @@ class SearchViewController: UIViewController, ISearchView {
     }
     
     func setEvents(_ events: [EventCollectionCellViewModel]) {
-        self.events = events
-        eventCollectionViewCommon.setEvents(events)
+        eventCollectionViewHandler.setEvents(events)
     }
     
     func showLoadingIndicator() {
-        eventCollectionViewCommon.showLoadingIndicator()
+        eventCollectionViewHandler.showLoadingIndicator()
     }
     
     func hideLoadingIndicator() {
-        eventCollectionViewCommon.hideLoadingIndicator()
+        eventCollectionViewHandler.hideLoadingIndicator()
     }
     
     private func registerNibs() {
@@ -75,7 +71,7 @@ class SearchViewController: UIViewController, ISearchView {
     
     private func lastCellWillDisplayAction() {
         DispatchQueue.main.async {
-            self.presenter.searchMoreEvents()
+            self.presenter.loadMoreEvents()
         }
     }
 }
