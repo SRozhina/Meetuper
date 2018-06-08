@@ -27,39 +27,39 @@ extension SwinjectStoryboard {
             return UserSettingsService()
         }.inObjectScope(.container)
         
-        defaultContainer.register(IFavoritePresenter.self) { r, v in
-            FavoritePresenter(view: v,
-                              eventStorage: r.resolve(IEventsStorage.self)!,
-                              selectedEventService: r.resolve(ISelectedEventService.self)!,
-                              userSettingsService: r.resolve(IUserSettingsService.self)!,
-                              dateFormatterService: r.resolve(IDateFormatterService.self)!)
+        defaultContainer.register(IFavoritePresenter.self) { resolver, view in
+            FavoritePresenter(view: view,
+                              eventStorage: resolver.resolve(IEventsStorage.self)!,
+                              selectedEventService: resolver.resolve(ISelectedEventService.self)!,
+                              userSettingsService: resolver.resolve(IUserSettingsService.self)!,
+                              dateFormatterService: resolver.resolve(IDateFormatterService.self)!)
         }
         
-        defaultContainer.storyboardInitCompleted(FavoritesViewController.self) { r, c in
-            c.presenter = r.resolve(IFavoritePresenter.self, argument: c as IFavoriveView)!
+        defaultContainer.storyboardInitCompleted(FavoritesViewController.self) { resolver, view in
+            view.presenter = resolver.resolve(IFavoritePresenter.self, argument: view as IFavoriveView)!
         }
         
-        defaultContainer.register(IFullEventPresenter.self) { r, v in
-            FullEventPresenter(view: v,
-                               selectedEventService: r.resolve(ISelectedEventService.self)!,
-                               dateFormatterService: r.resolve(IDateFormatterService.self)!,
-                               similarEventsService: r.resolve(ISimilarEventsStorage.self)!)
+        defaultContainer.register(IFullEventPresenter.self) { resolver, view in
+            FullEventPresenter(view: view,
+                               selectedEventService: resolver.resolve(ISelectedEventService.self)!,
+                               dateFormatterService: resolver.resolve(IDateFormatterService.self)!,
+                               similarEventsService: resolver.resolve(ISimilarEventsStorage.self)!)
         }
         
-        defaultContainer.storyboardInitCompleted(FullEventViewController.self) { r, c in
-            c.presenter = r.resolve(IFullEventPresenter.self, argument: c as IFullEventView)!
+        defaultContainer.storyboardInitCompleted(FullEventViewController.self) { resolver, view in
+            view.presenter = resolver.resolve(IFullEventPresenter.self, argument: view as IFullEventView)!
         }
         
-        defaultContainer.register(ISearchPresenter.self) { r, v in
-            SearchPresenter(view: v,
-                            eventStorage: r.resolve(IEventsStorage.self)!,
-                            selectedEventService: r.resolve(ISelectedEventService.self)!,
-                            userSettingsService: r.resolve(IUserSettingsService.self)!,
-                            dateFormatterService: r.resolve(IDateFormatterService.self)!)
+        defaultContainer.register(ISearchPresenter.self) { resolver, view in
+            SearchPresenter(view: view,
+                            eventStorage: resolver.resolve(IEventsStorage.self)!,
+                            selectedEventService: resolver.resolve(ISelectedEventService.self)!,
+                            userSettingsService: resolver.resolve(IUserSettingsService.self)!,
+                            dateFormatterService: resolver.resolve(IDateFormatterService.self)!)
         }
         
-        defaultContainer.storyboardInitCompleted(SearchViewController.self) { r, c in
-            c.presenter = r.resolve(ISearchPresenter.self, argument: c as ISearchView)!
+        defaultContainer.storyboardInitCompleted(SearchViewController.self) { resolver, view in
+            view.presenter = resolver.resolve(ISearchPresenter.self, argument: view as ISearchView)!
         }
     }
 }
