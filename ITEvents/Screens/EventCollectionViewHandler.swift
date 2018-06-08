@@ -78,8 +78,8 @@ class EventCollectionViewHandler: NSObject, IEventCollectionViewHandler {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let lastEventIndex = events.count - 1
-        if indexPath.row == lastEventIndex && !isLoadingIndicatorShown {
+        let eventIndex = events.count - 3
+        if indexPath.row == eventIndex && !isLoadingIndicatorShown {
             lastCellWillDisplayAction?()
         }
     }
