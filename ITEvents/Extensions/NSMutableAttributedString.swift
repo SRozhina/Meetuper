@@ -31,7 +31,7 @@ extension NSMutableAttributedString {
     }
     
     private func replaceFont(range: NSRange, value: UIFont) {
-        removeAttribute(NSAttributedString.Key.font, range: range)
-        addAttribute(NSAttributedString.Key.font, value: value, range: range)
+        removeAttribute(.font, range: range)
+        addAttribute(.font, value: value, range: range)
     }
 }

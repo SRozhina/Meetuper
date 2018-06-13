@@ -33,7 +33,7 @@ class ShowMoreEventsView: UIView, NibLoadable {
     
     private func setButtonTitle() {
         let title = ShowMoreEventsView.getButtonTitle(for: collapsed, and: descriptionsCount)
-        showMoreEventsButton.setTitle(title, for: UIControl.State.normal)
+        showMoreEventsButton.setTitle(title, for: .normal)
     }
     
     private class func getButtonTitle(for collapsed: Bool, and descriptionsCount: Int) -> String {
