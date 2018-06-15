@@ -5,7 +5,7 @@ typealias LastCellWillDisplayActionCallback = () -> Void
 
 class EventCollectionViewHandler: NSObject, IEventCollectionViewHandler {
     private var selectedEventAction: SelectedEventCallback?
-    private var lastCellWillDisplayAction: LastCellWillDisplayActionCallback?
+    private var thresholdCellWillDisplayAction: LastCellWillDisplayActionCallback?
     private var events = [EventCollectionCellViewModel]()
     private var viewWidth: CGFloat!
     private var collectionView: UICollectionView!
@@ -20,7 +20,7 @@ class EventCollectionViewHandler: NSObject, IEventCollectionViewHandler {
         self.viewWidth = viewWidth
         self.collectionView = collectionView
         self.selectedEventAction = selectedEventAction
-        self.lastCellWillDisplayAction = lastCellWillDisplayAction
+        self.thresholdCellWillDisplayAction = lastCellWillDisplayAction
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -78,9 +78,9 @@ class EventCollectionViewHandler: NSObject, IEventCollectionViewHandler {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let lastEventIndex = events.count - 1
-        if indexPath.row == lastEventIndex && !isLoadingIndicatorShown {
-            lastCellWillDisplayAction?()
+        let thresholdEventIndex = events.count - 3
+        if indexPath.row == thresholdEventIndex && !isLoadingIndicatorShown {
+            thresholdCellWillDisplayAction?()
         }
     }
     
