@@ -15,6 +15,11 @@
 		C30056382055AD6600875CCD /* Swinject Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30056372055AD6600875CCD /* Swinject Storyboard.swift */; };
 		C300563B2055ADEA00875CCD /* SharedUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300563A2055ADEA00875CCD /* SharedUtils.swift */; };
 		C318F82A209094A700D4730E /* EventsCollectionViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C318F829209094A700D4730E /* EventsCollectionViewFooter.swift */; };
+		C319FA9E20DC41ED005E56A6 /* SearchParametersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C319FA9D20DC41ED005E56A6 /* SearchParametersService.swift */; };
+		C319FAA020DC44C8005E56A6 /* SearchParametersPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C319FA9F20DC44C8005E56A6 /* SearchParametersPresenter.swift */; };
+		C319FAA220DC4696005E56A6 /* ISearchParametersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C319FAA120DC4696005E56A6 /* ISearchParametersService.swift */; };
+		C319FAA420DC498B005E56A6 /* ISearchParametersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C319FAA320DC498B005E56A6 /* ISearchParametersView.swift */; };
+		C319FAA620DC49A5005E56A6 /* ISearchParametersPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C319FAA520DC49A5005E56A6 /* ISearchParametersPresenter.swift */; };
 		C327C96E20C1BFD50075A0E3 /* IEventCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C327C96D20C1BFD50075A0E3 /* IEventCollectionViewHandler.swift */; };
 		C329A992207B768000DF4394 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329A991207B768000DF4394 /* Global.swift */; };
 		C34758592074F90F009FAA5F /* IFavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34758582074F90F009FAA5F /* IFavoriteView.swift */; };
@@ -72,6 +77,7 @@
 		C3C6051320BA021E00606B30 /* EventTagsStorageMockImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6050D20BA021E00606B30 /* EventTagsStorageMockImpl.swift */; };
 		C3C6051520BAC04400606B30 /* Cancelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6051420BAC04400606B30 /* Cancelation.swift */; };
 		C3C6051720BC8B5E00606B30 /* EventCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6051620BC8B5E00606B30 /* EventCollectionViewHandler.swift */; };
+		C3CCECF920CB057B00D2E133 /* SearchParametersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CCECF820CB057B00D2E133 /* SearchParametersViewController.swift */; };
 		C3D547642078104A009ABC73 /* IFullEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D547632078104A009ABC73 /* IFullEventView.swift */; };
 		C3D547662078208F009ABC73 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D547652078208F009ABC73 /* EventViewModel.swift */; };
 		C3DBDFA820726BAB002A35EB /* IUserSettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DBDFA720726BAB002A35EB /* IUserSettingService.swift */; };
@@ -90,6 +96,11 @@
 		C30056372055AD6600875CCD /* Swinject Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Swinject Storyboard.swift"; sourceTree = "<group>"; };
 		C300563A2055ADEA00875CCD /* SharedUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedUtils.swift; sourceTree = "<group>"; };
 		C318F829209094A700D4730E /* EventsCollectionViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsCollectionViewFooter.swift; sourceTree = "<group>"; };
+		C319FA9D20DC41ED005E56A6 /* SearchParametersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParametersService.swift; sourceTree = "<group>"; };
+		C319FA9F20DC44C8005E56A6 /* SearchParametersPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParametersPresenter.swift; sourceTree = "<group>"; };
+		C319FAA120DC4696005E56A6 /* ISearchParametersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISearchParametersService.swift; sourceTree = "<group>"; };
+		C319FAA320DC498B005E56A6 /* ISearchParametersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISearchParametersView.swift; sourceTree = "<group>"; };
+		C319FAA520DC49A5005E56A6 /* ISearchParametersPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISearchParametersPresenter.swift; sourceTree = "<group>"; };
 		C327C96D20C1BFD50075A0E3 /* IEventCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IEventCollectionViewHandler.swift; sourceTree = "<group>"; };
 		C329A991207B768000DF4394 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		C34758582074F90F009FAA5F /* IFavoriteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFavoriteView.swift; sourceTree = "<group>"; };
@@ -153,6 +164,7 @@
 		C3C6050D20BA021E00606B30 /* EventTagsStorageMockImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTagsStorageMockImpl.swift; sourceTree = "<group>"; };
 		C3C6051420BAC04400606B30 /* Cancelation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancelation.swift; sourceTree = "<group>"; };
 		C3C6051620BC8B5E00606B30 /* EventCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionViewHandler.swift; sourceTree = "<group>"; };
+		C3CCECF820CB057B00D2E133 /* SearchParametersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParametersViewController.swift; sourceTree = "<group>"; };
 		C3D547632078104A009ABC73 /* IFullEventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFullEventView.swift; sourceTree = "<group>"; };
 		C3D547652078208F009ABC73 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		C3DBDFA720726BAB002A35EB /* IUserSettingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IUserSettingService.swift; sourceTree = "<group>"; };
@@ -307,6 +319,7 @@
 		C391909F201E62FD00CD7151 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				C3CCECF720CB055200D2E133 /* Search Parameters tab */,
 				C3FF3CFC2044578100C65137 /* Full Event View */,
 				C39190A0201E630B00CD7151 /* Profile tab */,
 				C3919091201E605E00CD7151 /* Search tab */,
@@ -378,6 +391,17 @@
 			path = ITEventsUITests;
 			sourceTree = "<group>";
 		};
+		C3CCECF720CB055200D2E133 /* Search Parameters tab */ = {
+			isa = PBXGroup;
+			children = (
+				C319FAA320DC498B005E56A6 /* ISearchParametersView.swift */,
+				C3CCECF820CB057B00D2E133 /* SearchParametersViewController.swift */,
+				C319FAA520DC49A5005E56A6 /* ISearchParametersPresenter.swift */,
+				C319FA9F20DC44C8005E56A6 /* SearchParametersPresenter.swift */,
+			);
+			path = "Search Parameters tab";
+			sourceTree = "<group>";
+		};
 		C3E792E4202E411300876D6B /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -393,6 +417,8 @@
 				C34C4F83206B8A51001A61A9 /* SelectedEventService.swift */,
 				C3DBDFA720726BAB002A35EB /* IUserSettingService.swift */,
 				C3FFF10B20737DCE00ADF407 /* UserSettingsService.swift */,
+				C319FAA120DC4696005E56A6 /* ISearchParametersService.swift */,
+				C319FA9D20DC41ED005E56A6 /* SearchParametersService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -577,14 +603,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3CCECF920CB057B00D2E133 /* SearchParametersViewController.swift in Sources */,
 				C391909B201E62D600CD7151 /* ISearchView.swift in Sources */,
 				C3919093201E608A00CD7151 /* SearchViewController.swift in Sources */,
 				C391908C201E59D100CD7151 /* Event.swift in Sources */,
 				C3C6050E20BA021E00606B30 /* IEventsStorage.swift in Sources */,
+				C319FA9E20DC41ED005E56A6 /* SearchParametersService.swift in Sources */,
 				C347586F2074F942009FAA5F /* EventDescriptionView.swift in Sources */,
 				C39190B5201E6B2C00CD7151 /* IEventCollectionViewCell.swift in Sources */,
 				C300563B2055ADEA00875CCD /* SharedUtils.swift in Sources */,
 				C34C4F82206B89FD001A61A9 /* ISelectedEventService.swift in Sources */,
+				C319FAA220DC4696005E56A6 /* ISearchParametersService.swift in Sources */,
 				C3C6051120BA021E00606B30 /* EventsStorageMockImpl.swift in Sources */,
 				C39190AD201E638700CD7151 /* FullEventPresenter.swift in Sources */,
 				C3C6051720BC8B5E00606B30 /* EventCollectionViewHandler.swift in Sources */,
@@ -598,6 +627,7 @@
 				C34758722074F942009FAA5F /* EventPlaceView.swift in Sources */,
 				C34758692074F942009FAA5F /* EventView.swift in Sources */,
 				C300562C2055AA6B00875CCD /* UserSettings.swift in Sources */,
+				C319FAA620DC49A5005E56A6 /* ISearchParametersPresenter.swift in Sources */,
 				C39190A2201E632700CD7151 /* ProfileViewController.swift in Sources */,
 				C3C6051220BA021E00606B30 /* SimilarEventsStorageMockImpl.swift in Sources */,
 				C3919097201E62B900CD7151 /* IFavoritePresenter.swift in Sources */,
@@ -627,8 +657,10 @@
 				C375E752209B67FC00D089FB /* GridCollectionViewCell.swift in Sources */,
 				C3FFF10C20737DCE00ADF407 /* UserSettingsService.swift in Sources */,
 				C39190AB201E637600CD7151 /* FullEventViewController.swift in Sources */,
+				C319FAA020DC44C8005E56A6 /* SearchParametersPresenter.swift in Sources */,
 				C3B88298201A22520031F261 /* AppDelegate.swift in Sources */,
 				C39190A6201E634200CD7151 /* IProfileViewController.swift in Sources */,
+				C319FAA420DC498B005E56A6 /* ISearchParametersView.swift in Sources */,
 				C3C6051320BA021E00606B30 /* EventTagsStorageMockImpl.swift in Sources */,
 				C3C6050F20BA021E00606B30 /* ISimilarEventsStorage.swift in Sources */,
 				C39190A4201E633500CD7151 /* ProfilePresenter.swift in Sources */,

@@ -12,7 +12,7 @@ class SharedUtils {
         return view
     }
     
-    private static func decorateAsPanel(view: UIView) {
+    static func decorateAsPanel(view: UIView) {
         let layer = view.layer
         layer.cornerRadius = 14
         layer.shadowColor = UIColor.black.cgColor
