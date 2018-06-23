@@ -14,7 +14,7 @@ class ShowEventSourceView: UIView, NibLoadable {
     
     private func setup(with text: String, and action: (() -> Void)? = nil) {
         self.sourceOpenAction = action
-        self.showSourceButton.setTitle("Show on \(text)", for: UIControl.State.normal)
+        self.showSourceButton.setTitle("Show on \(text)", for: .normal)
     }
     
     @IBAction private func showEventSourceTapped(_ sender: UIButton) {
