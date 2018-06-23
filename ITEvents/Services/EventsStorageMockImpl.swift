@@ -19,10 +19,15 @@ class EventsStorageMockImpl: IEventsStorage {
             let events = self.getEvents()
             var filteredEvents = events
             
-            if searchText != "" || !searchTags.isEmpty {
+            if searchText != "" && !searchTags.isEmpty {
                 filteredEvents = events.filter({
-                    $0.title.lowercased().contains(searchText.lowercased()) ||
-                    $0.description.lowercased().contains(searchText.lowercased())
+                    ($0.title.lowercased().contains(searchText.lowercased()) ||
+                     $0.description.lowercased().contains(searchText.lowercased())) &&
+                    $0.tags.contains(where: { searchTags.contains($0) })
+                })
+            } else if !searchTags.isEmpty {
+                filteredEvents = events.filter({
+                    $0.tags.contains(where: { searchTags.contains($0) })
                 })
             }
             
@@ -73,7 +78,7 @@ class EventsStorageMockImpl: IEventsStorage {
     
     private func getEvents() -> [Event] {
         var events = [Event]()
-        for _ in 0..<10 {
+        for _ in 0..<1 {
             events.append(contentsOf:
             [
                 createEvent(id: 1,
@@ -93,7 +98,7 @@ class EventsStorageMockImpl: IEventsStorage {
                             similarEventsCount: 1,
                             source: EventSource(id: 2, name: "Meetup.com"),
                             tags: [
-                                Tag(id: 1, name: "JavaScript"),
+                                Tag(id: 1, name: "CSS"),
                                 Tag(id: 2, name: "Frontend")
                     ]),
                 createEvent(id: 3,
@@ -103,7 +108,7 @@ class EventsStorageMockImpl: IEventsStorage {
                             image: UIImage(named: "wrike")!,
                             similarEventsCount: 2,
                             source: EventSource(id: 3, name: "Meetabit"),
-                            tags: [Tag(id: 1, name: "JavaScript")]),
+                            tags: [Tag(id: 1, name: "Dart")]),
                 createEvent(id: 4,
                             title: "EmberJS",
                             startDate: getDateFromString(stringDate: "2018-09-09 19:00:00"),
@@ -135,7 +140,7 @@ class EventsStorageMockImpl: IEventsStorage {
                             image: UIImage(named: "ember")!,
                             similarEventsCount: 0,
                             source: EventSource(id: 1, name: "Timepad"),
-                            tags: [Tag(id: 1, name: "JavaScript")])
+                            tags: [Tag(id: 1, name: "CSS")])
             ])
         }
         return events
