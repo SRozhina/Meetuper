@@ -7,10 +7,10 @@ class SearchViewController: UIViewController, ISearchView {
 
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var settingsButton: UIBarButtonItem!
     
     private var eventCollectionViewHandler: IEventCollectionViewHandler!
     private var searchText: String { return searchBar.text ?? "" }
-    private var searchTags: [Tag] = []
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +20,7 @@ class SearchViewController: UIViewController, ISearchView {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        settingsButton.isEnabled = true
         presenter.activate()
     }
     
@@ -74,6 +75,17 @@ class SearchViewController: UIViewController, ISearchView {
             self.presenter.loadMoreEvents()
         }
     }
+    
+    @IBAction private func unwindToSearch(_ sender: UIStoryboardSegue) {
+        presenter.searchEvents(by: searchText)
+    }
+    
+    @IBAction private func setSearchParameters(_ sender: Any) {
+        settingsButton.isEnabled = false
+        presenter.setSearchParameters(completion: {
+            self.performSegue(withIdentifier: "OpenSearchParameters", sender: nil)
+        })
+    }
 }
 
 extension SearchViewController: UISearchBarDelegate {
@@ -82,6 +94,6 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        presenter.searchEvents(by: searchText, and: searchTags)
+        presenter.searchEvents(by: searchText)
     }
 }

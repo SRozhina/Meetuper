@@ -6,6 +6,8 @@ class SearchPresenter: ISearchPresenter {
     var selectedEventService: ISelectedEventService!
     let userSettingsService: IUserSettingsService!
     let dateFormatterService: IDateFormatterService!
+    let tagsStorage: IEventTagsStorage!
+    var searchParametersService: ISearchParametersService!
     private var events: [Event] = []
     private var eventViewModels: [EventCollectionCellViewModel] = []
     private var isListLayoutCurrent: Bool!
@@ -19,12 +21,16 @@ class SearchPresenter: ISearchPresenter {
          eventStorage: IEventsStorage,
          selectedEventService: ISelectedEventService,
          userSettingsService: IUserSettingsService,
-         dateFormatterService: IDateFormatterService) {
+         dateFormatterService: IDateFormatterService,
+         tagsStorage: IEventTagsStorage,
+         searchParametersService: ISearchParametersService) {
         self.view = view
         self.eventStorage = eventStorage
         self.selectedEventService = selectedEventService
         self.userSettingsService = userSettingsService
         self.dateFormatterService = dateFormatterService
+        self.tagsStorage = tagsStorage
+        self.searchParametersService = searchParametersService
         
         searchEventsDebounced = debounce(
             delay: DispatchTimeInterval.seconds(2),
@@ -46,6 +52,20 @@ class SearchPresenter: ISearchPresenter {
     func selectEvent(with eventId: Int) {
         selectedEventService.selectedEvent = events.first { $0.id == eventId }
     }
+    
+    func setSearchParameters(completion: @escaping () -> Void) {
+        let selectedTags = searchParametersService.selectedTags
+        let otherTags = searchParametersService.otherTags
+        if selectedTags.isEmpty && otherTags.isEmpty {
+            tagsStorage.fetchTags { tags in
+                self.searchParametersService.otherTags = tags
+                completion()
+            }
+        } else {
+            completion()
+        }
+        
+    }
 
     func loadMoreEvents() {
         if eventsTotal == events.count {
@@ -60,7 +80,9 @@ class SearchPresenter: ISearchPresenter {
         searchEventsDebounced(false)
     }
     
-    func searchEvents(by newSearchText: String, and newSearchTags: [Tag]) {
+    func searchEvents(by newSearchText: String) {
+        let newSearchTags = searchParametersService.selectedTags
+        if searchText == newSearchText && searchTags == newSearchTags { return }
         searchText = newSearchText
         searchTags = newSearchTags
         clearViewEvents()
