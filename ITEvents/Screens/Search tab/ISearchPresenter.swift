@@ -7,7 +7,9 @@ protocol ISearchPresenter {
     
     func forceEventSearching()
     
-    func searchEvents(by searchText: String, and searchTags: [Tag])
+    func searchEvents(by searchText: String)
     
     func activate()
+    
+    func prepareSearchParameters(completion: @escaping () -> Void)
 }
