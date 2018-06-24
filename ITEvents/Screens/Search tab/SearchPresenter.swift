@@ -1,8 +1,12 @@
 import Foundation
 
+extension Notification.Name {
+    static let SearchSettingsChanged = Notification.Name("SEARCH_SETTINGS_CHANGED")
+}
+
 class SearchPresenter: ISearchPresenter {    
     let view: ISearchView!
-    let eventStorage: IEventsStorage!
+    let eventsStorage: IEventsStorage!
     var selectedEventService: ISelectedEventService!
     let userSettingsService: IUserSettingsService!
     let dateFormatterService: IDateFormatterService!
@@ -18,14 +22,14 @@ class SearchPresenter: ISearchPresenter {
     private var searchCancelation: Cancelation?
     
     init(view: ISearchView,
-         eventStorage: IEventsStorage,
+         eventsStorage: IEventsStorage,
          selectedEventService: ISelectedEventService,
          userSettingsService: IUserSettingsService,
          dateFormatterService: IDateFormatterService,
          tagsStorage: IEventTagsStorage,
          searchParametersService: ISearchParametersService) {
         self.view = view
-        self.eventStorage = eventStorage
+        self.eventsStorage = eventsStorage
         self.selectedEventService = selectedEventService
         self.userSettingsService = userSettingsService
         self.dateFormatterService = dateFormatterService
@@ -33,14 +37,23 @@ class SearchPresenter: ISearchPresenter {
         self.searchParametersService = searchParametersService
         
         searchEventsDebounced = debounce(
-            delay: DispatchTimeInterval.seconds(2),
+            delay: DispatchTimeInterval.seconds(1),
             queue: DispatchQueue.main,
-            action: searchEventDebouncedAction
+            action: searchEvents
         )
     }
     
     func setup() {
-        searchEventDebouncedAction()
+        searchEvents()
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(settingsChanged),
+                                               name: .SearchSettingsChanged,
+                                               object: nil)
+    }
+    
+    @objc private func settingsChanged() {
+        searchEvents(by: searchParametersService.selectedTags)
     }
     
     func activate() {
@@ -53,7 +66,7 @@ class SearchPresenter: ISearchPresenter {
         selectedEventService.selectedEvent = events.first { $0.id == eventId }
     }
     
-    func setSearchParameters(completion: @escaping () -> Void) {
+    func prepareSearchParameters(completion: @escaping () -> Void) {
         let selectedTags = searchParametersService.selectedTags
         let otherTags = searchParametersService.otherTags
         if selectedTags.isEmpty && otherTags.isEmpty {
@@ -81,16 +94,20 @@ class SearchPresenter: ISearchPresenter {
     }
     
     func searchEvents(by newSearchText: String) {
-        let newSearchTags = searchParametersService.selectedTags
-        if searchText == newSearchText && searchTags == newSearchTags { return }
+        if searchText == newSearchText { return }
         searchText = newSearchText
+        clearViewEvents()
+        searchEventsDebounced(true)
+    }
+    
+    private func searchEvents(by newSearchTags: [Tag]) {
+        if searchTags == newSearchTags { return }
         searchTags = newSearchTags
         clearViewEvents()
         searchEventsDebounced(true)
     }
     
-    private func searchEventDebouncedAction() {
-        
+    private func searchEvents() {
         events.removeAll()
         eventViewModels.removeAll()
         
@@ -101,10 +118,10 @@ class SearchPresenter: ISearchPresenter {
     private func loadBatchEvents() {
         view.showLoadingIndicator()
         
-        _ = eventStorage.searchEvents(indexRange: events.count..<events.count + 10,
-                                      searchText: searchText,
-                                      searchTags: searchTags,
-                                      then: appendEvents)
+        _ = eventsStorage.searchEvents(indexRange: events.count..<events.count + 10,
+                                       searchText: searchText,
+                                       searchTags: searchTags,
+                                       then: appendEvents)
     }
     
     private func clearViewEvents() {

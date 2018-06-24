@@ -18,17 +18,19 @@ class EventsStorageMockImpl: IEventsStorage {
             
             let events = self.getEvents()
             var filteredEvents = events
+        
+            if !searchTags.isEmpty {
+                filteredEvents = filteredEvents.filter {
+                    $0.tags.contains(where: { searchTags.contains($0) })
+                }
+            }
             
-            if searchText != "" && !searchTags.isEmpty {
-                filteredEvents = events.filter({
-                    ($0.title.lowercased().contains(searchText.lowercased()) ||
-                     $0.description.lowercased().contains(searchText.lowercased())) &&
-                    $0.tags.contains(where: { searchTags.contains($0) })
-                })
-            } else if !searchTags.isEmpty {
-                filteredEvents = events.filter({
-                    $0.tags.contains(where: { searchTags.contains($0) })
-                })
+            if searchText != "" {
+                filteredEvents = filteredEvents.filter { event in
+                    let lowercasedSearchText = searchText.lowercased()
+                    return event.title.lowercased().contains(lowercasedSearchText)
+                        || event.description.lowercased().contains(lowercasedSearchText)
+                }
             }
             
             let updatedIndexRange = filteredEvents.count < indexRange.upperBound
@@ -78,7 +80,7 @@ class EventsStorageMockImpl: IEventsStorage {
     
     private func getEvents() -> [Event] {
         var events = [Event]()
-        for _ in 0..<1 {
+        for _ in 0..<10 {
             events.append(contentsOf:
             [
                 createEvent(id: 1,

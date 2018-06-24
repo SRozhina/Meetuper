@@ -11,5 +11,5 @@ protocol ISearchPresenter {
     
     func activate()
     
-    func setSearchParameters(completion: @escaping () -> Void)
+    func prepareSearchParameters(completion: @escaping () -> Void)
 }

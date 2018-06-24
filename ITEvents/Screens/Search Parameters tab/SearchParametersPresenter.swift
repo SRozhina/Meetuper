@@ -1,3 +1,5 @@
+import Foundation
+
 class SearchParametersPresenter: ISearchParametersPresenter {
     let view: ISearchParametersView!
     var searchParametersService: ISearchParametersService!
@@ -10,25 +12,27 @@ class SearchParametersPresenter: ISearchParametersPresenter {
         self.searchParametersService = searchParametersService
     }
     
-    func parametersSelectionFinished() {
+    func saveSettings() {
         searchParametersService.selectedTags = selectedTags
         searchParametersService.otherTags = otherTags
+        
+        NotificationCenter.default.post(name: .SearchSettingsChanged, object: nil)
     }
     
     func setup() {
         selectedTags = searchParametersService.selectedTags
         otherTags = searchParametersService.otherTags
-        view.fillTagListViews(with: selectedTags, otherTags: otherTags)
+        view.fill(with: selectedTags, otherTags: otherTags)
     }
     
-    func removeTag(with title: String) {
-        guard let tagIndex = selectedTags.firstIndex(where: { $0.name == title }) else { return }
+    func deselectTag(_ tag: Tag) {
+        guard let tagIndex = selectedTags.firstIndex(of: tag) else { return }
         let removedTag = selectedTags.remove(at: tagIndex)
         otherTags.append(removedTag)
     }
     
-    func selectTag(with title: String) {
-        guard let tagIndex = otherTags.firstIndex(where: { $0.name == title }) else { return }
+    func selectTag(_ tag: Tag) {
+        guard let tagIndex = otherTags.firstIndex(of: tag) else { return }
         let selectedTag = otherTags.remove(at: tagIndex)
         selectedTags.append(selectedTag)
     }

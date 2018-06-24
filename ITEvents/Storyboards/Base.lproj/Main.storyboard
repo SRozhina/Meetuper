@@ -85,7 +85,7 @@
                         <barButtonItem key="rightBarButtonItem" image="settings" id="YUj-sH-uy2">
                             <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="setSearchParameters:" destination="RD7-ji-xpX" id="jTp-5w-yIR"/>
+                                <action selector="showSearchParameters:" destination="RD7-ji-xpX" id="jTp-5w-yIR"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -169,14 +169,14 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="RNw-R1-rQR">
                                         <rect key="frame" x="10" y="10" width="355" height="534"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YZf-wo-rBw">
+                                            <view contentMode="scaleToFill" horizontalHuggingPriority="240" verticalHuggingPriority="240" horizontalCompressionResistancePriority="760" verticalCompressionResistancePriority="760" translatesAutoresizingMaskIntoConstraints="NO" id="YZf-wo-rBw">
                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="51"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="klI-gc-OVZ">
                                                         <rect key="frame" x="16" y="10" width="323" height="31"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Obs-4t-QfG" customClass="TagListView" customModule="TagListView">
-                                                                <rect key="frame" x="0.0" y="0.0" width="323" height="21"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="323" height="0.0"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="textColor">
@@ -210,7 +210,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="IgW-Zq-BGV" customClass="TagListView" customModule="TagListView">
-                                                                <rect key="frame" x="0.0" y="31" width="323" height="0.0"/>
+                                                                <rect key="frame" x="0.0" y="10" width="323" height="21"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="textColor">
@@ -254,7 +254,7 @@
                                                     <constraint firstAttribute="bottom" secondItem="klI-gc-OVZ" secondAttribute="bottom" constant="10" id="ged-L9-uMD"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" horizontalHuggingPriority="240" verticalHuggingPriority="240" horizontalCompressionResistancePriority="760" verticalCompressionResistancePriority="760" translatesAutoresizingMaskIntoConstraints="NO" id="Gkb-at-DU9">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gkb-at-DU9">
                                                 <rect key="frame" x="0.0" y="51" width="355" height="483"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
@@ -283,7 +283,7 @@
                     <navigationItem key="navigationItem" title="Search Parameters" id="PzT-Wp-QRz">
                         <barButtonItem key="leftBarButtonItem" systemItem="done" id="qCf-1z-RFZ">
                             <connections>
-                                <segue destination="mbg-rB-nO9" kind="unwind" unwindAction="unwindToSearch:" id="BQK-0B-OTq"/>
+                                <action selector="saveParameters:" destination="2Ph-fr-AtU" id="HIR-2X-m7L"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -294,7 +294,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rCe-iv-jQh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="mbg-rB-nO9" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1134" y="609"/>
         </scene>

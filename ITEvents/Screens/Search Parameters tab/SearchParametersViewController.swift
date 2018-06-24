@@ -18,16 +18,13 @@ class SearchParametersViewController: UIViewController, ISearchParametersView {
     ]
     private let gradientLayerStartPoint = CGPoint(x: 0, y: 0)
     private let gradientLayerEndPoint = CGPoint(x: 1, y: 0)
+    private var tags: [Tag] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         SharedUtils.decorateAsPanel(view: tagViewContainer)
         setupTagListViews()
         presenter.setup()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        presenter.parametersSelectionFinished()
     }
     
     private func setupTagListViews() {
@@ -38,13 +35,21 @@ class SearchParametersViewController: UIViewController, ISearchParametersView {
         otherTagListView.textFont = tagsFont
     }
     
-    func fillTagListViews(with selectedTags: [Tag], otherTags: [Tag]) {
+    func fill(with selectedTags: [Tag], otherTags: [Tag]) {
+        clearTags()
+        
+        tags = selectedTags + otherTags
         for tag in selectedTags {
             addTag(tag.name, to: selectedTagListView)
         }
         for tag in otherTags {
             addTag(tag.name, to: otherTagListView)
         }
+    }
+    
+    private func clearTags() {
+        selectedTagListView.removeAllTags()
+        otherTagListView.removeAllTags()
     }
     
     private func addTag(_ tagName: String, to tagListView: TagListView) {
@@ -64,18 +69,25 @@ class SearchParametersViewController: UIViewController, ISearchParametersView {
         gradientLayer.frame = frame
         return gradientLayer
     }
+    
+    @IBAction private func saveParameters(_ sender: Any) {
+        presenter.saveSettings()
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension SearchParametersViewController: TagListViewDelegate {
     func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
-        presenter.removeTag(with: title)
+        guard let tag = tags.first(where: { $0.name == title }) else { return }
+        presenter.deselectTag(tag)
         selectedTagListView.removeTagView(tagView)
         addTag(title, to: otherTagListView)
     }
     
     func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
         if sender == selectedTagListView { return }
-        presenter.selectTag(with: title)
+        guard let tag = tags.first(where: { $0.name == title }) else { return }
+        presenter.selectTag(tag)
         otherTagListView.removeTagView(tagView)
         addTag(title, to: selectedTagListView)
     }

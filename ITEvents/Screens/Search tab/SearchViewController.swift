@@ -76,13 +76,9 @@ class SearchViewController: UIViewController, ISearchView {
         }
     }
     
-    @IBAction private func unwindToSearch(_ sender: UIStoryboardSegue) {
-        presenter.searchEvents(by: searchText)
-    }
-    
-    @IBAction private func setSearchParameters(_ sender: Any) {
+    @IBAction private func showSearchParameters(_ sender: Any) {
         settingsButton.isEnabled = false
-        presenter.setSearchParameters(completion: {
+        presenter.prepareSearchParameters(completion: {
             self.performSegue(withIdentifier: "OpenSearchParameters", sender: nil)
         })
     }

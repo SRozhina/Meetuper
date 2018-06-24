@@ -1,9 +1,9 @@
 protocol ISearchParametersPresenter {
     func setup()
     
-    func removeTag(with title: String)
+    func deselectTag(_ tag: Tag)
     
-    func selectTag(with title: String)
+    func selectTag(_ tag: Tag)
     
-    func parametersSelectionFinished()
+    func saveSettings()
 }

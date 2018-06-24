@@ -60,7 +60,7 @@ extension SwinjectStoryboard {
         
         defaultContainer.register(ISearchPresenter.self) { resolver, view in
             SearchPresenter(view: view,
-                            eventStorage: resolver.resolve(IEventsStorage.self)!,
+                            eventsStorage: resolver.resolve(IEventsStorage.self)!,
                             selectedEventService: resolver.resolve(ISelectedEventService.self)!,
                             userSettingsService: resolver.resolve(IUserSettingsService.self)!,
                             dateFormatterService: resolver.resolve(IDateFormatterService.self)!,
@@ -74,7 +74,7 @@ extension SwinjectStoryboard {
         
         defaultContainer.register(ISearchParametersPresenter.self) { resolver, view in
             SearchParametersPresenter(view: view,
-                               searchParametersService: resolver.resolve(ISearchParametersService.self)!)
+                                      searchParametersService: resolver.resolve(ISearchParametersService.self)!)
         }
         
         defaultContainer.storyboardInitCompleted(SearchParametersViewController.self) { resolver, view in
