@@ -135,8 +135,8 @@ class SearchPresenter: ISearchPresenter {
         self.events.append(contentsOf: fetchedEvents)
         self.eventViewModels.append(contentsOf: fetchedEvents.map(createEventViewModel))
         
-        self.view.setEvents(self.eventViewModels)
         self.view.hideLoadingIndicator()
+        self.view.setEvents(self.eventViewModels)
     }
     
     private func createEventViewModel(event: Event) -> EventCollectionCellViewModel {

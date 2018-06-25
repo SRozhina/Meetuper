@@ -21,6 +21,9 @@ class EventCollectionViewHandler: NSObject, IEventCollectionViewHandler {
         self.collectionView = collectionView
         self.selectedEventAction = selectedEventAction
         self.thresholdCellWillDisplayAction = lastCellWillDisplayAction
+        
+        super.init()
+        setLabelForEmptySearchResults()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -86,6 +89,11 @@ class EventCollectionViewHandler: NSObject, IEventCollectionViewHandler {
     
     func setEvents(_ newEvents: [EventCollectionCellViewModel]) {
         self.events = newEvents
+        if newEvents.isEmpty && !isLoadingIndicatorShown {
+            collectionView.backgroundView?.isHidden = false
+        } else {
+            collectionView.backgroundView?.isHidden = true
+        }
         collectionView.reloadData()
     }
     
@@ -104,5 +112,18 @@ class EventCollectionViewHandler: NSObject, IEventCollectionViewHandler {
 
         isListLayoutSelected.toggle()
         collectionView.reloadData()
+    }
+    
+    private func setLabelForEmptySearchResults() {
+        let messageLabel = UILabel(frame: CGRect(x: 0,
+                                                 y: 0,
+                                                 width: collectionView.bounds.size.width,
+                                                 height: collectionView.bounds.size.height))
+        messageLabel.text = "No events found"
+        messageLabel.textColor = .gray
+        messageLabel.textAlignment = .center
+        
+        collectionView.backgroundView = messageLabel
+        collectionView.backgroundView?.isHidden = true
     }
 }
