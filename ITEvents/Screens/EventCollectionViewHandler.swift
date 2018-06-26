@@ -17,13 +17,14 @@ class EventCollectionViewHandler: NSObject, IEventCollectionViewHandler {
          collectionView: UICollectionView,
          selectedEventAction: SelectedEventCallback? = nil,
          lastCellWillDisplayAction: LastCellWillDisplayActionCallback? = nil) {
+        super.init()
+
         self.viewWidth = viewWidth
         self.collectionView = collectionView
         self.selectedEventAction = selectedEventAction
         self.thresholdCellWillDisplayAction = lastCellWillDisplayAction
         
-        super.init()
-        setLabelForEmptySearchResults()
+        configureBackgroundView()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -89,11 +90,8 @@ class EventCollectionViewHandler: NSObject, IEventCollectionViewHandler {
     
     func setEvents(_ newEvents: [EventCollectionCellViewModel]) {
         self.events = newEvents
-        if newEvents.isEmpty && !isLoadingIndicatorShown {
-            collectionView.backgroundView?.isHidden = false
-        } else {
-            collectionView.backgroundView?.isHidden = true
-        }
+        let needToShowBackground = newEvents.isEmpty && !isLoadingIndicatorShown
+        collectionView.backgroundView?.isHidden = !needToShowBackground
         collectionView.reloadData()
     }
     
@@ -114,16 +112,18 @@ class EventCollectionViewHandler: NSObject, IEventCollectionViewHandler {
         collectionView.reloadData()
     }
     
-    private func setLabelForEmptySearchResults() {
-        let messageLabel = UILabel(frame: CGRect(x: 0,
-                                                 y: 0,
-                                                 width: collectionView.bounds.size.width,
-                                                 height: collectionView.bounds.size.height))
-        messageLabel.text = "No events found"
-        messageLabel.textColor = .gray
-        messageLabel.textAlignment = .center
-        
-        collectionView.backgroundView = messageLabel
+    private func createEmptySearchResultLabel() -> UILabel {
+        let viewSize = collectionView.bounds.size
+        let labelFrame = CGRect(x: 0, y: 0, width: viewSize.width, height: viewSize.height)
+        let label = UILabel(frame: labelFrame)
+        label.text = "No events found"
+        label.textColor = .gray
+        label.textAlignment = .center
+        return label
+    }
+    
+    private func configureBackgroundView() {
+        collectionView.backgroundView = createEmptySearchResultLabel()
         collectionView.backgroundView?.isHidden = true
     }
 }
