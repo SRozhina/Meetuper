@@ -455,7 +455,6 @@
 				C3B88292201A22510031F261 /* Resources */,
 				C3B882C5201A242C0031F261 /* ShellScript */,
 				463541AD3E81A627713D189A /* [CP] Embed Pods Frameworks */,
-				78DBD7419FE6F9128AC0D56A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -548,21 +547,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ITEvents/Pods-ITEvents-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		78DBD7419FE6F9128AC0D56A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ITEvents/Pods-ITEvents-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C3B882C5201A242C0031F261 /* ShellScript */ = {
