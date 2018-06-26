@@ -1,4 +1,4 @@
-import Foundation
+import Promises
 
 extension Notification.Name {
     static let SearchSettingsChanged = Notification.Name("SEARCH_SETTINGS_CHANGED")
@@ -19,7 +19,7 @@ class SearchPresenter: ISearchPresenter {
     private var searchText: String = ""
     private var searchTags: [Tag] = []
     private var eventsTotal = -1
-    private var searchCancelation: Cancelation?
+    private var searchCancelation: Cancelable<EventsResult>?
     
     init(view: ISearchView,
          eventsStorage: IEventsStorage,
@@ -70,7 +70,7 @@ class SearchPresenter: ISearchPresenter {
         let selectedTags = searchParametersService.selectedTags
         let otherTags = searchParametersService.otherTags
         if selectedTags.isEmpty && otherTags.isEmpty {
-            tagsStorage.fetchTags { tags in
+            tagsStorage.fetchTags().then { tags in
                 self.searchParametersService.otherTags = tags
                 completion()
             }
@@ -85,7 +85,7 @@ class SearchPresenter: ISearchPresenter {
             return
         }
         
-        loadBatchEvents()
+        _ = loadBatchEvents()
     }
     
     func forceEventSearching() {
@@ -112,16 +112,18 @@ class SearchPresenter: ISearchPresenter {
         eventViewModels.removeAll()
         
         searchCancelation?.cancel()
-        loadBatchEvents()
+        searchCancelation = loadBatchEvents()
     }
     
-    private func loadBatchEvents() {
+    private func loadBatchEvents() -> Cancelable<EventsResult> {
         view.showLoadingIndicator()
         
-        _ = eventsStorage.searchEvents(indexRange: events.count..<events.count + 10,
-                                       searchText: searchText,
-                                       searchTags: searchTags,
-                                       then: appendEvents)
+        let cancelablePromise = eventsStorage.searchEvents(indexRange: events.count..<events.count + 10,
+                                                           searchText: searchText,
+                                                           searchTags: searchTags)
+        cancelablePromise.promise.then(appendEvents)
+        
+        return cancelablePromise
     }
     
     private func clearViewEvents() {
@@ -129,14 +131,14 @@ class SearchPresenter: ISearchPresenter {
         view.clearEvents()
     }
     
-    private func appendEvents(_ fetchedEvents: [Event], total: Int) {
-        self.eventsTotal = total
+    private func appendEvents(_ eventsResult: EventsResult) {
+        eventsTotal = eventsResult.totalEventsCount
         
-        self.events.append(contentsOf: fetchedEvents)
-        self.eventViewModels.append(contentsOf: fetchedEvents.map(createEventViewModel))
+        events.append(contentsOf: eventsResult.events)
+        eventViewModels.append(contentsOf: eventsResult.events.map(createEventViewModel))
         
-        self.view.setEvents(self.eventViewModels)
-        self.view.hideLoadingIndicator()
+        view.setEvents(self.eventViewModels)
+        view.hideLoadingIndicator()
     }
     
     private func createEventViewModel(event: Event) -> EventCollectionCellViewModel {

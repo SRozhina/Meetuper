@@ -1,5 +1,5 @@
 import Foundation
-import UIKit
+import Promises
 
 class EventsStorageMockImpl: IEventsStorage {
     private let dateFormatter: DateFormatter = {
@@ -8,17 +8,13 @@ class EventsStorageMockImpl: IEventsStorage {
         return formatter
     }()
     
-    func searchEvents(indexRange: Range<Int>, searchText: String, searchTags: [Tag], then completion: @escaping EventRequestCallback) -> Cancelation {
-        let cancelation = Cancelation()
-        
+    func searchEvents(indexRange: Range<Int>, searchText: String, searchTags: [Tag]) -> Cancelable<EventsResult> {
+        let pendingPromise = Promise<EventsResult>.pending()
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            if cancelation.canceled {
-                return
-            }
-            
             let events = self.getEvents()
             var filteredEvents = events
-        
+            
             if !searchTags.isEmpty {
                 filteredEvents = filteredEvents.filter {
                     $0.tags.contains(where: { searchTags.contains($0) })
@@ -36,11 +32,12 @@ class EventsStorageMockImpl: IEventsStorage {
             let updatedIndexRange = filteredEvents.count < indexRange.upperBound
                 ? indexRange.lowerBound..<filteredEvents.count
                 : indexRange
-            let filteredEventsSlice = filteredEvents[updatedIndexRange]
-            completion(Array(filteredEventsSlice), filteredEvents.count)
+            let filteredEventsSlice = Array(filteredEvents[updatedIndexRange])
+            let filteredEventsResult = EventsResult(events: filteredEventsSlice, totalEventsCount: filteredEvents.count)
+            pendingPromise.fulfill(filteredEventsResult)
         }
         
-        return cancelation
+        return Cancelable<EventsResult>(promise: pendingPromise)
     }
     
     private func createEvent(id: Int,

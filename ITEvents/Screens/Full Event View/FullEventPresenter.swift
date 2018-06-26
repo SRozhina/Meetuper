@@ -30,7 +30,7 @@ class FullEventPresenter: IFullEventPresenter {
             return
         }
         
-        similarEventsService.fetchSimilarEvents(for: event.id) { events in
+        similarEventsService.fetchSimilarEvents(for: event.id).then { events in
             self.similarEvents = events
             if !events.isEmpty {
                 self.createSimilarEventViews(from: events)
