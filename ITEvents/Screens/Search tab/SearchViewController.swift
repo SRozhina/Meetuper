@@ -59,6 +59,14 @@ class SearchViewController: UIViewController, ISearchView {
         eventCollectionViewHandler.hideLoadingIndicator()
     }
     
+    func showBackgroundView() {
+        eventCollectionViewHandler.showBackgroundView()
+    }
+    
+    func hideBackgroundView() {
+        eventCollectionViewHandler.hideBackgroundView()
+    }
+    
     private func registerNibs() {
         collectionView.register(cellType: ListCollectionViewCell.self)
         collectionView.register(cellType: GridCollectionViewCell.self)

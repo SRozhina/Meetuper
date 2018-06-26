@@ -10,5 +10,8 @@ protocol IEventCollectionViewHandler: UICollectionViewDelegateFlowLayout, UIColl
     func showLoadingIndicator()
     func hideLoadingIndicator()
     
+    func showBackgroundView()
+    func hideBackgroundView() 
+    
     func toggleListLayout(value isListLayout: Bool)
 }

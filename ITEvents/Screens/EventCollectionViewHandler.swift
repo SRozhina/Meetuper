@@ -90,8 +90,6 @@ class EventCollectionViewHandler: NSObject, IEventCollectionViewHandler {
     
     func setEvents(_ newEvents: [EventCollectionCellViewModel]) {
         self.events = newEvents
-        let needToShowBackground = newEvents.isEmpty && !isLoadingIndicatorShown
-        collectionView.backgroundView?.isHidden = !needToShowBackground
         collectionView.reloadData()
     }
     
@@ -102,6 +100,16 @@ class EventCollectionViewHandler: NSObject, IEventCollectionViewHandler {
     
     func hideLoadingIndicator() {
         isLoadingIndicatorShown = false
+        collectionView.reloadData()
+    }
+    
+    func showBackgroundView() {
+        collectionView.backgroundView?.isHidden = false
+        collectionView.reloadData()
+    }
+    
+    func hideBackgroundView() {
+        collectionView.backgroundView?.isHidden = true
         collectionView.reloadData()
     }
     
