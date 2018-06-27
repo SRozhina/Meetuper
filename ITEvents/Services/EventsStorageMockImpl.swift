@@ -90,7 +90,7 @@ class EventsStorageMockImpl: IEventsStorage {
                             image: UIImage(named: "js")!,
                             similarEventsCount: 0,
                             source: EventSource(id: 1, name: "Timepad"),
-                            tags: (0...10).map {Tag(id: $0, name: "JavaScript")}
+                            tags: [Tag(id: 1, name: "JavaScript")]
                 ),
                 createEvent(id: 2,
                             title: "PiterCSS #25",
@@ -100,8 +100,8 @@ class EventsStorageMockImpl: IEventsStorage {
                             similarEventsCount: 1,
                             source: EventSource(id: 2, name: "Meetup.com"),
                             tags: [
-                                Tag(id: 1, name: "CSS"),
-                                Tag(id: 2, name: "Frontend")
+                                Tag(id: 7, name: "CSS"),
+                                Tag(id: 9, name: "Frontend")
                     ]),
                 createEvent(id: 3,
                             title: "DartUp",
@@ -110,7 +110,7 @@ class EventsStorageMockImpl: IEventsStorage {
                             image: UIImage(named: "wrike")!,
                             similarEventsCount: 2,
                             source: EventSource(id: 3, name: "Meetabit"),
-                            tags: [Tag(id: 1, name: "Dart")]),
+                            tags: [Tag(id: 6, name: "Dart")]),
                 createEvent(id: 4,
                             title: "EmberJS",
                             startDate: getDateFromString(stringDate: "2018-09-09 19:00:00"),
@@ -129,7 +129,7 @@ class EventsStorageMockImpl: IEventsStorage {
                       description: "Short description for iPad",
                       tags: [
                         Tag(id: 1, name: "JavaScript"),
-                        Tag(id: 2, name: "Frontend")
+                        Tag(id: 9, name: "Frontend")
                     ],
                       image: UIImage(named: "yandex")!,
                       similarEventsCount: 1,
@@ -142,7 +142,7 @@ class EventsStorageMockImpl: IEventsStorage {
                             image: UIImage(named: "ember")!,
                             similarEventsCount: 0,
                             source: EventSource(id: 1, name: "Timepad"),
-                            tags: [Tag(id: 1, name: "CSS")])
+                            tags: [Tag(id: 7, name: "CSS")])
             ])
         }
         return events
