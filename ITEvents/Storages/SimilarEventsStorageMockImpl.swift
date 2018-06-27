@@ -1,5 +1,5 @@
-import Foundation
 import UIKit
+import Promises
 
 class SimilarEventsStorageMockImpl: ISimilarEventsStorage {
     
@@ -44,7 +44,7 @@ class SimilarEventsStorageMockImpl: ISimilarEventsStorage {
         return dateFormatter.date(from: stringDate)!
     }
     
-    func fetchSimilarEvents(for eventId: Int, then completion: @escaping ([Event]) -> Void) {
+    func fetchSimilarEvents(for eventId: Int) -> Promise<[Event]> {
         let eventDictionary: [Int: [Event]] =
             [
             2: [
@@ -99,11 +99,13 @@ class SimilarEventsStorageMockImpl: ISimilarEventsStorage {
                       url: URL(string: "https://pitercss.timepad.ru/event/457262/"))
             ]
         ]
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            if let events = eventDictionary[eventId] {
-                completion(events)
+        return Promise<[Event]> { fulfill, reject in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                if let events = eventDictionary[eventId] {
+                    fulfill(events)
+                }
             }
         }
+        
     }
 }

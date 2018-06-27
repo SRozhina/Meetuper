@@ -50,17 +50,17 @@ class FavoritePresenter: IFavoritePresenter {
     private func loadBatchEvents() {
         view.showLoadingIndicator()
         
-        _ = eventStorage.searchEvents(indexRange: events.count..<events.count + 10,
+        eventStorage.searchEvents(indexRange: events.count..<events.count + 10,
                                       searchText: "",
-                                      searchTags: favoriteTags,
-                                      then: appendEvents)
+                                      searchTags: favoriteTags)
+            .promise.then(appendEvents)
     }
     
-    private func appendEvents(_ fetchedEvents: [Event], total: Int) {
-        eventsTotal = total
+    private func appendEvents(_ eventsResult: EventsResult) {
+        eventsTotal = eventsResult.totalEventsCount
         
-        events.append(contentsOf: fetchedEvents)
-        eventViewModels.append(contentsOf: fetchedEvents.map(createEventViewModel))
+        events.append(contentsOf: eventsResult.events)
+        eventViewModels.append(contentsOf: eventsResult.events.map(createEventViewModel))
         
         view.setEvents(eventViewModels)
         view.hideLoadingIndicator()

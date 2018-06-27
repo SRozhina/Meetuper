@@ -1,7 +1,7 @@
-import Foundation
+import Promises
 
 class EventTagsStorageMockImpl: IEventTagsStorage {
-    func fetchTags(then completion: @escaping ([Tag]) -> Void) {
+    func fetchTags() -> Promise<[Tag]> {
         let tags = [
             Tag(id: 1, name: "JavaScript"),
             Tag(id: 2, name: "iOS"),
@@ -13,9 +13,11 @@ class EventTagsStorageMockImpl: IEventTagsStorage {
             Tag(id: 8, name: "Go"),
             Tag(id: 9, name: "Frontend")
         ]
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            completion(tags)
+        return Promise<[Tag]> { fulfill, reject in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                fulfill(tags)
+            }
         }
+        
     }
 }
