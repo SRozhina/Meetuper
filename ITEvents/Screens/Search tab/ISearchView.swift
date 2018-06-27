@@ -7,5 +7,8 @@ protocol ISearchView {
     func showLoadingIndicator()
     func hideLoadingIndicator()
     
+    func showBackgroundView()
+    func hideBackgroundView() 
+    
     func toggleLayout(value isListLayout: Bool)
 }
