@@ -85,7 +85,7 @@ class SearchPresenter: ISearchPresenter {
             return
         }
         
-        _ = loadBatchEvents()
+        searchCancelation = loadBatchEvents()
     }
     
     func forceEventSearching() {

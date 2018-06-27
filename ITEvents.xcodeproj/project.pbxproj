@@ -335,7 +335,7 @@
 		C391909F201E62FD00CD7151 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				C3CCECF720CB055200D2E133 /* Search Parameters tab */,
+				C3CCECF720CB055200D2E133 /* Search Parameters View */,
 				C3FF3CFC2044578100C65137 /* Full Event View */,
 				C39190A0201E630B00CD7151 /* Profile tab */,
 				C3919091201E605E00CD7151 /* Search tab */,
@@ -408,7 +408,7 @@
 			path = ITEventsUITests;
 			sourceTree = "<group>";
 		};
-		C3CCECF720CB055200D2E133 /* Search Parameters tab */ = {
+		C3CCECF720CB055200D2E133 /* Search Parameters View */ = {
 			isa = PBXGroup;
 			children = (
 				C319FAA320DC498B005E56A6 /* ISearchParametersView.swift */,
@@ -416,7 +416,7 @@
 				C319FAA520DC49A5005E56A6 /* ISearchParametersPresenter.swift */,
 				C319FA9F20DC44C8005E56A6 /* SearchParametersPresenter.swift */,
 			);
-			path = "Search Parameters tab";
+			path = "Search Parameters View";
 			sourceTree = "<group>";
 		};
 		C3E792E4202E411300876D6B /* Services */ = {
