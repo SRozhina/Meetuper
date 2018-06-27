@@ -17,10 +17,14 @@ class EventCollectionViewHandler: NSObject, IEventCollectionViewHandler {
          collectionView: UICollectionView,
          selectedEventAction: SelectedEventCallback? = nil,
          lastCellWillDisplayAction: LastCellWillDisplayActionCallback? = nil) {
+        super.init()
+
         self.viewWidth = viewWidth
         self.collectionView = collectionView
         self.selectedEventAction = selectedEventAction
         self.thresholdCellWillDisplayAction = lastCellWillDisplayAction
+        
+        configureBackgroundView()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -99,10 +103,35 @@ class EventCollectionViewHandler: NSObject, IEventCollectionViewHandler {
         collectionView.reloadData()
     }
     
+    func showBackgroundView() {
+        collectionView.backgroundView?.isHidden = false
+        collectionView.reloadData()
+    }
+    
+    func hideBackgroundView() {
+        collectionView.backgroundView?.isHidden = true
+        collectionView.reloadData()
+    }
+    
     func toggleListLayout(value isListLayout: Bool) {
         if isListLayoutSelected == isListLayout { return }
 
         isListLayoutSelected.toggle()
         collectionView.reloadData()
+    }
+    
+    private func createEmptySearchResultLabel() -> UILabel {
+        let viewSize = collectionView.bounds.size
+        let labelFrame = CGRect(x: 0, y: 0, width: viewSize.width, height: viewSize.height)
+        let label = UILabel(frame: labelFrame)
+        label.text = "No events found"
+        label.textColor = .gray
+        label.textAlignment = .center
+        return label
+    }
+    
+    private func configureBackgroundView() {
+        collectionView.backgroundView = createEmptySearchResultLabel()
+        collectionView.backgroundView?.isHidden = true
     }
 }

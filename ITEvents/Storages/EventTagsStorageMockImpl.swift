@@ -8,9 +8,10 @@ class EventTagsStorageMockImpl: IEventTagsStorage {
             Tag(id: 3, name: "Android"),
             Tag(id: 4, name: "Python"),
             Tag(id: 5, name: "php"),
-            Tag(id: 6, name: "C#"),
+            Tag(id: 6, name: "Dart"),
             Tag(id: 7, name: "CSS"),
-            Tag(id: 8, name: "Go")
+            Tag(id: 8, name: "Go"),
+            Tag(id: 9, name: "Frontend")
         ]
         return Promise<[Tag]> { fulfill, reject in
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
