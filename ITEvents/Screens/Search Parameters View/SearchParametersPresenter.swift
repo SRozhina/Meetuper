@@ -20,7 +20,7 @@ class SearchParametersPresenter: ISearchParametersPresenter {
         searchParametersService.selectedTags = selectedTags.sorted { $0.name < $1.name }
         searchParametersService.otherTags = otherTags.sorted { $0.name < $1.name }
         
-        notificationService.post(name: .SearchSettingsChanged)
+        notificationService.post(name: "SearchSettingsChanged")
     }
     
     func setup() {

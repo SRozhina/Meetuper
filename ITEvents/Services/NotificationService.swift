@@ -1,13 +1,13 @@
 import Foundation
 
 class NotificationCenterService: INotificationService {
-    private let center = NotificationCenter.default
+    let center = NotificationCenter.default
     
-    func post(name: Notification.Name) {
-        center.post(name: name, object: nil)
+    func post(name: String) {
+        center.post(name: Notification.Name(name), object: nil)
     }
     
-    func addObserver(observer: Any, selector: Selector, name: Notification.Name) {
-        center.addObserver(observer, selector: selector, name: name, object: nil)
+    func addObserver(observer: Any, selector: Selector, name: String) {
+        center.addObserver(observer, selector: selector, name: Notification.Name(name), object: nil)
     }
 }

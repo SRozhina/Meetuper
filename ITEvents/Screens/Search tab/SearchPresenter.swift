@@ -1,9 +1,5 @@
 import Promises
 
-extension Notification.Name {
-    static let SearchSettingsChanged = Notification.Name("SEARCH_SETTINGS_CHANGED")
-}
-
 class SearchPresenter: ISearchPresenter {    
     let view: ISearchView!
     let eventsStorage: IEventsStorage!
@@ -49,9 +45,10 @@ class SearchPresenter: ISearchPresenter {
     func setup() {
         searchEvents()
         
+        //except string could create custom enum with NotificationNames for future usage
         notificationService.addObserver(observer: self,
                                         selector: #selector(settingsChanged),
-                                        name: .SearchSettingsChanged)
+                                        name: "SearchSettingsChanged")
     }
     
     @objc private func settingsChanged() {
