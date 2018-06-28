@@ -3,20 +3,24 @@ import Foundation
 class SearchParametersPresenter: ISearchParametersPresenter {
     let view: ISearchParametersView!
     var searchParametersService: ISearchParametersService!
+    let notificationService: INotificationService!
     private var selectedTags: [Tag] = []
     private var otherTags: [Tag] = []
     
     init(view: ISearchParametersView,
-         searchParametersService: ISearchParametersService) {
+         searchParametersService: ISearchParametersService,
+         notificationService: INotificationService) {
         self.view = view
         self.searchParametersService = searchParametersService
+        self.notificationService = notificationService
     }
     
     func saveSettings() {
+        //Maybe add check if tags were changed then only post notification and remove this check from presenter
         searchParametersService.selectedTags = selectedTags.sorted { $0.name < $1.name }
         searchParametersService.otherTags = otherTags.sorted { $0.name < $1.name }
         
-        NotificationCenter.default.post(name: .SearchSettingsChanged, object: nil)
+        notificationService.post(name: .SearchSettingsChanged)
     }
     
     func setup() {

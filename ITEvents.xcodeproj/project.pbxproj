@@ -82,6 +82,8 @@
 		C3D547642078104A009ABC73 /* IFullEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D547632078104A009ABC73 /* IFullEventView.swift */; };
 		C3D547662078208F009ABC73 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D547652078208F009ABC73 /* EventViewModel.swift */; };
 		C3DBDFA820726BAB002A35EB /* IUserSettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DBDFA720726BAB002A35EB /* IUserSettingService.swift */; };
+		C3DC022320E4EE69005C4418 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DC022220E4EE69005C4418 /* NotificationService.swift */; };
+		C3DC022520E4EE77005C4418 /* INotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DC022420E4EE77005C4418 /* INotificationService.swift */; };
 		C3FFF10A20726CEB00ADF407 /* UserSettingsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C3FFF10820726CEB00ADF407 /* UserSettingsModel.xcdatamodeld */; };
 		C3FFF10C20737DCE00ADF407 /* UserSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FFF10B20737DCE00ADF407 /* UserSettingsService.swift */; };
 /* End PBXBuildFile section */
@@ -170,6 +172,8 @@
 		C3D547632078104A009ABC73 /* IFullEventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFullEventView.swift; sourceTree = "<group>"; };
 		C3D547652078208F009ABC73 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		C3DBDFA720726BAB002A35EB /* IUserSettingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IUserSettingService.swift; sourceTree = "<group>"; };
+		C3DC022220E4EE69005C4418 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		C3DC022420E4EE77005C4418 /* INotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INotificationService.swift; sourceTree = "<group>"; };
 		C3FFF10920726CEB00ADF407 /* UserSettingsModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserSettingsModel.xcdatamodel; sourceTree = "<group>"; };
 		C3FFF10B20737DCE00ADF407 /* UserSettingsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingsService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -430,6 +434,8 @@
 				C3FFF10B20737DCE00ADF407 /* UserSettingsService.swift */,
 				C319FAA120DC4696005E56A6 /* ISearchParametersService.swift */,
 				C319FA9D20DC41ED005E56A6 /* SearchParametersService.swift */,
+				C3DC022420E4EE77005C4418 /* INotificationService.swift */,
+				C3DC022220E4EE69005C4418 /* NotificationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -626,6 +632,7 @@
 				C327C96E20C1BFD50075A0E3 /* IEventCollectionViewHandler.swift in Sources */,
 				C34758722074F942009FAA5F /* EventPlaceView.swift in Sources */,
 				C34758692074F942009FAA5F /* EventView.swift in Sources */,
+				C3DC022520E4EE77005C4418 /* INotificationService.swift in Sources */,
 				C300562C2055AA6B00875CCD /* UserSettings.swift in Sources */,
 				C319FAA620DC49A5005E56A6 /* ISearchParametersPresenter.swift in Sources */,
 				C39190A2201E632700CD7151 /* ProfileViewController.swift in Sources */,
@@ -660,6 +667,7 @@
 				C319FAA020DC44C8005E56A6 /* SearchParametersPresenter.swift in Sources */,
 				C3B88298201A22520031F261 /* AppDelegate.swift in Sources */,
 				C39190A6201E634200CD7151 /* IProfileViewController.swift in Sources */,
+				C3DC022320E4EE69005C4418 /* NotificationService.swift in Sources */,
 				C319FAA420DC498B005E56A6 /* ISearchParametersView.swift in Sources */,
 				C3C6051320BA021E00606B30 /* EventTagsStorageMockImpl.swift in Sources */,
 				C3C6050F20BA021E00606B30 /* ISimilarEventsStorage.swift in Sources */,
