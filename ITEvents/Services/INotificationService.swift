@@ -1,6 +1,6 @@
 import Foundation
 
 protocol INotificationService {
-    func post(name: String)
-    func addObserver(observer: Any, selector: Selector, name: String)
+    func post(name: NotificationName)
+    func addObserver(observer: Any, selector: Selector, name: NotificationName)
 }

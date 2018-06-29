@@ -45,10 +45,9 @@ class SearchPresenter: ISearchPresenter {
     func setup() {
         searchEvents()
         
-        //except string could create custom enum with NotificationNames for future usage
         notificationService.addObserver(observer: self,
                                         selector: #selector(settingsChanged),
-                                        name: "SearchSettingsChanged")
+                                        name: NotificationName.SearchSettingsChanged)
     }
     
     @objc private func settingsChanged() {
@@ -56,7 +55,6 @@ class SearchPresenter: ISearchPresenter {
     }
     
     func activate() {
-        //TODO implement notifying about layout changes when settings are ready
         let userSettings = userSettingsService.fetchSettings()
         view.toggleLayout(value: userSettings.isListLayoutSelected)
     }

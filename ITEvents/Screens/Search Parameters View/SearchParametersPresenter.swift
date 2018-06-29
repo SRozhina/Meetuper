@@ -16,11 +16,15 @@ class SearchParametersPresenter: ISearchParametersPresenter {
     }
     
     func saveSettings() {
-        //Maybe add check if tags were changed then only post notification and remove this check from presenter
-        searchParametersService.selectedTags = selectedTags.sorted { $0.name < $1.name }
-        searchParametersService.otherTags = otherTags.sorted { $0.name < $1.name }
+        selectedTags = selectedTags.sorted { $0.name < $1.name }
+        otherTags = otherTags.sorted { $0.name < $1.name }
+        if searchParametersService.selectedTags == selectedTags && searchParametersService.otherTags == otherTags {
+            return
+        }
+        searchParametersService.selectedTags = selectedTags
+        searchParametersService.otherTags = otherTags
         
-        notificationService.post(name: "SearchSettingsChanged")
+        notificationService.post(name: NotificationName.SearchSettingsChanged)
     }
     
     func setup() {
