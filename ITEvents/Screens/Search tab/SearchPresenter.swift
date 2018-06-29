@@ -98,7 +98,6 @@ class SearchPresenter: ISearchPresenter {
     }
     
     private func searchEvents(by newSearchTags: [Tag]) {
-        if searchTags == newSearchTags { return }
         searchTags = newSearchTags
         clearViewEvents()
         searchEventsDebounced(true)
