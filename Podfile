@@ -21,3 +21,6 @@ target 'ITEvents' do
       end
   end
 end
+
+target 'ITEventsUnitTests' do
+end
