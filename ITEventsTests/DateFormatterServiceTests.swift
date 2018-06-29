@@ -1,7 +1,7 @@
 import XCTest
 @testable import ITEvents
 
-class ITEventsUnitTests: XCTestCase {
+class DateFormatterServiceTests: XCTestCase {
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -21,9 +21,7 @@ class ITEventsUnitTests: XCTestCase {
                                                   end: dateFormatter.date(from: endDifferentDate)!)
     }
     
-    override func tearDown() {
-        super.tearDown()
-    }
+    override func tearDown() { }
     
     func testShortDateSameDay() {
         let dateFormatterService = DateFormatterService()

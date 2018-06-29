@@ -22,5 +22,5 @@ target 'ITEvents' do
   end
 end
 
-target 'ITEventsUnitTests' do
+target 'ITEventsTests' do
 end

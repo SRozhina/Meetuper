@@ -14,3 +14,4 @@ struct Event {
     let source: EventSource?
     let url: URL?
 }
+extension Event: Equatable { }
