@@ -52,7 +52,8 @@ class SearchPresenter: ISearchPresenter {
                                                object: nil)
     }
     
-    @objc private func settingsChanged() {
+    @objc
+    private func settingsChanged() {
         searchEvents(by: searchParametersService.selectedTags)
     }
     

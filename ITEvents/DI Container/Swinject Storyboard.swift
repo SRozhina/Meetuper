@@ -2,34 +2,35 @@ import Foundation
 import SwinjectStoryboard
 
 extension SwinjectStoryboard {
-    @objc class func setup() {
+    @objc
+    class func setup() {
         defaultContainer.register(IEventsStorage.self) { _ in
             return EventsStorageMockImpl()
-        }.inObjectScope(.container)
+            }.inObjectScope(.container)
         
         defaultContainer.register(IEventTagsStorage.self) { _ in
             return EventTagsStorageMockImpl()
-        }.inObjectScope(.container)
+            }.inObjectScope(.container)
         
         defaultContainer.register(ISimilarEventsStorage.self) { _ in
             return SimilarEventsStorageMockImpl()
-        }.inObjectScope(.container)
+            }.inObjectScope(.container)
         
         defaultContainer.register(IDateFormatterService.self) { _ in
             return DateFormatterService()
-        }.inObjectScope(.container)
-
+            }.inObjectScope(.container)
+        
         defaultContainer.register(ISelectedEventService.self) { _ in
             return SelectedEventService()
-        }.inObjectScope(.container)
+            }.inObjectScope(.container)
         
         defaultContainer.register(ISearchParametersService.self) { _ in
             return SearchParametersService()
-        }.inObjectScope(.container)
+            }.inObjectScope(.container)
         
         defaultContainer.register(IUserSettingsService.self) { _ in
             return UserSettingsService()
-        }.inObjectScope(.container)
+            }.inObjectScope(.container)
         
         defaultContainer.register(IEventTagsStorage.self) { _ in
             return EventTagsStorageMockImpl()

@@ -32,9 +32,9 @@ class SearchViewController: UIViewController, ISearchView {
     private func setupViewController() {
         registerNibs()
         eventCollectionViewHandler = EventCollectionViewHandler(viewWidth: view.frame.width,
-                                                              collectionView: collectionView,
-                                                              selectedEventAction: selectedEventAction,
-                                                              lastCellWillDisplayAction: lastCellWillDisplayAction)
+                                                                collectionView: collectionView,
+                                                                selectedEventAction: selectedEventAction,
+                                                                lastCellWillDisplayAction: lastCellWillDisplayAction)
         collectionView.dataSource = eventCollectionViewHandler
         collectionView.delegate = eventCollectionViewHandler
     }

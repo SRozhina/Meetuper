@@ -27,9 +27,9 @@ class FavoritesViewController: UIViewController, IFavoriveView {
     private func setupViewController() {
         registerNibs()
         eventCollectionViewHandler = EventCollectionViewHandler(viewWidth: view.frame.width,
-                                                               collectionView: collectionView,
-                                                               selectedEventAction: selectedEventAction,
-                                                               lastCellWillDisplayAction: lastCellWillDisplayAction)
+                                                                collectionView: collectionView,
+                                                                selectedEventAction: selectedEventAction,
+                                                                lastCellWillDisplayAction: lastCellWillDisplayAction)
         collectionView.delegate = eventCollectionViewHandler
         collectionView.dataSource = eventCollectionViewHandler
     }
