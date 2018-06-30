@@ -36,10 +36,6 @@ extension SwinjectStoryboard {
             return EventTagsStorageMockImpl()
         }
         
-        defaultContainer.register(INotificationService.self) { _ in
-            return NotificationCenterService()
-        }
-        
         defaultContainer.register(IFavoritePresenter.self) { resolver, view in
             FavoritePresenter(view: view,
                               eventStorage: resolver.resolve(IEventsStorage.self)!,
@@ -70,8 +66,7 @@ extension SwinjectStoryboard {
                             userSettingsService: resolver.resolve(IUserSettingsService.self)!,
                             dateFormatterService: resolver.resolve(IDateFormatterService.self)!,
                             tagsStorage: resolver.resolve(IEventTagsStorage.self)!,
-                            searchParametersService: resolver.resolve(ISearchParametersService.self)!,
-                            notificationService: resolver.resolve(INotificationService.self)!)
+                            searchParametersService: resolver.resolve(ISearchParametersService.self)!)
         }
         
         defaultContainer.storyboardInitCompleted(SearchViewController.self) { resolver, view in
@@ -80,8 +75,7 @@ extension SwinjectStoryboard {
         
         defaultContainer.register(ISearchParametersPresenter.self) { resolver, view in
             SearchParametersPresenter(view: view,
-                                      searchParametersService: resolver.resolve(ISearchParametersService.self)!,
-                                      notificationService: resolver.resolve(INotificationService.self)!)
+                                      searchParametersService: resolver.resolve(ISearchParametersService.self)!)
         }
         
         defaultContainer.storyboardInitCompleted(SearchParametersViewController.self) { resolver, view in

@@ -8,7 +8,6 @@ class SearchPresenter: ISearchPresenter {
     let dateFormatterService: IDateFormatterService!
     let tagsStorage: IEventTagsStorage!
     var searchParametersService: ISearchParametersService!
-    let notificationService: INotificationService!
     private var events: [Event] = []
     private var eventViewModels: [EventCollectionCellViewModel] = []
     private var isListLayoutCurrent: Bool!
@@ -24,8 +23,7 @@ class SearchPresenter: ISearchPresenter {
          userSettingsService: IUserSettingsService,
          dateFormatterService: IDateFormatterService,
          tagsStorage: IEventTagsStorage,
-         searchParametersService: ISearchParametersService,
-         notificationService: INotificationService) {
+         searchParametersService: ISearchParametersService) {
         self.view = view
         self.eventsStorage = eventsStorage
         self.selectedEventService = selectedEventService
@@ -33,7 +31,6 @@ class SearchPresenter: ISearchPresenter {
         self.dateFormatterService = dateFormatterService
         self.tagsStorage = tagsStorage
         self.searchParametersService = searchParametersService
-        self.notificationService = notificationService
         
         searchEventsDebounced = debounce(
             delay: DispatchTimeInterval.seconds(1),
@@ -45,9 +42,7 @@ class SearchPresenter: ISearchPresenter {
     func setup() {
         searchEvents()
         
-        notificationService.addObserver(observer: self,
-                                        selector: #selector(settingsChanged),
-                                        name: NotificationName.SearchSettingsChanged)
+        searchParametersService.addTagsChangedObserver(self, selector: #selector(settingsChanged))
     }
     
     @objc
@@ -69,7 +64,7 @@ class SearchPresenter: ISearchPresenter {
         let otherTags = searchParametersService.otherTags
         if selectedTags.isEmpty && otherTags.isEmpty {
             tagsStorage.fetchTags().then { tags in
-                self.searchParametersService.otherTags = tags
+                self.searchParametersService.updateTags(selectedTags: [], otherTags: tags)
                 completion()
             }
         } else {

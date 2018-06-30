@@ -3,28 +3,19 @@ import Foundation
 class SearchParametersPresenter: ISearchParametersPresenter {
     let view: ISearchParametersView!
     var searchParametersService: ISearchParametersService!
-    let notificationService: INotificationService!
     private var selectedTags: [Tag] = []
     private var otherTags: [Tag] = []
     
     init(view: ISearchParametersView,
-         searchParametersService: ISearchParametersService,
-         notificationService: INotificationService) {
+         searchParametersService: ISearchParametersService) {
         self.view = view
         self.searchParametersService = searchParametersService
-        self.notificationService = notificationService
     }
     
     func saveSettings() {
         selectedTags = selectedTags.sorted { $0.name < $1.name }
         otherTags = otherTags.sorted { $0.name < $1.name }
-        if searchParametersService.selectedTags == selectedTags && searchParametersService.otherTags == otherTags {
-            return
-        }
-        searchParametersService.selectedTags = selectedTags
-        searchParametersService.otherTags = otherTags
-        
-        notificationService.post(name: NotificationName.SearchSettingsChanged)
+        searchParametersService.updateTags(selectedTags: selectedTags, otherTags: otherTags)
     }
     
     func setup() {
