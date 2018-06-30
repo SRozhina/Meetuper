@@ -50,7 +50,8 @@ class SearchPresenter: ISearchPresenter {
                                         name: NotificationName.SearchSettingsChanged)
     }
     
-    @objc private func settingsChanged() {
+    @objc
+    private func settingsChanged() {
         searchEvents(by: searchParametersService.selectedTags)
     }
     
