@@ -51,8 +51,8 @@ class FavoritePresenter: IFavoritePresenter {
         view.showLoadingIndicator()
         
         eventStorage.searchEvents(indexRange: events.count..<events.count + 10,
-                                      searchText: "",
-                                      searchTags: favoriteTags)
+                                  searchText: "",
+                                  searchTags: favoriteTags)
             .promise.then(appendEvents)
     }
     
