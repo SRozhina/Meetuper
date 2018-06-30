@@ -40,6 +40,7 @@
 		C34758772074F942009FAA5F /* ShowEventSourceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C34758682074F942009FAA5F /* ShowEventSourceView.xib */; };
 		C34C4F82206B89FD001A61A9 /* ISelectedEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34C4F81206B89FD001A61A9 /* ISelectedEventService.swift */; };
 		C34C4F84206B8A51001A61A9 /* SelectedEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34C4F83206B8A51001A61A9 /* SelectedEventService.swift */; };
+		C35D5EB720E7AF5500F83158 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35D5EB620E7AF5500F83158 /* Dictionary.swift */; };
 		C362DD9920472D7B00D301A6 /* IDateFormatterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C362DD9820472D7B00D301A6 /* IDateFormatterService.swift */; };
 		C362DD9B20472D9A00D301A6 /* DateFormatterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C362DD9A20472D9A00D301A6 /* DateFormatterService.swift */; };
 		C362DD9D204733BB00D301A6 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = C362DD9C204733BB00D301A6 /* Podfile */; };
@@ -122,6 +123,7 @@
 		C34758682074F942009FAA5F /* ShowEventSourceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowEventSourceView.xib; sourceTree = "<group>"; };
 		C34C4F81206B89FD001A61A9 /* ISelectedEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISelectedEventService.swift; sourceTree = "<group>"; };
 		C34C4F83206B8A51001A61A9 /* SelectedEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedEventService.swift; sourceTree = "<group>"; };
+		C35D5EB620E7AF5500F83158 /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		C362DD9820472D7B00D301A6 /* IDateFormatterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDateFormatterService.swift; sourceTree = "<group>"; };
 		C362DD9A20472D9A00D301A6 /* DateFormatterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterService.swift; sourceTree = "<group>"; };
 		C362DD9C204733BB00D301A6 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -153,10 +155,6 @@
 		C3B8829E201A22520031F261 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C3B882A1201A22520031F261 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C3B882A3201A22520031F261 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C3B882AC201A22520031F261 /* ITEventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITEventsTests.swift; sourceTree = "<group>"; };
-		C3B882AE201A22520031F261 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C3B882B7201A22520031F261 /* ITEventsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITEventsUITests.swift; sourceTree = "<group>"; };
-		C3B882B9201A22520031F261 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C3B882C6201A5D5C0031F261 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		C3C6050820BA021D00606B30 /* IEventsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IEventsStorage.swift; sourceTree = "<group>"; };
 		C3C6050920BA021D00606B30 /* ISimilarEventsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISimilarEventsStorage.swift; sourceTree = "<group>"; };
@@ -200,6 +198,7 @@
 			children = (
 				C30056342055AD0600875CCD /* NSMutableAttributedString.swift */,
 				C329A991207B768000DF4394 /* Global.swift */,
+				C35D5EB620E7AF5500F83158 /* Dictionary.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -364,8 +363,6 @@
 				C3B882C6201A5D5C0031F261 /* .swiftlint.yml */,
 				C362DD9C204733BB00D301A6 /* Podfile */,
 				C3B88296201A22520031F261 /* ITEvents */,
-				C3B882AB201A22520031F261 /* ITEventsTests */,
-				C3B882B6201A22520031F261 /* ITEventsUITests */,
 				C3A30CAC201BDEB90041D549 /* ITEvents.app */,
 				4B657F909494C1105F7D5DB5 /* Pods */,
 				E4429BA5C6238A6F3B0C2565 /* Frameworks */,
@@ -388,24 +385,6 @@
 				C3919089201E599000CD7151 /* Storyboards */,
 			);
 			path = ITEvents;
-			sourceTree = "<group>";
-		};
-		C3B882AB201A22520031F261 /* ITEventsTests */ = {
-			isa = PBXGroup;
-			children = (
-				C3B882AC201A22520031F261 /* ITEventsTests.swift */,
-				C3B882AE201A22520031F261 /* Info.plist */,
-			);
-			path = ITEventsTests;
-			sourceTree = "<group>";
-		};
-		C3B882B6201A22520031F261 /* ITEventsUITests */ = {
-			isa = PBXGroup;
-			children = (
-				C3B882B7201A22520031F261 /* ITEventsUITests.swift */,
-				C3B882B9201A22520031F261 /* Info.plist */,
-			);
-			path = ITEventsUITests;
 			sourceTree = "<group>";
 		};
 		C3CCECF720CB055200D2E133 /* Search Parameters View */ = {
@@ -575,7 +554,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		D3E47DE6BEC07F6855C17E4D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -606,6 +585,7 @@
 				C391909B201E62D600CD7151 /* ISearchView.swift in Sources */,
 				C3919093201E608A00CD7151 /* SearchViewController.swift in Sources */,
 				C391908C201E59D100CD7151 /* Event.swift in Sources */,
+				C35D5EB720E7AF5500F83158 /* Dictionary.swift in Sources */,
 				C3C6050E20BA021E00606B30 /* IEventsStorage.swift in Sources */,
 				C319FA9E20DC41ED005E56A6 /* SearchParametersService.swift in Sources */,
 				C347586F2074F942009FAA5F /* EventDescriptionView.swift in Sources */,

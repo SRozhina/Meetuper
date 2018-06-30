@@ -1,9 +1,5 @@
 import Promises
 
-extension Notification.Name {
-    static let SearchSettingsChanged = Notification.Name("SEARCH_SETTINGS_CHANGED")
-}
-
 class SearchPresenter: ISearchPresenter {    
     let view: ISearchView!
     let eventsStorage: IEventsStorage!
@@ -46,10 +42,7 @@ class SearchPresenter: ISearchPresenter {
     func setup() {
         searchEvents()
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(settingsChanged),
-                                               name: .SearchSettingsChanged,
-                                               object: nil)
+        searchParametersService.addTagsChangedObserver(self, selector: #selector(settingsChanged))
     }
     
     @objc
@@ -58,7 +51,6 @@ class SearchPresenter: ISearchPresenter {
     }
     
     func activate() {
-        //TODO implement notifying about layout changes when settings are ready
         let userSettings = userSettingsService.fetchSettings()
         view.toggleLayout(value: userSettings.isListLayoutSelected)
     }
@@ -72,7 +64,7 @@ class SearchPresenter: ISearchPresenter {
         let otherTags = searchParametersService.otherTags
         if selectedTags.isEmpty && otherTags.isEmpty {
             tagsStorage.fetchTags().then { tags in
-                self.searchParametersService.otherTags = tags
+                self.searchParametersService.updateTags(selectedTags: [], otherTags: tags)
                 completion()
             }
         } else {
@@ -102,7 +94,6 @@ class SearchPresenter: ISearchPresenter {
     }
     
     private func searchEvents(by newSearchTags: [Tag]) {
-        if searchTags == newSearchTags { return }
         searchTags = newSearchTags
         clearViewEvents()
         searchEventsDebounced(true)
