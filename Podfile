@@ -7,7 +7,6 @@ target 'ITEvents' do
   pod 'SwinjectStoryboard'
   pod 'Reusable'
   pod 'TagListView'
-  pod 'PromisesObjC'
   pod 'PromisesSwift'
   
   post_install do |installer|
