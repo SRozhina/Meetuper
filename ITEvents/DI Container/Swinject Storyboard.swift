@@ -4,37 +4,35 @@ import SwinjectStoryboard
 extension SwinjectStoryboard {
     @objc
     class func setup() {
-        defaultContainer.register(IEventsStorage.self) { _ in
-            return EventsStorageMockImpl()
-            }.inObjectScope(.container)
+        defaultContainer
+            .register(IEventsStorage.self) { _ in EventsStorageMockImpl() }
+            .inObjectScope(.container)
         
-        defaultContainer.register(IEventTagsStorage.self) { _ in
-            return EventTagsStorageMockImpl()
-            }.inObjectScope(.container)
+        defaultContainer
+            .register(IEventTagsStorage.self) { _ in EventTagsStorageMockImpl() }
+            .inObjectScope(.container)
         
-        defaultContainer.register(ISimilarEventsStorage.self) { _ in
-            return SimilarEventsStorageMockImpl()
-            }.inObjectScope(.container)
+        defaultContainer
+            .register(ISimilarEventsStorage.self) { _ in SimilarEventsStorageMockImpl() }
+            .inObjectScope(.container)
         
-        defaultContainer.register(IDateFormatterService.self) { _ in
-            return DateFormatterService()
-            }.inObjectScope(.container)
+        defaultContainer
+            .register(IDateFormatterService.self) { _ in DateFormatterService() }
+            .inObjectScope(.container)
         
-        defaultContainer.register(ISelectedEventService.self) { _ in
-            return SelectedEventService()
-            }.inObjectScope(.container)
+        defaultContainer
+            .register(ISelectedEventService.self) { _ in SelectedEventService() }
+            .inObjectScope(.container)
         
-        defaultContainer.register(ISearchParametersService.self) { _ in
-            return SearchParametersService()
-            }.inObjectScope(.container)
+        defaultContainer
+            .register(ISearchParametersService.self) { _ in  SearchParametersService() }
+            .inObjectScope(.container)
         
-        defaultContainer.register(IUserSettingsService.self) { _ in
-            return UserSettingsService()
-            }.inObjectScope(.container)
+        defaultContainer
+            .register(IUserSettingsService.self) { _ in UserSettingsService() }
+            .inObjectScope(.container)
         
-        defaultContainer.register(IEventTagsStorage.self) { _ in
-            return EventTagsStorageMockImpl()
-        }
+        defaultContainer.register(IEventTagsStorage.self) { _ in EventTagsStorageMockImpl() }
         
         defaultContainer.register(IFavoritePresenter.self) { resolver, view in
             FavoritePresenter(view: view,
