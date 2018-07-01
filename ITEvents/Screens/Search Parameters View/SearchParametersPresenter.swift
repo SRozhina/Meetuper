@@ -25,13 +25,13 @@ class SearchParametersPresenter: ISearchParametersPresenter {
     }
     
     func deselectTag(_ tag: Tag) {
-        guard let tagIndex = selectedTags.firstIndex(of: tag) else { return }
+        guard let tagIndex = selectedTags.index(where: { $0 == tag }) else { return }
         let removedTag = selectedTags.remove(at: tagIndex)
         otherTags.append(removedTag)
     }
     
     func selectTag(_ tag: Tag) {
-        guard let tagIndex = otherTags.firstIndex(of: tag) else { return }
+        guard let tagIndex = otherTags.index(where: { $0 == tag }) else { return }
         let selectedTag = otherTags.remove(at: tagIndex)
         selectedTags.append(selectedTag)
     }

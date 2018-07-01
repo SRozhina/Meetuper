@@ -13,7 +13,7 @@ class EventTagsStorageMockImpl: IEventTagsStorage {
             Tag(id: 8, name: "Go"),
             Tag(id: 9, name: "Frontend")
         ]
-        return Promise<[Tag]> { fulfill, reject in
+        return Promise<[Tag]> { fulfill, _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 fulfill(tags)
             }

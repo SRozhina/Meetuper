@@ -82,6 +82,7 @@
 		C3CCECF920CB057B00D2E133 /* SearchParametersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CCECF820CB057B00D2E133 /* SearchParametersViewController.swift */; };
 		C3D547642078104A009ABC73 /* IFullEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D547632078104A009ABC73 /* IFullEventView.swift */; };
 		C3D547662078208F009ABC73 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D547652078208F009ABC73 /* EventViewModel.swift */; };
+		C3D69A6220E9310F00290931 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = C3D69A6120E9310F00290931 /* .travis.yml */; };
 		C3DBDFA820726BAB002A35EB /* IUserSettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DBDFA720726BAB002A35EB /* IUserSettingService.swift */; };
 		C3FFF10A20726CEB00ADF407 /* UserSettingsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C3FFF10820726CEB00ADF407 /* UserSettingsModel.xcdatamodeld */; };
 		C3FFF10C20737DCE00ADF407 /* UserSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FFF10B20737DCE00ADF407 /* UserSettingsService.swift */; };
@@ -167,6 +168,7 @@
 		C3CCECF820CB057B00D2E133 /* SearchParametersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParametersViewController.swift; sourceTree = "<group>"; };
 		C3D547632078104A009ABC73 /* IFullEventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFullEventView.swift; sourceTree = "<group>"; };
 		C3D547652078208F009ABC73 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
+		C3D69A6120E9310F00290931 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
 		C3DBDFA720726BAB002A35EB /* IUserSettingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IUserSettingService.swift; sourceTree = "<group>"; };
 		C3FFF10920726CEB00ADF407 /* UserSettingsModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserSettingsModel.xcdatamodel; sourceTree = "<group>"; };
 		C3FFF10B20737DCE00ADF407 /* UserSettingsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingsService.swift; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 		C3B8828B201A22510031F261 = {
 			isa = PBXGroup;
 			children = (
+				C3D69A6120E9310F00290931 /* .travis.yml */,
 				C3FFF10820726CEB00ADF407 /* UserSettingsModel.xcdatamodeld */,
 				C3B882C6201A5D5C0031F261 /* .swiftlint.yml */,
 				C362DD9C204733BB00D301A6 /* Podfile */,
@@ -495,6 +498,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3D69A6220E9310F00290931 /* .travis.yml in Resources */,
 				C347586C2074F942009FAA5F /* EventView.xib in Resources */,
 				C34758752074F942009FAA5F /* EventTagsView.xib in Resources */,
 				C34758772074F942009FAA5F /* ShowEventSourceView.xib in Resources */,
@@ -719,12 +723,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -772,10 +777,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
