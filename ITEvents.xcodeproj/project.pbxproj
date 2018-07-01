@@ -296,6 +296,7 @@
 				C3C6050D20BA021E00606B30 /* EventTagsStorageMockImpl.swift */,
 				C3C6050920BA021D00606B30 /* ISimilarEventsStorage.swift */,
 				C3C6050C20BA021E00606B30 /* SimilarEventsStorageMockImpl.swift */,
+				C3C6051420BAC04400606B30 /* Cancelable.swift */,
 			);
 			path = Storages;
 			sourceTree = "<group>";
@@ -326,7 +327,6 @@
 				C300562B2055AA6B00875CCD /* Tag.swift */,
 				C30056292055AA6B00875CCD /* UserSettings.swift */,
 				C391908B201E59D100CD7151 /* Event.swift */,
-				C3C6051420BAC04400606B30 /* Cancelable.swift */,
 				C389283E20E2C2A900B0BF4A /* EventsResult.swift */,
 			);
 			path = Model;
@@ -908,6 +908,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7U8A899S5N;
 				INFOPLIST_FILE = "$(SRCROOT)/ITEvents/Supporting files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SonyaTest.ITEvents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -924,6 +925,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7U8A899S5N;
 				INFOPLIST_FILE = "$(SRCROOT)/ITEvents/Supporting files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SonyaTest.ITEvents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
