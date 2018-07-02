@@ -1,7 +1,7 @@
 import Foundation
 import Promises
 
-class EventsStorageMockImpl: IEventsStorage {
+class EventsInMemoryStorage: IEventsStorage {
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
