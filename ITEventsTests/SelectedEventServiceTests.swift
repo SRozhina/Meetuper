@@ -17,8 +17,8 @@ class SelectedEventServiceTests: XCTestCase {
     func testSavingSelectedEvent() {
         let event = Event(id: 1,
                           title: "Test event",
-                          dateInterval: DateInterval(start: Date(timeIntervalSinceNow: 60*60*24) ,
-                                                     end: Date(timeIntervalSinceNow: 60*60*27)),
+                          dateInterval: DateInterval(start: Date(timeIntervalSinceNow: 60 * 60 * 24),
+                                                     end: Date(timeIntervalSinceNow: 60 * 60 * 27)),
                           address: "Большой Сампсониевский проспект 28 к2 литД",
                           city: "Санкт-Петербург",
                           country: "Россия",

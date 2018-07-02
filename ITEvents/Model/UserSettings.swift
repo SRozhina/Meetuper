@@ -1,5 +1,3 @@
-struct UserSettings {
+struct UserSettings: Equatable {
     var isListLayoutSelected: Bool
 }
-
-extension UserSettings: Equatable { }

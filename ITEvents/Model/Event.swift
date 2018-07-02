@@ -1,6 +1,6 @@
 import UIKit
 
-struct Event {
+struct Event: Equatable {
     let id: Int
     let title: String
     let dateInterval: DateInterval
@@ -14,4 +14,3 @@ struct Event {
     let source: EventSource?
     let url: URL?
 }
-extension Event: Equatable { }

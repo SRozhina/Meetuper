@@ -21,6 +21,8 @@
 		C319FAA220DC4696005E56A6 /* ISearchParametersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C319FAA120DC4696005E56A6 /* ISearchParametersService.swift */; };
 		C319FAA420DC498B005E56A6 /* ISearchParametersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C319FAA320DC498B005E56A6 /* ISearchParametersView.swift */; };
 		C319FAA620DC49A5005E56A6 /* ISearchParametersPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C319FAA520DC49A5005E56A6 /* ISearchParametersPresenter.swift */; };
+		C320931C20EA27D600E51E4A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C320931B20EA27D500E51E4A /* README.md */; };
+		C320931E20EA27FD00E51E4A /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = C320931D20EA27FD00E51E4A /* .travis.yml */; };
 		C327C96E20C1BFD50075A0E3 /* IEventCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C327C96D20C1BFD50075A0E3 /* IEventCollectionViewHandler.swift */; };
 		C329A992207B768000DF4394 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329A991207B768000DF4394 /* Global.swift */; };
 		C330988E20E6CCAD00F4C2B3 /* SearchParametersServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C330988D20E6CCAD00F4C2B3 /* SearchParametersServiceTests.swift */; };
@@ -123,6 +125,8 @@
 		C319FAA120DC4696005E56A6 /* ISearchParametersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISearchParametersService.swift; sourceTree = "<group>"; };
 		C319FAA320DC498B005E56A6 /* ISearchParametersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISearchParametersView.swift; sourceTree = "<group>"; };
 		C319FAA520DC49A5005E56A6 /* ISearchParametersPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISearchParametersPresenter.swift; sourceTree = "<group>"; };
+		C320931B20EA27D500E51E4A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C320931D20EA27FD00E51E4A /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
 		C327C96D20C1BFD50075A0E3 /* IEventCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IEventCollectionViewHandler.swift; sourceTree = "<group>"; };
 		C329A991207B768000DF4394 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		C330988D20E6CCAD00F4C2B3 /* SearchParametersServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParametersServiceTests.swift; sourceTree = "<group>"; };
@@ -396,6 +400,8 @@
 		C3B8828B201A22510031F261 = {
 			isa = PBXGroup;
 			children = (
+				C320931D20EA27FD00E51E4A /* .travis.yml */,
+				C320931B20EA27D500E51E4A /* README.md */,
 				C3FFF10820726CEB00ADF407 /* UserSettingsModel.xcdatamodeld */,
 				C3B882C6201A5D5C0031F261 /* .swiftlint.yml */,
 				C362DD9C204733BB00D301A6 /* Podfile */,
@@ -575,6 +581,7 @@
 			files = (
 				C347586C2074F942009FAA5F /* EventView.xib in Resources */,
 				C34758752074F942009FAA5F /* EventTagsView.xib in Resources */,
+				C320931E20EA27FD00E51E4A /* .travis.yml in Resources */,
 				C34758772074F942009FAA5F /* ShowEventSourceView.xib in Resources */,
 				C375E753209B67FC00D089FB /* GridCollectionViewCell.xib in Resources */,
 				C3B882C7201A5D5C0031F261 /* .swiftlint.yml in Resources */,
@@ -585,6 +592,7 @@
 				C34758762074F942009FAA5F /* ShowMoreEventsView.xib in Resources */,
 				C34758712074F942009FAA5F /* EventDescriptionView.xib in Resources */,
 				C3B8829F201A22520031F261 /* Assets.xcassets in Resources */,
+				C320931C20EA27D600E51E4A /* README.md in Resources */,
 				C3B8829D201A22520031F261 /* Main.storyboard in Resources */,
 				C34758742074F942009FAA5F /* EventPlaceView.xib in Resources */,
 			);
@@ -943,6 +951,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7U8A899S5N;
 				INFOPLIST_FILE = ITEventsTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SonyaTest.ITEventsTests;
@@ -962,6 +971,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7U8A899S5N;
 				INFOPLIST_FILE = ITEventsTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SonyaTest.ITEventsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

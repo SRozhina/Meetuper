@@ -1,6 +1,4 @@
-struct EventSource {
+struct EventSource: Equatable {
     let id: Int
     let name: String
 }
-
-extension EventSource: Equatable { }

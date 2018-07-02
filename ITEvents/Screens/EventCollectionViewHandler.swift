@@ -45,8 +45,8 @@ class EventCollectionViewHandler: NSObject, IEventCollectionViewHandler {
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
-        case UICollectionView.elementKindSectionFooter:
-            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter,
+        case UICollectionElementKindSectionFooter:
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter,
                                                                          withReuseIdentifier: "Footer",
                                                                          for: indexPath) as! EventsCollectionViewFooter
             if isLoadingIndicatorShown {
@@ -116,7 +116,7 @@ class EventCollectionViewHandler: NSObject, IEventCollectionViewHandler {
     func toggleListLayout(value isListLayout: Bool) {
         if isListLayoutSelected == isListLayout { return }
 
-        isListLayoutSelected.toggle()
+        isListLayoutSelected = !isListLayoutSelected
         collectionView.reloadData()
     }
     

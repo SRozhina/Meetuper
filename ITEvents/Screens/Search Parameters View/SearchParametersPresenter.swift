@@ -13,10 +13,9 @@ class SearchParametersPresenter: ISearchParametersPresenter {
     }
     
     func saveSettings() {
-        searchParametersService.selectedTags = selectedTags.sorted { $0.name < $1.name }
-        searchParametersService.otherTags = otherTags.sorted { $0.name < $1.name }
-        
-        NotificationCenter.default.post(name: .SearchSettingsChanged, object: nil)
+        selectedTags = selectedTags.sorted { $0.name < $1.name }
+        otherTags = otherTags.sorted { $0.name < $1.name }
+        searchParametersService.updateTags(selectedTags: selectedTags, otherTags: otherTags)
     }
     
     func setup() {
@@ -26,13 +25,13 @@ class SearchParametersPresenter: ISearchParametersPresenter {
     }
     
     func deselectTag(_ tag: Tag) {
-        guard let tagIndex = selectedTags.firstIndex(of: tag) else { return }
+        guard let tagIndex = selectedTags.index(where: { $0 == tag }) else { return }
         let removedTag = selectedTags.remove(at: tagIndex)
         otherTags.append(removedTag)
     }
     
     func selectTag(_ tag: Tag) {
-        guard let tagIndex = otherTags.firstIndex(of: tag) else { return }
+        guard let tagIndex = otherTags.index(where: { $0 == tag }) else { return }
         let selectedTag = otherTags.remove(at: tagIndex)
         selectedTags.append(selectedTag)
     }

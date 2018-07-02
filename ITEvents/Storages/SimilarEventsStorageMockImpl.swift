@@ -99,7 +99,7 @@ class SimilarEventsStorageMockImpl: ISimilarEventsStorage {
                       url: URL(string: "https://pitercss.timepad.ru/event/457262/"))
             ]
         ]
-        return Promise<[Event]> { fulfill, reject in
+        return Promise<[Event]> { fulfill, _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 if let events = eventDictionary[eventId] {
                     fulfill(events)
