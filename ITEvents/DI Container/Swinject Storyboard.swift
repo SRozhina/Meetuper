@@ -5,15 +5,15 @@ extension SwinjectStoryboard {
     @objc
     class func setup() {
         defaultContainer
-            .register(IEventsStorage.self) { _ in EventsStorageMockImpl() }
+            .register(IEventsStorage.self) { _ in EventsInMemoryStorage() }
             .inObjectScope(.container)
         
         defaultContainer
-            .register(IEventTagsStorage.self) { _ in EventTagsStorageMockImpl() }
+            .register(IEventTagsStorage.self) { _ in EventTagsInMemoryStorage() }
             .inObjectScope(.container)
         
         defaultContainer
-            .register(ISimilarEventsStorage.self) { _ in SimilarEventsStorageMockImpl() }
+            .register(ISimilarEventsStorage.self) { _ in SimilarEventsInMemoryStorage() }
             .inObjectScope(.container)
         
         defaultContainer
@@ -32,7 +32,7 @@ extension SwinjectStoryboard {
             .register(IUserSettingsService.self) { _ in UserSettingsService() }
             .inObjectScope(.container)
         
-        defaultContainer.register(IEventTagsStorage.self) { _ in EventTagsStorageMockImpl() }
+        defaultContainer.register(IEventTagsStorage.self) { _ in EventTagsInMemoryStorage() }
         
         defaultContainer.register(IFavoritePresenter.self) { resolver, view in
             FavoritePresenter(view: view,

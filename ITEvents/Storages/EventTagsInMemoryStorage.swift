@@ -1,6 +1,6 @@
 import Promises
 
-class EventTagsStorageMockImpl: IEventTagsStorage {
+class EventTagsInMemoryStorage: IEventTagsStorage {
     func fetchTags() -> Promise<[Tag]> {
         let tags = [
             Tag(id: 1, name: "JavaScript"),

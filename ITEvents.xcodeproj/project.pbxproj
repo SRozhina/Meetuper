@@ -79,9 +79,9 @@
 		C3C6050E20BA021E00606B30 /* IEventsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6050820BA021D00606B30 /* IEventsStorage.swift */; };
 		C3C6050F20BA021E00606B30 /* ISimilarEventsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6050920BA021D00606B30 /* ISimilarEventsStorage.swift */; };
 		C3C6051020BA021E00606B30 /* IEventTagsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6050A20BA021E00606B30 /* IEventTagsStorage.swift */; };
-		C3C6051120BA021E00606B30 /* EventsStorageMockImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6050B20BA021E00606B30 /* EventsStorageMockImpl.swift */; };
-		C3C6051220BA021E00606B30 /* SimilarEventsStorageMockImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6050C20BA021E00606B30 /* SimilarEventsStorageMockImpl.swift */; };
-		C3C6051320BA021E00606B30 /* EventTagsStorageMockImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6050D20BA021E00606B30 /* EventTagsStorageMockImpl.swift */; };
+		C3C6051120BA021E00606B30 /* EventsInMemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6050B20BA021E00606B30 /* EventsInMemoryStorage.swift */; };
+		C3C6051220BA021E00606B30 /* SimilarEventsInMemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6050C20BA021E00606B30 /* SimilarEventsInMemoryStorage.swift */; };
+		C3C6051320BA021E00606B30 /* EventTagsInMemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6050D20BA021E00606B30 /* EventTagsInMemoryStorage.swift */; };
 		C3C6051520BAC04400606B30 /* Cancelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6051420BAC04400606B30 /* Cancelable.swift */; };
 		C3C6051720BC8B5E00606B30 /* EventCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6051620BC8B5E00606B30 /* EventCollectionViewHandler.swift */; };
 		C3CCECF920CB057B00D2E133 /* SearchParametersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CCECF820CB057B00D2E133 /* SearchParametersViewController.swift */; };
@@ -187,9 +187,9 @@
 		C3C6050820BA021D00606B30 /* IEventsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IEventsStorage.swift; sourceTree = "<group>"; };
 		C3C6050920BA021D00606B30 /* ISimilarEventsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISimilarEventsStorage.swift; sourceTree = "<group>"; };
 		C3C6050A20BA021E00606B30 /* IEventTagsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IEventTagsStorage.swift; sourceTree = "<group>"; };
-		C3C6050B20BA021E00606B30 /* EventsStorageMockImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsStorageMockImpl.swift; sourceTree = "<group>"; };
-		C3C6050C20BA021E00606B30 /* SimilarEventsStorageMockImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimilarEventsStorageMockImpl.swift; sourceTree = "<group>"; };
-		C3C6050D20BA021E00606B30 /* EventTagsStorageMockImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTagsStorageMockImpl.swift; sourceTree = "<group>"; };
+		C3C6050B20BA021E00606B30 /* EventsInMemoryStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsInMemoryStorage.swift; sourceTree = "<group>"; };
+		C3C6050C20BA021E00606B30 /* SimilarEventsInMemoryStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimilarEventsInMemoryStorage.swift; sourceTree = "<group>"; };
+		C3C6050D20BA021E00606B30 /* EventTagsInMemoryStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTagsInMemoryStorage.swift; sourceTree = "<group>"; };
 		C3C6051420BAC04400606B30 /* Cancelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancelable.swift; sourceTree = "<group>"; };
 		C3C6051620BC8B5E00606B30 /* EventCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionViewHandler.swift; sourceTree = "<group>"; };
 		C3CCECF820CB057B00D2E133 /* SearchParametersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParametersViewController.swift; sourceTree = "<group>"; };
@@ -295,11 +295,11 @@
 			isa = PBXGroup;
 			children = (
 				C3C6050820BA021D00606B30 /* IEventsStorage.swift */,
-				C3C6050B20BA021E00606B30 /* EventsStorageMockImpl.swift */,
+				C3C6050B20BA021E00606B30 /* EventsInMemoryStorage.swift */,
 				C3C6050A20BA021E00606B30 /* IEventTagsStorage.swift */,
-				C3C6050D20BA021E00606B30 /* EventTagsStorageMockImpl.swift */,
+				C3C6050D20BA021E00606B30 /* EventTagsInMemoryStorage.swift */,
 				C3C6050920BA021D00606B30 /* ISimilarEventsStorage.swift */,
-				C3C6050C20BA021E00606B30 /* SimilarEventsStorageMockImpl.swift */,
+				C3C6050C20BA021E00606B30 /* SimilarEventsInMemoryStorage.swift */,
 				C3C6051420BAC04400606B30 /* Cancelable.swift */,
 			);
 			path = Storages;
@@ -703,7 +703,7 @@
 				C300563B2055ADEA00875CCD /* SharedUtils.swift in Sources */,
 				C34C4F82206B89FD001A61A9 /* ISelectedEventService.swift in Sources */,
 				C319FAA220DC4696005E56A6 /* ISearchParametersService.swift in Sources */,
-				C3C6051120BA021E00606B30 /* EventsStorageMockImpl.swift in Sources */,
+				C3C6051120BA021E00606B30 /* EventsInMemoryStorage.swift in Sources */,
 				C39190AD201E638700CD7151 /* FullEventPresenter.swift in Sources */,
 				C389283F20E2C2A900B0BF4A /* EventsResult.swift in Sources */,
 				C3C6051720BC8B5E00606B30 /* EventCollectionViewHandler.swift in Sources */,
@@ -719,7 +719,7 @@
 				C300562C2055AA6B00875CCD /* UserSettings.swift in Sources */,
 				C319FAA620DC49A5005E56A6 /* ISearchParametersPresenter.swift in Sources */,
 				C39190A2201E632700CD7151 /* ProfileViewController.swift in Sources */,
-				C3C6051220BA021E00606B30 /* SimilarEventsStorageMockImpl.swift in Sources */,
+				C3C6051220BA021E00606B30 /* SimilarEventsInMemoryStorage.swift in Sources */,
 				C3919097201E62B900CD7151 /* IFavoritePresenter.swift in Sources */,
 				C362DD9920472D7B00D301A6 /* IDateFormatterService.swift in Sources */,
 				C347586E2074F942009FAA5F /* ShowEventSourceView.swift in Sources */,
@@ -751,7 +751,7 @@
 				C3B88298201A22520031F261 /* AppDelegate.swift in Sources */,
 				C39190A6201E634200CD7151 /* IProfileViewController.swift in Sources */,
 				C319FAA420DC498B005E56A6 /* ISearchParametersView.swift in Sources */,
-				C3C6051320BA021E00606B30 /* EventTagsStorageMockImpl.swift in Sources */,
+				C3C6051320BA021E00606B30 /* EventTagsInMemoryStorage.swift in Sources */,
 				C3C6050F20BA021E00606B30 /* ISimilarEventsStorage.swift in Sources */,
 				C39190A4201E633500CD7151 /* ProfilePresenter.swift in Sources */,
 			);
