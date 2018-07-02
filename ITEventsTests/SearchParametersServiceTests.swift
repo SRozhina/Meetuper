@@ -20,8 +20,7 @@ class SearchParametersServiceTests: XCTestCase {
         let otherTags = [Tag(id: 3, name: "Android"),
                          Tag(id: 4, name: "Python")]
         
-        searchParametersService.selectedTags = selectedTags
-        searchParametersService.otherTags = otherTags
+        searchParametersService.updateTags(selectedTags: selectedTags, otherTags: otherTags)
         
         XCTAssertEqual(searchParametersService.selectedTags, selectedTags)
         XCTAssertEqual(searchParametersService.otherTags, otherTags)
