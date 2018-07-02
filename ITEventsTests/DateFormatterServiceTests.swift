@@ -2,7 +2,7 @@ import XCTest
 @testable import ITEvents
 
 class DateFormatterServiceTests: XCTestCase {
-    var dateFormatterService: DateFormatterService!
+    var dateFormatterService: IDateFormatterService!
     var dateIntervalSameDate: DateInterval!
     var dateIntervalDifferentDates: DateInterval!
     
@@ -11,20 +11,13 @@ class DateFormatterServiceTests: XCTestCase {
         
         dateFormatterService = DateFormatterService()
 
-        let dateFormatter: DateFormatter = {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            return formatter
-        }()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
-        let startDate = "2018-01-18 19:00:00"
-        let endDate = "2018-01-18 22:00:00"
-        let endDifferentDate = "2018-01-19 22:00:00"
-        
-        dateIntervalSameDate = DateInterval(start: dateFormatter.date(from: startDate)! ,
-                                            end: dateFormatter.date(from: endDate)!)
-        dateIntervalDifferentDates = DateInterval(start: dateFormatter.date(from: startDate)!,
-                                                  end: dateFormatter.date(from: endDifferentDate)!)
+        dateIntervalSameDate = DateInterval(start: dateFormatter.date(from: "2018-01-18 19:00:00")! ,
+                                            end: dateFormatter.date(from: "2018-01-18 22:00:00")!)
+        dateIntervalDifferentDates = DateInterval(start: dateFormatter.date(from: "2018-01-18 19:00:00")!,
+                                                  end: dateFormatter.date(from: "2018-01-19 22:00:00")!)
     }
     
     override func tearDown() {

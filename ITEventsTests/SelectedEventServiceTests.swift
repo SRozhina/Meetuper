@@ -2,7 +2,7 @@ import XCTest
 @testable import ITEvents
 
 class SelectedEventServiceTests: XCTestCase {
-    var selectedEventService: SelectedEventService!
+    var selectedEventService: ISelectedEventService!
     
     override func setUp() {
         super.setUp()

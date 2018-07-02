@@ -2,12 +2,11 @@ import XCTest
 @testable import ITEvents
 
 class SearchParametersServiceTests: XCTestCase {
-    var searchParametersService: SearchParametersService!
+    var searchParametersService: ISearchParametersService!
     
     override func setUp() {
         super.setUp()
         searchParametersService = SearchParametersService()
-
     }
 
     override func tearDown() {
