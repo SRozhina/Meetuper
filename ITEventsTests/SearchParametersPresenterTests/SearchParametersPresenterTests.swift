@@ -16,6 +16,8 @@ class SearchParametersPresenterTests: XCTestCase {
     
     override func tearDown() {
         searchParametersPresenter = nil
+        view = nil
+        searchParametersService = nil
         super.tearDown()
     }
     
