@@ -3,14 +3,14 @@ import XCTest
 
 class SearchParametersPresenterTests: XCTestCase {
     var searchParametersPresenter: ISearchParametersPresenter!
-    var view: (ISearchParametersView & ISearchParametersViewMock)!
-    var searchParametersService: ISearchParametersService!
+    var view: SearchParametersViewMock!
+    var searchParametersService: SearchParametersServiceMock!
     
     override func setUp() {
         super.setUp()
         
-        searchParametersService = SearchParametersService()
-        view = SearchParametersMockViewController()
+        searchParametersService = SearchParametersServiceMock()
+        view = SearchParametersViewMock()
         searchParametersPresenter = SearchParametersPresenter(view: view, searchParametersService: searchParametersService)
     }
     
@@ -23,31 +23,25 @@ class SearchParametersPresenterTests: XCTestCase {
     
     func testPresenterSetup() {
         //Given
-        let selectedTags = [Tag(id: 1, name: "JavaScript"),
-                            Tag(id: 2, name: "iOS")]
-        let otherTags = [Tag(id: 3, name: "Android"),
-                         Tag(id: 4, name: "Python")]
-        searchParametersService.updateTags(selectedTags: selectedTags, otherTags: otherTags)
-        
+        searchParametersService.selectedTags = [Tag(id: 1, name: "JavaScript"),
+                                                Tag(id: 2, name: "iOS")]
+        searchParametersService.otherTags = [Tag(id: 3, name: "Android"),
+                                             Tag(id: 4, name: "Python")]
         //When
         searchParametersPresenter.setup()
         
         //Then
         XCTAssertEqual(view.selectedTags, searchParametersService.selectedTags)
         XCTAssertEqual(view.otherTags, searchParametersService.otherTags)
+        XCTAssertEqual(view.fillCallsCount, 1)
     }
     
     func testPresenterSelectSearchTagAndSave() {
         //Given
-        let selectedTags = [Tag(id: 1, name: "JavaScript"),
-                            Tag(id: 2, name: "iOS")]
-        let otherTags = [Tag(id: 3, name: "Android"),
-                         Tag(id: 4, name: "Python")]
-        let finalSelectedTags = [Tag(id: 3, name: "Android"),
-                                 Tag(id: 1, name: "JavaScript"),
-                                 Tag(id: 2, name: "iOS")]
-        let finalOtherTags = [Tag(id: 4, name: "Python")]
-        searchParametersService.updateTags(selectedTags: selectedTags, otherTags: otherTags)
+        searchParametersService.selectedTags = [Tag(id: 1, name: "JavaScript"),
+                                                Tag(id: 2, name: "iOS")]
+        searchParametersService.otherTags = [Tag(id: 3, name: "Android"),
+                                             Tag(id: 4, name: "Python")]
         
         //When
         searchParametersPresenter.setup()
@@ -55,21 +49,21 @@ class SearchParametersPresenterTests: XCTestCase {
         searchParametersPresenter.saveSettings()
         
         //Then
-        XCTAssertEqual(searchParametersService.selectedTags, finalSelectedTags)
-        XCTAssertEqual(searchParametersService.otherTags, finalOtherTags)
+        let expectedSelectedTags = [Tag(id: 3, name: "Android"),
+                                 Tag(id: 1, name: "JavaScript"),
+                                 Tag(id: 2, name: "iOS")]
+        let expectedOtherTags = [Tag(id: 4, name: "Python")]
+        XCTAssertEqual(searchParametersService.selectedTags, expectedSelectedTags)
+        XCTAssertEqual(searchParametersService.otherTags, expectedOtherTags)
+        XCTAssertEqual(view.fillCallsCount, 1)
     }
     
     func testPresenterDeselectSearchTagAndSave() {
         //Given
-        let selectedTags = [Tag(id: 1, name: "JavaScript"),
+        searchParametersService.selectedTags = [Tag(id: 1, name: "JavaScript"),
                             Tag(id: 2, name: "iOS")]
-        let otherTags = [Tag(id: 3, name: "Android"),
+        searchParametersService.otherTags = [Tag(id: 3, name: "Android"),
                          Tag(id: 4, name: "Python")]
-        let finalSelectedTags = [Tag(id: 2, name: "iOS")]
-        let finalOtherTags = [Tag(id: 3, name: "Android"),
-                              Tag(id: 1, name: "JavaScript"),
-                              Tag(id: 4, name: "Python")]
-        searchParametersService.updateTags(selectedTags: selectedTags, otherTags: otherTags)
         
         //When
         searchParametersPresenter.setup()
@@ -77,8 +71,13 @@ class SearchParametersPresenterTests: XCTestCase {
         searchParametersPresenter.saveSettings()
         
         //Then
-        XCTAssertEqual(searchParametersService.selectedTags, finalSelectedTags)
-        XCTAssertEqual(searchParametersService.otherTags, finalOtherTags)
+        let expectedSelectedTags = [Tag(id: 2, name: "iOS")]
+        let expectedOtherTags = [Tag(id: 3, name: "Android"),
+                              Tag(id: 1, name: "JavaScript"),
+                              Tag(id: 4, name: "Python")]
+        XCTAssertEqual(searchParametersService.selectedTags, expectedSelectedTags)
+        XCTAssertEqual(searchParametersService.otherTags, expectedOtherTags)
+        XCTAssertEqual(view.fillCallsCount, 1)
     }
     
     func testPresenterSelectNonExistingSearchTagAndSave() {
@@ -97,6 +96,7 @@ class SearchParametersPresenterTests: XCTestCase {
         //Then
         XCTAssertEqual(searchParametersService.selectedTags, selectedTags)
         XCTAssertEqual(searchParametersService.otherTags, otherTags)
+        XCTAssertEqual(view.fillCallsCount, 1)
     }
     
     func testPresenterDeselectNonExistingSearchTagAndSave() {
@@ -115,6 +115,7 @@ class SearchParametersPresenterTests: XCTestCase {
         //Then
         XCTAssertEqual(searchParametersService.selectedTags, selectedTags)
         XCTAssertEqual(searchParametersService.otherTags, otherTags)
+        XCTAssertEqual(view.fillCallsCount, 1)
     }
     
 }
