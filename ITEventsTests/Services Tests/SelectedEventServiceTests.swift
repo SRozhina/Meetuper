@@ -15,6 +15,7 @@ class SelectedEventServiceTests: XCTestCase {
     }
 
     func testSavingSelectedEvent() {
+        //Given
         let event = Event(id: 1,
                           title: "Test event",
                           dateInterval: DateInterval(start: Date(timeIntervalSinceNow: 60 * 60 * 24),
@@ -29,8 +30,10 @@ class SelectedEventServiceTests: XCTestCase {
                           source: EventSource(id: 1, name: "Timepad"),
                           url: URL(string: "https://pitercss.timepad.ru/event/457262/"))
         
+        //When
         selectedEventService.selectedEvent = event
         
+        //Then
         XCTAssertNotNil(selectedEventService.selectedEvent)
         XCTAssertEqual(selectedEventService.selectedEvent, event)
     }
