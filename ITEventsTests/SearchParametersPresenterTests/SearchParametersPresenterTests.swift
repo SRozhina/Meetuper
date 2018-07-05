@@ -4,43 +4,43 @@ import XCTest
 class SearchParametersPresenterTests: XCTestCase {
     var searchParametersPresenter: ISearchParametersPresenter!
     var view: SearchParametersViewMock!
-    var searchParametersService: SearchParametersServiceMock!
+    var searchParametersServiceMock: SearchParametersServiceMock!
     
     override func setUp() {
         super.setUp()
         
-        searchParametersService = SearchParametersServiceMock()
+        searchParametersServiceMock = SearchParametersServiceMock()
         view = SearchParametersViewMock()
-        searchParametersPresenter = SearchParametersPresenter(view: view, searchParametersService: searchParametersService)
+        searchParametersPresenter = SearchParametersPresenter(view: view, searchParametersService: searchParametersServiceMock)
     }
     
     override func tearDown() {
         searchParametersPresenter = nil
         view = nil
-        searchParametersService = nil
+        searchParametersServiceMock = nil
         super.tearDown()
     }
     
     func testPresenterSetup() {
         //Given
-        searchParametersService.selectedTags = [Tag(id: 1, name: "JavaScript"),
+        searchParametersServiceMock.selectedTags = [Tag(id: 1, name: "JavaScript"),
                                                 Tag(id: 2, name: "iOS")]
-        searchParametersService.otherTags = [Tag(id: 3, name: "Android"),
+        searchParametersServiceMock.otherTags = [Tag(id: 3, name: "Android"),
                                              Tag(id: 4, name: "Python")]
         //When
         searchParametersPresenter.setup()
         
         //Then
-        XCTAssertEqual(view.selectedTags, searchParametersService.selectedTags)
-        XCTAssertEqual(view.otherTags, searchParametersService.otherTags)
+        XCTAssertEqual(view.selectedTags, searchParametersServiceMock.selectedTags)
+        XCTAssertEqual(view.otherTags, searchParametersServiceMock.otherTags)
         XCTAssertEqual(view.fillCallsCount, 1)
     }
     
     func testPresenterSelectSearchTagAndSave() {
         //Given
-        searchParametersService.selectedTags = [Tag(id: 1, name: "JavaScript"),
+        searchParametersServiceMock.selectedTags = [Tag(id: 1, name: "JavaScript"),
                                                 Tag(id: 2, name: "iOS")]
-        searchParametersService.otherTags = [Tag(id: 3, name: "Android"),
+        searchParametersServiceMock.otherTags = [Tag(id: 3, name: "Android"),
                                              Tag(id: 4, name: "Python")]
         
         //When
@@ -50,20 +50,20 @@ class SearchParametersPresenterTests: XCTestCase {
         
         //Then
         let expectedSelectedTags = [Tag(id: 3, name: "Android"),
-                                 Tag(id: 1, name: "JavaScript"),
-                                 Tag(id: 2, name: "iOS")]
+                                    Tag(id: 1, name: "JavaScript"),
+                                    Tag(id: 2, name: "iOS")]
         let expectedOtherTags = [Tag(id: 4, name: "Python")]
-        XCTAssertEqual(searchParametersService.selectedTags, expectedSelectedTags)
-        XCTAssertEqual(searchParametersService.otherTags, expectedOtherTags)
+        XCTAssertEqual(searchParametersServiceMock.selectedTags, expectedSelectedTags)
+        XCTAssertEqual(searchParametersServiceMock.otherTags, expectedOtherTags)
         XCTAssertEqual(view.fillCallsCount, 1)
     }
     
     func testPresenterDeselectSearchTagAndSave() {
         //Given
-        searchParametersService.selectedTags = [Tag(id: 1, name: "JavaScript"),
-                            Tag(id: 2, name: "iOS")]
-        searchParametersService.otherTags = [Tag(id: 3, name: "Android"),
-                         Tag(id: 4, name: "Python")]
+        searchParametersServiceMock.selectedTags = [Tag(id: 1, name: "JavaScript"),
+                                                Tag(id: 2, name: "iOS")]
+        searchParametersServiceMock.otherTags = [Tag(id: 3, name: "Android"),
+                                             Tag(id: 4, name: "Python")]
         
         //When
         searchParametersPresenter.setup()
@@ -73,10 +73,10 @@ class SearchParametersPresenterTests: XCTestCase {
         //Then
         let expectedSelectedTags = [Tag(id: 2, name: "iOS")]
         let expectedOtherTags = [Tag(id: 3, name: "Android"),
-                              Tag(id: 1, name: "JavaScript"),
-                              Tag(id: 4, name: "Python")]
-        XCTAssertEqual(searchParametersService.selectedTags, expectedSelectedTags)
-        XCTAssertEqual(searchParametersService.otherTags, expectedOtherTags)
+                                 Tag(id: 1, name: "JavaScript"),
+                                 Tag(id: 4, name: "Python")]
+        XCTAssertEqual(searchParametersServiceMock.selectedTags, expectedSelectedTags)
+        XCTAssertEqual(searchParametersServiceMock.otherTags, expectedOtherTags)
         XCTAssertEqual(view.fillCallsCount, 1)
     }
     
@@ -86,7 +86,8 @@ class SearchParametersPresenterTests: XCTestCase {
                             Tag(id: 2, name: "iOS")]
         let otherTags = [Tag(id: 3, name: "Android"),
                          Tag(id: 4, name: "Python")]
-        searchParametersService.updateTags(selectedTags: selectedTags, otherTags: otherTags)
+        searchParametersServiceMock.selectedTags = selectedTags
+        searchParametersServiceMock.otherTags = otherTags
         
         //When
         searchParametersPresenter.setup()
@@ -94,8 +95,8 @@ class SearchParametersPresenterTests: XCTestCase {
         searchParametersPresenter.saveSettings()
         
         //Then
-        XCTAssertEqual(searchParametersService.selectedTags, selectedTags)
-        XCTAssertEqual(searchParametersService.otherTags, otherTags)
+        XCTAssertEqual(searchParametersServiceMock.selectedTags, selectedTags)
+        XCTAssertEqual(searchParametersServiceMock.otherTags, otherTags)
         XCTAssertEqual(view.fillCallsCount, 1)
     }
     
@@ -105,7 +106,8 @@ class SearchParametersPresenterTests: XCTestCase {
                             Tag(id: 2, name: "iOS")]
         let otherTags = [Tag(id: 3, name: "Android"),
                          Tag(id: 4, name: "Python")]
-        searchParametersService.updateTags(selectedTags: selectedTags, otherTags: otherTags)
+        searchParametersServiceMock.selectedTags = selectedTags
+        searchParametersServiceMock.otherTags = otherTags
         
         //When
         searchParametersPresenter.setup()
@@ -113,8 +115,8 @@ class SearchParametersPresenterTests: XCTestCase {
         searchParametersPresenter.saveSettings()
         
         //Then
-        XCTAssertEqual(searchParametersService.selectedTags, selectedTags)
-        XCTAssertEqual(searchParametersService.otherTags, otherTags)
+        XCTAssertEqual(searchParametersServiceMock.selectedTags, selectedTags)
+        XCTAssertEqual(searchParametersServiceMock.otherTags, otherTags)
         XCTAssertEqual(view.fillCallsCount, 1)
     }
     
