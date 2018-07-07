@@ -1,6 +1,6 @@
 import Foundation
 
-class DateFormatterService: IDateFormatterService {
+class DateFormatterService: IDateFormatterService {    
     private let longDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "d MMMM HH:mm"

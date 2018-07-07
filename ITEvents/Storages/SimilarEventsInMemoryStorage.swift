@@ -110,13 +110,11 @@ class SimilarEventsInMemoryStorage: ISimilarEventsStorage {
     }
     
     func fetchSimilarEvents(for eventId: Int) -> Promise<[Event]> {
-        return Promise<[Event]> { fulfill, _ in
-            self.queue.asyncAfter(deadline: .now() + 2) {
-                if let events = self.similarEvents[eventId] {
-                    fulfill(events)
-                }
-            }
+        let pendingPromise = Promise<[Event]>.pending()
+        self.queue.asyncAfter(deadline: .now() + 2) {
+            let events = self.similarEvents[eventId] ?? []
+            pendingPromise.fulfill(events)
         }
-        
+        return pendingPromise
     }
 }

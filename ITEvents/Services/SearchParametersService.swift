@@ -1,7 +1,7 @@
 import Foundation
 
 class SearchParametersService: ISearchParametersService {
-    private let notificationCenter = NotificationCenter.default
+    private let notificationCenter = NotificationCenter()
     
     var selectedTags: [Tag] = []
     var otherTags: [Tag] = []
@@ -23,5 +23,5 @@ class SearchParametersService: ISearchParametersService {
 }
 
 extension Notification.Name {
-    public static let TagsChanged = Notification.Name("SearchParametersService_TagsChanged")
+    fileprivate static let TagsChanged = Notification.Name("TagsChanged")
 }

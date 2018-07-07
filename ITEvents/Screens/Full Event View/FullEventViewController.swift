@@ -4,6 +4,7 @@ import SafariServices
 class FullEventViewController: UIViewController, IFullEventView {
     @IBOutlet private weak var stackView: UIStackView!
     @IBOutlet private weak var scrollView: UIScrollView!
+    
     private let descriptionsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -11,6 +12,8 @@ class FullEventViewController: UIViewController, IFullEventView {
         stackView.isHidden = true
         return stackView
     }()
+    private weak var showMoreEventsView: ShowMoreEventsView!
+    
     var presenter: IFullEventPresenter!
     
     override func viewDidLoad() {
@@ -27,14 +30,17 @@ class FullEventViewController: UIViewController, IFullEventView {
     }
     
     func createShowMoreEventsButton(for eventsCount: Int) {
-        let showMoreEvents = ShowMoreEventsView.initiateAndSetup(with: eventsCount,
-                                                                 showOrHideEventsAction: showMoreButtonTapped)
-        stackView.addArrangedSubview(showMoreEvents)
+        showMoreEventsView = ShowMoreEventsView.initiateAndSetup(with: eventsCount, collapsed: true)
+        showMoreEventsView.addMoreEventsRequestObserver(self, selector: #selector(moreEventsRequested))
+        stackView.addArrangedSubview(showMoreEventsView)
         stackView.addArrangedSubview(descriptionsStackView)
     }
     
-    private func showMoreButtonTapped(completion: @escaping () -> Void) {
-        presenter.requestSimilarEvents {
+    @objc
+    private func moreEventsRequested() {
+        showMoreEventsView.isEnable = false
+        
+        presenter.requestSimilarEvents().then {
             self.expandOrCollapseEvents()
             
             if !self.descriptionsStackView.isHidden {
@@ -43,7 +49,8 @@ class FullEventViewController: UIViewController, IFullEventView {
                 self.scrollView.setContentOffset(scrollOffsetPoint, animated: true)
             }
             
-            completion()
+            self.showMoreEventsView.isEnable = true
+            self.showMoreEventsView.updateTitle(for: self.descriptionsStackView.isHidden)
         }
     }
     
@@ -60,9 +67,9 @@ class FullEventViewController: UIViewController, IFullEventView {
     }
     
     private func expandOrCollapseEvents() {
-            UIView.animate(withDuration: 0.3) {
-                self.descriptionsStackView.isHidden = !self.descriptionsStackView.isHidden
-            }
+        UIView.animate(withDuration: 0.3) {
+            self.descriptionsStackView.isHidden = !self.descriptionsStackView.isHidden
+        }
     }
     
     private func openAction(url: URL) {
