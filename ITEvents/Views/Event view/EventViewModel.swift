@@ -9,7 +9,8 @@ struct EventCollectionCellViewModel {
     let image: UIImage
 }
 
-struct EventViewModel {
+//TODO move all Equatable to extensions to tests
+struct EventViewModel: Equatable {
     let id: Int
     let title: String
     let date: String

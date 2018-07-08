@@ -2,70 +2,63 @@ import UIKit
 import Promises
 
 class SimilarEventsInMemoryStorage: ISimilarEventsStorage {
-    private var similarEvents: [Int: [Event]] = [:]
-    private let queue: DispatchQueue!
+    private var similarEventsById: [Int: [Event]] = [:]
     
-    init(similarEvents: [Int: [Event]] = [:], queue: DispatchQueue = DispatchQueue.main) {
-        self.queue = queue
-        if !similarEvents.isEmpty {
-            self.similarEvents = similarEvents
-        } else {
-            self.similarEvents = [
-                2: [
-                    createEvent(id: 2,
-                                title: "PiterCSS #25",
-                                startDate: getDateFromString(stringDate: "2018-03-31 19:00:00"),
-                                endDate: getDateFromString(stringDate: "2018-03-31 22:00:00"),
-                                image: UIImage(named: "pitercss")!,
-                                similarEventsCount: 1,
-                                source: EventSource(id: 2, name: "Meetup.com"),
-                                tags: [
-                                    Tag(id: 1, name: "JavaScript"),
-                                    Tag(id: 2, name: "Frontend")
-                        ]
-                    )
-                ],
-                3: [
-                    createEvent(id: 3,
-                                title: "DartUp",
-                                startDate: getDateFromString(stringDate: "2018-05-06 19:00:00"),
-                                endDate: getDateFromString(stringDate: "2018-05-06 22:00:00"),
-                                image: UIImage(named: "wrike")!,
-                                similarEventsCount: 2,
-                                source: EventSource(id: 3, name: "Meetabit"),
-                                tags: [Tag(id: 1, name: "JavaScript")]
-                    ),
-                    createEvent(id: 3,
-                                title: "DartUp",
-                                startDate: getDateFromString(stringDate: "2018-05-06 19:00:00"),
-                                endDate: getDateFromString(stringDate: "2018-05-06 22:00:00"),
-                                image: UIImage(named: "wrike")!,
-                                similarEventsCount: 2,
-                                source: EventSource(id: 3, name: "Meetabit"),
-                                tags: [Tag(id: 1, name: "JavaScript")]
-                    )
-                ],
-                5: [
-                    Event(id: 5,
-                          title: "Yandex Frontend Meetup for Middle developers and higher",
-                          dateInterval: DateInterval(start: getDateFromString(stringDate: "2018-12-23 19:00:00"),
-                                                     end: getDateFromString(stringDate: "2018-12-24 22:00:00")),
-                          address: "Большой Сампсониевский проспект 28 к2 литД",
-                          city: "Санкт-Петербург",
-                          country: "Россия",
-                          description: "Short description for iPad",
-                          tags: [
-                            Tag(id: 1, name: "JavaScript"),
-                            Tag(id: 2, name: "Frontend")
-                        ],
-                          image: UIImage(named: "yandex")!,
-                          similarEventsCount: 1,
-                          source: EventSource(id: 1, name: "Яндекс События"),
-                          url: URL(string: "https://pitercss.timepad.ru/event/457262/"))
-                ]
+    init() {
+        similarEventsById = [
+            2: [
+                createEvent(id: 2,
+                            title: "PiterCSS #25",
+                            startDate: getDateFromString(stringDate: "2018-03-31 19:00:00"),
+                            endDate: getDateFromString(stringDate: "2018-03-31 22:00:00"),
+                            image: UIImage(named: "pitercss")!,
+                            similarEventsCount: 1,
+                            source: EventSource(id: 2, name: "Meetup.com"),
+                            tags: [
+                                Tag(id: 1, name: "JavaScript"),
+                                Tag(id: 2, name: "Frontend")
+                    ]
+                )
+            ],
+            3: [
+                createEvent(id: 3,
+                            title: "DartUp",
+                            startDate: getDateFromString(stringDate: "2018-05-06 19:00:00"),
+                            endDate: getDateFromString(stringDate: "2018-05-06 22:00:00"),
+                            image: UIImage(named: "wrike")!,
+                            similarEventsCount: 2,
+                            source: EventSource(id: 3, name: "Meetabit"),
+                            tags: [Tag(id: 1, name: "JavaScript")]
+                ),
+                createEvent(id: 3,
+                            title: "DartUp",
+                            startDate: getDateFromString(stringDate: "2018-05-06 19:00:00"),
+                            endDate: getDateFromString(stringDate: "2018-05-06 22:00:00"),
+                            image: UIImage(named: "wrike")!,
+                            similarEventsCount: 2,
+                            source: EventSource(id: 3, name: "Meetabit"),
+                            tags: [Tag(id: 1, name: "JavaScript")]
+                )
+            ],
+            5: [
+                Event(id: 5,
+                      title: "Yandex Frontend Meetup for Middle developers and higher",
+                      dateInterval: DateInterval(start: getDateFromString(stringDate: "2018-12-23 19:00:00"),
+                                                 end: getDateFromString(stringDate: "2018-12-24 22:00:00")),
+                      address: "Большой Сампсониевский проспект 28 к2 литД",
+                      city: "Санкт-Петербург",
+                      country: "Россия",
+                      description: "Short description for iPad",
+                      tags: [
+                        Tag(id: 1, name: "JavaScript"),
+                        Tag(id: 2, name: "Frontend")
+                    ],
+                      image: UIImage(named: "yandex")!,
+                      similarEventsCount: 1,
+                      source: EventSource(id: 1, name: "Яндекс События"),
+                      url: URL(string: "https://pitercss.timepad.ru/event/457262/"))
             ]
-        }
-        
+        ]
     }
     
     private let dateFormatter: DateFormatter = {
@@ -111,8 +104,8 @@ class SimilarEventsInMemoryStorage: ISimilarEventsStorage {
     
     func fetchSimilarEvents(for eventId: Int) -> Promise<[Event]> {
         let pendingPromise = Promise<[Event]>.pending()
-        self.queue.asyncAfter(deadline: .now() + 2) {
-            let events = self.similarEvents[eventId] ?? []
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            let events = self.similarEventsById[eventId] ?? []
             pendingPromise.fulfill(events)
         }
         return pendingPromise
