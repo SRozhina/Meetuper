@@ -2,9 +2,9 @@ import XCTest
 @testable import ITEvents
 
 class DateFormatterServiceTests: XCTestCase {
-    var dateFormatterService: IDateFormatterService!
-    var dateIntervalSameDate: DateInterval!
-    var dateIntervalDifferentDates: DateInterval!
+    private var dateFormatterService: IDateFormatterService!
+    private var dateIntervalSameDate: DateInterval!
+    private var dateIntervalDifferentDates: DateInterval!
     
     override func setUp() {
         super.setUp()

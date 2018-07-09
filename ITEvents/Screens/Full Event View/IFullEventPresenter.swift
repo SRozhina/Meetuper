@@ -1,5 +1,7 @@
+import Promises
+
 protocol IFullEventPresenter {
     func setup()
     
-    func requestSimilarEvents(completion: @escaping () -> Void)
+    func requestSimilarEvents() -> Promise<Void>
 }

@@ -4,34 +4,39 @@ import Reusable
 
 class ShowMoreEventsView: UIView, NibLoadable {
     @IBOutlet private weak var showMoreEventsButton: UIButton!
-    private var showOrHideEventsAction: ((@escaping () -> Void) -> Void)?
+    
+    private let notificationCenter = NotificationCenter()
     private var descriptionsCount: Int = 0
-    private var collapsed: Bool = true
     
-    class func initiateAndSetup(with descriptionsCount: Int, showOrHideEventsAction: ((@escaping () -> Void) -> Void)? = nil) -> ShowMoreEventsView {
-        let showMoreEventsView: ShowMoreEventsView = SharedUtils.createPanelView()
-        showMoreEventsView.setup(with: descriptionsCount, action: showOrHideEventsAction)
-        return showMoreEventsView
-    }
-    
-    private func setup(with descriptionsCount: Int, action showOrHideEventsAction: ((@escaping () -> Void) -> Void)? ) {
-        self.showOrHideEventsAction = showOrHideEventsAction
-        self.descriptionsCount = descriptionsCount
-        self.setButtonTitle()
-    }
-    
-    @IBAction private func showMoreEventsTapped(_ sender: UIButton) {
-        if let action = showOrHideEventsAction {
-            sender.isEnabled = false
-            action {
-                self.collapsed = !self.collapsed
-                self.setButtonTitle()
-                sender.isEnabled = true
-            }
+    var isEnable: Bool {
+        get {
+            return showMoreEventsButton.isEnabled
+        }
+        set {
+            showMoreEventsButton.isEnabled = newValue
         }
     }
     
-    private func setButtonTitle() {
+    class func initiateAndSetup(with descriptionsCount: Int, collapsed: Bool) -> ShowMoreEventsView {
+        let showMoreEventsView: ShowMoreEventsView = SharedUtils.createPanelView()
+        showMoreEventsView.setup(with: descriptionsCount, collapsed: collapsed)
+        return showMoreEventsView
+    }
+    
+    private func setup(with descriptionsCount: Int, collapsed: Bool) {
+        self.descriptionsCount = descriptionsCount
+        self.updateTitle(for: collapsed)
+    }
+    
+    @IBAction private func showMoreEventsTapped(_ sender: UIButton) {
+        notificationCenter.post(name: .MoreEventsRequest, object: nil)
+    }
+    
+    func addMoreEventsRequestObserver(_ observer: Any, selector: Selector) {
+        notificationCenter.addObserver(observer, selector: selector, name: .MoreEventsRequest, object: nil)
+    }
+    
+    func updateTitle(for collapsed: Bool) {
         let title = ShowMoreEventsView.getButtonTitle(for: collapsed, and: descriptionsCount)
         showMoreEventsButton.setTitle(title, for: .normal)
     }
@@ -44,4 +49,8 @@ class ShowMoreEventsView: UIView, NibLoadable {
         }
         return "Show less descriptions"
     }
+}
+
+extension Notification.Name {
+    fileprivate static let MoreEventsRequest = Notification.Name("MoreEventsRequest")
 }

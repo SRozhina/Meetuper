@@ -2,21 +2,21 @@ import XCTest
 @testable import ITEvents
 
 class SearchParametersPresenterTests: XCTestCase {
-    var searchParametersPresenter: ISearchParametersPresenter!
-    var view: SearchParametersViewMock!
-    var searchParametersServiceMock: SearchParametersServiceMock!
+    private var searchParametersPresenter: ISearchParametersPresenter!
+    private var viewMock: SearchParametersViewMock!
+    private var searchParametersServiceMock: SearchParametersServiceMock!
     
     override func setUp() {
         super.setUp()
         
         searchParametersServiceMock = SearchParametersServiceMock()
-        view = SearchParametersViewMock()
-        searchParametersPresenter = SearchParametersPresenter(view: view, searchParametersService: searchParametersServiceMock)
+        viewMock = SearchParametersViewMock()
+        searchParametersPresenter = SearchParametersPresenter(view: viewMock, searchParametersService: searchParametersServiceMock)
     }
     
     override func tearDown() {
         searchParametersPresenter = nil
-        view = nil
+        viewMock = nil
         searchParametersServiceMock = nil
         super.tearDown()
     }
@@ -31,9 +31,9 @@ class SearchParametersPresenterTests: XCTestCase {
         searchParametersPresenter.setup()
         
         //Then
-        XCTAssertEqual(view.selectedTags, searchParametersServiceMock.selectedTags)
-        XCTAssertEqual(view.otherTags, searchParametersServiceMock.otherTags)
-        XCTAssertEqual(view.fillCallsCount, 1)
+        XCTAssertEqual(viewMock.selectedTags, searchParametersServiceMock.selectedTags)
+        XCTAssertEqual(viewMock.otherTags, searchParametersServiceMock.otherTags)
+        XCTAssertEqual(viewMock.fillCallsCount, 1)
     }
     
     func testPresenterSelectSearchTagAndSave() {
@@ -55,7 +55,7 @@ class SearchParametersPresenterTests: XCTestCase {
         let expectedOtherTags = [Tag(id: 4, name: "Python")]
         XCTAssertEqual(searchParametersServiceMock.selectedTags, expectedSelectedTags)
         XCTAssertEqual(searchParametersServiceMock.otherTags, expectedOtherTags)
-        XCTAssertEqual(view.fillCallsCount, 1)
+        XCTAssertEqual(viewMock.fillCallsCount, 1)
     }
     
     func testPresenterDeselectSearchTagAndSave() {
@@ -77,7 +77,7 @@ class SearchParametersPresenterTests: XCTestCase {
                                  Tag(id: 4, name: "Python")]
         XCTAssertEqual(searchParametersServiceMock.selectedTags, expectedSelectedTags)
         XCTAssertEqual(searchParametersServiceMock.otherTags, expectedOtherTags)
-        XCTAssertEqual(view.fillCallsCount, 1)
+        XCTAssertEqual(viewMock.fillCallsCount, 1)
     }
     
     func testPresenterSelectNonExistingSearchTagAndSave() {
@@ -97,7 +97,7 @@ class SearchParametersPresenterTests: XCTestCase {
         //Then
         XCTAssertEqual(searchParametersServiceMock.selectedTags, selectedTags)
         XCTAssertEqual(searchParametersServiceMock.otherTags, otherTags)
-        XCTAssertEqual(view.fillCallsCount, 1)
+        XCTAssertEqual(viewMock.fillCallsCount, 1)
     }
     
     func testPresenterDeselectNonExistingSearchTagAndSave() {
@@ -117,7 +117,7 @@ class SearchParametersPresenterTests: XCTestCase {
         //Then
         XCTAssertEqual(searchParametersServiceMock.selectedTags, selectedTags)
         XCTAssertEqual(searchParametersServiceMock.otherTags, otherTags)
-        XCTAssertEqual(view.fillCallsCount, 1)
+        XCTAssertEqual(viewMock.fillCallsCount, 1)
     }
     
 }

@@ -22,4 +22,6 @@ target 'ITEvents' do
 end
 
 target 'ITEventsTests' do
+    use_frameworks!
+    pod 'PromisesSwift'
 end

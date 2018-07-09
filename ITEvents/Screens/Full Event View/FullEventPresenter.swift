@@ -1,3 +1,5 @@
+import Promises
+
 class FullEventPresenter: IFullEventPresenter {
     var selectedEventService: ISelectedEventService!
     var dateFormatterService: IDateFormatterService!
@@ -24,18 +26,17 @@ class FullEventPresenter: IFullEventPresenter {
         view.createShowMoreEventsButton(for: event.similarEventsCount)
     }
     
-    func requestSimilarEvents(completion: @escaping () -> Void) {
+    func requestSimilarEvents() -> Promise<Void> {
         if similarEvents != nil {
-            completion()
-            return
+            return Promise(())
         }
         
-        similarEventsService.fetchSimilarEvents(for: event.id).then { events in
+        return similarEventsService.fetchSimilarEvents(for: event.id).then { events in
             self.similarEvents = events
             if !events.isEmpty {
                 self.createSimilarEventViews(from: events)
-                completion()
             }
+            return Promise(())
         }
     }
     
