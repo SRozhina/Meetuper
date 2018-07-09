@@ -2,17 +2,20 @@
 
 class FullEventViewMock: IFullEventView {
     var showMoreEventsButtonCount = 0
-    var similarEventsCount = 0
+    var similarEventsViewsCount = 0
     var createdViewsCount = 0
     var eventViewModel: EventViewModel!
     
     func createEventView(with event: EventViewModel, isSimilar: Bool) {
+        if isSimilar {
+            similarEventsViewsCount += 1
+        } else {
+            createdViewsCount += 1
+        }
         eventViewModel = event
-        createdViewsCount += 1
     }
     
     func createShowMoreEventsButton(for eventsCount: Int) {
         showMoreEventsButtonCount += 1
-        self.similarEventsCount = eventsCount
     }
 }
