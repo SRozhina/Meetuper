@@ -6,7 +6,7 @@ class EventDescriptionView: UIView, NibLoadable {
     @IBOutlet private weak var descriptionLabel: UILabel!
     
     class func initiateAndSetup(with description: String) -> EventDescriptionView {
-        let eventDescriptionView: EventDescriptionView = SharedUtils.createPanelView()
+        let eventDescriptionView: EventDescriptionView = UIViewUtils.createPanelView()
 
         let font = UIFont.systemFont(ofSize: 15)
         let formattedDescription = NSMutableAttributedString.create(html: description, with: font)

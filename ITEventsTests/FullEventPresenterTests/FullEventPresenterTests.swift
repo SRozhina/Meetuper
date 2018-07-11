@@ -147,14 +147,14 @@ class FullEventPresenterTests: XCTestCase {
             }
         
         //Then
-        XCTAssert(waitForPromises(timeout: 1))
+        XCTAssert(waitForPromises(timeout: 2))
         XCTAssertEqual(isFetchedSimilarEvents, true)
         XCTAssertEqual(viewMock.showMoreEventsButtonCount, 1)
         XCTAssertEqual(viewMock.similarEventsViewsCount, 3)
         XCTAssertEqual(viewMock.createdViewsCount, 1)
     }
     
-    func testPresenterTryToFetchEventsWhereThereISNoSimilar() {
+    func testPresenterTryToFetchEventsWhereThereIsNoSimilar() {
         //Given
         var isFetchedSimilarEvents = false
         selectedEventServiceMock.selectedEvent = Event(id: 5,
@@ -179,7 +179,7 @@ class FullEventPresenterTests: XCTestCase {
         }
         
         //Then
-        XCTAssert(waitForPromises(timeout: 1))
+        XCTAssert(waitForPromises(timeout: 2))
         XCTAssertEqual(isFetchedSimilarEvents, true)
         XCTAssertEqual(viewMock.showMoreEventsButtonCount, 1)
         XCTAssertEqual(viewMock.similarEventsViewsCount, 0)

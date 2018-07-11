@@ -10,7 +10,7 @@ class EventInfoView: UIView, NibLoadable {
     class func initiateAndSetup(with image: UIImage,
                                 title: String,
                                 date: String) -> EventInfoView {
-        let eventInfoView: EventInfoView = SharedUtils.createPanelView()
+        let eventInfoView: EventInfoView = UIViewUtils.createPanelView()
         eventInfoView.setup(with: image, title: title, date: date)
         return eventInfoView
     }

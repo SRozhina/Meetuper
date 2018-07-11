@@ -9,7 +9,7 @@ class EventView: UIStackView, NibLoadable {
     class func initiateAndSetup(with event: EventViewModel,
                                 sourceOpenAction: ((URL) -> Void)? = nil,
                                 isSimilar: Bool = false) -> EventView {
-        let eventView: EventView = SharedUtils.createView()
+        let eventView: EventView = UIViewUtils.createView()
         eventView.setup(with: event, and: sourceOpenAction, isSimilar: isSimilar)
         return eventView
     }

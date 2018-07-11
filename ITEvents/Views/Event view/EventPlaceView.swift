@@ -7,7 +7,7 @@ class EventPlaceView: UIView, NibLoadable {
     @IBOutlet private weak var addressLabel: UILabel!
     
     class func initiateAndSetup(with city: String, country: String, address: String) -> EventPlaceView {
-        let eventPlaceView: EventPlaceView = SharedUtils.createPanelView()
+        let eventPlaceView: EventPlaceView = UIViewUtils.createPanelView()
         eventPlaceView.setup(with: city, country: country, address: address)
         return eventPlaceView
     }
