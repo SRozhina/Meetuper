@@ -12,7 +12,7 @@ class EventTagsView: UIView, NibLoadable {
     private let gradientLayerEndPoint = CGPoint(x: 1, y: 0)
     
     class func initiateAndSetup(with tags: [Tag], fontSize: CGFloat = 18) -> EventTagsView {
-        let eventTagsView: EventTagsView = SharedUtils.createPanelView()
+        let eventTagsView: EventTagsView = UIViewUtils.createPanelView()
         eventTagsView.setup(with: tags, fontSize: fontSize)
         return eventTagsView
     }

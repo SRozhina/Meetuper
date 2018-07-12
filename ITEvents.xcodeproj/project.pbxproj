@@ -14,7 +14,7 @@
 		C300562E2055AA6B00875CCD /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300562B2055AA6B00875CCD /* Tag.swift */; };
 		C30056352055AD0600875CCD /* NSMutableAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30056342055AD0600875CCD /* NSMutableAttributedString.swift */; };
 		C30056382055AD6600875CCD /* Swinject Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30056372055AD6600875CCD /* Swinject Storyboard.swift */; };
-		C300563B2055ADEA00875CCD /* SharedUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300563A2055ADEA00875CCD /* SharedUtils.swift */; };
+		C300563B2055ADEA00875CCD /* UIViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300563A2055ADEA00875CCD /* UIViewUtils.swift */; };
 		C318F82A209094A700D4730E /* EventsCollectionViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C318F829209094A700D4730E /* EventsCollectionViewFooter.swift */; };
 		C319FA9E20DC41ED005E56A6 /* SearchParametersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C319FA9D20DC41ED005E56A6 /* SearchParametersService.swift */; };
 		C319FAA020DC44C8005E56A6 /* SearchParametersPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C319FA9F20DC44C8005E56A6 /* SearchParametersPresenter.swift */; };
@@ -24,7 +24,7 @@
 		C320931C20EA27D600E51E4A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C320931B20EA27D500E51E4A /* README.md */; };
 		C320931E20EA27FD00E51E4A /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = C320931D20EA27FD00E51E4A /* .travis.yml */; };
 		C327C96E20C1BFD50075A0E3 /* IEventCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C327C96D20C1BFD50075A0E3 /* IEventCollectionViewHandler.swift */; };
-		C329A992207B768000DF4394 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329A991207B768000DF4394 /* Global.swift */; };
+		C329A992207B768000DF4394 /* Debounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329A991207B768000DF4394 /* Debounce.swift */; };
 		C330988E20E6CCAD00F4C2B3 /* SearchParametersServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C330988D20E6CCAD00F4C2B3 /* SearchParametersServiceTests.swift */; };
 		C34758592074F90F009FAA5F /* IFavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34758582074F90F009FAA5F /* IFavoriteView.swift */; };
 		C34758692074F942009FAA5F /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C347585A2074F940009FAA5F /* EventView.swift */; };
@@ -44,6 +44,7 @@
 		C34758772074F942009FAA5F /* ShowEventSourceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C34758682074F942009FAA5F /* ShowEventSourceView.xib */; };
 		C34C4F82206B89FD001A61A9 /* ISelectedEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34C4F81206B89FD001A61A9 /* ISelectedEventService.swift */; };
 		C34C4F84206B8A51001A61A9 /* SelectedEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34C4F83206B8A51001A61A9 /* SelectedEventService.swift */; };
+		C362DAB320F6594700C22E66 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C362DAB220F6594700C22E66 /* Dictionary.swift */; };
 		C362DD9920472D7B00D301A6 /* IDateFormatterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C362DD9820472D7B00D301A6 /* IDateFormatterService.swift */; };
 		C362DD9B20472D9A00D301A6 /* DateFormatterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C362DD9A20472D9A00D301A6 /* DateFormatterService.swift */; };
 		C362DD9D204733BB00D301A6 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = C362DD9C204733BB00D301A6 /* Podfile */; };
@@ -126,7 +127,7 @@
 		C300562B2055AA6B00875CCD /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		C30056342055AD0600875CCD /* NSMutableAttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedString.swift; sourceTree = "<group>"; };
 		C30056372055AD6600875CCD /* Swinject Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Swinject Storyboard.swift"; sourceTree = "<group>"; };
-		C300563A2055ADEA00875CCD /* SharedUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedUtils.swift; sourceTree = "<group>"; };
+		C300563A2055ADEA00875CCD /* UIViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewUtils.swift; sourceTree = "<group>"; };
 		C318F829209094A700D4730E /* EventsCollectionViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsCollectionViewFooter.swift; sourceTree = "<group>"; };
 		C319FA9D20DC41ED005E56A6 /* SearchParametersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParametersService.swift; sourceTree = "<group>"; };
 		C319FA9F20DC44C8005E56A6 /* SearchParametersPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParametersPresenter.swift; sourceTree = "<group>"; };
@@ -136,7 +137,7 @@
 		C320931B20EA27D500E51E4A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C320931D20EA27FD00E51E4A /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
 		C327C96D20C1BFD50075A0E3 /* IEventCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IEventCollectionViewHandler.swift; sourceTree = "<group>"; };
-		C329A991207B768000DF4394 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		C329A991207B768000DF4394 /* Debounce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debounce.swift; sourceTree = "<group>"; };
 		C330988D20E6CCAD00F4C2B3 /* SearchParametersServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParametersServiceTests.swift; sourceTree = "<group>"; };
 		C34758582074F90F009FAA5F /* IFavoriteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFavoriteView.swift; sourceTree = "<group>"; };
 		C347585A2074F940009FAA5F /* EventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
@@ -156,6 +157,7 @@
 		C34758682074F942009FAA5F /* ShowEventSourceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowEventSourceView.xib; sourceTree = "<group>"; };
 		C34C4F81206B89FD001A61A9 /* ISelectedEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISelectedEventService.swift; sourceTree = "<group>"; };
 		C34C4F83206B8A51001A61A9 /* SelectedEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedEventService.swift; sourceTree = "<group>"; };
+		C362DAB220F6594700C22E66 /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		C362DD9820472D7B00D301A6 /* IDateFormatterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDateFormatterService.swift; sourceTree = "<group>"; };
 		C362DD9A20472D9A00D301A6 /* DateFormatterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterService.swift; sourceTree = "<group>"; };
 		C362DD9C204733BB00D301A6 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -251,13 +253,13 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		C30056332055ACE600875CCD /* Extensions */ = {
+		C30056332055ACE600875CCD /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				C30056342055AD0600875CCD /* NSMutableAttributedString.swift */,
-				C329A991207B768000DF4394 /* Global.swift */,
+				C362DAB120F658D400C22E66 /* Extensions */,
+				C329A991207B768000DF4394 /* Debounce.swift */,
 			);
-			path = Extensions;
+			path = Global;
 			sourceTree = "<group>";
 		};
 		C30056362055AD4300875CCD /* DI Container */ = {
@@ -271,7 +273,7 @@
 		C30056392055AD9100875CCD /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				C300563A2055ADEA00875CCD /* SharedUtils.swift */,
+				C300563A2055ADEA00875CCD /* UIViewUtils.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -305,6 +307,15 @@
 				C34758672074F941009FAA5F /* ShowMoreEventsView.xib */,
 			);
 			path = "Event view";
+			sourceTree = "<group>";
+		};
+		C362DAB120F658D400C22E66 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C362DAB220F6594700C22E66 /* Dictionary.swift */,
+				C30056342055AD0600875CCD /* NSMutableAttributedString.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		C384AD5620EA7627006B8C27 /* Services Tests */ = {
@@ -465,7 +476,7 @@
 				C34758382074F8DA009FAA5F /* Views */,
 				C30056392055AD9100875CCD /* Utilities */,
 				C30056362055AD4300875CCD /* DI Container */,
-				C30056332055ACE600875CCD /* Extensions */,
+				C30056332055ACE600875CCD /* Global */,
 				C389284020E2D50D00B0BF4A /* Storages */,
 				C3E792E4202E411300876D6B /* Services */,
 				C391909F201E62FD00CD7151 /* Screens */,
@@ -793,7 +804,7 @@
 				C319FA9E20DC41ED005E56A6 /* SearchParametersService.swift in Sources */,
 				C347586F2074F942009FAA5F /* EventDescriptionView.swift in Sources */,
 				C39190B5201E6B2C00CD7151 /* IEventCollectionViewCell.swift in Sources */,
-				C300563B2055ADEA00875CCD /* SharedUtils.swift in Sources */,
+				C300563B2055ADEA00875CCD /* UIViewUtils.swift in Sources */,
 				C34C4F82206B89FD001A61A9 /* ISelectedEventService.swift in Sources */,
 				C319FAA220DC4696005E56A6 /* ISearchParametersService.swift in Sources */,
 				C3C6051120BA021E00606B30 /* EventsInMemoryStorage.swift in Sources */,
@@ -817,6 +828,7 @@
 				C362DD9920472D7B00D301A6 /* IDateFormatterService.swift in Sources */,
 				C347586E2074F942009FAA5F /* ShowEventSourceView.swift in Sources */,
 				C3919090201E604600CD7151 /* FavoritePresenter.swift in Sources */,
+				C362DAB320F6594700C22E66 /* Dictionary.swift in Sources */,
 				C39190A8201E634F00CD7151 /* IProfilePresenter.swift in Sources */,
 				C39190B1201E63C500CD7151 /* IFullEventPresenter.swift in Sources */,
 				C300562E2055AA6B00875CCD /* Tag.swift in Sources */,
@@ -832,7 +844,7 @@
 				C30056382055AD6600875CCD /* Swinject Storyboard.swift in Sources */,
 				C3764B73202100AA0024CFA7 /* UIGradientImageView.swift in Sources */,
 				C391909D201E62E300CD7151 /* ISearchPresenter.swift in Sources */,
-				C329A992207B768000DF4394 /* Global.swift in Sources */,
+				C329A992207B768000DF4394 /* Debounce.swift in Sources */,
 				C3D547662078208F009ABC73 /* EventViewModel.swift in Sources */,
 				C3C6051020BA021E00606B30 /* IEventTagsStorage.swift in Sources */,
 				C347586B2074F942009FAA5F /* EventTagsView.swift in Sources */,

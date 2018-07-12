@@ -7,7 +7,7 @@ class ShowEventSourceView: UIView, NibLoadable {
     private var sourceOpenAction: (() -> Void)?
     
     class func initiateAndSetup(with text: String, sourceOpenAction: (() -> Void)? = nil) -> ShowEventSourceView {
-        let showEventSourceView: ShowEventSourceView = SharedUtils.createPanelView()
+        let showEventSourceView: ShowEventSourceView = UIViewUtils.createPanelView()
         showEventSourceView.setup(with: text, and: sourceOpenAction)
         return showEventSourceView
     }

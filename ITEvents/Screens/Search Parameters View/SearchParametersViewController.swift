@@ -22,7 +22,7 @@ class SearchParametersViewController: UIViewController, ISearchParametersView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        SharedUtils.decorateAsPanel(view: tagViewContainer)
+        UIViewUtils.decorateAsPanel(view: tagViewContainer)
         setupTagListViews()
         presenter.setup()
     }

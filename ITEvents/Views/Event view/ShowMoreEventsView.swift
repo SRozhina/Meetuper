@@ -18,7 +18,7 @@ class ShowMoreEventsView: UIView, NibLoadable {
     }
     
     class func initiateAndSetup(with descriptionsCount: Int, collapsed: Bool) -> ShowMoreEventsView {
-        let showMoreEventsView: ShowMoreEventsView = SharedUtils.createPanelView()
+        let showMoreEventsView: ShowMoreEventsView = UIViewUtils.createPanelView()
         showMoreEventsView.setup(with: descriptionsCount, collapsed: collapsed)
         return showMoreEventsView
     }
