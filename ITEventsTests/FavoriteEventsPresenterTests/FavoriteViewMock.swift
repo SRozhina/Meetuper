@@ -11,9 +11,7 @@ class FavoriteViewMock: IFavoriveView {
         setEventsCount += 1
     }
     
-    func toggleLayout(value isListLayout: Bool) {
-        
-    }
+    func toggleLayout(value isListLayout: Bool) { }
     
     func showLoadingIndicator() {
         loadingIndicatorShownCount += 1

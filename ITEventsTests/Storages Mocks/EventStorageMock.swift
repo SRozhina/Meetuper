@@ -44,6 +44,5 @@ class EventStorageMock: IEventsStorage {
         let eventsResult = EventsResult(events: eventsSlice, totalEventsCount: events.count)
         let promise = Promise(eventsResult)
         return Cancelable(promise: promise)
-        
     }
 }

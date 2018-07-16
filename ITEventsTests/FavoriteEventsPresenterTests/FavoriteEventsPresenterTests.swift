@@ -25,6 +25,8 @@ class FavoriteEventsPresenterTests: XCTestCase {
     override func tearDown() {
         presenter = nil
         viewMock = nil
+        selectedEventServiceMock = nil
+        eventStorageMock = nil
         super.tearDown()
     }
     
