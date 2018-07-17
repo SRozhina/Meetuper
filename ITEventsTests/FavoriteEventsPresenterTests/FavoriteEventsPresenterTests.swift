@@ -13,7 +13,8 @@ class FavoriteEventsPresenterTests: XCTestCase {
         
         viewMock = FavoriteViewMock()
         selectedEventServiceMock = SelectedEventServiceMock()
-        eventStorageMock = EventStorageMock()
+        let events = createTestEvents()
+        eventStorageMock = EventStorageMock(events: events)
         
         presenter = FavoritePresenter(view: viewMock,
                                       eventStorage: eventStorageMock,
@@ -103,5 +104,39 @@ class FavoriteEventsPresenterTests: XCTestCase {
         //Then
         XCTAssert(waitForPromises(timeout: 2))
         XCTAssertEqual(selectedEventServiceMock.selectedEvent, event1)
+    }
+    
+    private func createTestEvents() -> [Event] {
+        var events: [Event] = []
+        let event1 = Event(id: 1,
+                           title: "Test event1",
+                           dateInterval: DateInterval(start: Date(timeIntervalSinceNow: 60 * 60 * 24),
+                                                      end: Date(timeIntervalSinceNow: 60 * 60 * 27)),
+                           address: "Большой Сампсониевский проспект 28 к2 лит Д",
+                           city: "Санкт-Петербург",
+                           country: "Россия",
+                           description: "Description for event",
+                           tags: [Tag(id: 1, name: "JavaScript")],
+                           image: UIImage(named: "js")!,
+                           similarEventsCount: 2,
+                           source: EventSource(id: 1, name: "Timepad"),
+                           url: URL(string: "https://pitercss.timepad.ru/event/457262/"))
+        let event2 = Event(id: 2,
+                           title: "Test event2",
+                           dateInterval: DateInterval(start: Date(timeIntervalSinceNow: 60 * 60 * 24),
+                                                      end: Date(timeIntervalSinceNow: 60 * 60 * 27)),
+                           address: "Большой Сампсониевский проспект 28 к2 лит Д",
+                           city: "Санкт-Петербург",
+                           country: "Россия",
+                           description: "Description for event",
+                           tags: [Tag(id: 1, name: "JavaScript"), Tag(id: 1, name: "CSS")],
+                           image: UIImage(named: "js")!,
+                           similarEventsCount: 2,
+                           source: EventSource(id: 1, name: "Timepad"),
+                           url: URL(string: "https://pitercss.timepad.ru/event/457262/"))
+        for _ in Array(1..<10) {
+            events.append(contentsOf: [event1, event2])
+        }
+        return events
     }
 }
