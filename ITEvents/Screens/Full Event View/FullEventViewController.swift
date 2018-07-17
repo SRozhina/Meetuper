@@ -23,7 +23,7 @@ class FullEventViewController: UIViewController, IFullEventView {
     
     func createEventView(with event: EventViewModel, isSimilar: Bool) {
         let eventView = EventView.initiateAndSetup(with: event,
-                                                   sourceOpenAction: openAction,
+                                                   eventURLOpener: self,
                                                    isSimilar: isSimilar)
         let stackViewToAddEvent: UIStackView = isSimilar ? descriptionsStackView : stackView
         stackViewToAddEvent.addArrangedSubview(eventView)
@@ -71,8 +71,10 @@ class FullEventViewController: UIViewController, IFullEventView {
             self.descriptionsStackView.isHidden = !self.descriptionsStackView.isHidden
         }
     }
-    
-    private func openAction(url: URL) {
+}
+
+extension FullEventViewController: IEventURLOpener {
+    func open(url: URL) {
         let safariWebView = SFSafariViewController(url: url)
         present(safariWebView, animated: true, completion: nil)
     }
