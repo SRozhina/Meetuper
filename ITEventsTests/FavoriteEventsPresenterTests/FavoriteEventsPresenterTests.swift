@@ -79,6 +79,18 @@ class FavoriteEventsPresenterTests: XCTestCase {
         XCTAssertEqual(viewMock.loadingIndicatorHidedCount, 2)
     }
     
+    func testSearchPresenterActivate() {
+        //Given
+        
+        //When
+        presenter.setup()
+        presenter.activate()
+        
+        //Then
+        XCTAssert(waitForPromises(timeout: 2))
+        XCTAssertEqual(viewMock.toggleLayoutCount, 1)
+    }
+    
     func testPresenterSelectEvent() {
         //Given
         let event1 = Event(id: 1,

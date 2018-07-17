@@ -34,7 +34,6 @@ class FavoritePresenter: IFavoritePresenter {
     }
     
     func activate() {
-        //TODO write test
         //TODO implement notifying about layout changes when settings are ready
         let userSettings = userSettingsService.fetchSettings()
         view.toggleLayout(value: userSettings.isListLayoutSelected)

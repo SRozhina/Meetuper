@@ -98,6 +98,8 @@
 		C3D547642078104A009ABC73 /* IFullEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D547632078104A009ABC73 /* IFullEventView.swift */; };
 		C3D547662078208F009ABC73 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D547652078208F009ABC73 /* EventViewModel.swift */; };
 		C3DBDFA820726BAB002A35EB /* IUserSettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DBDFA720726BAB002A35EB /* IUserSettingService.swift */; };
+		C3E4DA2620FDFC7F00E84EF6 /* EventTagsStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E4DA2520FDFC7F00E84EF6 /* EventTagsStorageMock.swift */; };
+		C3E4DA2820FDFCB000E84EF6 /* SearchViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E4DA2720FDFCB000E84EF6 /* SearchViewMock.swift */; };
 		C3EA2EE820EE95E600A984D4 /* SelectedEventServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EA2EE720EE95E600A984D4 /* SelectedEventServiceMock.swift */; };
 		C3EA2EEB20EE961B00A984D4 /* FullEventPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EA2EE920EE961A00A984D4 /* FullEventPresenterTests.swift */; };
 		C3EA2EEC20EE961B00A984D4 /* FullEventViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EA2EEA20EE961B00A984D4 /* FullEventViewMock.swift */; };
@@ -222,6 +224,8 @@
 		C3D547632078104A009ABC73 /* IFullEventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFullEventView.swift; sourceTree = "<group>"; };
 		C3D547652078208F009ABC73 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		C3DBDFA720726BAB002A35EB /* IUserSettingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IUserSettingService.swift; sourceTree = "<group>"; };
+		C3E4DA2520FDFC7F00E84EF6 /* EventTagsStorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTagsStorageMock.swift; sourceTree = "<group>"; };
+		C3E4DA2720FDFCB000E84EF6 /* SearchViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewMock.swift; sourceTree = "<group>"; };
 		C3EA2EE720EE95E600A984D4 /* SelectedEventServiceMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedEventServiceMock.swift; sourceTree = "<group>"; };
 		C3EA2EE920EE961A00A984D4 /* FullEventPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullEventPresenterTests.swift; sourceTree = "<group>"; };
 		C3EA2EEA20EE961B00A984D4 /* FullEventViewMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullEventViewMock.swift; sourceTree = "<group>"; };
@@ -343,6 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				C379A48120FCCF1A007487DA /* SearchEventsPresenterTests.swift */,
+				C3E4DA2720FDFCB000E84EF6 /* SearchViewMock.swift */,
 			);
 			path = SearchEventsPresenterTests;
 			sourceTree = "<group>";
@@ -573,6 +578,7 @@
 			children = (
 				C3EA2EEE20F20BD800A984D4 /* SimilarEventsStorageMock.swift */,
 				C379A47E20FCCBF2007487DA /* EventStorageMock.swift */,
+				C3E4DA2520FDFC7F00E84EF6 /* EventTagsStorageMock.swift */,
 			);
 			path = "Storages Mocks";
 			sourceTree = "<group>";
@@ -893,6 +899,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3E4DA2820FDFCB000E84EF6 /* SearchViewMock.swift in Sources */,
 				C3EA2EEB20EE961B00A984D4 /* FullEventPresenterTests.swift in Sources */,
 				C379A47920FCAC27007487DA /* FavoriteEventsPresenterTests.swift in Sources */,
 				C379A48220FCCF1A007487DA /* SearchEventsPresenterTests.swift in Sources */,
@@ -902,6 +909,7 @@
 				C3EA2EF120F2100A00A984D4 /* DateFormatterServiceMock.swift in Sources */,
 				C379A47B20FCADA4007487DA /* UserSettingsServiceMock.swift in Sources */,
 				C3EA2EE820EE95E600A984D4 /* SelectedEventServiceMock.swift in Sources */,
+				C3E4DA2620FDFC7F00E84EF6 /* EventTagsStorageMock.swift in Sources */,
 				C384AD5520EA7594006B8C27 /* SearchParametersViewMock.swift in Sources */,
 				C3EA2EEF20F20BD800A984D4 /* SimilarEventsStorageMock.swift in Sources */,
 				C384AD8620ECFE86006B8C27 /* SearchParametersServiceMock.swift in Sources */,
