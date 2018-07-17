@@ -129,8 +129,7 @@ class SearchPresenter: ISearchPresenter {
         
         events.append(contentsOf: eventsResult.events)
         eventViewModels.append(contentsOf: eventsResult.events.map(createEventViewModel))
-        
-        view.hideLoadingIndicator()
+
         if eventsResult.events.isEmpty { view.showBackgroundView() }
         
         view.setEvents(self.eventViewModels)
