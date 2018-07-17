@@ -4,7 +4,11 @@ import Promises
 class EventStorageMock: IEventsStorage {
     var events: [Event] = []
     
-    init() {
+    init(events: [Event] = []) {
+        if !events.isEmpty {
+            self.events = events
+            return
+        }
         let event1 = Event(id: 1,
                            title: "Test event1",
                            dateInterval: DateInterval(start: Date(timeIntervalSinceNow: 60 * 60 * 24),
@@ -32,7 +36,7 @@ class EventStorageMock: IEventsStorage {
                            source: EventSource(id: 1, name: "Timepad"),
                            url: URL(string: "https://pitercss.timepad.ru/event/457262/"))
         for _ in Array(1..<10) {
-            events.append(contentsOf: [event1, event2])
+            self.events.append(contentsOf: [event1, event2])
         }
     }
     

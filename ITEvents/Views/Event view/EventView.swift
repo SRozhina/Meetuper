@@ -3,22 +3,22 @@ import UIKit
 import Reusable
 
 class EventView: UIStackView, NibLoadable {
-    private var sourceOpenAction: ((URL) -> Void)?
     private var event: EventViewModel!
+    private var eventURLOpener: IEventURLOpener!
 
     class func initiateAndSetup(with event: EventViewModel,
-                                sourceOpenAction: ((URL) -> Void)? = nil,
+                                eventURLOpener: IEventURLOpener,
                                 isSimilar: Bool = false) -> EventView {
         let eventView: EventView = UIViewUtils.createView()
-        eventView.setup(with: event, and: sourceOpenAction, isSimilar: isSimilar)
+        eventView.setup(with: event, eventURLOpener: eventURLOpener, isSimilar: isSimilar)
         return eventView
     }
     
     private func setup(with event: EventViewModel,
-                       and sourceOpenAction: ((URL) -> Void)?,
+                       eventURLOpener: IEventURLOpener,
                        isSimilar: Bool) {
         self.event = event
-        self.sourceOpenAction = sourceOpenAction
+        self.eventURLOpener = eventURLOpener
         
         if isSimilar {
             let sourceLabel = EventView.createSourceLabel(text: event.sourceName!)
@@ -42,14 +42,16 @@ class EventView: UIStackView, NibLoadable {
         addArrangedSubview(eventTags)
         
         if let sourceName = event.sourceName {
-            let showEventSource = ShowEventSourceView.initiateAndSetup(with: sourceName, sourceOpenAction: openAction)
+            let showEventSource = ShowEventSourceView.initiateAndSetup(with: sourceName)
+            showEventSource.addShowEventSourceObserver(self, selector: #selector(openAction))
             addArrangedSubview(showEventSource)
         }
     }
     
+    @objc
     private func openAction() {
-        if let action = sourceOpenAction, let url = event.url {
-            action(url)
+        if let url = event.url {
+            eventURLOpener.open(url: url)
         }
     }
     
