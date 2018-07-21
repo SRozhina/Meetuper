@@ -173,7 +173,7 @@ class SearchEventsPresenterTests: XCTestCase {
         
         //Then
         XCTAssert(waitForPromises(timeout: 2))
-        let testTags = createTestTags()
+        let testTags = createTestTags().sorted { $0.name < $1.name }
         XCTAssertEqual(searchParametersServiceMock.otherTags, testTags)
         XCTAssertEqual(searchParametersServiceMock.selectedTags, [])
     }
