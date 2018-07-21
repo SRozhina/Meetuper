@@ -4,10 +4,12 @@ import XCTest
 
 class SearchEventsPresenterTests: XCTestCase {
     private var presenter: ISearchPresenter!
+
     private var viewMock: SearchViewMock!
     private var eventStorageMock: EventStorageMock!
     private var selectedEventServiceMock: SelectedEventServiceMock!
     private var searchParametersServiceMock: SearchParametersServiceMock!
+    private var debouncerMock: DebouncerMock!
     
     override func setUp() {
         super.setUp()
@@ -16,6 +18,8 @@ class SearchEventsPresenterTests: XCTestCase {
         eventStorageMock = EventStorageMock(events: events)
         selectedEventServiceMock = SelectedEventServiceMock()
         searchParametersServiceMock = SearchParametersServiceMock()
+        debouncerMock = DebouncerMock(actionQueue: DispatchQueue(label: "searchEventsDebouncedQueue"))
+        
         let tags = createTestTags()
         
         presenter = SearchPresenter(view: viewMock,
@@ -24,8 +28,8 @@ class SearchEventsPresenterTests: XCTestCase {
                                     userSettingsService: UserSettingsServiceMock(),
                                     dateFormatterService: DateFormatterServiceMock(),
                                     tagsStorage: EventTagsStorageMock(tags: tags),
-                                    searchParametersService: searchParametersServiceMock)
-        
+                                    searchParametersService: searchParametersServiceMock,
+                                    debouncer: debouncerMock)
     }
     
     override func tearDown() {
@@ -53,10 +57,10 @@ class SearchEventsPresenterTests: XCTestCase {
     
     func testSearchPresenterLoadMoreEvents() {
         //Given
-        
-        //When
         presenter.setup()
         XCTAssert(waitForPromises(timeout: 2))
+        
+        //When
         presenter.loadMoreEvents()
         
         //Then
@@ -69,10 +73,10 @@ class SearchEventsPresenterTests: XCTestCase {
     
     func testSearchPresenterAllEventsLoaded() {
         //Given
-        
-        //When
         presenter.setup()
         XCTAssert(waitForPromises(timeout: 2))
+        
+        //When
         presenter.loadMoreEvents()
         XCTAssert(waitForPromises(timeout: 2))
         presenter.loadMoreEvents()
@@ -85,32 +89,86 @@ class SearchEventsPresenterTests: XCTestCase {
         XCTAssertEqual(viewMock.loadingIndicatorHidedCount, 2)
     }
     
-//    func testSearchPresenterSearchByText() {
-//        //Given
-//
-//        //When
-//        presenter.setup()
-//        XCTAssert(waitForPromises(timeout: 2))
-//        presenter.searchEvents(by: "CSS")
-//        sleep(10)
-//
-//        //Then
-//        XCTAssert(waitForPromises(timeout: 10))
-//        XCTAssert(waitForPromises(timeout: 2))
-//
-//        XCTAssertEqual(viewMock.loadingIndicatorShownCount, 2)
-//        XCTAssertEqual(viewMock.setEventsCount, 2)
-//        XCTAssertEqual(viewMock.eventViweModels.count, 9)
-//        XCTAssertEqual(viewMock.loadingIndicatorHidedCount, 2)
-//        XCTAssertEqual(viewMock.eventsCleanedCount, 1)
-//    }
+    func testSearchPresenterSearchByText() {
+        //Given
+        presenter.setup()
+        XCTAssert(waitForPromises(timeout: 2))
+        
+        //When
+        presenter.searchEvents(by: "CSS")
+        debouncerMock.actionQueue.sync { }
+        
+        //Then
+        XCTAssert(waitForPromises(timeout: 2))
+        XCTAssertEqual(viewMock.loadingIndicatorShownCount, 3)
+        XCTAssertEqual(viewMock.setEventsCount, 2)
+        XCTAssertEqual(viewMock.eventViweModels.count, 9)
+        XCTAssertEqual(viewMock.loadingIndicatorHidedCount, 2)
+        XCTAssertEqual(viewMock.eventsCleanedCount, 1)
+    }
+    
+    func testSearchPresenterSearchByTheSameTextTwice() {
+        //Given
+        presenter.setup()
+        XCTAssert(waitForPromises(timeout: 2))
+        presenter.searchEvents(by: "CSS")
+        debouncerMock.actionQueue.sync { }
+        XCTAssert(waitForPromises(timeout: 2))
+        
+        //When
+        presenter.searchEvents(by: "CSS")
+        
+        //Then
+        XCTAssertEqual(viewMock.loadingIndicatorShownCount, 3)
+        XCTAssertEqual(viewMock.setEventsCount, 2)
+        XCTAssertEqual(viewMock.eventViweModels.count, 9)
+        XCTAssertEqual(viewMock.loadingIndicatorHidedCount, 2)
+        XCTAssertEqual(viewMock.eventsCleanedCount, 1)
+    }
+    
+    func testSearchPresenterSearchByTag() {
+        //Given
+        presenter.setup()
+        XCTAssert(waitForPromises(timeout: 2))
+        
+        //When
+        searchParametersServiceMock.updateTags(selectedTags: [Tag(id: 2, name: "CSS")], otherTags: searchParametersServiceMock.otherTags)
+        debouncerMock.actionQueue.sync { }
+        
+        //Then
+        XCTAssert(waitForPromises(timeout: 2))
+        XCTAssertEqual(viewMock.loadingIndicatorShownCount, 3)
+        XCTAssertEqual(viewMock.setEventsCount, 2)
+        XCTAssertEqual(viewMock.eventViweModels.count, 9)
+        XCTAssertEqual(viewMock.loadingIndicatorHidedCount, 2)
+        XCTAssertEqual(viewMock.eventsCleanedCount, 1)
+    }
+    
+    func testSearchPresenterNoEventsFound() {
+        //Given
+        presenter.setup()
+        XCTAssert(waitForPromises(timeout: 2))
+        
+        //When
+        presenter.searchEvents(by: "123")
+        debouncerMock.actionQueue.sync { }
+        
+        //Then
+        XCTAssert(waitForPromises(timeout: 2))
+        XCTAssertEqual(viewMock.loadingIndicatorShownCount, 3)
+        XCTAssertEqual(viewMock.setEventsCount, 2)
+        XCTAssertEqual(viewMock.eventViweModels.count, 0)
+        XCTAssertEqual(viewMock.loadingIndicatorHidedCount, 2)
+        XCTAssertEqual(viewMock.eventsCleanedCount, 1)
+        XCTAssertEqual(viewMock.backgroundViewShownCount, 1)
+    }
     
     func testSearchPresenterGetSearchParameters() {
         //Given
-        
-        //When
         presenter.setup()
         XCTAssert(waitForPromises(timeout: 2))
+        
+        //When
         presenter.prepareSearchParameters(completion: { })
         
         //Then
@@ -122,9 +180,9 @@ class SearchEventsPresenterTests: XCTestCase {
     
     func testSearchPresenterActivate() {
         //Given
+        presenter.setup()
         
         //When
-        presenter.setup()
         presenter.activate()
         
         //Then
@@ -195,8 +253,8 @@ class SearchEventsPresenterTests: XCTestCase {
                            address: "Большой Сампсониевский проспект 28 к2 лит Д",
                            city: "Санкт-Петербург",
                            country: "Россия",
-                           description: "Description for event",
-                           tags: [Tag(id: 1, name: "JavaScript"), Tag(id: 1, name: "CSS")],
+                           description: "Description for event CSS",
+                           tags: [Tag(id: 1, name: "JavaScript"), Tag(id: 2, name: "CSS")],
                            image: UIImage(named: "js")!,
                            similarEventsCount: 2,
                            source: EventSource(id: 1, name: "Timepad"),

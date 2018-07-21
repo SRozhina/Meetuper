@@ -25,7 +25,7 @@
 		C320931E20EA27FD00E51E4A /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = C320931D20EA27FD00E51E4A /* .travis.yml */; };
 		C324550A20FCA8EB00C0E139 /* IEventURLOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = C324550920FCA8EB00C0E139 /* IEventURLOpener.swift */; };
 		C327C96E20C1BFD50075A0E3 /* IEventCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C327C96D20C1BFD50075A0E3 /* IEventCollectionViewHandler.swift */; };
-		C329A992207B768000DF4394 /* Debounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329A991207B768000DF4394 /* Debounce.swift */; };
+		C329A992207B768000DF4394 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329A991207B768000DF4394 /* Debouncer.swift */; };
 		C330988E20E6CCAD00F4C2B3 /* SearchParametersServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C330988D20E6CCAD00F4C2B3 /* SearchParametersServiceTests.swift */; };
 		C34758592074F90F009FAA5F /* IFavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34758582074F90F009FAA5F /* IFavoriteView.swift */; };
 		C34758692074F942009FAA5F /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C347585A2074F940009FAA5F /* EventView.swift */; };
@@ -78,6 +78,8 @@
 		C39190AD201E638700CD7151 /* FullEventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39190AC201E638700CD7151 /* FullEventPresenter.swift */; };
 		C39190B1201E63C500CD7151 /* IFullEventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39190B0201E63C500CD7151 /* IFullEventPresenter.swift */; };
 		C39190B5201E6B2C00CD7151 /* IEventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39190B4201E6B2C00CD7151 /* IEventCollectionViewCell.swift */; };
+		C3B7C4E92103C4B700769570 /* IDebouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B7C4E82103C4B700769570 /* IDebouncer.swift */; };
+		C3B7C4EC2103C88900769570 /* DebouncerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B7C4EB2103C88900769570 /* DebouncerMock.swift */; };
 		C3B88298201A22520031F261 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B88297201A22520031F261 /* AppDelegate.swift */; };
 		C3B8829A201A22520031F261 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B88299201A22520031F261 /* FavoritesViewController.swift */; };
 		C3B8829D201A22520031F261 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3B8829B201A22520031F261 /* Main.storyboard */; };
@@ -146,7 +148,7 @@
 		C320931D20EA27FD00E51E4A /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
 		C324550920FCA8EB00C0E139 /* IEventURLOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IEventURLOpener.swift; sourceTree = "<group>"; };
 		C327C96D20C1BFD50075A0E3 /* IEventCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IEventCollectionViewHandler.swift; sourceTree = "<group>"; };
-		C329A991207B768000DF4394 /* Debounce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debounce.swift; sourceTree = "<group>"; };
+		C329A991207B768000DF4394 /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 		C330988D20E6CCAD00F4C2B3 /* SearchParametersServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParametersServiceTests.swift; sourceTree = "<group>"; };
 		C34758582074F90F009FAA5F /* IFavoriteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFavoriteView.swift; sourceTree = "<group>"; };
 		C347585A2074F940009FAA5F /* EventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
@@ -200,6 +202,8 @@
 		C39190B0201E63C500CD7151 /* IFullEventPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IFullEventPresenter.swift; sourceTree = "<group>"; };
 		C39190B4201E6B2C00CD7151 /* IEventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IEventCollectionViewCell.swift; sourceTree = "<group>"; };
 		C3A30CAC201BDEB90041D549 /* ITEvents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ITEvents.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3B7C4E82103C4B700769570 /* IDebouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDebouncer.swift; sourceTree = "<group>"; };
+		C3B7C4EB2103C88900769570 /* DebouncerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebouncerMock.swift; sourceTree = "<group>"; };
 		C3B88297201A22520031F261 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3B88299201A22520031F261 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		C3B8829C201A22520031F261 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -273,7 +277,8 @@
 			isa = PBXGroup;
 			children = (
 				C362DAB120F658D400C22E66 /* Extensions */,
-				C329A991207B768000DF4394 /* Debounce.swift */,
+				C329A991207B768000DF4394 /* Debouncer.swift */,
+				C3B7C4E82103C4B700769570 /* IDebouncer.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -488,6 +493,16 @@
 			path = "Profile tab";
 			sourceTree = "<group>";
 		};
+		C3B7C4EA2103C85900769570 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				C384AD8420ECFE72006B8C27 /* Services Mocks */,
+				C3EA2EED20F20BA600A984D4 /* Storages Mocks */,
+				C3B7C4EB2103C88900769570 /* DebouncerMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		C3B8828B201A22510031F261 = {
 			isa = PBXGroup;
 			children = (
@@ -526,11 +541,10 @@
 		C3C132B320E6C26100FE7B0D /* ITEventsTests */ = {
 			isa = PBXGroup;
 			children = (
+				C3B7C4EA2103C85900769570 /* Mocks */,
 				C379A48020FCCEF8007487DA /* SearchEventsPresenterTests */,
 				C379A47720FCABD5007487DA /* FavoriteEventsPresenterTests */,
-				C3EA2EED20F20BA600A984D4 /* Storages Mocks */,
 				C3EA2EE220EE95C900A984D4 /* FullEventPresenterTests */,
-				C384AD8420ECFE72006B8C27 /* Services Mocks */,
 				C384AD5720EA7636006B8C27 /* SearchParametersPresenterTests */,
 				C384AD5620EA7627006B8C27 /* Services Tests */,
 				C3C132B620E6C26100FE7B0D /* Info.plist */,
@@ -576,8 +590,8 @@
 		C3EA2EED20F20BA600A984D4 /* Storages Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				C3EA2EEE20F20BD800A984D4 /* SimilarEventsStorageMock.swift */,
 				C379A47E20FCCBF2007487DA /* EventStorageMock.swift */,
+				C3EA2EEE20F20BD800A984D4 /* SimilarEventsStorageMock.swift */,
 				C3E4DA2520FDFC7F00E84EF6 /* EventTagsStorageMock.swift */,
 			);
 			path = "Storages Mocks";
@@ -877,10 +891,11 @@
 				C30056382055AD6600875CCD /* Swinject Storyboard.swift in Sources */,
 				C3764B73202100AA0024CFA7 /* UIGradientImageView.swift in Sources */,
 				C391909D201E62E300CD7151 /* ISearchPresenter.swift in Sources */,
-				C329A992207B768000DF4394 /* Debounce.swift in Sources */,
+				C329A992207B768000DF4394 /* Debouncer.swift in Sources */,
 				C3D547662078208F009ABC73 /* EventViewModel.swift in Sources */,
 				C3C6051020BA021E00606B30 /* IEventTagsStorage.swift in Sources */,
 				C347586B2074F942009FAA5F /* EventTagsView.swift in Sources */,
+				C3B7C4E92103C4B700769570 /* IDebouncer.swift in Sources */,
 				C375E74E209B656A00D089FB /* ListCollectionViewCell.swift in Sources */,
 				C375E752209B67FC00D089FB /* GridCollectionViewCell.swift in Sources */,
 				C3FFF10C20737DCE00ADF407 /* UserSettingsService.swift in Sources */,
@@ -904,6 +919,7 @@
 				C379A47920FCAC27007487DA /* FavoriteEventsPresenterTests.swift in Sources */,
 				C379A48220FCCF1A007487DA /* SearchEventsPresenterTests.swift in Sources */,
 				C384AD4F20EA5E7F006B8C27 /* SearchParametersPresenterTests.swift in Sources */,
+				C3B7C4EC2103C88900769570 /* DebouncerMock.swift in Sources */,
 				C3C132B520E6C26100FE7B0D /* DateFormatterServiceTests.swift in Sources */,
 				C3EA2EEC20EE961B00A984D4 /* FullEventViewMock.swift in Sources */,
 				C3EA2EF120F2100A00A984D4 /* DateFormatterServiceMock.swift in Sources */,
