@@ -18,7 +18,7 @@ class SearchEventsPresenterTests: XCTestCase {
         eventStorageMock = EventStorageMock(events: events)
         selectedEventServiceMock = SelectedEventServiceMock()
         searchParametersServiceMock = SearchParametersServiceMock()
-        debouncerMock = DebouncerMock(actionQueue: DispatchQueue(label: "searchEventsDebouncedQueue"))
+        debouncerMock = DebouncerMock()
         
         let tags = createTestTags()
         
@@ -96,7 +96,6 @@ class SearchEventsPresenterTests: XCTestCase {
         
         //When
         presenter.searchEvents(by: "CSS")
-        debouncerMock.actionQueue.sync { }
         
         //Then
         XCTAssert(waitForPromises(timeout: 2))
@@ -112,7 +111,6 @@ class SearchEventsPresenterTests: XCTestCase {
         presenter.setup()
         XCTAssert(waitForPromises(timeout: 2))
         presenter.searchEvents(by: "CSS")
-        debouncerMock.actionQueue.sync { }
         XCTAssert(waitForPromises(timeout: 2))
         
         //When
@@ -133,7 +131,6 @@ class SearchEventsPresenterTests: XCTestCase {
         
         //When
         searchParametersServiceMock.updateTags(selectedTags: [Tag(id: 2, name: "CSS")], otherTags: searchParametersServiceMock.otherTags)
-        debouncerMock.actionQueue.sync { }
         
         //Then
         XCTAssert(waitForPromises(timeout: 2))
@@ -151,7 +148,6 @@ class SearchEventsPresenterTests: XCTestCase {
         
         //When
         presenter.searchEvents(by: "123")
-        debouncerMock.actionQueue.sync { }
         
         //Then
         XCTAssert(waitForPromises(timeout: 2))
@@ -187,7 +183,7 @@ class SearchEventsPresenterTests: XCTestCase {
         
         //Then
         XCTAssert(waitForPromises(timeout: 2))
-        XCTAssertEqual(viewMock.toggleLayoutCount, 1)
+        XCTAssertEqual(viewMock.toggleLayoutCallsCount, 1)
     }
     
     func testSearchPresenterSelectEvent() {

@@ -5,7 +5,7 @@ class SearchViewMock: ISearchView {
     var loadingIndicatorHidedCount = 0
     var backgroundViewShownCount = 0
     var backgroundViewHidedCount = 0
-    var toggleLayoutCount = 0
+    var toggleLayoutCallsCount = 0
     var setEventsCount = 0
     var eventsCleanedCount = 0
     var eventViweModels: [EventCollectionCellViewModel] = []
@@ -28,5 +28,5 @@ class SearchViewMock: ISearchView {
     
     func hideBackgroundView() { backgroundViewHidedCount += 1 }
     
-    func toggleLayout(value isListLayout: Bool) { toggleLayoutCount += 1 }
+    func toggleLayout(value isListLayout: Bool) { toggleLayoutCallsCount += 1 }
 }
