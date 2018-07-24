@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -19,25 +19,30 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="pSv-Ne-fvu">
-                    <rect key="frame" x="10" y="10" width="503" height="309"/>
+                    <rect key="frame" x="10" y="10" width="483" height="289"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" image="js" translatesAutoresizingMaskIntoConstraints="NO" id="0FC-3F-Gkz" customClass="RoundedImageView" customModule="ITEvents" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="176" height="176"/>
+                            <rect key="frame" x="0.0" y="0.0" width="169" height="169"/>
+                            <accessibility key="accessibilityConfiguration" identifier="EventImage">
+                                <bool key="isElement" value="YES"/>
+                            </accessibility>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="0FC-3F-Gkz" secondAttribute="height" multiplier="1:1" id="6kW-iB-3sL"/>
                             </constraints>
                         </imageView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="hvt-Bg-uFf">
-                            <rect key="frame" x="166" y="0.0" width="327" height="72"/>
+                            <rect key="frame" x="179" y="0.0" width="304" height="72"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hvb-CH-Ihb">
-                                    <rect key="frame" x="0.0" y="10" width="327" height="26.5"/>
+                                    <rect key="frame" x="0.0" y="10" width="304" height="26.5"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="EventTitle"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rYg-B2-hLN">
-                                    <rect key="frame" x="0.0" y="51.5" width="327" height="20.5"/>
+                                    <rect key="frame" x="0.0" y="51.5" width="304" height="20.5"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="EventDate"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
