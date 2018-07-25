@@ -14,8 +14,7 @@ class SearchEventsPresenterTests: XCTestCase {
     override func setUp() {
         super.setUp()
         viewMock = SearchViewMock()
-        let events = createTestEvents()
-        eventStorageMock = EventStorageMock(events: events)
+        eventStorageMock = EventStorageMock()
         selectedEventServiceMock = SelectedEventServiceMock()
         searchParametersServiceMock = SearchParametersServiceMock()
         debouncerMock = DebouncerMock()
@@ -43,6 +42,8 @@ class SearchEventsPresenterTests: XCTestCase {
     
     func testSearchPresenterSetup() {
         //Given
+        eventStorageMock.events = createTestEvents()
+        eventStorageMock.searchAction = makeSearchAction
         
         //When
         presenter.setup()
@@ -51,12 +52,14 @@ class SearchEventsPresenterTests: XCTestCase {
         XCTAssert(waitForPromises(timeout: 2))
         XCTAssertEqual(viewMock.loadingIndicatorShownCount, 1)
         XCTAssertEqual(viewMock.setEventsCount, 1)
-        XCTAssertEqual(viewMock.eventViweModels.count, 10)
+        XCTAssertEqual(viewMock.eventViweModels.count, eventStorageMock.events.count)
         XCTAssertEqual(viewMock.loadingIndicatorHidedCount, 1)
     }
     
     func testSearchPresenterLoadMoreEvents() {
         //Given
+        eventStorageMock.events = createTestEvents()
+        eventStorageMock.searchAction = makeSearchButchEventsAction
         presenter.setup()
         XCTAssert(waitForPromises(timeout: 2))
         
@@ -67,12 +70,14 @@ class SearchEventsPresenterTests: XCTestCase {
         XCTAssert(waitForPromises(timeout: 2))
         XCTAssertEqual(viewMock.loadingIndicatorShownCount, 2)
         XCTAssertEqual(viewMock.setEventsCount, 2)
-        XCTAssertEqual(viewMock.eventViweModels.count, 18)
+        XCTAssertEqual(viewMock.eventViweModels.count, eventStorageMock.events.count)
         XCTAssertEqual(viewMock.loadingIndicatorHidedCount, 2)
     }
     
     func testSearchPresenterAllEventsLoaded() {
         //Given
+        eventStorageMock.events = createTestEvents()
+        eventStorageMock.searchAction = makeSearchButchEventsAction
         presenter.setup()
         XCTAssert(waitForPromises(timeout: 2))
         
@@ -85,12 +90,14 @@ class SearchEventsPresenterTests: XCTestCase {
         XCTAssert(waitForPromises(timeout: 2))
         XCTAssertEqual(viewMock.loadingIndicatorShownCount, 2)
         XCTAssertEqual(viewMock.setEventsCount, 2)
-        XCTAssertEqual(viewMock.eventViweModels.count, 18)
+        XCTAssertEqual(viewMock.eventViweModels.count, eventStorageMock.events.count)
         XCTAssertEqual(viewMock.loadingIndicatorHidedCount, 2)
     }
     
     func testSearchPresenterSearchByText() {
         //Given
+        eventStorageMock.events = createTestEvents()
+        eventStorageMock.searchAction = makeSearchAction
         presenter.setup()
         XCTAssert(waitForPromises(timeout: 2))
         
@@ -101,13 +108,15 @@ class SearchEventsPresenterTests: XCTestCase {
         XCTAssert(waitForPromises(timeout: 2))
         XCTAssertEqual(viewMock.loadingIndicatorShownCount, 3)
         XCTAssertEqual(viewMock.setEventsCount, 2)
-        XCTAssertEqual(viewMock.eventViweModels.count, 9)
+        XCTAssertEqual(viewMock.eventViweModels.count, eventStorageMock.events.count)
         XCTAssertEqual(viewMock.loadingIndicatorHidedCount, 2)
         XCTAssertEqual(viewMock.eventsCleanedCount, 1)
     }
     
     func testSearchPresenterSearchByTheSameTextTwice() {
         //Given
+        eventStorageMock.events = createTestEvents()
+        eventStorageMock.searchAction = makeSearchAction
         presenter.setup()
         XCTAssert(waitForPromises(timeout: 2))
         presenter.searchEvents(by: "CSS")
@@ -119,13 +128,15 @@ class SearchEventsPresenterTests: XCTestCase {
         //Then
         XCTAssertEqual(viewMock.loadingIndicatorShownCount, 3)
         XCTAssertEqual(viewMock.setEventsCount, 2)
-        XCTAssertEqual(viewMock.eventViweModels.count, 9)
+        XCTAssertEqual(viewMock.eventViweModels.count, eventStorageMock.events.count)
         XCTAssertEqual(viewMock.loadingIndicatorHidedCount, 2)
         XCTAssertEqual(viewMock.eventsCleanedCount, 1)
     }
     
     func testSearchPresenterSearchByTag() {
         //Given
+        eventStorageMock.events = createTestEvents()
+        eventStorageMock.searchAction = makeSearchAction
         presenter.setup()
         XCTAssert(waitForPromises(timeout: 2))
         
@@ -136,15 +147,18 @@ class SearchEventsPresenterTests: XCTestCase {
         XCTAssert(waitForPromises(timeout: 2))
         XCTAssertEqual(viewMock.loadingIndicatorShownCount, 3)
         XCTAssertEqual(viewMock.setEventsCount, 2)
-        XCTAssertEqual(viewMock.eventViweModels.count, 9)
+        XCTAssertEqual(viewMock.eventViweModels.count, eventStorageMock.events.count)
         XCTAssertEqual(viewMock.loadingIndicatorHidedCount, 2)
         XCTAssertEqual(viewMock.eventsCleanedCount, 1)
     }
     
     func testSearchPresenterNoEventsFound() {
         //Given
+        eventStorageMock.events = createTestEvents()
+        eventStorageMock.searchAction = makeSearchAction
         presenter.setup()
         XCTAssert(waitForPromises(timeout: 2))
+        eventStorageMock.events = []
         
         //When
         presenter.searchEvents(by: "123")
@@ -202,10 +216,11 @@ class SearchEventsPresenterTests: XCTestCase {
                            source: EventSource(id: 1, name: "Timepad"),
                            url: URL(string: "https://pitercss.timepad.ru/event/457262/"))
         eventStorageMock.events = Array(repeating: event1, count: 5)
-        
-        //When
+        eventStorageMock.searchAction = makeSearchAction
         presenter.setup()
         XCTAssert(waitForPromises(timeout: 2))
+        
+        //When
         presenter.selectEvent(with: 1)
         
         //Then
@@ -259,5 +274,28 @@ class SearchEventsPresenterTests: XCTestCase {
             events.append(contentsOf: [event1, event2])
         }
         return events
+    }
+    
+    private func makeSearchAction(indexRange: Range<Int>? = nil,
+                                  searchText: String? = nil,
+                                  searchTags: [Tag]? = nil) -> Cancelable<EventsResult> {
+        return makeEventResult(with: eventStorageMock.events)
+    }
+    
+    private func makeSearchButchEventsAction(indexRange: Range<Int>,
+                                             searchText: String? = nil,
+                                             searchTags: [Tag]? = nil) -> Cancelable<EventsResult> {
+        let events = eventStorageMock.events
+        let updatedIndexRange = events.count < indexRange.upperBound
+            ? indexRange.lowerBound..<events.count
+            : indexRange
+        let butchEvents = Array(events[updatedIndexRange])
+        return makeEventResult(with: butchEvents)
+    }
+    
+    private func makeEventResult(with events: [Event]) -> Cancelable<EventsResult> {
+        let eventsResult = EventsResult(events: events, totalEventsCount: eventStorageMock.events.count)
+        let promise = Promise(eventsResult)
+        return Cancelable<EventsResult>(promise: promise)
     }
 }

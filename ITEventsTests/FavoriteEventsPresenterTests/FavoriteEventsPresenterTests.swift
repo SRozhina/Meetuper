@@ -13,8 +13,8 @@ class FavoriteEventsPresenterTests: XCTestCase {
         
         viewMock = FavoriteViewMock()
         selectedEventServiceMock = SelectedEventServiceMock()
-        let events = createTestEvents()
-        eventStorageMock = EventStorageMock(events: events)
+        //TODO Refactor tests
+        eventStorageMock = EventStorageMock()
         
         presenter = FavoritePresenter(view: viewMock,
                                       eventStorage: eventStorageMock,
