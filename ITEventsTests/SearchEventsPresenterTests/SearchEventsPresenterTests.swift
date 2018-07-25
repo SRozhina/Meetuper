@@ -276,15 +276,11 @@ class SearchEventsPresenterTests: XCTestCase {
         return events
     }
     
-    private func makeSearchAction(indexRange: Range<Int>? = nil,
-                                  searchText: String? = nil,
-                                  searchTags: [Tag]? = nil) -> Cancelable<EventsResult> {
+    private func makeSearchAction(indexRange: Range<Int>? = nil) -> Cancelable<EventsResult> {
         return makeEventResult(with: eventStorageMock.events)
     }
     
-    private func makeSearchButchEventsAction(indexRange: Range<Int>,
-                                             searchText: String? = nil,
-                                             searchTags: [Tag]? = nil) -> Cancelable<EventsResult> {
+    private func makeSearchButchEventsAction(indexRange: Range<Int>) -> Cancelable<EventsResult> {
         let events = eventStorageMock.events
         let updatedIndexRange = events.count < indexRange.upperBound
             ? indexRange.lowerBound..<events.count
