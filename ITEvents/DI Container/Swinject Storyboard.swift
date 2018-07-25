@@ -32,6 +32,10 @@ extension SwinjectStoryboard {
             .register(IUserSettingsService.self) { _ in UserSettingsService() }
             .inObjectScope(.container)
         
+        defaultContainer
+            .register(IDebouncer.self) { _ in Debouncer() }
+            .inObjectScope(.container)
+        
         defaultContainer.register(IEventTagsStorage.self) { _ in EventTagsInMemoryStorage() }
         
         defaultContainer.register(IFavoritePresenter.self) { resolver, view in
@@ -64,7 +68,8 @@ extension SwinjectStoryboard {
                             userSettingsService: resolver.resolve(IUserSettingsService.self)!,
                             dateFormatterService: resolver.resolve(IDateFormatterService.self)!,
                             tagsStorage: resolver.resolve(IEventTagsStorage.self)!,
-                            searchParametersService: resolver.resolve(ISearchParametersService.self)!)
+                            searchParametersService: resolver.resolve(ISearchParametersService.self)!,
+                            debouncer: resolver.resolve(IDebouncer.self)!)
         }
         
         defaultContainer.storyboardInitCompleted(SearchViewController.self) { resolver, view in

@@ -5,8 +5,6 @@ protocol ISearchPresenter {
     
     func loadMoreEvents()
     
-    func forceEventSearching()
-    
     func searchEvents(by searchText: String)
     
     func activate()

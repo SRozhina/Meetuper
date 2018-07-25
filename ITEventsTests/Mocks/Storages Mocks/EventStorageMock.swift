@@ -16,7 +16,7 @@ class EventStorageMock: IEventsStorage {
                            address: "Большой Сампсониевский проспект 28 к2 лит Д",
                            city: "Санкт-Петербург",
                            country: "Россия",
-                           description: "Description for event",
+                           description: "Description for event javascript",
                            tags: [Tag(id: 1, name: "JavaScript")],
                            image: UIImage(named: "js")!,
                            similarEventsCount: 2,
@@ -29,7 +29,7 @@ class EventStorageMock: IEventsStorage {
                            address: "Большой Сампсониевский проспект 28 к2 лит Д",
                            city: "Санкт-Петербург",
                            country: "Россия",
-                           description: "Description for event",
+                           description: "Description for event css",
                            tags: [Tag(id: 1, name: "JavaScript"), Tag(id: 1, name: "CSS")],
                            image: UIImage(named: "js")!,
                            similarEventsCount: 2,
@@ -41,11 +41,27 @@ class EventStorageMock: IEventsStorage {
     }
     
     func searchEvents(indexRange: Range<Int>, searchText: String, searchTags: [Tag]) -> Cancelable<EventsResult> {
-        let updatedIndexRange = events.count < indexRange.upperBound
-            ? indexRange.lowerBound..<events.count
+        var filteredEvents = events
+        
+        if !searchTags.isEmpty {
+            filteredEvents = filteredEvents.filter {
+                $0.tags.contains(where: { searchTags.contains($0) })
+            }
+        }
+        
+        if searchText != "" {
+            filteredEvents = filteredEvents.filter { event in
+                let lowercasedSearchText = searchText.lowercased()
+                return event.title.lowercased().contains(lowercasedSearchText)
+                    || event.description.lowercased().contains(lowercasedSearchText)
+            }
+        }
+        
+        let updatedIndexRange = filteredEvents.count < indexRange.upperBound
+            ? indexRange.lowerBound..<filteredEvents.count
             : indexRange
-        let eventsSlice = Array(events[updatedIndexRange])
-        let eventsResult = EventsResult(events: eventsSlice, totalEventsCount: events.count)
+        let eventsSlice = Array(filteredEvents[updatedIndexRange])
+        let eventsResult = EventsResult(events: eventsSlice, totalEventsCount: filteredEvents.count)
         let promise = Promise(eventsResult)
         return Cancelable(promise: promise)
     }
