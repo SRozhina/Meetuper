@@ -65,7 +65,7 @@ class SearchPresenter: ISearchPresenter {
         let otherTags = searchParametersService.otherTags
         if selectedTags.isEmpty && otherTags.isEmpty {
             tagsStorage.fetchTags().then { tags in
-                self.searchParametersService.updateTags(selectedTags: [], otherTags: tags)
+                self.searchParametersService.updateTags(selectedTags: [], otherTags: tags.sorted { $0.name < $1.name })
                 completion()
             }
         } else {

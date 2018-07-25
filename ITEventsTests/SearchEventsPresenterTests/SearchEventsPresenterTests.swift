@@ -183,8 +183,8 @@ class SearchEventsPresenterTests: XCTestCase {
         
         //Then
         XCTAssert(waitForPromises(timeout: 2))
-        let testTags = createTestTags()
-        XCTAssertEqual(searchParametersServiceMock.otherTags, testTags)
+        let expectedTags = createTestTags().sorted { $0.name < $1.name }
+        XCTAssertEqual(searchParametersServiceMock.otherTags, expectedTags)
         XCTAssertEqual(searchParametersServiceMock.selectedTags, [])
     }
     
@@ -202,30 +202,30 @@ class SearchEventsPresenterTests: XCTestCase {
     
     func testSearchPresenterSelectEvent() {
         //Given
-        let event1 = Event(id: 1,
-                           title: "Test event1",
-                           dateInterval: DateInterval(start: Date(timeIntervalSinceNow: 60 * 60 * 24),
-                                                      end: Date(timeIntervalSinceNow: 60 * 60 * 27)),
-                           address: "Большой Сампсониевский проспект 28 к2 лит Д",
-                           city: "Санкт-Петербург",
-                           country: "Россия",
-                           description: "Description for event",
-                           tags: [Tag(id: 1, name: "JavaScript")],
-                           image: UIImage(named: "js")!,
-                           similarEventsCount: 2,
-                           source: EventSource(id: 1, name: "Timepad"),
-                           url: URL(string: "https://pitercss.timepad.ru/event/457262/"))
-        eventStorageMock.events = Array(repeating: event1, count: 5)
+        let event = Event(id: 1,
+                          title: "Test event1",
+                          dateInterval: DateInterval(start: Date(timeIntervalSinceNow: 60 * 60 * 24),
+                                                     end: Date(timeIntervalSinceNow: 60 * 60 * 27)),
+                          address: "Большой Сампсониевский проспект 28 к2 лит Д",
+                          city: "Санкт-Петербург",
+                          country: "Россия",
+                          description: "Description for event",
+                          tags: [Tag(id: 1, name: "JavaScript")],
+                          image: UIImage(named: "js")!,
+                          similarEventsCount: 2,
+                          source: EventSource(id: 1, name: "Timepad"),
+                          url: URL(string: "https://pitercss.timepad.ru/event/457262/"))
+        eventStorageMock.events = Array(repeating: event, count: 5)
         eventStorageMock.searchAction = makeSearchAction
         presenter.setup()
         XCTAssert(waitForPromises(timeout: 2))
-        
+
         //When
         presenter.selectEvent(with: 1)
         
         //Then
         XCTAssert(waitForPromises(timeout: 2))
-        XCTAssertEqual(selectedEventServiceMock.selectedEvent, event1)
+        XCTAssertEqual(selectedEventServiceMock.selectedEvent, event)
     }
     
     private func createTestTags() -> [Tag] {
