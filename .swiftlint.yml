@@ -32,5 +32,5 @@ file_length:
     warning: 500
 
 type_body_length:
-    warning: 500
-    error: 550
+    warning: 400
+    error: 450
