@@ -2,12 +2,11 @@
 import Promises
 
 class EventStorageMock: IEventsStorage {
-    var events: [Event] = []
-    var searchAction: ((Range<Int>) -> Cancelable<EventsResult>)?
+    var searchEventsMocked: ((Range<Int>) -> Cancelable<EventsResult>)?
     
     func searchEvents(indexRange: Range<Int>, searchText: String, searchTags: [Tag]) -> Cancelable<EventsResult> {
-        if let searchAction = searchAction {
-            return searchAction(indexRange)
+        if let searchEventsMocked = searchEventsMocked {
+            return searchEventsMocked(indexRange)
         }
         let eventsResult = EventsResult(events: [], totalEventsCount: 0)
         let promise = Promise(eventsResult)
