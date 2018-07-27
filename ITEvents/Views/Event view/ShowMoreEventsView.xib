@@ -18,6 +18,7 @@
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0P9-mA-fGZ">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                    <accessibility key="accessibilityConfiguration" identifier="ShowSimilarEventsButton"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="fos-ez-Mxt"/>
                     </constraints>
@@ -30,7 +31,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <accessibility key="accessibilityConfiguration" identifier="ShowSimilarEventsButton">
-                <bool key="isElement" value="YES"/>
+                <bool key="isElement" value="NO"/>
             </accessibility>
             <constraints>
                 <constraint firstItem="UCZ-pC-xDP" firstAttribute="bottom" secondItem="0P9-mA-fGZ" secondAttribute="bottom" id="JSf-aW-OSi"/>

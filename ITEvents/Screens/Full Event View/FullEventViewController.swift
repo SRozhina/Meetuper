@@ -25,7 +25,6 @@ class FullEventViewController: UIViewController, IFullEventView {
         let eventView = EventView.initiateAndSetup(with: event,
                                                    eventURLOpener: self,
                                                    isSimilar: isSimilar)
-        eventView.accessibilityIdentifier = "EventView"
         let stackViewToAddEvent: UIStackView = isSimilar ? descriptionsStackView : stackView
         stackViewToAddEvent.addArrangedSubview(eventView)
     }
