@@ -211,7 +211,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
-                                                            <view contentMode="scaleToFill" horizontalHuggingPriority="241" verticalHuggingPriority="241" horizontalCompressionResistancePriority="759" verticalCompressionResistancePriority="759" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IgW-Zq-BGV" customClass="TagListView" customModule="TagListView">
+                                                            <view contentMode="scaleToFill" horizontalHuggingPriority="240" verticalHuggingPriority="240" horizontalCompressionResistancePriority="760" verticalCompressionResistancePriority="760" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IgW-Zq-BGV" customClass="TagListView" customModule="TagListView">
                                                                 <rect key="frame" x="0.0" y="60" width="323" height="50"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <userDefinedRuntimeAttributes>
@@ -354,6 +354,9 @@
                                     <subviews>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ZOz-dD-dQo">
                                             <rect key="frame" x="8" y="8" width="359" height="34"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="ActivityIndicator"/>
+                                            </userDefinedRuntimeAttributes>
                                         </activityIndicatorView>
                                     </subviews>
                                     <constraints>
