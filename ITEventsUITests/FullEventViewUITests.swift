@@ -3,6 +3,7 @@ import XCTest
 class FullEventViewUITests: XCTestCase {
     private var app: XCUIApplication!
     
+    private lazy var eventsCollectionView = app.collectionViews["EventsCollectionView"]
     private lazy var eventView = app.otherElements.matching(identifier: "EventView")
     private lazy var eventImage = app.images.matching(identifier: "EventImage")
     private lazy var eventTitle = app.staticTexts.matching(identifier: "EventTitle")
@@ -27,8 +28,12 @@ class FullEventViewUITests: XCTestCase {
     }
     
     func testFullEventViewContent() {
-        app.collectionViews.cells.element(boundBy: 0).tap()
+        //Given
+        
+        //When
+        eventsCollectionView.cells.element(boundBy: 0).tap()
 
+        //Then
         if !eventView.element.waitForExistence(timeout: 3) { XCTFail("No Event View Found") }
         XCTAssertTrue(eventView.element.exists)
         
@@ -46,9 +51,10 @@ class FullEventViewUITests: XCTestCase {
     }
     
     func testFullEventViewShowSimilarEvents() {
+        //Given
         var isEventWithSimilarFound = false
         
-        _ = app.collectionViews.cells.element.waitForExistence(timeout: 3)
+        _ = eventsCollectionView.cells.element.waitForExistence(timeout: 3)
         
         for index in 0..<app.collectionViews.cells.count - 1 {
             app.collectionViews.cells.element(boundBy: index).tap()
@@ -62,7 +68,10 @@ class FullEventViewUITests: XCTestCase {
         
         if !isEventWithSimilarFound { XCTFail("There is no events with similar") }
         
+        //When
         showSimilarEventsButton.tap()
+        
+        //Then
         if !app.buttons["Show less descriptions"].waitForExistence(timeout: 3) { XCTFail("No Show less descriptions button found") }
         XCTAssertGreaterThan(eventView.count, 1)
         XCTAssertGreaterThan(eventImage.count, 1)
@@ -76,9 +85,10 @@ class FullEventViewUITests: XCTestCase {
     }
     
     func testFullEventViewHideSimilarEvents() {
+        //Given
         var isEventWithSimilarFound = false
         
-        _ = app.collectionViews.cells.element.waitForExistence(timeout: 3)
+        _ = eventsCollectionView.cells.element.waitForExistence(timeout: 3)
         
         for index in 0..<app.collectionViews.cells.count - 1 {
             app.collectionViews.cells.element(boundBy: index).tap()
@@ -94,7 +104,11 @@ class FullEventViewUITests: XCTestCase {
         
         showSimilarEventsButton.tap()
         if !app.buttons["Show less descriptions"].waitForExistence(timeout: 3) { XCTFail("No Show less descriptions button found") }
+        
+        //When
         app.buttons["Show less descriptions"].tap()
+        
+        //Then
         XCTAssertEqual(eventView.count, 1)
         XCTAssertEqual(eventImage.count, 1)
         XCTAssertEqual(eventTitle.count, 1)
@@ -107,8 +121,13 @@ class FullEventViewUITests: XCTestCase {
     }
     
     func testFullEventViewOpenEventSource() {
-        app.collectionViews.cells.element(boundBy: 0).tap()
+        //Given
+        eventsCollectionView.cells.element(boundBy: 0).tap()
+        
+        //When
         eventSourceButton.element.tap()
+        
+        //Then
         XCTAssertTrue(app.otherElements["URL"].exists)
     }
 }
