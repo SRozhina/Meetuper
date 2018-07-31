@@ -11,7 +11,7 @@ class SearchPresenter: ISearchPresenter {
     private var events: [Event] = []
     private var eventViewModels: [EventCollectionCellViewModel] = []
     private var isListLayoutCurrent: Bool!
-    private var searchEventsDebounced: ((Bool) -> Void)!
+    private var searchEventsDebounced: DebouncedFunction!
     private var searchText: String = ""
     private var searchTags: [Tag] = []
     private var eventsTotal = -1
@@ -23,7 +23,8 @@ class SearchPresenter: ISearchPresenter {
          userSettingsService: IUserSettingsService,
          dateFormatterService: IDateFormatterService,
          tagsStorage: IEventTagsStorage,
-         searchParametersService: ISearchParametersService) {
+         searchParametersService: ISearchParametersService,
+         debouncer: IDebouncer) {
         self.view = view
         self.eventsStorage = eventsStorage
         self.selectedEventService = selectedEventService
@@ -32,9 +33,9 @@ class SearchPresenter: ISearchPresenter {
         self.tagsStorage = tagsStorage
         self.searchParametersService = searchParametersService
         
-        searchEventsDebounced = debounce(
+        searchEventsDebounced = debouncer.debounce(
             delay: DispatchTimeInterval.seconds(1),
-            queue: DispatchQueue.main,
+            queue: .main,
             action: searchEvents
         )
     }
@@ -64,7 +65,7 @@ class SearchPresenter: ISearchPresenter {
         let otherTags = searchParametersService.otherTags
         if selectedTags.isEmpty && otherTags.isEmpty {
             tagsStorage.fetchTags().then { tags in
-                self.searchParametersService.updateTags(selectedTags: [], otherTags: tags)
+                self.searchParametersService.updateTags(selectedTags: [], otherTags: tags.sorted { $0.name < $1.name })
                 completion()
             }
         } else {
@@ -79,11 +80,6 @@ class SearchPresenter: ISearchPresenter {
         }
         
         searchCancelation = loadBatchEvents()
-    }
-    
-    func forceEventSearching() {
-        clearViewEvents()
-        searchEventsDebounced(false)
     }
     
     func searchEvents(by newSearchText: String) {
@@ -129,8 +125,7 @@ class SearchPresenter: ISearchPresenter {
         
         events.append(contentsOf: eventsResult.events)
         eventViewModels.append(contentsOf: eventsResult.events.map(createEventViewModel))
-        
-        view.hideLoadingIndicator()
+
         if eventsResult.events.isEmpty { view.showBackgroundView() }
         
         view.setEvents(self.eventViewModels)

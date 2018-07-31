@@ -24,9 +24,9 @@ class SearchParametersPresenterTests: XCTestCase {
     func testPresenterSetup() {
         //Given
         searchParametersServiceMock.selectedTags = [Tag(id: 1, name: "JavaScript"),
-                                                Tag(id: 2, name: "iOS")]
+                                                    Tag(id: 2, name: "iOS")]
         searchParametersServiceMock.otherTags = [Tag(id: 3, name: "Android"),
-                                             Tag(id: 4, name: "Python")]
+                                                 Tag(id: 4, name: "Python")]
         //When
         searchParametersPresenter.setup()
         
@@ -39,12 +39,12 @@ class SearchParametersPresenterTests: XCTestCase {
     func testPresenterSelectSearchTagAndSave() {
         //Given
         searchParametersServiceMock.selectedTags = [Tag(id: 1, name: "JavaScript"),
-                                                Tag(id: 2, name: "iOS")]
+                                                    Tag(id: 2, name: "iOS")]
         searchParametersServiceMock.otherTags = [Tag(id: 3, name: "Android"),
-                                             Tag(id: 4, name: "Python")]
+                                                 Tag(id: 4, name: "Python")]
+        searchParametersPresenter.setup()
         
         //When
-        searchParametersPresenter.setup()
         searchParametersPresenter.selectTag(Tag(id: 3, name: "Android"))
         searchParametersPresenter.saveSettings()
         
@@ -61,9 +61,9 @@ class SearchParametersPresenterTests: XCTestCase {
     func testPresenterDeselectSearchTagAndSave() {
         //Given
         searchParametersServiceMock.selectedTags = [Tag(id: 1, name: "JavaScript"),
-                                                Tag(id: 2, name: "iOS")]
+                                                    Tag(id: 2, name: "iOS")]
         searchParametersServiceMock.otherTags = [Tag(id: 3, name: "Android"),
-                                             Tag(id: 4, name: "Python")]
+                                                 Tag(id: 4, name: "Python")]
         
         //When
         searchParametersPresenter.setup()

@@ -2,7 +2,6 @@ warning_threshold: 15
 
 excluded:
  - Pods
- - MBUITest
 
 opt_in_rules:
 - private_outlet
@@ -26,12 +25,12 @@ line_length: 150
 warning: 150
 
 function_parameter_count:
-warning: 10
-error: 15
+    warning: 10
+    error: 15
 
 file_length:
-warning: 500
+    warning: 500
 
 type_body_length:
-warning: 400
-error: 450
+    warning: 400
+    error: 450

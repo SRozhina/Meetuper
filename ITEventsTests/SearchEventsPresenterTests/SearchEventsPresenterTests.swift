@@ -2,35 +2,45 @@ import XCTest
 @testable import Promises
 @testable import ITEvents
 
-class FavoriteEventsPresenterTests: XCTestCase {
-    private var presenter: IFavoritePresenter!
-    private var viewMock: FavoriteViewMock!
-    private var selectedEventServiceMock: SelectedEventServiceMock!
+class SearchEventsPresenterTests: XCTestCase {
+    private var presenter: ISearchPresenter!
+
+    private var viewMock: SearchViewMock!
     private var eventStorageMock: EventStorageMock!
+    private var selectedEventServiceMock: SelectedEventServiceMock!
+    private var searchParametersServiceMock: SearchParametersServiceMock!
+    private var debouncerMock: DebouncerMock!
     
     override func setUp() {
         super.setUp()
-        
-        viewMock = FavoriteViewMock()
-        selectedEventServiceMock = SelectedEventServiceMock()
+        viewMock = SearchViewMock()
         eventStorageMock = EventStorageMock()
+        selectedEventServiceMock = SelectedEventServiceMock()
+        searchParametersServiceMock = SearchParametersServiceMock()
+        debouncerMock = DebouncerMock()
         
-        presenter = FavoritePresenter(view: viewMock,
-                                      eventStorage: eventStorageMock,
-                                      selectedEventService: selectedEventServiceMock,
-                                      userSettingsService: UserSettingsServiceMock(),
-                                      dateFormatterService: DateFormatterServiceMock())
+        let tags = createTestTags()
+        
+        presenter = SearchPresenter(view: viewMock,
+                                    eventsStorage: eventStorageMock,
+                                    selectedEventService: selectedEventServiceMock,
+                                    userSettingsService: UserSettingsServiceMock(),
+                                    dateFormatterService: DateFormatterServiceMock(),
+                                    tagsStorage: EventTagsStorageMock(tags: tags),
+                                    searchParametersService: searchParametersServiceMock,
+                                    debouncer: debouncerMock)
     }
     
     override func tearDown() {
         presenter = nil
         viewMock = nil
-        selectedEventServiceMock = nil
         eventStorageMock = nil
+        selectedEventServiceMock = nil
+        searchParametersServiceMock = nil
         super.tearDown()
     }
     
-    func testPresenterSetup() {
+    func testSearchPresenterSetup() {
         //Given
         let allEvents = createTestEvents()
         eventStorageMock.searchEventsMocked = { _ in self.makeEventResult(with: allEvents) }
@@ -46,7 +56,7 @@ class FavoriteEventsPresenterTests: XCTestCase {
         XCTAssertEqual(viewMock.loadingIndicatorHidedCount, 1)
     }
     
-    func testPresenterLoadMoreEvents() {
+    func testSearchPresenterLoadMoreEvents() {
         //Given
         let allEvents = createTestEvents()
         eventStorageMock.searchEventsMocked = { self.makeSearchBatchEventsAction(indexRange: $0, events: allEvents) }
@@ -64,16 +74,16 @@ class FavoriteEventsPresenterTests: XCTestCase {
         XCTAssertEqual(viewMock.loadingIndicatorHidedCount, 2)
     }
     
-    func testPresenterAllEventsLoaded() {
+    func testSearchPresenterAllEventsLoaded() {
         //Given
         let allEvents = createTestEvents()
         eventStorageMock.searchEventsMocked = { self.makeSearchBatchEventsAction(indexRange: $0, events: allEvents) }
         presenter.setup()
         XCTAssert(waitForPromises(timeout: 2))
-        presenter.loadMoreEvents()
-        XCTAssert(waitForPromises(timeout: 2))
         
         //When
+        presenter.loadMoreEvents()
+        XCTAssert(waitForPromises(timeout: 2))
         presenter.loadMoreEvents()
         
         //Then
@@ -84,20 +94,7 @@ class FavoriteEventsPresenterTests: XCTestCase {
         XCTAssertEqual(viewMock.loadingIndicatorHidedCount, 2)
     }
     
-    func testSearchPresenterActivate() {
-        //Given
-        eventStorageMock.searchEventsMocked = { _ in self.makeEmptyResult() }
-        presenter.setup()
-
-        //When
-        presenter.activate()
-        
-        //Then
-        XCTAssert(waitForPromises(timeout: 2))
-        XCTAssertEqual(viewMock.toggleLayoutCount, 1)
-    }
-    
-    func testPresenterSelectEvent() {
+    func testSearchPresenterSearchByText() {
         //Given
         let allEvents = createTestEvents()
         eventStorageMock.searchEventsMocked = { _ in self.makeEventResult(with: allEvents) }
@@ -105,11 +102,133 @@ class FavoriteEventsPresenterTests: XCTestCase {
         XCTAssert(waitForPromises(timeout: 2))
         
         //When
+        presenter.searchEvents(by: "CSS")
+        
+        //Then
+        XCTAssert(waitForPromises(timeout: 2))
+        XCTAssertEqual(viewMock.loadingIndicatorShownCount, 3)
+        XCTAssertEqual(viewMock.setEventsCount, 2)
+        XCTAssertEqual(viewMock.eventViweModels.count, allEvents.count)
+        XCTAssertEqual(viewMock.loadingIndicatorHidedCount, 2)
+        XCTAssertEqual(viewMock.eventsCleanedCount, 1)
+    }
+    
+    func testSearchPresenterSearchByTheSameTextTwice() {
+        //Given
+        let allEvents = createTestEvents()
+        eventStorageMock.searchEventsMocked = { _ in self.makeEventResult(with: allEvents) }
+        presenter.setup()
+        XCTAssert(waitForPromises(timeout: 2))
+        presenter.searchEvents(by: "CSS")
+        XCTAssert(waitForPromises(timeout: 2))
+        
+        //When
+        presenter.searchEvents(by: "CSS")
+        
+        //Then
+        XCTAssertEqual(viewMock.loadingIndicatorShownCount, 3)
+        XCTAssertEqual(viewMock.setEventsCount, 2)
+        XCTAssertEqual(viewMock.eventViweModels.count, allEvents.count)
+        XCTAssertEqual(viewMock.loadingIndicatorHidedCount, 2)
+        XCTAssertEqual(viewMock.eventsCleanedCount, 1)
+    }
+    
+    func testSearchPresenterSearchByTag() {
+        //Given
+        let allEvents = createTestEvents()
+        eventStorageMock.searchEventsMocked = { _ in self.makeEventResult(with: allEvents) }
+        presenter.setup()
+        XCTAssert(waitForPromises(timeout: 2))
+        
+        //When
+        searchParametersServiceMock.updateTags(selectedTags: [Tag(id: 2, name: "CSS")], otherTags: searchParametersServiceMock.otherTags)
+        
+        //Then
+        XCTAssert(waitForPromises(timeout: 2))
+        XCTAssertEqual(viewMock.loadingIndicatorShownCount, 3)
+        XCTAssertEqual(viewMock.setEventsCount, 2)
+        XCTAssertEqual(viewMock.eventViweModels.count, allEvents.count)
+        XCTAssertEqual(viewMock.loadingIndicatorHidedCount, 2)
+        XCTAssertEqual(viewMock.eventsCleanedCount, 1)
+    }
+    
+    func testSearchPresenterNoEventsFound() {
+        //Given
+        var allEvents = createTestEvents()
+        eventStorageMock.searchEventsMocked = { _ in self.makeEventResult(with: allEvents) }
+        presenter.setup()
+        XCTAssert(waitForPromises(timeout: 2))
+        allEvents = []
+        
+        //When
+        presenter.searchEvents(by: "123")
+        
+        //Then
+        XCTAssert(waitForPromises(timeout: 2))
+        XCTAssertEqual(viewMock.loadingIndicatorShownCount, 3)
+        XCTAssertEqual(viewMock.setEventsCount, 2)
+        XCTAssertEqual(viewMock.eventViweModels.count, 0)
+        XCTAssertEqual(viewMock.loadingIndicatorHidedCount, 2)
+        XCTAssertEqual(viewMock.eventsCleanedCount, 1)
+        XCTAssertEqual(viewMock.backgroundViewShownCount, 1)
+    }
+    
+    func testSearchPresenterGetSearchParameters() {
+        //Given
+        eventStorageMock.searchEventsMocked = { _ in self.makeEmptyResult() }
+        presenter.setup()
+        XCTAssert(waitForPromises(timeout: 2))
+        
+        //When
+        presenter.prepareSearchParameters(completion: { })
+        
+        //Then
+        XCTAssert(waitForPromises(timeout: 2))
+        let expectedTags = createTestTags().sorted { $0.name < $1.name }
+        XCTAssertEqual(searchParametersServiceMock.otherTags, expectedTags)
+        XCTAssertEqual(searchParametersServiceMock.selectedTags, [])
+    }
+    
+    func testSearchPresenterActivate() {
+        //Given
+        eventStorageMock.searchEventsMocked = { _ in self.makeEmptyResult() }
+        presenter.setup()
+        
+        //When
+        presenter.activate()
+        
+        //Then
+        XCTAssert(waitForPromises(timeout: 2))
+        XCTAssertEqual(viewMock.toggleLayoutCallsCount, 1)
+    }
+    
+    func testSearchPresenterSelectEvent() {
+        //Given
+        let allEvents = createTestEvents()
+        eventStorageMock.searchEventsMocked = { _ in self.makeEventResult(with: allEvents) }
+        presenter.setup()
+        XCTAssert(waitForPromises(timeout: 2))
+
+        //When
         presenter.selectEvent(with: allEvents[0].id)
         
         //Then
         XCTAssert(waitForPromises(timeout: 2))
         XCTAssertEqual(selectedEventServiceMock.selectedEvent, allEvents[0])
+    }
+    
+    private func createTestTags() -> [Tag] {
+        return [
+            Tag(id: 1, name: "JavaScript"),
+            Tag(id: 2, name: "iOS"),
+            Tag(id: 3, name: "Android"),
+            Tag(id: 4, name: "Python"),
+            Tag(id: 5, name: "php"),
+            Tag(id: 6, name: "Dart"),
+            Tag(id: 7, name: "CSS"),
+            Tag(id: 8, name: "Go"),
+            Tag(id: 9, name: "Frontend")
+        ]
     }
     
     private func createTestEvents() -> [Event] {
