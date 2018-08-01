@@ -2,9 +2,10 @@ language: swift
 osx_image: xcode9.4
 
 before_install:
-- export IOS_SIMULATOR_UDID=`instruments -s devices | grep "iPhone 8 (11.4" | awk -F '[ ]' '{print $4}' | awk -F '[\[]' '{print $2}' | sed 's/.$//'`
+# Fix Travis  xcodebuild exited with 65 https://github.com/travis-ci/travis-ci/issues/6675#issuecomment-257964767
+- export IOS_SIMULATOR_UDID=`instruments -s devices | grep -m 1 "iPhone 8 (11" | awk -F '[ ]' '{print $4}' | awk -F '[\[]' '{print $2}' | sed 's/.$//'`
 - echo $IOS_SIMULATOR_UDID
 - open -a "simulator" --args -CurrentDeviceUDID $IOS_SIMULATOR_UDID
 
 script:
-- xcodebuild -workspace ITEvents.xcworkspace -scheme ITEvents -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.4' build test
+- travis_retry xcodebuild -workspace ITEvents.xcworkspace -scheme ITEvents -sdk iphonesimulator -destination "id=$IOS_SIMULATOR_UDID" test | xcpretty -c
