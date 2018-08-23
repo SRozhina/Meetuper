@@ -8,16 +8,6 @@ env:
           SDK=iphonesimulator11.4
           SIMULATOR="platform=iOS Simulator,OS=11.4,name=iPhone 8"
 
-before_install:
-    - export IOS_SIMULATOR_UDID=`instruments -s devices | grep "iPhone 8 (11.4" | awk -F '[ ]' '{print $4}' | awk -F '[[]' '{print $2}' | sed 's/.$//'`
-    - echo $IOS_SIMULATOR_UDID
-    - open -b com.apple.iphonesimulator --args -CurrentDeviceUDID $IOS_SIMULATOR_UDID
-
-script:
-    - set -o pipefail
-    - xcodebuild -version
-    - xcodebuild -showsdks
-    - instruments -s devices
-
 # Build Framework in Debug and Run Tests if specified
+script:
     - travis_retry xcodebuild -workspace $WORKSPACE -scheme "$SCHEME" -sdk $SDK test -destination "$SIMULATOR" | xcpretty -c
