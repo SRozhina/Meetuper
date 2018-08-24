@@ -45,8 +45,8 @@ class EventCollectionViewHandler: NSObject, IEventCollectionViewHandler {
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
-        case UICollectionElementKindSectionFooter:
-            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter,
+        case UICollectionView.elementKindSectionFooter:
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter,
                                                                          withReuseIdentifier: "Footer",
                                                                          for: indexPath) as! EventsCollectionViewFooter
             if isLoadingIndicatorShown {
