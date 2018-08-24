@@ -127,8 +127,9 @@ class FullEventViewUITests: XCTestCase {
         //When
         eventSourceButton.element.tap()
         
-        print(app.debugDescription)
         //Then
-        XCTAssertTrue(app.buttons.matching(identifier: "URL").element.exists)
+        if !app.buttons.matching(identifier: "URL").element.waitForExistence(timeout: 3) {
+            XCTFail("No Safari with source URL was opened")
+        }
     }
 }
