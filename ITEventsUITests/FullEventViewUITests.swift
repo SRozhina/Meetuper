@@ -125,11 +125,12 @@ class FullEventViewUITests: XCTestCase {
         eventsCollectionView.cells.element(boundBy: 0).tap()
         
         //When
+        _ = eventView.element.waitForExistence(timeout: 3)
         eventSourceButton.element.tap()
         
         //Then
-        if !app.buttons.matching(identifier: "URL").element.waitForExistence(timeout: 3) {
+        //if !app.buttons.matching(identifier: "URL").element.waitForExistence(timeout: 3) {
             XCTFail("No Safari with source URL was opened")
-        }
+        //}
     }
 }
