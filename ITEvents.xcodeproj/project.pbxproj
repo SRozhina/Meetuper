@@ -63,6 +63,7 @@
 		C384AD5520EA7594006B8C27 /* SearchParametersViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C384AD5420EA7594006B8C27 /* SearchParametersViewMock.swift */; };
 		C384AD8620ECFE86006B8C27 /* SearchParametersServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C384AD8520ECFE86006B8C27 /* SearchParametersServiceMock.swift */; };
 		C389283F20E2C2A900B0BF4A /* EventsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C389283E20E2C2A900B0BF4A /* EventsResult.swift */; };
+		C38AC1D921108F5F0049FD7E /* FullEventViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38AC1C721108EC90049FD7E /* FullEventViewUITests.swift */; };
 		C391908C201E59D100CD7151 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391908B201E59D100CD7151 /* Event.swift */; };
 		C3919090201E604600CD7151 /* FavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391908F201E604600CD7151 /* FavoritePresenter.swift */; };
 		C3919093201E608A00CD7151 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3919092201E608A00CD7151 /* SearchViewController.swift */; };
@@ -113,6 +114,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		C38AC1D421108F500049FD7E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C3B8828C201A22510031F261 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C3B88293201A22510031F261;
+			remoteInfo = ITEvents;
+		};
 		C3C132B720E6C26100FE7B0D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C3B8828C201A22510031F261 /* Project object */;
@@ -186,6 +194,9 @@
 		C384AD5420EA7594006B8C27 /* SearchParametersViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParametersViewMock.swift; sourceTree = "<group>"; };
 		C384AD8520ECFE86006B8C27 /* SearchParametersServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParametersServiceMock.swift; sourceTree = "<group>"; };
 		C389283E20E2C2A900B0BF4A /* EventsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsResult.swift; sourceTree = "<group>"; };
+		C38AC1C721108EC90049FD7E /* FullEventViewUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullEventViewUITests.swift; sourceTree = "<group>"; };
+		C38AC1CF21108F500049FD7E /* ITEventsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ITEventsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C38AC1D321108F500049FD7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C391908B201E59D100CD7151 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		C391908F201E604600CD7151 /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePresenter.swift; sourceTree = "<group>"; };
 		C3919092201E608A00CD7151 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -240,6 +251,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C38AC1CC21108F500049FD7E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C3B88291201A22510031F261 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -401,6 +419,15 @@
 			path = Storages;
 			sourceTree = "<group>";
 		};
+		C38AC1D021108F500049FD7E /* ITEventsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C38AC1C721108EC90049FD7E /* FullEventViewUITests.swift */,
+				C38AC1D321108F500049FD7E /* Info.plist */,
+			);
+			path = ITEventsUITests;
+			sourceTree = "<group>";
+		};
 		C3919088201E597D00CD7151 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
@@ -515,8 +542,10 @@
 				C3A30CAC201BDEB90041D549 /* ITEvents.app */,
 				4B657F909494C1105F7D5DB5 /* Pods */,
 				C3C132B320E6C26100FE7B0D /* ITEventsTests */,
+				C38AC1D021108F500049FD7E /* ITEventsUITests */,
 				E4429BA5C6238A6F3B0C2565 /* Frameworks */,
 				C3C132B220E6C26100FE7B0D /* ITEventsTests.xctest */,
+				C38AC1CF21108F500049FD7E /* ITEventsUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -623,6 +652,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		C38AC1CE21108F500049FD7E /* ITEventsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C38AC1D621108F500049FD7E /* Build configuration list for PBXNativeTarget "ITEventsUITests" */;
+			buildPhases = (
+				C38AC1CB21108F500049FD7E /* Sources */,
+				C38AC1CC21108F500049FD7E /* Frameworks */,
+				C38AC1CD21108F500049FD7E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C38AC1D521108F500049FD7E /* PBXTargetDependency */,
+			);
+			name = ITEventsUITests;
+			productName = ITEventsUITests;
+			productReference = C38AC1CF21108F500049FD7E /* ITEventsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		C3B88293201A22510031F261 /* ITEvents */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C3B882BC201A22520031F261 /* Build configuration list for PBXNativeTarget "ITEvents" */;
@@ -669,10 +716,16 @@
 		C3B8828C201A22510031F261 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1000;
+				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = Sofia;
 				TargetAttributes = {
+					C38AC1CE21108F500049FD7E = {
+						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
+						ProvisioningStyle = Automatic;
+						TestTargetID = C3B88293201A22510031F261;
+					};
 					C3B88293201A22510031F261 = {
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 1000;
@@ -700,11 +753,19 @@
 			targets = (
 				C3B88293201A22510031F261 /* ITEvents */,
 				C3C132B120E6C26100FE7B0D /* ITEventsTests */,
+				C38AC1CE21108F500049FD7E /* ITEventsUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C38AC1CD21108F500049FD7E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C3B88292201A22510031F261 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -745,8 +806,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ITEvents/Pods-ITEvents-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
-				"${BUILT_PRODUCTS_DIR}/PromisesSwift/Promises.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC-iOS12.0/FBLPromises.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesSwift-iOS12.0/Promises.framework",
 				"${BUILT_PRODUCTS_DIR}/Reusable/Reusable.framework",
 				"${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework",
 				"${BUILT_PRODUCTS_DIR}/SwinjectStoryboard/SwinjectStoryboard.framework",
@@ -791,8 +852,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ITEventsTests/Pods-ITEventsTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
-				"${BUILT_PRODUCTS_DIR}/PromisesSwift/Promises.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC-iOS11.4/FBLPromises.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesSwift-iOS11.4/Promises.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -838,6 +899,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C38AC1CB21108F500049FD7E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C38AC1D921108F5F0049FD7E /* FullEventViewUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C3B88290201A22510031F261 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -939,6 +1008,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		C38AC1D521108F500049FD7E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C3B88293201A22510031F261 /* ITEvents */;
+			targetProxy = C38AC1D421108F500049FD7E /* PBXContainerItemProxy */;
+		};
 		C3C132B820E6C26100FE7B0D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C3B88293201A22510031F261 /* ITEvents */;
@@ -966,6 +1040,38 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		C38AC1D721108F500049FD7E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7U8A899S5N;
+				INFOPLIST_FILE = ITEventsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.SonyaTest.ITEventsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ITEvents;
+			};
+			name = Debug;
+		};
+		C38AC1D821108F500049FD7E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7U8A899S5N;
+				INFOPLIST_FILE = ITEventsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.SonyaTest.ITEventsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ITEvents;
+			};
+			name = Release;
+		};
 		C3B882BA201A22520031F261 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1085,7 +1191,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7U8A899S5N;
 				INFOPLIST_FILE = "$(SRCROOT)/ITEvents/Supporting files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SonyaTest.ITEvents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1102,7 +1207,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7U8A899S5N;
 				INFOPLIST_FILE = "$(SRCROOT)/ITEvents/Supporting files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SonyaTest.ITEvents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1120,7 +1224,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7U8A899S5N;
 				INFOPLIST_FILE = ITEventsTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SonyaTest.ITEventsTests;
@@ -1140,7 +1243,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7U8A899S5N;
 				INFOPLIST_FILE = ITEventsTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SonyaTest.ITEventsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1153,6 +1255,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C38AC1D621108F500049FD7E /* Build configuration list for PBXNativeTarget "ITEventsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C38AC1D721108F500049FD7E /* Debug */,
+				C38AC1D821108F500049FD7E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C3B8828F201A22510031F261 /* Build configuration list for PBXProject "ITEvents" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

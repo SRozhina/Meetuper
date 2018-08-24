@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Yi-Er-GNF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Yi-Er-GNF">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -169,14 +171,14 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="RNw-R1-rQR">
                                         <rect key="frame" x="10" y="10" width="355" height="534"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" horizontalHuggingPriority="240" verticalHuggingPriority="240" horizontalCompressionResistancePriority="760" verticalCompressionResistancePriority="760" translatesAutoresizingMaskIntoConstraints="NO" id="YZf-wo-rBw">
-                                                <rect key="frame" x="0.0" y="0.0" width="355" height="86"/>
+                                            <view contentMode="scaleToFill" horizontalHuggingPriority="240" verticalHuggingPriority="240" horizontalCompressionResistancePriority="760" verticalCompressionResistancePriority="760" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YZf-wo-rBw">
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="130"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="klI-gc-OVZ">
-                                                        <rect key="frame" x="16" y="10" width="323" height="66"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="klI-gc-OVZ">
+                                                        <rect key="frame" x="16" y="10" width="323" height="110"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Obs-4t-QfG" customClass="TagListView" customModule="TagListView">
-                                                                <rect key="frame" x="0.0" y="0.0" width="323" height="28"/>
+                                                            <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Obs-4t-QfG" customClass="TagListView" customModule="TagListView">
+                                                                <rect key="frame" x="0.0" y="0.0" width="323" height="50"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="textColor">
@@ -209,8 +211,8 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
-                                                            <view contentMode="scaleToFill" horizontalHuggingPriority="240" verticalHuggingPriority="240" horizontalCompressionResistancePriority="760" verticalCompressionResistancePriority="760" translatesAutoresizingMaskIntoConstraints="NO" id="IgW-Zq-BGV" customClass="TagListView" customModule="TagListView">
-                                                                <rect key="frame" x="0.0" y="38" width="323" height="28"/>
+                                                            <view contentMode="scaleToFill" horizontalHuggingPriority="241" verticalHuggingPriority="241" horizontalCompressionResistancePriority="759" verticalCompressionResistancePriority="759" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IgW-Zq-BGV" customClass="TagListView" customModule="TagListView">
+                                                                <rect key="frame" x="0.0" y="60" width="323" height="50"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="textColor">
@@ -254,8 +256,8 @@
                                                     <constraint firstAttribute="bottom" secondItem="klI-gc-OVZ" secondAttribute="bottom" constant="10" id="ged-L9-uMD"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" horizontalHuggingPriority="260" verticalHuggingPriority="260" horizontalCompressionResistancePriority="740" verticalCompressionResistancePriority="740" translatesAutoresizingMaskIntoConstraints="NO" id="Gkb-at-DU9">
-                                                <rect key="frame" x="0.0" y="86" width="355" height="448"/>
+                                            <view contentMode="scaleToFill" horizontalHuggingPriority="261" verticalHuggingPriority="261" horizontalCompressionResistancePriority="739" verticalCompressionResistancePriority="739" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gkb-at-DU9">
+                                                <rect key="frame" x="0.0" y="130" width="355" height="404"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
@@ -368,6 +370,7 @@
                                     <userDefinedRuntimeAttribute type="rect" keyPath="contentInset">
                                         <rect key="value" x="0.0" y="0.0" width="10" height="0.0"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="EventsCollectionView"/>
                                 </userDefinedRuntimeAttributes>
                             </collectionView>
                         </subviews>
@@ -490,7 +493,7 @@
         <image name="settings" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9SO-cF-Njo"/>
+        <segue reference="dEb-y7-KcZ"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.027450980390000001" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
