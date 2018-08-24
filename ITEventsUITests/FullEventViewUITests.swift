@@ -127,6 +127,7 @@ class FullEventViewUITests: XCTestCase {
         //When
         eventSourceButton.element.tap()
         
+        print(app.debugDescription)
         //Then
         XCTAssertTrue(app.buttons.matching(identifier: "URL").element.exists)
     }
