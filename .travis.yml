@@ -5,8 +5,8 @@ env:
         - WORKSPACE=ITEvents.xcworkspace
     matrix:
         - SCHEME="ITEvents"
-          SDK=iphonesimulator11.4
-          SIMULATOR="platform=iOS Simulator,OS=11.4,name=iPhone 8"
+          SDK=iphonesimulator112.0
+          SIMULATOR="platform=iOS Simulator,OS=12.0,name=iPhone 8"
 
 # Build Framework in Debug and Run Tests if specified
 script:
