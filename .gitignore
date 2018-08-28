@@ -4,6 +4,9 @@ build
 !*.xcodeproj/project.pbxproj
 !*.xcworkspace/contents.xcworkspacedata
 
+##Build time log
+buildtimes.log
+
 ## Build generated
 build/
 DerivedData/

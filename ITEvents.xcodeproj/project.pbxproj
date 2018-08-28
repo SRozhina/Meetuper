@@ -675,11 +675,13 @@
 			buildConfigurationList = C3B882BC201A22520031F261 /* Build configuration list for PBXNativeTarget "ITEvents" */;
 			buildPhases = (
 				D3E47DE6BEC07F6855C17E4D /* [CP] Check Pods Manifest.lock */,
+				C3729FDB213527170046D2F5 /* Start time */,
 				C3B88290201A22510031F261 /* Sources */,
 				C3B88291201A22510031F261 /* Frameworks */,
 				C3B88292201A22510031F261 /* Resources */,
-				C3B882C5201A242C0031F261 /* ShellScript */,
+				C3B882C5201A242C0031F261 /* SwiftLint */,
 				463541AD3E81A627713D189A /* [CP] Embed Pods Frameworks */,
+				C3729FDC213527730046D2F5 /* End time */,
 			);
 			buildRules = (
 			);
@@ -865,18 +867,55 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ITEventsTests/Pods-ITEventsTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C3B882C5201A242C0031F261 /* ShellScript */ = {
+		C3729FDB213527170046D2F5 /* Start time */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Start time";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"$(date +%s)\" > \"buildtimes.log\"\n";
+		};
+		C3729FDC213527730046D2F5 /* End time */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "End time";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "startime=$(<buildtimes.log)\nendtime=$(date +%s)\ndeltatime=$((endtime-startime))\nnewline=$'\\n'\necho \"[Start] $startime$newline[End] $endtime$newline[Delta] $deltatime\" > \"buildtimes.log\"\n";
+		};
+		C3B882C5201A242C0031F261 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = SwiftLint;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		D3E47DE6BEC07F6855C17E4D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1192,6 +1231,7 @@
 				DEVELOPMENT_TEAM = 7U8A899S5N;
 				INFOPLIST_FILE = "$(SRCROOT)/ITEvents/Supporting files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -warn-long-function-bodies=500";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SonyaTest.ITEvents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1208,6 +1248,7 @@
 				DEVELOPMENT_TEAM = 7U8A899S5N;
 				INFOPLIST_FILE = "$(SRCROOT)/ITEvents/Supporting files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SonyaTest.ITEvents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
