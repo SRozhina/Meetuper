@@ -2,18 +2,20 @@ import Foundation
 import UIKit
 
 extension NSMutableAttributedString {
-    class func create(html: String, with font: UIFont? = nil) -> NSMutableAttributedString {
+    internal convenience init?(html: String, with font: UIFont? = nil) {
         let defaultOptions = [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html]
-        if let unicodedData = html.data(using: .unicode),
-            let mutableString = try? NSMutableAttributedString(data: unicodedData,
-                                                               options: defaultOptions,
-                                                               documentAttributes: nil) {
-            if let font = font {
-                mutableString.replaceFont(with: font)
-            }
-            return mutableString
+        guard let unicodedData = html.data(using: .unicode),
+              let mutableString = try? NSMutableAttributedString(data: unicodedData,
+                                                                 options: defaultOptions,
+                                                                 documentAttributes: nil) else {
+                                                                
+                                                                    self.init(string: html)
+                                                                    return
         }
-        return NSMutableAttributedString(string: html)
+        if let font = font {
+            mutableString.replaceFont(with: font)
+        }
+        self.init(attributedString: mutableString)
     }
     
     private func replaceFont(with font: UIFont) {
@@ -24,14 +26,16 @@ extension NSMutableAttributedString {
                     .withFamily(font.familyName)
                     .withSymbolicTraits(currentFont.fontDescriptor.symbolicTraits)!
                 let newFont = UIFont(descriptor: newFontDescriptor, size: font.pointSize)
-                replaceFont(range: range, value: newFont)
+                let fontMetrics = UIFontMetrics(forTextStyle: .body)
+                let scaledFont = fontMetrics.scaledFont(for: newFont)
+                replaceAttribute(.font, range: range, value: scaledFont)
             }
         }
         endEditing()
     }
     
-    private func replaceFont(range: NSRange, value: UIFont) {
-        removeAttribute(.font, range: range)
-        addAttribute(.font, value: value, range: range)
+    private func replaceAttribute(_ attribute: NSAttributedString.Key, range: NSRange, value: Any) {
+        removeAttribute(attribute, range: range)
+        addAttribute(attribute, value: value, range: range)
     }
 }

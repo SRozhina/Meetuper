@@ -8,8 +8,9 @@ class EventDescriptionView: UIView, NibLoadable {
     class func initiateAndSetup(with description: String) -> EventDescriptionView {
         let eventDescriptionView: EventDescriptionView = UIViewUtils.createPanelView()
 
-        let font = UIFont.systemFont(ofSize: 15)
-        let formattedDescription = NSMutableAttributedString.create(html: description, with: font)
+        let font = UIFont.systemFont(ofSize: 15)        
+        let formattedDescription = NSMutableAttributedString(html: description, with: font)
+        
         eventDescriptionView.descriptionLabel.attributedText = formattedDescription
         return eventDescriptionView
     }
