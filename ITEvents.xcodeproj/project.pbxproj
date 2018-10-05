@@ -59,6 +59,7 @@
 		C379A47B20FCADA4007487DA /* UserSettingsServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C379A47A20FCADA4007487DA /* UserSettingsServiceMock.swift */; };
 		C379A47D20FCCBCB007487DA /* FavoriteViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C379A47C20FCCBCB007487DA /* FavoriteViewMock.swift */; };
 		C379A47F20FCCBF2007487DA /* EventStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C379A47E20FCCBF2007487DA /* EventStorageMock.swift */; };
+		C37FA2DA21680423002C59C3 /* XCUIElementTestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37FA2D921680423002C59C3 /* XCUIElementTestExtension.swift */; };
 		C384AD4F20EA5E7F006B8C27 /* SearchParametersPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C384AD4E20EA5E7F006B8C27 /* SearchParametersPresenterTests.swift */; };
 		C384AD5520EA7594006B8C27 /* SearchParametersViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C384AD5420EA7594006B8C27 /* SearchParametersViewMock.swift */; };
 		C384AD8620ECFE86006B8C27 /* SearchParametersServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C384AD8520ECFE86006B8C27 /* SearchParametersServiceMock.swift */; };
@@ -186,6 +187,7 @@
 		C379A47A20FCADA4007487DA /* UserSettingsServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsServiceMock.swift; sourceTree = "<group>"; };
 		C379A47C20FCCBCB007487DA /* FavoriteViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewMock.swift; sourceTree = "<group>"; };
 		C379A47E20FCCBF2007487DA /* EventStorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStorageMock.swift; sourceTree = "<group>"; };
+		C37FA2D921680423002C59C3 /* XCUIElementTestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCUIElementTestExtension.swift; sourceTree = "<group>"; };
 		C384AD4E20EA5E7F006B8C27 /* SearchParametersPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParametersPresenterTests.swift; sourceTree = "<group>"; };
 		C384AD5420EA7594006B8C27 /* SearchParametersViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParametersViewMock.swift; sourceTree = "<group>"; };
 		C384AD8520ECFE86006B8C27 /* SearchParametersServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParametersServiceMock.swift; sourceTree = "<group>"; };
@@ -355,6 +357,14 @@
 				C379A47C20FCCBCB007487DA /* FavoriteViewMock.swift */,
 			);
 			path = FavoriteEventsPresenterTests;
+			sourceTree = "<group>";
+		};
+		C37FA2D8216803FA002C59C3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C37FA2D921680423002C59C3 /* XCUIElementTestExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		C384AD5620EA7627006B8C27 /* Services Tests */ = {
@@ -558,6 +568,7 @@
 		C3E4DA2E20FE24EB00E84EF6 /* ITEventsUITests */ = {
 			isa = PBXGroup;
 			children = (
+				C37FA2D8216803FA002C59C3 /* Extensions */,
 				C3327084210F4C5200F9D0C1 /* FavoriteViewUITests.swift */,
 				C3E4DA2F20FE24EB00E84EF6 /* FullEventViewUITests.swift */,
 				C3E4DA3120FE24EB00E84EF6 /* Info.plist */,
@@ -968,6 +979,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3327085210F4C5200F9D0C1 /* FavoriteViewUITests.swift in Sources */,
+				C37FA2DA21680423002C59C3 /* XCUIElementTestExtension.swift in Sources */,
 				C3E4DA3020FE24EB00E84EF6 /* FullEventViewUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
