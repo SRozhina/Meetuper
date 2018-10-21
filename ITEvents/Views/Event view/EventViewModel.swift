@@ -9,8 +9,7 @@ struct EventCollectionCellViewModel {
     let image: UIImage
 }
 
-//TODO move all Equatable to extensions to tests
-struct EventViewModel: Equatable {
+struct EventViewModel {
     let id: Int
     let title: String
     let date: String
@@ -23,3 +22,5 @@ struct EventViewModel: Equatable {
     let sourceName: String?
     let url: URL?
 }
+
+extension EventViewModel: Equatable { }
